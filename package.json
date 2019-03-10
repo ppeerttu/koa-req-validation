@@ -10,13 +10,16 @@
     "demo": "./node_modules/.bin/ts-node ./demo/index.ts",
     "build": "./node_modules/.bin/tsc -p ."
   },
-  "author": "Perttu Kärnä",
+  "author": "Perttu Kärnä <perttu.karna@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/ppeerttu/koa-request-validation.git"
+  },
   "license": "ISC",
   "devDependencies": {
     "@types/jest": "^24.0.11",
     "@types/koa": "^2.0.48",
     "@types/koa-bodyparser": "^4.2.2",
-    "@types/koa-router": "^7.0.40",
     "@types/validator": "^10.9.0",
     "jest": "^24.3.1",
     "koa": "^2.7.0",
@@ -32,6 +35,9 @@
     "validator": "^10.11.0",
     "koa-bodyparser": "^4.2.1",
     "koa-router": "^7.4.0"
+  },
+  "dependencies": {
+    "@types/koa-router": "^7.0.40"
   },
   "jest": {
     "preset": "ts-jest"
