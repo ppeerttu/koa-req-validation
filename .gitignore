@@ -1,0 +1,8 @@
+# Module dependencies
+/node_modules
+
+# Test coverage results
+/coverage
+
+# Distribution content
+/dist

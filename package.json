@@ -1,0 +1,39 @@
+{
+  "name": "koa-request-validation",
+  "version": "0.1.0",
+  "description": "A request validation middleware for Koa.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "test": "jest",
+    "test:watch": "jest --watchAll",
+    "demo": "./node_modules/.bin/ts-node ./demo/index.ts",
+    "build": "./node_modules/.bin/tsc -p ."
+  },
+  "author": "Perttu Kärnä",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/jest": "^24.0.11",
+    "@types/koa": "^2.0.48",
+    "@types/koa-bodyparser": "^4.2.2",
+    "@types/koa-router": "^7.0.40",
+    "@types/validator": "^10.9.0",
+    "jest": "^24.3.1",
+    "koa": "^2.7.0",
+    "koa-bodyparser": "^4.2.1",
+    "koa-router": "^7.4.0",
+    "ts-jest": "^24.0.0",
+    "ts-node": "^8.0.3",
+    "tslint": "^5.13.1",
+    "typescript": "^3.3.3333",
+    "validator": "^10.11.0"
+  },
+  "peerDependencies": {
+    "validator": "^10.11.0",
+    "koa-bodyparser": "^4.2.1",
+    "koa-router": "^7.4.0"
+  },
+  "jest": {
+    "preset": "ts-jest"
+  }
+}
