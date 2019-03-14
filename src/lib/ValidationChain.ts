@@ -227,6 +227,88 @@ export default class ValidationChain {
     }
 
     /**
+     * Check if the paramter contains only lowercase characters.
+     */
+    isLowercase() {
+        this.validations.push({
+            validation: 'isLowercase',
+        });
+        return this;
+    }
+
+    /**
+     * Check if the parameter is a MAC address.
+     */
+    isMACAddress() {
+        this.validations.push({
+            validation: 'isMACAddress',
+        });
+        return this;
+    }
+
+    /**
+     * Check if the parameter is a valid MongoDB ObjectId.
+     */
+    isMongoId() {
+        this.validations.push({
+            validation: 'isMongoId',
+        });
+        return this;
+    }
+
+    /**
+     * Check if the parameter contains only numbers.
+     */
+    isNumeric() {
+        this.validations.push({
+            validation: 'isNumeric',
+        });
+        return this;
+    }
+
+    /**
+     * Check if the parameter is a valid port number.
+     */
+    isPort() {
+        this.validations.push({
+            validation: 'isPort',
+        });
+        return this;
+    }
+
+    /**
+     * Check if the parameter is valid UUID (v3, v4 or v5).
+     */
+    isUUID() {
+        this.validations.push({
+            validation: 'isUUID',
+        });
+        return this;
+    }
+
+    /**
+     * Check if the parameter contains only uppercase characters.
+     */
+    isUppercase() {
+        this.validations.push({
+            validation: 'isUppercase',
+        });
+        return this;
+    }
+
+    /**
+     * Check if the parameter matches given regular expression.
+     * @param regExp The regular expression
+     */
+    matches(regExp: RegExp) {
+        this.validations.push({
+            validation: 'matches',
+            options: regExp
+        });
+        return this;
+    }
+
+    /**
      * Run the validations and return the results.
      * @param ctx The context
      */

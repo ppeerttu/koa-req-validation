@@ -9,12 +9,6 @@ export interface IMinMaxOptions {
     max?: number;
 }
 
-/**
- * Options containing property regExp.
- */
-export interface IRegExpOptions {
-    regExp?: RegExp;
-}
 
 /**
  * Options containing an array of string.
@@ -34,12 +28,10 @@ export interface IAllowNullOptions {
  * General validator options combining all
  * possible options.
  */
-export interface IValidatorOptions extends
-    IMinMaxOptions,
-    IRegExpOptions,
-    IIsInValuesOptions,
-    IAllowNullOptions {
-}
+export type ValidatorOptions =  IMinMaxOptions
+    | RegExp
+    | IIsInValuesOptions
+    | IAllowNullOptions;
 
 /**
  * Definition of custom validation function. Custom
@@ -57,7 +49,7 @@ export type CustomValidatorFunction = (
 export interface IValidationDefinition {
     validation: ValidatorFunctionName;
     message?: string;
-    options?: IValidatorOptions | string;
+    options?: ValidatorOptions | string;
     func?: CustomValidatorFunction;
 }
 
