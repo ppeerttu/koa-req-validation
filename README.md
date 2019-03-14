@@ -38,7 +38,7 @@ import { query, validationResults, IValidationContext } from 'koa-request-valida
 
 /// ....
 
-const router = new Router[];
+const router = new Router();
 
 router.get(
     '/api/hello',
@@ -47,9 +47,9 @@ router.get(
         .withMessage('The name has to be between 3 and 20 characters')
         .run(),
     async (ctx: ParameterizedContext<IValidationContext>) => {
-        const errors = validationResults(ctx);
-        if (errors) {
-            throw new RequestError(422, errors);
+        const result = validationResults(ctx);
+        if (result.hasErrors()) {
+            throw new RequestError(422, result.mapped());
         }
         const { name } = ctx.query;
         ctx.body = `Hello ${name}`;

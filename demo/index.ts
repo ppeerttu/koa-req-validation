@@ -54,9 +54,9 @@ router.get(
         .withMessage('The name has to be between 3 and 20 characters')
         .run(),
     async (ctx: ParameterizedContext<IValidationContext>) => {
-        const errors = validationResults(ctx);
-        if (errors) {
-            throw new RequestError(422, errors);
+        const results = validationResults(ctx);
+        if (results.hasErrors()) {
+            throw new RequestError(422, results.mapped());
         }
         const { name } = ctx.query;
         ctx.body = `Hello ${name}`;
@@ -70,9 +70,9 @@ router.get(
         .optional()
         .run(),
     async (ctx: ParameterizedContext<IValidationContext>) => {
-        const errors = validationResults(ctx);
-        if (errors) {
-            throw new RequestError(422, errors);
+        const results = validationResults(ctx);
+        if (results.hasErrors()) {
+            throw new RequestError(422, results.mapped());
         }
         const { name } = ctx.query;
         ctx.body = `Hello ${name || 'stranger'}`;
@@ -83,9 +83,9 @@ router.get(
     '/api/hello/:count',
     ...arrayExample,
     async (ctx: ParameterizedContext<IValidationContext>) => {
-        const errors = validationResults(ctx);
-        if (errors) {
-            throw new RequestError(422, errors);
+        const results = validationResults(ctx);
+        if (results.hasErrors()) {
+            throw new RequestError(422, results.mapped());
         }
         const { count } = ctx.params;
         const { name } = ctx.query;
