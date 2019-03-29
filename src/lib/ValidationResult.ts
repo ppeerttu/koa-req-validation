@@ -1,5 +1,5 @@
-import { IValidationError } from "..";
-import { MappedValidationResults } from "./types";
+import { IValidationError } from '..';
+import { MappedValidationResults } from './types';
 
 /**
  * Validation result set.
@@ -10,6 +10,12 @@ export default class ValidationResult {
 
     constructor(results?: IValidationError[]) {
         if (results) {
+            if (!Array.isArray(results)) {
+                throw new TypeError(
+                    `Parameter for ValidationResult constructor must be an`
+                    + ` array but received ${results}`
+                );
+            }
             this.results = results;
         } else {
             this.results = [];

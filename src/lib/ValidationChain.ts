@@ -1,8 +1,14 @@
-import validator from "validator";
-import { IValidationDefinition, ParamLocation, IMinMaxOptions, IAllowNullOptions, CustomValidatorFunction } from "./types";
-import { ParameterizedContext } from "koa";
-import { IValidationContext, IValidationError } from "..";
-import ValidationResult from "./ValidationResult";
+import validator from 'validator';
+import {
+    IValidationDefinition,
+    ParamLocation,
+    IMinMaxOptions,
+    IAllowNullOptions,
+    CustomValidatorFunction
+} from './types';
+import { ParameterizedContext } from 'koa';
+import { IValidationContext, IValidationError } from '..';
+import ValidationResult from './ValidationResult';
 
 /**
  * The validation chain object.
@@ -37,6 +43,13 @@ export default class ValidationChain {
         location: ParamLocation,
     ) {
         this.parameter = parameter;
+        if (!Object.values(ParamLocation).includes(location)) {
+            throw new TypeError(
+                `Param location has to be one of `
+                + Object.values(ParamLocation).join(', ')
+                + ` but received ${location}`
+            );
+        }
         this.location = location;
         this.validations = [];
         this.isOptional = { value: false };
@@ -315,8 +328,9 @@ export default class ValidationChain {
     private async checkResults(
         ctx: ParameterizedContext<IValidationContext>
     ): Promise<ValidationResult | null> {
-        let input: any;;
+        let input: any;
         let originalInput: any;
+
         switch (this.location) {
             case ParamLocation.BODY:
                 input = ctx.request.body[this.parameter];

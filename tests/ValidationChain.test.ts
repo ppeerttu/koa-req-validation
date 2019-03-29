@@ -13,10 +13,21 @@ const next = async () => {};
  */
 describe('ValidationChain', () => {
 
-    test('Constructs without exceptions', () => {
-        expect(() => {
-            new ValidationChain('param', ParamLocation.BODY);
-        }).not.toThrow();
+    describe('constructor()', () => {
+
+        test('Constructs without exceptions', () => {
+            expect(() => {
+                new ValidationChain('param', ParamLocation.BODY);
+            }).not.toThrow();
+        });
+    
+        test('Throws a TypeError with invalid parameters', () => {
+            expect(() => {
+                const location: any = 'invalid';
+                new ValidationChain('param', location);
+            }).toThrow(TypeError);
+        });  
+  
     });
 
     test('Stores validations', async () => {

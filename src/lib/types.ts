@@ -54,7 +54,8 @@ export interface IValidationDefinition {
 }
 
 /**
- * Allowed validation function name.
+ * Allowed validation function name. This is the available list
+ * of validators in the validator.js -module.
  */
 export type ValidatorFunctionName = 'custom'
     | 'contains'

@@ -1,9 +1,9 @@
-import { ParameterizedContext } from "koa";
-import { IRouterContext } from "koa-router";
+import { ParameterizedContext } from 'koa';
+import { IRouterContext } from 'koa-router';
 
-import ValidationChain from "./lib/ValidationChain";
-import { ParamLocation } from "./lib/types";
-import ValidationResult from "./lib/ValidationResult";
+import ValidationChain from './lib/ValidationChain';
+import { ParamLocation } from './lib/types';
+import ValidationResult from './lib/ValidationResult';
 
 /**
  * Interface describing validation errors.
@@ -56,7 +56,7 @@ export const validationResults = (
  * @param param The parameter to be validated from request.
  * 
  * @example
- * router.post('/api/login', body('username').equals('user').run(), body('password').equals('pass').run(), handler);
+ * router.post('/auth/login', body('username').equals('user').run(), body('password').equals('pass').run(), handler);
  */
 export const body = (param: string) => {
     const validationChain = new ValidationChain(param, ParamLocation.BODY);
@@ -69,7 +69,7 @@ export const body = (param: string) => {
  * @param param The parameter to be validated from request.
  * 
  * @example
- * router.get('/api/tags', body('search').contains('_').run(), handler);
+ * router.get('/api/tags', query('search').contains('_').run(), handler);
  */
 export const query = (param: string) => {
     const validationChain = new ValidationChain(param, ParamLocation.QUERY);
@@ -82,7 +82,7 @@ export const query = (param: string) => {
  * @param param The parameter to be validated from request.
  * 
  * @example
- * router.post('/api/login', body('username').equals('user').run(), body('password').equals('pass').run(), handler);
+ * router.get('/api/users/:id', param('id').isInt().run(), handler);
  */
 export const param = (param: string) => {
     const validationChain = new ValidationChain(param, ParamLocation.PARAM);
