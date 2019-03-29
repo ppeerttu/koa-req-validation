@@ -55,8 +55,14 @@ export const validationResults = (
  * 
  * @param param The parameter to be validated from request.
  * 
- * @example
- * router.post('/auth/login', body('username').equals('user').run(), body('password').equals('pass').run(), handler);
+ * ```typescript
+ * router.post(
+ *     '/auth/login',
+ *     body('username').equals('user').run(),
+ *     body('password').equals('pass').run(),
+ *     handler
+ * );
+ * ```
  */
 export const body = (param: string) => {
     const validationChain = new ValidationChain(param, ParamLocation.BODY);
@@ -68,8 +74,13 @@ export const body = (param: string) => {
  * 
  * @param param The parameter to be validated from request.
  * 
- * @example
- * router.get('/api/tags', query('search').contains('_').run(), handler);
+ * ```typescript
+ * router.get(
+ *     '/api/tags',
+ *     query('search').contains('_').run(),
+ *     handler
+ * );
+ * ```
  */
 export const query = (param: string) => {
     const validationChain = new ValidationChain(param, ParamLocation.QUERY);
@@ -81,8 +92,13 @@ export const query = (param: string) => {
  * 
  * @param param The parameter to be validated from request.
  * 
- * @example
- * router.get('/api/users/:id', param('id').isInt().run(), handler);
+ * ```typescript
+ * router.get(
+ *     '/api/users/:id',
+ *     param('id').isInt().run(),
+ *     handler
+ * );
+ * ```
  */
 export const param = (param: string) => {
     const validationChain = new ValidationChain(param, ParamLocation.PARAM);
