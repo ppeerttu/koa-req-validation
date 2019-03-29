@@ -1,6 +1,8 @@
 # koa-request-validation
 
-A [koa][koa-site] middleware for [validator][validator-site]. Inspired by [express-validator][express-validator-site].
+[![Build Status](https://travis-ci.com/ppeerttu/koa-request-validation.svg?token=aVeJy3vvwJcfF8qTPA2R&branch=development)](https://travis-ci.com/ppeerttu/koa-request-validation)
+
+A [validator][validator-site] middleware for [koa][koa-site]. Inspired by [express-validator][express-validator-site].
 
 - [koa-request-validation](#koa-request-validation)
 - [Installation](#installation)
@@ -61,11 +63,11 @@ See the [demo](./demo/index.ts) for other examples.
 
 # Motivation
 
-Motivation behind this module is the awesome experience of using the [express-validator][express-validator-site]. However, (mostly, but not only) due to `async` middleware in [koa][koa-site] the `express-validator` doesn't suit it and it seems that there is quite a lot of request validation packages out there mainly for `koa` v1 without any clear standard and warranty for active maintenance. This package tries to mimic the API of the `express-validator` and slowly provide all the same features.
+Motivation behind this module is the awesome experience of using the [express-validator][express-validator-site]. However, (mostly, but not only) due to `async` middleware in [koa][koa-site] the `express-validator` doesn't suit it and it seems that there is quite a lot of request validation packages out there mainly for `koa` v1 without any clear standard and warranty for active maintenance. This package tries to mimic the API of the `express-validator` and eventually provide most of the features.
 
 ## Peer dependencies
 
-The usage of the few peer dependencies is a known dececision. As it appears to be slowly growing concern that developers hog thousands of npm pacakges without knowing them, we'd like to make sure the developer knows what's included in this package and actively consider whether to include this pacakge along with it's peer dependencies to the project he/she is building.
+The usage of the few peer dependencies is a known dececision. As it appears to be slowly growing concern that developers hog thousands of npm pacakges without knowing them, we'd like to make sure the developer knows what's included in this package and actively consider whether to include this pacakge along with it's peer dependencies to the project.
 
 Also, since this package is still in very raw state and lots of features are missing, it makes more sense to manually install the [validator.js][validator-site] -module along the project dependencies for the opportunity of using it as is in the application.
 
