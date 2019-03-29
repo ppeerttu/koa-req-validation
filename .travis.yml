@@ -1,0 +1,22 @@
+dist: xenial
+language: node_js
+node_js:
+  - lts/*
+
+branches:
+  only:
+    - development
+    - master
+
+install:
+  - npm install
+script:
+  - npm test -- --coverage
+
+notifications:
+  email:
+    recipients:
+      - perttu.karna@gmail.com
+    on_success: change
+    on_failure: always
+
