@@ -10,8 +10,13 @@ branches:
 
 install:
   - npm install
+  - npm install codecov -g
+
 script:
   - npm test -- --coverage
+
+after_success:
+  - codecov
 
 notifications:
   email:
