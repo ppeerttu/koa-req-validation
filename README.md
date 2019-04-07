@@ -1,6 +1,7 @@
 # koa-request-validation
 
 [![Build Status](https://travis-ci.com/ppeerttu/koa-request-validation.svg?token=aVeJy3vvwJcfF8qTPA2R&branch=development)](https://travis-ci.com/ppeerttu/koa-request-validation)
+![dependencies](https://david-dm.org/ppeerttu/koa-request-validation.svg)
 
 A [validator][validator-site] middleware for [koa][koa-site]. Inspired by [express-validator][express-validator-site].
 
