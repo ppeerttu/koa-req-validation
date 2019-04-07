@@ -2,6 +2,7 @@
 
 [![Build Status](https://travis-ci.com/ppeerttu/koa-request-validation.svg?token=aVeJy3vvwJcfF8qTPA2R&branch=development)](https://travis-ci.com/ppeerttu/koa-request-validation)
 ![dependencies](https://david-dm.org/ppeerttu/koa-request-validation.svg)
+[![codecov](https://codecov.io/gh/ppeerttu/koa-request-validation/branch/master/graph/badge.svg?token=IuGu3GKizF)](https://codecov.io/gh/ppeerttu/koa-request-validation)
 
 A [validator][validator-site] middleware for [koa][koa-site]. Inspired by [express-validator][express-validator-site].
 
