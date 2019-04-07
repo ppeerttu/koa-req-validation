@@ -16,7 +16,7 @@
     "type": "git",
     "url": "git://github.com/ppeerttu/koa-request-validation.git"
   },
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "@types/jest": "^24.0.11",
     "@types/koa": "^2.0.48",
