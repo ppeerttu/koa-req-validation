@@ -16,7 +16,7 @@
     "type": "git",
     "url": "git://github.com/ppeerttu/koa-request-validation.git"
   },
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "@types/jest": "^24.0.11",
     "@types/koa": "^2.0.48",
@@ -42,6 +42,10 @@
     "@types/koa-router": "^7.0.40"
   },
   "jest": {
-    "preset": "ts-jest"
+    "preset": "ts-jest",
+    "collectCoverageFrom": [
+      "src/*.ts",
+      "src/**/*.ts"
+    ]
   }
 }
