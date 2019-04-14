@@ -8,6 +8,8 @@ import { validationResults } from "../src";
  */
 const next = async () => {};
 
+const prop = 'property';
+
 /**
  * ValidationChain
  */
@@ -215,6 +217,118 @@ describe('ValidationChain', () => {
             const mappedResults = results.mapped();
             expect(mappedResults).toHaveProperty('email');
             expect(mappedResults.email).toHaveProperty('msg', message);
+        });
+
+    });
+
+    describe('contains()', () => {
+
+        test('Return an error if the haystack doesn\'t contain the seed', async () => {
+            const seed = 'seed';
+            const haystack = 'haystack';
+            const validationChain = new ValidationChain(prop, ParamLocation.BODY)
+                .contains(seed);
+            const ctx = mockContext(ParamLocation.BODY, { [prop]: haystack });
+            await validationChain.run()(ctx, next);
+            const results = validationResults(ctx);
+            expect(results.mapped()).toHaveProperty(prop);
+        });
+
+        test('Doesn\'t return an error if the haystack contains the seed', async () => {
+            const seed = 'seed';
+            const haystack = 'hayseed';
+            const validationChain = new ValidationChain(prop, ParamLocation.BODY)
+                .contains(seed);
+            const ctx = mockContext(ParamLocation.BODY, { [prop]: haystack });
+            await validationChain.run()(ctx, next);
+            const results = validationResults(ctx);
+            expect(results.mapped()).not.toHaveProperty(prop);
+        });
+
+    });
+
+    describe('equals', () => {
+
+        test('Returns an error if the strings doesn\'t match', async () => {
+            const comparison = 'comparison';
+            const value = 'nosirapmoc';
+            const validationChain = new ValidationChain(prop, ParamLocation.BODY)
+                .equals(comparison);
+            
+            const ctx = mockContext(ParamLocation.BODY, { [prop]: value });
+            await validationChain.run()(ctx, next);
+
+            const results = validationResults(ctx);
+            expect(results.mapped()).toHaveProperty(prop);
+        });
+
+        test('Doesn\'t return an error if the values equal', async () => {
+            const comparison = 'comparison';
+            const value = 'comparison';
+            const validationChain = new ValidationChain(prop, ParamLocation.BODY)
+                .equals(comparison);
+            
+            const ctx = mockContext(ParamLocation.BODY, { [prop]: value });
+            await validationChain.run()(ctx, next);
+
+            const results = validationResults(ctx);
+            expect(results.mapped()).not.toHaveProperty(prop);
+        });
+
+    });
+
+    describe('isBoolean()', () => {
+
+        test('Returns an error if the value is not boolean value', async () => {
+            const value = null;
+            const validationChain = new ValidationChain(prop, ParamLocation.BODY)
+                .isBoolean();
+            
+            const ctx = mockContext(ParamLocation.BODY, { [prop]: value });
+            await validationChain.run()(ctx, next);
+
+            const results = validationResults(ctx);
+            expect(results.mapped()).toHaveProperty(prop);
+        });
+
+        test('Doesn\'t return an error if the value is a boolean value', async () => {
+            const value = false;
+            const validationChain = new ValidationChain(prop, ParamLocation.BODY)
+                .isBoolean();
+            
+            const ctx = mockContext(ParamLocation.BODY, { [prop]: value });
+            await validationChain.run()(ctx, next);
+
+            const results = validationResults(ctx);
+            expect(results.mapped()).not.toHaveProperty(prop);
+        });
+
+    });
+
+    describe('isEmpty()', () => {
+
+        test('Returns an error if the value is not empty', async () => {
+            const value = 'value';
+            const validationChain = new ValidationChain(prop, ParamLocation.BODY)
+                .isEmpty();
+            
+            const ctx = mockContext(ParamLocation.BODY, { [prop]: value });
+            await validationChain.run()(ctx, next);
+
+            const results = validationResults(ctx);
+            expect(results.mapped()).toHaveProperty(prop);
+        });
+
+        test('Doesn\'t return an error if the value is empty', async () => {
+            const value = '';
+            const validationChain = new ValidationChain(prop, ParamLocation.BODY)
+                .isEmpty();
+            
+            const ctx = mockContext(ParamLocation.BODY, { [prop]: value });
+            await validationChain.run()(ctx, next);
+
+            const results = validationResults(ctx);
+            expect(results.mapped()).not.toHaveProperty(prop);
         });
 
     });

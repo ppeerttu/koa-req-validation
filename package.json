@@ -42,6 +42,10 @@
     "@types/koa-router": "^7.0.40"
   },
   "jest": {
-    "preset": "ts-jest"
+    "preset": "ts-jest",
+    "collectCoverageFrom": [
+      "src/*.ts",
+      "src/**/*.ts"
+    ]
   }
 }
