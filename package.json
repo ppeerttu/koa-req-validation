@@ -9,7 +9,7 @@
     "test:watch": "jest --watchAll",
     "demo": "./node_modules/.bin/ts-node ./demo/index.ts",
     "build": "./node_modules/.bin/tsc -p .",
-    "docs": "./node_modules/.bin/typedoc --out docs/ src/"
+    "docs": "./node_modules/.bin/typedoc --theme markdown --mdEngine github --out docs/ src/"
   },
   "author": "Perttu Kärnä <perttu.karna@gmail.com>",
   "repository": {
@@ -30,6 +30,7 @@
     "ts-node": "^8.0.3",
     "tslint": "^5.13.1",
     "typedoc": "^0.14.2",
+    "typedoc-plugin-markdown": "^1.2.0",
     "typescript": "^3.3.3333",
     "validator": "^10.11.0"
   },
