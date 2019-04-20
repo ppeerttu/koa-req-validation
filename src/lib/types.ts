@@ -20,7 +20,7 @@ export interface IIsInValuesOptions {
 /**
  * Options containing allowNull flag.
  */
-export interface IAllowNullOptions {
+export interface IOptionalOptions {
     allowNull?: boolean;
 }
 
@@ -31,7 +31,7 @@ export interface IAllowNullOptions {
 export type ValidatorOptions =  IMinMaxOptions
     | RegExp
     | IIsInValuesOptions
-    | IAllowNullOptions;
+    | IOptionalOptions;
 
 /**
  * Definition of custom validation function. Custom
