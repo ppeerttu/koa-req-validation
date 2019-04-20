@@ -59,16 +59,13 @@ export default class ValidationChain {
         ctx: ParameterizedContext<IValidationContext>,
         next: () => Promise<void>
     ) => {
-        try {
-            const results = await this.checkResults(ctx);
-            if (results) {
-                if (Array.isArray(ctx.state.validationResults)) {
-                    ctx.state.validationResults.push(results);
-                } else {
-                    ctx.state.validationResults = [results];
-                }
+        const results = await this.checkResults(ctx);
+        if (results) {
+            if (Array.isArray(ctx.state.validationResults)) {
+                ctx.state.validationResults.push(results);
+            } else {
+                ctx.state.validationResults = [results];
             }
-        } catch (e) {
         }
         await next();
     }
@@ -354,21 +351,24 @@ export default class ValidationChain {
             if (this.isOptional.options && this.isOptional.options.allowNull) {
                 return null;
             }
+        } else {
+            input = input.toString();
         }
 
         const errors = await this.validations.reduce(
             async (arrP: Promise<IValidationError[]>, current) => {
                 const arr = await arrP;
                 const { validation, options, message, func } = current;
-
                 if (validation === 'custom') {
+                    // Has to be thrown before the try-catch
+                    // in order to notify the developer during development
+                    if (!func) {
+                        throw new Error(
+                            `No custom validation function defined for `
+                            + `param ${this.parameter} at ${this.location}`
+                        );
+                    }
                     try {
-                        if (!func) {
-                            throw new Error(
-                                `No custom validation function defined for `
-                                + `param ${this.parameter} at ${this.location}`
-                            );
-                        }
                         await func(input, ctx);
                     } catch (e) {
                         arr.push({
