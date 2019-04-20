@@ -18,6 +18,8 @@ A [validator][validator-site] middleware for [koa][koa-site]. Inspired by [expre
 
 # Installation
 
+**NOTE: This project has not been released in npm yet.**
+
 The **koa-request-validation** requires [validator][validator-site], [koa-router][koa-router-site] and [koa-bodyparser][koa-bodyparser-site] as peer dependencies.
 
 
