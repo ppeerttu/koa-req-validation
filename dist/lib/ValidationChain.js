@@ -1,156 +1,120 @@
-import validator from 'validator';
-import {
-    IValidationDefinition,
-    ParamLocation,
-    IMinMaxOptions,
-    IOptionalOptions,
-    CustomValidatorFunction
-} from './types';
-import { ParameterizedContext } from 'koa';
-import { IValidationContext, IValidationError } from '..';
-import ValidationResult from './ValidationResult';
-
+"use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const validator_1 = __importDefault(require("validator"));
+const types_1 = require("./types");
+const ValidationResult_1 = __importDefault(require("./ValidationResult"));
 /**
  * The validation chain object.
  */
-export default class ValidationChain {
-
-    /**
-     * Parameter to be validated.
-     */
-    private parameter: string;
-
-    /**
-     * Validations to be excecuted.
-     */
-    private validations: IValidationDefinition[];
-
-    /**
-     * Location of the given parameter.
-     */
-    private location: ParamLocation;
-
-    /**
-     * Is this parameter optional?
-     */
-    private isOptional: {
-        value: boolean,
-        options?: IOptionalOptions
-    };
-
-    constructor(
-        parameter: string,
-        location: ParamLocation,
-    ) {
+class ValidationChain {
+    constructor(parameter, location) {
+        this.run = () => (ctx, next) => __awaiter(this, void 0, void 0, function* () {
+            const results = yield this.checkResults(ctx);
+            if (results) {
+                if (Array.isArray(ctx.state.validationResults)) {
+                    ctx.state.validationResults.push(results);
+                }
+                else {
+                    ctx.state.validationResults = [results];
+                }
+            }
+            yield next();
+        });
         this.parameter = parameter;
-        if (!Object.values(ParamLocation).includes(location)) {
-            throw new TypeError(
-                `Param location has to be one of `
-                + Object.values(ParamLocation).join(', ')
-                + ` but received ${location}`
-            );
+        if (!Object.values(types_1.ParamLocation).includes(location)) {
+            throw new TypeError(`Param location has to be one of `
+                + Object.values(types_1.ParamLocation).join(', ')
+                + ` but received ${location}`);
         }
         this.location = location;
         this.validations = [];
         this.isOptional = { value: false };
     }
-
-    run = () => async (
-        ctx: ParameterizedContext<IValidationContext>,
-        next: () => Promise<void>
-    ) => {
-        const results = await this.checkResults(ctx);
-        if (results) {
-            if (Array.isArray(ctx.state.validationResults)) {
-                ctx.state.validationResults.push(results);
-            } else {
-                ctx.state.validationResults = [results];
-            }
-        }
-        await next();
-    }
-
     /**
      * Pass a custom message to the validation.
      * @param message Custom message
      */
-    withMessage(message: string) {
+    withMessage(message) {
         const validationDefinition = this.validations[this.validations.length - 1];
         validationDefinition.message = message;
         return this;
     }
-
     /**
      * Set this property as optional.
      */
-    optional(options?: IOptionalOptions) {
+    optional(options) {
         this.isOptional = {
             value: true,
             options
         };
         return this;
     }
-
     /**
      * Custom async validation function to execute. The function
      * must throw when the validation fails.
-     * 
+     *
      * @param func The validation function
      */
-    custom(func: CustomValidatorFunction) {
+    custom(func) {
         this.validations.push({
             validation: 'custom',
             func
         });
         return this;
     }
-
     /**
      * Check if the request property contains the given seed.
      */
-    contains(seed: string) {
+    contains(seed) {
         this.validations.push({
             validation: 'contains',
             options: seed
         });
         return this;
     }
-
     /**
      * Check if the request property equals the given comparison.
      */
-    equals(comparison: string) {
+    equals(comparison) {
         this.validations.push({
             validation: 'equals',
             options: comparison
         });
         return this;
     }
-
     /**
      * Check if the parameter is an integer.
      */
-    isInt(options?: IMinMaxOptions) {
+    isInt(options) {
         this.validations.push({
             validation: 'isInt',
             options
         });
         return this;
     }
-
     /**
      * Check if the string is in given length.
-     * 
+     *
      * @param options Min and max length
      */
-    isLength(options: IMinMaxOptions) {
+    isLength(options) {
         this.validations.push({
             validation: 'isLength',
             options
         });
         return this;
     }
-
     /**
      * Check if the parameter is an email.
      */
@@ -160,17 +124,15 @@ export default class ValidationChain {
         });
         return this;
     }
-
     /**
      * Check if the parameter is a boolean value.
      */
     isBoolean() {
         this.validations.push({
             validation: 'isBoolean'
-        })
+        });
         return this;
     }
-
     /**
      * Check if the parameter is a zero length string.
      */
@@ -180,7 +142,6 @@ export default class ValidationChain {
         });
         return this;
     }
-
     /**
      * Check if the parameter is a float.
      */
@@ -190,20 +151,18 @@ export default class ValidationChain {
         });
         return this;
     }
-
     /**
      * Check if the parameter is an algorithm.
-     * 
+     *
      * @param algorithm The algorithm
      */
-    isHash(algorithm: ValidatorJS.HashAlgorithm) {
+    isHash(algorithm) {
         this.validations.push({
             validation: 'isHash',
             options: algorithm
         });
         return this;
     }
-    
     /**
      * Check if the parameter is a valid JWT token.
      */
@@ -213,7 +172,6 @@ export default class ValidationChain {
         });
         return this;
     }
-
     /**
      * Check if the parameter is a valid JSON. Uses
      * `JSON.parse`.
@@ -224,7 +182,6 @@ export default class ValidationChain {
         });
         return this;
     }
-
     /**
      * Check if the parameter is a latitude-lognitude coordinate
      * in the format `lat,long` or `lat, long`.
@@ -235,7 +192,6 @@ export default class ValidationChain {
         });
         return this;
     }
-
     /**
      * Check if the paramter contains only lowercase characters.
      */
@@ -245,7 +201,6 @@ export default class ValidationChain {
         });
         return this;
     }
-
     /**
      * Check if the parameter is a MAC address.
      */
@@ -255,7 +210,6 @@ export default class ValidationChain {
         });
         return this;
     }
-
     /**
      * Check if the parameter is a valid MongoDB ObjectId.
      */
@@ -265,7 +219,6 @@ export default class ValidationChain {
         });
         return this;
     }
-
     /**
      * Check if the parameter contains only numbers.
      */
@@ -275,7 +228,6 @@ export default class ValidationChain {
         });
         return this;
     }
-
     /**
      * Check if the parameter is a valid port number.
      */
@@ -285,7 +237,6 @@ export default class ValidationChain {
         });
         return this;
     }
-
     /**
      * Check if the parameter is valid UUID (v3, v4 or v5).
      */
@@ -295,7 +246,6 @@ export default class ValidationChain {
         });
         return this;
     }
-
     /**
      * Check if the parameter contains only uppercase characters.
      */
@@ -305,72 +255,65 @@ export default class ValidationChain {
         });
         return this;
     }
-
     /**
      * Check if the parameter matches given regular expression.
      * @param regExp The regular expression
      */
-    matches(regExp: RegExp) {
+    matches(regExp) {
         this.validations.push({
             validation: 'matches',
             options: regExp
         });
         return this;
     }
-
     /**
      * Run the validations and return the results.
      * @param ctx The context
      */
-    private async checkResults(
-        ctx: ParameterizedContext<IValidationContext>
-    ): Promise<ValidationResult | null> {
-        let input: any;
-        let originalInput: any;
-
-        switch (this.location) {
-            case ParamLocation.BODY:
-                input = ctx.request.body[this.parameter];
-                break;
-            case ParamLocation.PARAM:
-                input = ctx.params[this.parameter];
-                break;
-            case ParamLocation.QUERY:
-                input = ctx.query[this.parameter];
-                break;
-        }
-
-        originalInput = input;
-
-        if (typeof input === 'undefined') {
-            if (this.isOptional.value) {
-                return null;
+    checkResults(ctx) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let input;
+            let originalInput;
+            switch (this.location) {
+                case types_1.ParamLocation.BODY:
+                    input = ctx.request.body[this.parameter];
+                    break;
+                case types_1.ParamLocation.PARAM:
+                    input = ctx.params[this.parameter];
+                    break;
+                case types_1.ParamLocation.QUERY:
+                    input = ctx.query[this.parameter];
+                    break;
             }
-            input = null;
-        } else if (input === null) {
-            if (this.isOptional.options && this.isOptional.options.allowNull) {
-                return null;
+            originalInput = input;
+            if (typeof input === 'undefined') {
+                if (this.isOptional.value) {
+                    return null;
+                }
+                input = null;
             }
-        } else {
-            input = input.toString();
-        }
-
-        const errors = await this.validations.reduce(
-            async (arrP: Promise<IValidationError[]>, current) => {
-                const arr = await arrP;
+            else if (input === null) {
+                if (this.isOptional.options && this.isOptional.options.allowNull) {
+                    return null;
+                }
+            }
+            else {
+                input = input.toString();
+            }
+            const errors = yield this.validations.reduce((arrP, current) => __awaiter(this, void 0, void 0, function* () {
+                const arr = yield arrP;
                 const { validation, options, message, func } = current;
                 if (validation === 'custom') {
                     // Has to be thrown before the try-catch
                     // in order to notify the developer during development
                     if (!func) {
-                        throw new Error(
-                            `No custom validation function defined for `
-                            + `param ${this.parameter} at ${this.location}`
-                        );
+                        throw new Error(`No custom validation function defined for `
+                            + `param ${this.parameter} at ${this.location}`);
                     }
                     try {
-                        await func(input, ctx);
-                    } catch (e) {
+                        yield func(input, ctx);
+                    }
+                    catch (e) {
                         arr.push({
                             msg: message || e.message || 'Invalid value',
                             location: this.location,
@@ -378,9 +321,9 @@ export default class ValidationChain {
                             value: originalInput + ''
                         });
                     }
-
                     // @ts-ignore
-                } else if (input === null || !validator[validation](input, options)) {
+                }
+                else if (input === null || !validator_1.default[validation](input, options)) {
                     arr.push({
                         msg: message || 'Invalid value',
                         location: this.location,
@@ -388,11 +331,11 @@ export default class ValidationChain {
                         value: originalInput + ''
                     });
                 }
-
                 return arr;
-            },
-            Promise.resolve([])
-        );
-        return new ValidationResult(errors);
+            }), Promise.resolve([]));
+            return new ValidationResult_1.default(errors);
+        });
     }
 }
+exports.default = ValidationChain;
+//# sourceMappingURL=ValidationChain.js.map
