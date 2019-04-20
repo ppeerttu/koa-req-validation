@@ -1,7 +1,7 @@
 import ValidationChain from "../src/lib/ValidationChain";
 import { ParamLocation } from "../src/lib/types";
 import { mockContext } from "./helpers";
-import { validationResults } from "../src";
+import { validationResults, body, query, param } from "../src";
 
 /**
  * Mock next function
@@ -38,7 +38,7 @@ describe('ValidationChain', () => {
                 const location: any = 'invalid';
                 new ValidationChain('param', location);
             }).toThrow(TypeError);
-        });  
+        });
   
     });
 
