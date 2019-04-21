@@ -1,5 +1,5 @@
 {
-  "name": "koa-request-validation",
+  "name": "koa-req-validation",
   "version": "0.1.0",
   "description": "A request validation middleware for Koa.",
   "main": "dist/index.js",
@@ -14,9 +14,9 @@
   "author": "Perttu Kärnä <perttu.karna@gmail.com>",
   "repository": {
     "type": "git",
-    "url": "git://github.com/ppeerttu/koa-request-validation.git"
+    "url": "git://github.com/ppeerttu/koa-req-validation.git"
   },
-  "homepage": "https://ppeerttu.github.io/koa-request-validation/",
+  "homepage": "https://ppeerttu.github.io/koa-req-validation/",
   "license": "MIT",
   "devDependencies": {
     "@types/jest": "^24.0.11",
