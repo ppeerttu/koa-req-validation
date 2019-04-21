@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>koa-request-validation</title>
+	<title>koa-req-validation</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="assets/css/main.css">
@@ -22,7 +22,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="index.html" class="title">koa-request-validation</a>
+					<a href="index.html" class="title">koa-req-validation</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -56,7 +56,7 @@
 					<a href="globals.html">Globals</a>
 				</li>
 			</ul>
-			<h1> koa-request-validation</h1>
+			<h1> koa-req-validation</h1>
 		</div>
 	</div>
 </header>
@@ -64,15 +64,15 @@
 	<div class="row">
 		<div class="col-8 col-content">
 			<div class="tsd-panel tsd-typography">
-				<h1 id="koa-request-validation">koa-request-validation</h1>
-				<p><a href="https://travis-ci.org/ppeerttu/koa-request-validation"><img src="https://travis-ci.org/ppeerttu/koa-request-validation.svg?branch=master" alt="Build Status"></a>
-					<a href="https://david-dm.org/ppeerttu/koa-request-validation"><img src="https://david-dm.org/ppeerttu/koa-request-validation/status.svg" alt="dependencies Status"></a>
-					<a href="https://david-dm.org/ppeerttu/koa-request-validation?type=dev"><img src="https://david-dm.org/ppeerttu/koa-request-validation/dev-status.svg" alt="devDependencies Status"></a>
-					<a href="https://david-dm.org/ppeerttu/koa-request-validation?type=peer"><img src="https://david-dm.org/ppeerttu/koa-request-validation/peer-status.svg" alt="peerDependencies Status"></a>
-				<a href="https://codecov.io/gh/ppeerttu/koa-request-validation"><img src="https://codecov.io/gh/ppeerttu/koa-request-validation/branch/master/graph/badge.svg?token=IuGu3GKizF" alt="codecov"></a></p>
+				<h1 id="koa-req-validation">koa-req-validation</h1>
+				<p><a href="https://travis-ci.org/ppeerttu/koa-req-validation"><img src="https://travis-ci.org/ppeerttu/koa-req-validation.svg?branch=master" alt="Build Status"></a>
+					<a href="https://david-dm.org/ppeerttu/koa-req-validation"><img src="https://david-dm.org/ppeerttu/koa-req-validation/status.svg" alt="dependencies Status"></a>
+					<a href="https://david-dm.org/ppeerttu/koa-req-validation?type=dev"><img src="https://david-dm.org/ppeerttu/koa-req-validation/dev-status.svg" alt="devDependencies Status"></a>
+					<a href="https://david-dm.org/ppeerttu/koa-req-validation?type=peer"><img src="https://david-dm.org/ppeerttu/koa-req-validation/peer-status.svg" alt="peerDependencies Status"></a>
+				<a href="https://codecov.io/gh/ppeerttu/koa-req-validation"><img src="https://codecov.io/gh/ppeerttu/koa-req-validation/branch/master/graph/badge.svg?token=IuGu3GKizF" alt="codecov"></a></p>
 				<p>A <a href="https://github.com/chriso/validator.js">validator</a> middleware for <a href="https://koajs.com/">koa</a>. Inspired by <a href="https://github.com/express-validator/express-validator">express-validator</a>.</p>
 				<ul>
-					<li><a href="#koa-request-validation">koa-request-validation</a></li>
+					<li><a href="#koa-req-validation">koa-req-validation</a></li>
 					<li><a href="#installation">Installation</a></li>
 					<li><a href="#getting-started">Getting started</a></li>
 					<li><a href="#documentation">Documentation</a></li>
@@ -85,13 +85,13 @@
 					<li><a href="#licence">Licence</a></li>
 				</ul>
 				<h1 id="installation">Installation</h1>
-				<p>The <strong>koa-request-validation</strong> requires <a href="https://github.com/chriso/validator.js">validator</a>, <a href="https://github.com/ZijianHe/koa-router">koa-router</a> and <a href="https://github.com/koajs/bodyparser">koa-bodyparser</a> as peer dependencies.</p>
+				<p>The <strong>koa-req-validation</strong> requires <a href="https://github.com/chriso/validator.js">validator</a>, <a href="https://github.com/ZijianHe/koa-router">koa-router</a> and <a href="https://github.com/koajs/bodyparser">koa-bodyparser</a> as peer dependencies.</p>
 				<p>Install peer dependencies</p>
-				<pre><code>npm <span class="hljs-keyword">install </span>validator koa-<span class="hljs-keyword">bodyparser </span>koa-router</code></pre><p>Install <strong>koa-request-validation</strong></p>
-				<pre><code>npm <span class="hljs-keyword">install</span> koa-request-<span class="hljs-keyword">validation</span></code></pre><h1 id="getting-started">Getting started</h1>
+				<pre><code>npm <span class="hljs-keyword">install </span>validator koa-<span class="hljs-keyword">bodyparser </span>koa-router</code></pre><p>Install <strong>koa-req-validation</strong></p>
+				<pre><code>npm <span class="hljs-keyword">install</span> koa-req-<span class="hljs-keyword">validation</span></code></pre><h1 id="getting-started">Getting started</h1>
 				<p>A basic usage example</p>
 				<pre><code class="language-typescript"><span class="hljs-keyword">import</span> Router, { IRouterContext } <span class="hljs-keyword">from</span> <span class="hljs-string">'koa-router'</span>;
-<span class="hljs-keyword">import</span> { query, validationResults, IValidationContext } <span class="hljs-keyword">from</span> <span class="hljs-string">'koa-request-validation'</span>;
+<span class="hljs-keyword">import</span> { query, validationResults, IValidationContext } <span class="hljs-keyword">from</span> <span class="hljs-string">'koa-req-validation'</span>;
 
 <span class="hljs-comment">// ...</span>
 
@@ -112,20 +112,20 @@ router.get(
         ctx.body = <span class="hljs-string">`Hello <span class="hljs-subst">${name}</span>`</span>;
     }
 );</code></pre>
-				<p>See the <a href="https://github.com/ppeerttu/koa-request-validation/blob/master/demo/index.ts">demo</a> for other examples.</p>
+				<p>See the <a href="https://github.com/ppeerttu/koa-req-validation/blob/master/demo/index.ts">demo</a> for other examples.</p>
 				<h1 id="documentation">Documentation</h1>
-				<p>See the <a href="https://ppeerttu.github.io/koa-request-validation/">generated TypeDoc</a> for now. Improved documentation is coming up in the future.</p>
+				<p>See the <a href="https://ppeerttu.github.io/koa-req-validation/">generated TypeDoc</a> for now. Improved documentation is coming up in the future.</p>
 				<h1 id="motivation">Motivation</h1>
 				<p>Motivation behind this module is the awesome experience of using the <a href="https://github.com/express-validator/express-validator">express-validator</a>. However, due to various reasons the <code>express-validator</code> doesn&#39;t suit it and it seems that there is quite a lot of request validation packages out there mainly for <code>koa</code> v1 without warranty for active maintenance. This package tries to mimic the <code>express-validator</code> pacakge and eventually provide most of the features.</p>
 				<h2 id="peer-dependencies">Peer dependencies</h2>
 				<p>The usage of the few peer dependencies is a known dececision. As it appears to be slowly growing concern that developers hog thousands of npm pacakges without knowing them, we&#39;d like to make sure the developer knows what&#39;s included in this package and actively consider whether to include this pacakge along with it&#39;s peer dependencies to the project.</p>
 				<p>Also, since this package is still in very raw state and lots of features are missing, it makes more sense to manually install the <a href="https://github.com/chriso/validator.js">validator.js</a> -module along the project dependencies for the opportunity of using it as is in the application.</p>
 				<h1 id="issues">Issues</h1>
-				<p>We use <a href="https://github.com/ppeerttu/koa-request-validation/issues">GitHub</a> for issue tracking. Please look from <a href="https://github.com/ppeerttu/koa-request-validation/issues?utf8=%E2%9C%93&amp;q=is%3Aissue">previously submitted issues</a> if someone else has already submitted the same issue.</p>
+				<p>We use <a href="https://github.com/ppeerttu/koa-req-validation/issues">GitHub</a> for issue tracking. Please look from <a href="https://github.com/ppeerttu/koa-req-validation/issues?utf8=%E2%9C%93&amp;q=is%3Aissue">previously submitted issues</a> if someone else has already submitted the same issue.</p>
 				<h1 id="contribution">Contribution</h1>
 				<p>All contributions to the project are welcome. Contact the author for now, guidelines for contributions will be defined later.</p>
 				<h1 id="licence">Licence</h1>
-				<p><a href="https://github.com/ppeerttu/koa-request-validation/blob/master/LICENCE">MIT Licence</a></p>
+				<p><a href="https://github.com/ppeerttu/koa-req-validation/blob/master/LICENCE">MIT Licence</a></p>
 			</div>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
