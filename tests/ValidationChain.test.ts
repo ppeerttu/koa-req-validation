@@ -139,6 +139,21 @@ describe('ValidationChain', () => {
             await expect(validationChain.run()(ctx, next)).rejects.toThrow();
         });
 
+        test('Returns the default error message if no message has been passed', async () => {
+            const validationChain = new ValidationChain('int', ParamLocation.BODY)
+                .custom(
+                    async (input: any) => {
+                        if (typeof input !== 'number') {
+                            throw new TypeError();
+                        }
+                    }
+                );
+            const ctx: any = mockContext(ParamLocation.BODY, { int: '12' });
+            await validationChain.run()(ctx, next);
+            const results = validationResults(ctx).mapped();
+            expect(results).toHaveProperty('int');
+            expect(results.int).toHaveProperty('msg', validationChain.defaultErrorMessage);
+        });
 
         test('Doesn\'t return errors if function doesn\'t throw', async () => {
             const validationChain = new ValidationChain('int', ParamLocation.BODY)

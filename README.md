@@ -63,7 +63,7 @@ router.get(
 );
 ```
 
-See the [demo](./demo/index.ts) for other examples.
+See the [demo][demo-link] for other examples.
 
 # Motivation
 
@@ -85,9 +85,11 @@ All contributions to the project are welcome. Contact the author for now, guidel
 
 # Licence
 
-[MIT Licence](LICENCE)
+[MIT Licence][licence-link]
 
 
+[demo-link]:https://github.com/ppeerttu/koa-request-validation/blob/master/demo/index.ts
+[licence-link]:https://github.com/ppeerttu/koa-request-validation/blob/master/LICENCE
 
 [issue-site]:https://github.com/ppeerttu/koa-request-validation/issues
 [issue-all-filter-site]:https://github.com/ppeerttu/koa-request-validation/issues?utf8=%E2%9C%93&q=is%3Aissue
