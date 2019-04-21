@@ -14,6 +14,11 @@ import ValidationResult from './ValidationResult';
  * The validation chain object.
  */
 export default class ValidationChain {
+    
+    /**
+     * Default error message when validation fails.
+     */
+    public readonly defaultErrorMessage = 'Invalid value';
 
     /**
      * Parameter to be validated.
@@ -38,6 +43,11 @@ export default class ValidationChain {
         options?: IOptionalOptions
     };
 
+    /**
+     * Create a new ValidationChain.
+     * @param parameter Name of the parameter to validate
+     * @param location Location of the parameter in request
+     */
     constructor(
         parameter: string,
         location: ParamLocation,
@@ -55,6 +65,18 @@ export default class ValidationChain {
         this.isOptional = { value: false };
     }
 
+    /**
+     * Run the validation. This method has to be called
+     * at the end of each validation.
+     * ```typescript
+     * router.post(
+     *     '/auth/login',
+     *     body('username').equals('user').run(),
+     *     body('password').equals('pass').run(),
+     *     handler
+     * );
+     * ```
+     */
     run = () => async (
         ctx: ParameterizedContext<IValidationContext>,
         next: () => Promise<void>
@@ -372,7 +394,7 @@ export default class ValidationChain {
                         await func(input, ctx);
                     } catch (e) {
                         arr.push({
-                            msg: message || e.message || 'Invalid value',
+                            msg: message || e.message || this.defaultErrorMessage,
                             location: this.location,
                             param: this.parameter,
                             value: originalInput + ''
@@ -382,7 +404,7 @@ export default class ValidationChain {
                     // @ts-ignore
                 } else if (input === null || !validator[validation](input, options)) {
                     arr.push({
-                        msg: message || 'Invalid value',
+                        msg: message || this.defaultErrorMessage,
                         location: this.location,
                         param: this.parameter,
                         value: originalInput + ''

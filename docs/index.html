@@ -82,6 +82,7 @@
 					<li><a href="#licence">Licence</a></li>
 				</ul>
 				<h1 id="installation">Installation</h1>
+				<p><strong>NOTE: This project has not been released in npm yet.</strong></p>
 				<p>The <strong>koa-request-validation</strong> requires <a href="https://github.com/chriso/validator.js">validator</a>, <a href="https://github.com/ZijianHe/koa-router">koa-router</a> and <a href="https://github.com/koajs/bodyparser">koa-bodyparser</a> as peer dependencies.</p>
 				<p>Install peer dependencies</p>
 				<pre><code>npm <span class="hljs-keyword">install </span>validator koa-<span class="hljs-keyword">bodyparser </span>koa-router</code></pre><p>Install <strong>koa-request-validation</strong></p>
@@ -109,7 +110,7 @@ router.get(
         ctx.body = <span class="hljs-string">`Hello <span class="hljs-subst">${name}</span>`</span>;
     }
 );</code></pre>
-				<p>See the <a href="./demo/index.ts">demo</a> for other examples.</p>
+				<p>See the <a href="https://github.com/ppeerttu/koa-request-validation/blob/master/demo/index.ts">demo</a> for other examples.</p>
 				<h1 id="motivation">Motivation</h1>
 				<p>Motivation behind this module is the awesome experience of using the <a href="https://github.com/express-validator/express-validator">express-validator</a>. However, due to various reasons the <code>express-validator</code> doesn&#39;t suit it and it seems that there is quite a lot of request validation packages out there mainly for <code>koa</code> v1 without warranty for active maintenance. This package tries to mimic the <code>express-validator</code> pacakge and eventually provide most of the features.</p>
 				<h2 id="peer-dependencies">Peer dependencies</h2>
