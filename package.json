@@ -9,7 +9,7 @@
     "test:watch": "jest --watchAll",
     "demo": "./node_modules/.bin/ts-node ./demo/index.ts",
     "build": "./node_modules/.bin/tsc -p .",
-    "docs": "./node_modules/.bin/typedoc --out docs/ src/"
+    "docs": "./node_modules/.bin/typedoc --out docs/ src/ && touch docs/.nojekyll"
   },
   "author": "Perttu Kärnä <perttu.karna@gmail.com>",
   "repository": {
