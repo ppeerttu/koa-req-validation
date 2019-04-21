@@ -16,14 +16,14 @@ export interface IIsInValuesOptions {
 /**
  * Options containing allowNull flag.
  */
-export interface IAllowNullOptions {
+export interface IOptionalOptions {
     allowNull?: boolean;
 }
 /**
  * General validator options combining all
  * possible options.
  */
-export declare type ValidatorOptions = IMinMaxOptions | RegExp | IIsInValuesOptions | IAllowNullOptions;
+export declare type ValidatorOptions = IMinMaxOptions | RegExp | IIsInValuesOptions | IOptionalOptions;
 /**
  * Definition of custom validation function. Custom
  * validation function should throw an error

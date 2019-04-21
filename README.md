@@ -1,7 +1,9 @@
 # koa-request-validation
 
 [![Build Status](https://travis-ci.org/ppeerttu/koa-request-validation.svg?branch=master)](https://travis-ci.org/ppeerttu/koa-request-validation)
-![dependencies](https://david-dm.org/ppeerttu/koa-request-validation.svg)
+[![dependencies Status](https://david-dm.org/ppeerttu/koa-request-validation/status.svg)](https://david-dm.org/ppeerttu/koa-request-validation)
+[![devDependencies Status](https://david-dm.org/ppeerttu/koa-request-validation/dev-status.svg)](https://david-dm.org/ppeerttu/koa-request-validation?type=dev)
+[![peerDependencies Status](https://david-dm.org/ppeerttu/koa-request-validation/peer-status.svg)](https://david-dm.org/ppeerttu/koa-request-validation?type=peer)
 [![codecov](https://codecov.io/gh/ppeerttu/koa-request-validation/branch/master/graph/badge.svg?token=IuGu3GKizF)](https://codecov.io/gh/ppeerttu/koa-request-validation)
 
 A [validator][validator-site] middleware for [koa][koa-site]. Inspired by [express-validator][express-validator-site].
@@ -9,6 +11,7 @@ A [validator][validator-site] middleware for [koa][koa-site]. Inspired by [expre
 - [koa-request-validation](#koa-request-validation)
 - [Installation](#installation)
 - [Getting started](#getting-started)
+- [Documentation](#documentation)
 - [Motivation](#motivation)
   - [Peer dependencies](#peer-dependencies)
 - [Issues](#issues)
@@ -17,8 +20,6 @@ A [validator][validator-site] middleware for [koa][koa-site]. Inspired by [expre
 
 
 # Installation
-
-**NOTE: This project has not been released in npm yet.**
 
 The **koa-request-validation** requires [validator][validator-site], [koa-router][koa-router-site] and [koa-bodyparser][koa-bodyparser-site] as peer dependencies.
 
@@ -42,7 +43,7 @@ A basic usage example
 import Router, { IRouterContext } from 'koa-router';
 import { query, validationResults, IValidationContext } from 'koa-request-validation';
 
-/// ....
+// ...
 
 const router = new Router();
 
@@ -51,7 +52,7 @@ router.get(
     query('name')
         .isLength({ min: 3, max: 20 })
         .withMessage('The name has to be between 3 and 20 characters')
-        .run(),
+        .run(), // <-- This is required at the end of each validation
     async (ctx: ParameterizedContext<IValidationContext>) => {
         const result = validationResults(ctx);
         if (result.hasErrors()) {
@@ -64,6 +65,10 @@ router.get(
 ```
 
 See the [demo][demo-link] for other examples.
+
+# Documentation
+
+See the [generated TypeDoc][typedocs] for now. Improved documentation is coming up in the future.
 
 # Motivation
 
@@ -90,6 +95,7 @@ All contributions to the project are welcome. Contact the author for now, guidel
 
 [demo-link]:https://github.com/ppeerttu/koa-request-validation/blob/master/demo/index.ts
 [licence-link]:https://github.com/ppeerttu/koa-request-validation/blob/master/LICENCE
+[typedocs]:https://ppeerttu.github.io/koa-request-validation/
 
 [issue-site]:https://github.com/ppeerttu/koa-request-validation/issues
 [issue-all-filter-site]:https://github.com/ppeerttu/koa-request-validation/issues?utf8=%E2%9C%93&q=is%3Aissue

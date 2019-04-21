@@ -66,13 +66,16 @@
 			<div class="tsd-panel tsd-typography">
 				<h1 id="koa-request-validation">koa-request-validation</h1>
 				<p><a href="https://travis-ci.org/ppeerttu/koa-request-validation"><img src="https://travis-ci.org/ppeerttu/koa-request-validation.svg?branch=master" alt="Build Status"></a>
-					<img src="https://david-dm.org/ppeerttu/koa-request-validation.svg" alt="dependencies">
+					<a href="https://david-dm.org/ppeerttu/koa-request-validation"><img src="https://david-dm.org/ppeerttu/koa-request-validation/status.svg" alt="dependencies Status"></a>
+					<a href="https://david-dm.org/ppeerttu/koa-request-validation?type=dev"><img src="https://david-dm.org/ppeerttu/koa-request-validation/dev-status.svg" alt="devDependencies Status"></a>
+					<a href="https://david-dm.org/ppeerttu/koa-request-validation?type=peer"><img src="https://david-dm.org/ppeerttu/koa-request-validation/peer-status.svg" alt="peerDependencies Status"></a>
 				<a href="https://codecov.io/gh/ppeerttu/koa-request-validation"><img src="https://codecov.io/gh/ppeerttu/koa-request-validation/branch/master/graph/badge.svg?token=IuGu3GKizF" alt="codecov"></a></p>
 				<p>A <a href="https://github.com/chriso/validator.js">validator</a> middleware for <a href="https://koajs.com/">koa</a>. Inspired by <a href="https://github.com/express-validator/express-validator">express-validator</a>.</p>
 				<ul>
 					<li><a href="#koa-request-validation">koa-request-validation</a></li>
 					<li><a href="#installation">Installation</a></li>
 					<li><a href="#getting-started">Getting started</a></li>
+					<li><a href="#documentation">Documentation</a></li>
 					<li><a href="#motivation">Motivation</a><ul>
 							<li><a href="#peer-dependencies">Peer dependencies</a></li>
 						</ul>
@@ -82,7 +85,6 @@
 					<li><a href="#licence">Licence</a></li>
 				</ul>
 				<h1 id="installation">Installation</h1>
-				<p><strong>NOTE: This project has not been released in npm yet.</strong></p>
 				<p>The <strong>koa-request-validation</strong> requires <a href="https://github.com/chriso/validator.js">validator</a>, <a href="https://github.com/ZijianHe/koa-router">koa-router</a> and <a href="https://github.com/koajs/bodyparser">koa-bodyparser</a> as peer dependencies.</p>
 				<p>Install peer dependencies</p>
 				<pre><code>npm <span class="hljs-keyword">install </span>validator koa-<span class="hljs-keyword">bodyparser </span>koa-router</code></pre><p>Install <strong>koa-request-validation</strong></p>
@@ -91,7 +93,7 @@
 				<pre><code class="language-typescript"><span class="hljs-keyword">import</span> Router, { IRouterContext } <span class="hljs-keyword">from</span> <span class="hljs-string">'koa-router'</span>;
 <span class="hljs-keyword">import</span> { query, validationResults, IValidationContext } <span class="hljs-keyword">from</span> <span class="hljs-string">'koa-request-validation'</span>;
 
-<span class="hljs-comment">/// ....</span>
+<span class="hljs-comment">// ...</span>
 
 <span class="hljs-keyword">const</span> router = <span class="hljs-keyword">new</span> Router();
 
@@ -100,7 +102,7 @@ router.get(
     query(<span class="hljs-string">'name'</span>)
         .isLength({ min: <span class="hljs-number">3</span>, max: <span class="hljs-number">20</span> })
         .withMessage(<span class="hljs-string">'The name has to be between 3 and 20 characters'</span>)
-        .run(),
+        .run(), <span class="hljs-comment">// &lt;-- This is required at the end of each validation</span>
     <span class="hljs-keyword">async</span> (ctx: ParameterizedContext&lt;IValidationContext&gt;) =&gt; {
         <span class="hljs-keyword">const</span> result = validationResults(ctx);
         <span class="hljs-keyword">if</span> (result.hasErrors()) {
@@ -111,6 +113,8 @@ router.get(
     }
 );</code></pre>
 				<p>See the <a href="https://github.com/ppeerttu/koa-request-validation/blob/master/demo/index.ts">demo</a> for other examples.</p>
+				<h1 id="documentation">Documentation</h1>
+				<p>See the <a href="https://ppeerttu.github.io/koa-request-validation/">generated TypeDoc</a> for now. Improved documentation is coming up in the future.</p>
 				<h1 id="motivation">Motivation</h1>
 				<p>Motivation behind this module is the awesome experience of using the <a href="https://github.com/express-validator/express-validator">express-validator</a>. However, due to various reasons the <code>express-validator</code> doesn&#39;t suit it and it seems that there is quite a lot of request validation packages out there mainly for <code>koa</code> v1 without warranty for active maintenance. This package tries to mimic the <code>express-validator</code> pacakge and eventually provide most of the features.</p>
 				<h2 id="peer-dependencies">Peer dependencies</h2>
