@@ -18,7 +18,28 @@ const ValidationResult_1 = __importDefault(require("./ValidationResult"));
  * The validation chain object.
  */
 class ValidationChain {
+    /**
+     * Create a new ValidationChain.
+     * @param parameter Name of the parameter to validate
+     * @param location Location of the parameter in request
+     */
     constructor(parameter, location) {
+        /**
+         * Default error message when validation fails.
+         */
+        this.defaultErrorMessage = 'Invalid value';
+        /**
+         * Run the validation. This method has to be called
+         * at the end of each validation.
+         * ```typescript
+         * router.post(
+         *     '/auth/login',
+         *     body('username').equals('user').run(),
+         *     body('password').equals('pass').run(),
+         *     handler
+         * );
+         * ```
+         */
         this.run = () => (ctx, next) => __awaiter(this, void 0, void 0, function* () {
             const results = yield this.checkResults(ctx);
             if (results) {
@@ -315,7 +336,7 @@ class ValidationChain {
                     }
                     catch (e) {
                         arr.push({
-                            msg: message || e.message || 'Invalid value',
+                            msg: message || e.message || this.defaultErrorMessage,
                             location: this.location,
                             param: this.parameter,
                             value: originalInput + ''
@@ -325,7 +346,7 @@ class ValidationChain {
                 }
                 else if (input === null || !validator_1.default[validation](input, options)) {
                     arr.push({
-                        msg: message || 'Invalid value',
+                        msg: message || this.defaultErrorMessage,
                         location: this.location,
                         param: this.parameter,
                         value: originalInput + ''

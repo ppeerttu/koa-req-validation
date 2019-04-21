@@ -16,6 +16,7 @@
     "type": "git",
     "url": "git://github.com/ppeerttu/koa-request-validation.git"
   },
+  "homepage": "https://ppeerttu.github.io/koa-request-validation/",
   "license": "MIT",
   "devDependencies": {
     "@types/jest": "^24.0.11",
@@ -30,14 +31,13 @@
     "ts-node": "^8.0.3",
     "tslint": "^5.13.1",
     "typedoc": "^0.14.2",
-    "typedoc-plugin-markdown": "^1.2.0",
     "typescript": "^3.3.3333",
     "validator": "^10.11.0"
   },
   "peerDependencies": {
-    "validator": "^10.11.0",
-    "koa-bodyparser": "^4.2.1",
-    "koa-router": "^7.4.0"
+    "validator": "^10.11.x",
+    "koa-bodyparser": "^4.2.x",
+    "koa-router": "^7.4.x"
   },
   "dependencies": {
     "@types/koa-router": "^7.0.40"

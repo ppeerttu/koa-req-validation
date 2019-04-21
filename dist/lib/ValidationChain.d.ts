@@ -1,11 +1,15 @@
 /// <reference types="validator" />
-import { ParamLocation, IMinMaxOptions, IAllowNullOptions, CustomValidatorFunction } from './types';
+import { ParamLocation, IMinMaxOptions, IOptionalOptions, CustomValidatorFunction } from './types';
 import { ParameterizedContext } from 'koa';
 import { IValidationContext } from '..';
 /**
  * The validation chain object.
  */
 export default class ValidationChain {
+    /**
+     * Default error message when validation fails.
+     */
+    readonly defaultErrorMessage = "Invalid value";
     /**
      * Parameter to be validated.
      */
@@ -22,7 +26,24 @@ export default class ValidationChain {
      * Is this parameter optional?
      */
     private isOptional;
+    /**
+     * Create a new ValidationChain.
+     * @param parameter Name of the parameter to validate
+     * @param location Location of the parameter in request
+     */
     constructor(parameter: string, location: ParamLocation);
+    /**
+     * Run the validation. This method has to be called
+     * at the end of each validation.
+     * ```typescript
+     * router.post(
+     *     '/auth/login',
+     *     body('username').equals('user').run(),
+     *     body('password').equals('pass').run(),
+     *     handler
+     * );
+     * ```
+     */
     run: () => (ctx: ParameterizedContext<IValidationContext, {}>, next: () => Promise<void>) => Promise<void>;
     /**
      * Pass a custom message to the validation.
@@ -32,7 +53,7 @@ export default class ValidationChain {
     /**
      * Set this property as optional.
      */
-    optional(options?: IAllowNullOptions): this;
+    optional(options?: IOptionalOptions): this;
     /**
      * Custom async validation function to execute. The function
      * must throw when the validation fails.
