@@ -1,14 +1,14 @@
-# koa-request-validation
+# koa-req-validation
 
-[![Build Status](https://travis-ci.org/ppeerttu/koa-request-validation.svg?branch=master)](https://travis-ci.org/ppeerttu/koa-request-validation)
-[![dependencies Status](https://david-dm.org/ppeerttu/koa-request-validation/status.svg)](https://david-dm.org/ppeerttu/koa-request-validation)
-[![devDependencies Status](https://david-dm.org/ppeerttu/koa-request-validation/dev-status.svg)](https://david-dm.org/ppeerttu/koa-request-validation?type=dev)
-[![peerDependencies Status](https://david-dm.org/ppeerttu/koa-request-validation/peer-status.svg)](https://david-dm.org/ppeerttu/koa-request-validation?type=peer)
-[![codecov](https://codecov.io/gh/ppeerttu/koa-request-validation/branch/master/graph/badge.svg?token=IuGu3GKizF)](https://codecov.io/gh/ppeerttu/koa-request-validation)
+[![Build Status](https://travis-ci.org/ppeerttu/koa-req-validation.svg?branch=master)](https://travis-ci.org/ppeerttu/koa-req-validation)
+[![dependencies Status](https://david-dm.org/ppeerttu/koa-req-validation/status.svg)](https://david-dm.org/ppeerttu/koa-req-validation)
+[![devDependencies Status](https://david-dm.org/ppeerttu/koa-req-validation/dev-status.svg)](https://david-dm.org/ppeerttu/koa-req-validation?type=dev)
+[![peerDependencies Status](https://david-dm.org/ppeerttu/koa-req-validation/peer-status.svg)](https://david-dm.org/ppeerttu/koa-req-validation?type=peer)
+[![codecov](https://codecov.io/gh/ppeerttu/koa-req-validation/branch/master/graph/badge.svg?token=IuGu3GKizF)](https://codecov.io/gh/ppeerttu/koa-req-validation)
 
 A [validator][validator-site] middleware for [koa][koa-site]. Inspired by [express-validator][express-validator-site].
 
-- [koa-request-validation](#koa-request-validation)
+- [koa-req-validation](#koa-req-validation)
 - [Installation](#installation)
 - [Getting started](#getting-started)
 - [Documentation](#documentation)
@@ -21,7 +21,7 @@ A [validator][validator-site] middleware for [koa][koa-site]. Inspired by [expre
 
 # Installation
 
-The **koa-request-validation** requires [validator][validator-site], [koa-router][koa-router-site] and [koa-bodyparser][koa-bodyparser-site] as peer dependencies.
+The **koa-req-validation** requires [validator][validator-site], [koa-router][koa-router-site] and [koa-bodyparser][koa-bodyparser-site] as peer dependencies.
 
 
 Install peer dependencies
@@ -29,9 +29,9 @@ Install peer dependencies
 npm install validator koa-bodyparser koa-router
 ```
 
-Install **koa-request-validation**
+Install **koa-req-validation**
 ```
-npm install koa-request-validation
+npm install koa-req-validation
 ```
 
 
@@ -41,7 +41,7 @@ A basic usage example
 
 ```typescript
 import Router, { IRouterContext } from 'koa-router';
-import { query, validationResults, IValidationContext } from 'koa-request-validation';
+import { query, validationResults, IValidationContext } from 'koa-req-validation';
 
 // ...
 
@@ -93,12 +93,12 @@ All contributions to the project are welcome. Contact the author for now, guidel
 [MIT Licence][licence-link]
 
 
-[demo-link]:https://github.com/ppeerttu/koa-request-validation/blob/master/demo/index.ts
-[licence-link]:https://github.com/ppeerttu/koa-request-validation/blob/master/LICENCE
-[typedocs]:https://ppeerttu.github.io/koa-request-validation/
+[demo-link]:https://github.com/ppeerttu/koa-req-validation/blob/master/demo/index.ts
+[licence-link]:https://github.com/ppeerttu/koa-req-validation/blob/master/LICENCE
+[typedocs]:https://ppeerttu.github.io/koa-req-validation/
 
-[issue-site]:https://github.com/ppeerttu/koa-request-validation/issues
-[issue-all-filter-site]:https://github.com/ppeerttu/koa-request-validation/issues?utf8=%E2%9C%93&q=is%3Aissue
+[issue-site]:https://github.com/ppeerttu/koa-req-validation/issues
+[issue-all-filter-site]:https://github.com/ppeerttu/koa-req-validation/issues?utf8=%E2%9C%93&q=is%3Aissue
 
 [koa-site]:https://koajs.com/
 [koa-router-site]:https://github.com/ZijianHe/koa-router

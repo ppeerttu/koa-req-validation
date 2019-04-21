@@ -1,0 +1,7 @@
+# Ignore unnecessary files from distribution
+docs
+demo
+tests
+coverage
+
+.travis.yml
