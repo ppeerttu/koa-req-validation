@@ -13,9 +13,7 @@ export interface IMinMaxOptions {
 /**
  * Options containing an array of string.
  */
-export interface IIsInValuesOptions {
-    values?: string[];
-}
+export type IsInValuesOptions =  string[];
 
 /**
  * Options containing allowNull flag.
@@ -30,8 +28,13 @@ export interface IOptionalOptions {
  */
 export type ValidatorOptions =  IMinMaxOptions
     | RegExp
-    | IIsInValuesOptions
+    | IsInValuesOptions
     | IOptionalOptions;
+
+type CustomValidatorFunctionWithContext = (
+    input: any,
+    ctx: ParameterizedContext,
+) => Promise<void>;
 
 /**
  * Definition of custom validation function. Custom
@@ -40,7 +43,6 @@ export type ValidatorOptions =  IMinMaxOptions
  */
 export type CustomValidatorFunction = (
     input: any,
-    ctx?: ParameterizedContext,
 ) => Promise<void>;
 
 /**
@@ -50,7 +52,7 @@ export interface IValidationDefinition {
     validation: ValidatorFunctionName;
     message?: string;
     options?: ValidatorOptions | string;
-    func?: CustomValidatorFunction;
+    func?: CustomValidatorFunction | CustomValidatorFunctionWithContext;
 }
 
 /**

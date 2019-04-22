@@ -4,7 +4,8 @@ import {
     ParamLocation,
     IMinMaxOptions,
     IOptionalOptions,
-    CustomValidatorFunction
+    CustomValidatorFunction,
+    IsInValuesOptions
 } from './types';
 import { ParameterizedContext } from 'koa';
 import { IValidationContext, IValidationError } from '..';
@@ -337,6 +338,20 @@ export default class ValidationChain {
             validation: 'matches',
             options: regExp
         });
+        return this;
+    }
+
+    /**
+     * Check if the parameter is some of the allowed
+     * values.
+     * @param values Options containing at least `values`
+     * property with allowed values
+     */
+    isIn(values: IsInValuesOptions) {
+        this.validations.push({
+            validation: 'isIn',
+            options: values
+        })
         return this;
     }
 

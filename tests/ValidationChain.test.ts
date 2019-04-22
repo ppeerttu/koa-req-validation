@@ -699,6 +699,35 @@ describe('ValidationChain', () => {
 
     });
 
+    describe('isIn()', () => {
+        
+        const allowedValues = [ 'Au', 'Fe', 'Cu' ];
+
+        test('Returns an error if the value is not within allowed values', async () => {
+            const value = 'He';
+            
+            const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
+                .isIn(allowedValues);
+            const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
+            await validationChain.run()(ctx, next);
+
+            const results = validationResults(ctx);
+            expect(results.mapped()).toHaveProperty(prop);
+        });
+
+        test('Doesn\'t return an error if the value is within allowed values', async () => {
+            const value = 'Fe';
+            const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
+                .isIn(allowedValues);
+            const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
+            await validationChain.run()(ctx, next);
+
+            const results = validationResults(ctx);
+            expect(results.mapped()).not.toHaveProperty(prop);
+        });
+
+    });
+
     describe('matches()', () => {
 
         test('Returns an error if the value doesn\'t match the RegExp', async () => {
