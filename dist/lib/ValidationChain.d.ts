@@ -1,5 +1,5 @@
 /// <reference types="validator" />
-import { ParamLocation, IMinMaxOptions, IOptionalOptions, CustomValidatorFunction } from './types';
+import { ParamLocation, IMinMaxOptions, IOptionalOptions, CustomValidatorFunction, IsInValuesOptions, IsAlphaLocale, IIsCurrencyOptions } from './types';
 import { ParameterizedContext } from 'koa';
 import { IValidationContext } from '..';
 /**
@@ -148,6 +148,60 @@ export default class ValidationChain {
      * @param regExp The regular expression
      */
     matches(regExp: RegExp): this;
+    /**
+     * Check if the parameter is some of the allowed
+     * values.
+     * @param values Options containing at least `values`
+     * property with allowed values
+     */
+    isIn(values: IsInValuesOptions): this;
+    /**
+     * Check if the string is a date that's after the specified
+     * date (defaults to now).
+     * @param date The date
+     */
+    isAfter(date?: string): this;
+    /**
+     * Check if the string contains only letters. Locale
+     * defaults to en-US.
+     * @param locale The locale
+     */
+    isAlpha(locale?: IsAlphaLocale): this;
+    /**
+     * Check if the string contains only letters and numbers.
+     * Locale defaults to en-US.
+     * @param locale The locale
+     */
+    isAlphanumeric(locale?: IsAlphaLocale): this;
+    /**
+     * Check if the string contains ACII characters only.
+     */
+    isAscii(): this;
+    /**
+     * Check if the string is base64 encoded.
+     */
+    isBase64(): this;
+    /**
+     * Check if the string is a date that's before
+     * the given date. Defaults to now.
+     * @param date The date
+     */
+    isBefore(date?: string): this;
+    /**
+     * Check if the strin's length (in UTF-8 bytes)
+     * falls in range.
+     * @param options The range
+     */
+    isByteLength(options?: IMinMaxOptions): this;
+    /**
+     * Check if the string is a credit card.
+     */
+    isCreditCard(): this;
+    /**
+     * Check if the string is a valid currency amount.
+     * @param options The options
+     */
+    isCurrency(options?: IIsCurrencyOptions): this;
     /**
      * Run the validations and return the results.
      * @param ctx The context
