@@ -4,7 +4,10 @@ import {
     ParamLocation,
     IMinMaxOptions,
     IOptionalOptions,
-    CustomValidatorFunction
+    CustomValidatorFunction,
+    IsInValuesOptions,
+    IsAlphaLocale,
+    IIsCurrencyOptions
 } from './types';
 import { ParameterizedContext } from 'koa';
 import { IValidationContext, IValidationError } from '..';
@@ -336,6 +339,127 @@ export default class ValidationChain {
         this.validations.push({
             validation: 'matches',
             options: regExp
+        });
+        return this;
+    }
+
+    /**
+     * Check if the parameter is some of the allowed
+     * values.
+     * @param values Options containing at least `values`
+     * property with allowed values
+     */
+    isIn(values: IsInValuesOptions) {
+        this.validations.push({
+            validation: 'isIn',
+            options: values
+        });
+        return this;
+    }
+
+    /**
+     * Check if the string is a date that's after the specified
+     * date (defaults to now).
+     * @param date The date
+     */
+    isAfter(date = new Date().toString()) {
+        this.validations.push({
+            validation: 'isAfter',
+            options: date
+        });
+        return this;
+    }
+
+    /**
+     * Check if the string contains only letters. Locale
+     * defaults to en-US.
+     * @param locale The locale
+     */
+    isAlpha(locale?: IsAlphaLocale) {
+        this.validations.push({
+            validation: 'isAlpha',
+            options: locale
+        });
+        return this;
+    }
+
+    /**
+     * Check if the string contains only letters and numbers.
+     * Locale defaults to en-US.
+     * @param locale The locale
+     */
+    isAlphanumeric(locale?: IsAlphaLocale) {
+        this.validations.push({
+            validation: 'isAlphanumeric',
+            options: locale
+        });
+        return this;
+    }
+
+    /**
+     * Check if the string contains ACII characters only.
+     */
+    isAscii() {
+        this.validations.push({
+            validation: 'isAscii',
+        });
+        return this;
+    }
+
+    /**
+     * Check if the string is base64 encoded.
+     */
+    isBase64() {
+        this.validations.push({
+            validation: 'isBase64',
+        });
+        return this;
+    }
+
+    /**
+     * Check if the string is a date that's before
+     * the given date. Defaults to now.
+     * @param date The date
+     */
+    isBefore(date = new Date().toString()) {
+        this.validations.push({
+            validation: 'isBefore',
+            options: date,
+        });
+        return this;
+    }
+
+    /**
+     * Check if the strin's length (in UTF-8 bytes)
+     * falls in range.
+     * @param options The range
+     */
+    isByteLength(options: IMinMaxOptions = { min: 0 }) {
+        this.validations.push({
+            validation: 'isByteLength',
+            options,
+        });
+        return this;
+    }
+    
+    /**
+     * Check if the string is a credit card.
+     */
+    isCreditCard() {
+        this.validations.push({
+            validation: 'isCreditCard',
+        });
+        return this;
+    }
+
+    /**
+     * Check if the string is a valid currency amount.
+     * @param options The options
+     */
+    isCurrency(options?: IIsCurrencyOptions) {
+        this.validations.push({
+            validation: 'isCurrency',
+            options
         });
         return this;
     }

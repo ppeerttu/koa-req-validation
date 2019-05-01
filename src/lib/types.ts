@@ -9,13 +9,10 @@ export interface IMinMaxOptions {
     max?: number;
 }
 
-
 /**
  * Options containing an array of string.
  */
-export interface IIsInValuesOptions {
-    values?: string[];
-}
+export type IsInValuesOptions =  string[];
 
 /**
  * Options containing allowNull flag.
@@ -30,8 +27,19 @@ export interface IOptionalOptions {
  */
 export type ValidatorOptions =  IMinMaxOptions
     | RegExp
-    | IIsInValuesOptions
-    | IOptionalOptions;
+    | IsInValuesOptions
+    | IOptionalOptions
+    | string
+    | IsAlphaLocale
+    | IIsCurrencyOptions
+
+/**
+ * Custom validation function with context object.
+ */
+type CustomValidatorFunctionWithContext = (
+    input: any,
+    ctx: ParameterizedContext,
+) => Promise<void>;
 
 /**
  * Definition of custom validation function. Custom
@@ -40,7 +48,6 @@ export type ValidatorOptions =  IMinMaxOptions
  */
 export type CustomValidatorFunction = (
     input: any,
-    ctx?: ParameterizedContext,
 ) => Promise<void>;
 
 /**
@@ -50,7 +57,7 @@ export interface IValidationDefinition {
     validation: ValidatorFunctionName;
     message?: string;
     options?: ValidatorOptions | string;
-    func?: CustomValidatorFunction;
+    func?: CustomValidatorFunction | CustomValidatorFunctionWithContext;
 }
 
 /**
@@ -131,3 +138,78 @@ export enum ParamLocation {
  * Validation results as mapped object.
  */
 export type MappedValidationResults = { [key: string]: IValidationError };
+
+/**
+ * Possibile locales.
+ */
+export type IsAlphaLocale = 'ar'
+    | 'ar-AE'
+    | 'ar-BH'
+    | 'ar-DZ'
+    | 'ar-EG'
+    | 'ar-IQ'
+    | 'ar-JO'
+    | 'ar-KW'
+    | 'ar-LB'
+    | 'ar-LY'
+    | 'ar-MA'
+    | 'ar-QA'
+    | 'ar-QM'
+    | 'ar-SA'
+    | 'ar-SD'
+    | 'ar-SY'
+    | 'ar-TN'
+    | 'ar-YE'
+    | 'bg-BG'
+    | 'cs-CZ'
+    | 'da-DK'
+    | 'de-DE'
+    | 'el-GR'
+    | 'en-AU'
+    | 'en-GB'
+    | 'en-HK'
+    | 'en-IN'
+    | 'en-NZ'
+    | 'en-US'
+    | 'en-ZA'
+    | 'en-ZM'
+    | 'es-ES'
+    | 'fr-FR'
+    | 'hu-HU'
+    | 'it-IT'
+    | 'ku-IQ'
+    | 'nb-NO'
+    | 'nl-NL'
+    | 'nn-NO'
+    | 'pl-PL'
+    | 'pt-BR'
+    | 'pt-PT'
+    | 'ru-RU'
+    | 'sl-SI'
+    | 'sk-SK'
+    | 'sr-RS'
+    | 'sr-RS@latin'
+    | 'sv-SE'
+    | 'tr-TR'
+    | 'uk-UA';
+
+/**
+ * Options for isCurrency validation.
+ */
+export interface IIsCurrencyOptions {
+    symbol?: string;
+    require_symbol?: boolean;
+    allow_space_after_symbol?: boolean;
+    symbol_after_digits?: boolean;
+    allow_negatives?: boolean;
+    parens_for_negatives?: boolean;
+    negative_sign_before_digits?: boolean;
+    negative_sign_after_digits?: boolean;
+    allow_negative_sign_placeholder?: boolean;
+    thousands_separator?: string;
+    decimal_separator?: string;
+    allow_decimal?: boolean;
+    require_decimal?: boolean;
+    digits_after_decimal?: number[];
+    allow_space_after_digits?: boolean;
+}
