@@ -7,7 +7,10 @@ import {
     CustomValidatorFunction,
     IsInValuesOptions,
     IsAlphaLocale,
-    IIsCurrencyOptions
+    IIsCurrencyOptions,
+    IIsDecimalOptions,
+    IIsFQDNOptions,
+    IsIdentityCardLocale
 } from './types';
 import { ParameterizedContext } from 'koa';
 import { IValidationContext, IValidationError } from '..';
@@ -48,6 +51,7 @@ export default class ValidationChain {
 
     /**
      * Create a new ValidationChain.
+     * 
      * @param parameter Name of the parameter to validate
      * @param location Location of the parameter in request
      */
@@ -97,6 +101,7 @@ export default class ValidationChain {
 
     /**
      * Pass a custom message to the validation.
+     * 
      * @param message Custom message
      */
     withMessage(message: string) {
@@ -333,6 +338,7 @@ export default class ValidationChain {
 
     /**
      * Check if the parameter matches given regular expression.
+     * 
      * @param regExp The regular expression
      */
     matches(regExp: RegExp) {
@@ -346,6 +352,7 @@ export default class ValidationChain {
     /**
      * Check if the parameter is some of the allowed
      * values.
+     * 
      * @param values Options containing at least `values`
      * property with allowed values
      */
@@ -360,6 +367,7 @@ export default class ValidationChain {
     /**
      * Check if the string is a date that's after the specified
      * date (defaults to now).
+     * 
      * @param date The date
      */
     isAfter(date = new Date().toString()) {
@@ -373,6 +381,7 @@ export default class ValidationChain {
     /**
      * Check if the string contains only letters. Locale
      * defaults to en-US.
+     * 
      * @param locale The locale
      */
     isAlpha(locale?: IsAlphaLocale) {
@@ -386,6 +395,7 @@ export default class ValidationChain {
     /**
      * Check if the string contains only letters and numbers.
      * Locale defaults to en-US.
+     * 
      * @param locale The locale
      */
     isAlphanumeric(locale?: IsAlphaLocale) {
@@ -419,6 +429,7 @@ export default class ValidationChain {
     /**
      * Check if the string is a date that's before
      * the given date. Defaults to now.
+     * 
      * @param date The date
      */
     isBefore(date = new Date().toString()) {
@@ -432,6 +443,7 @@ export default class ValidationChain {
     /**
      * Check if the strin's length (in UTF-8 bytes)
      * falls in range.
+     * 
      * @param options The range
      */
     isByteLength(options: IMinMaxOptions = { min: 0 }) {
@@ -454,12 +466,130 @@ export default class ValidationChain {
 
     /**
      * Check if the string is a valid currency amount.
+     * 
      * @param options The options
      */
     isCurrency(options?: IIsCurrencyOptions) {
         this.validations.push({
             validation: 'isCurrency',
             options
+        });
+        return this;
+    }
+
+    /**
+     * Check if the string is a data uri format.
+     */
+    isDataURI() {
+        this.validations.push({
+            validation: 'isDataURI',
+        });
+        return this;
+    }
+
+    /**
+     * Check if the string is a magnet uri format.
+     */
+    isMagnetURI() {
+        this.validations.push({
+            validation: 'isMagnetURI',
+        });
+        return this;
+    }
+
+    /**
+     * Check if the string represents a decimal number.
+     *
+     * @param options The options
+     */
+    isDecimal(options?: IIsDecimalOptions) {
+        this.validations.push({
+            validation: 'isDecimal',
+            options,
+        });
+        return this;
+    }
+
+    /**
+     * Check if the string is a number divisible by 
+     * given number.
+     * 
+     * @param division The division number
+     */
+    isDivisibleBy(division: number) {
+        this.validations.push({
+            validation: 'isDivisibleBy',
+            options: division,
+        });
+        return this;
+    }
+
+    /**
+     * Check if the string is fully qualified
+     * domain name.
+     * 
+     * @param options The options
+     */
+    isFQDN(options: IIsFQDNOptions) {
+        this.validations.push({
+            validation: 'isFQDN',
+            options,
+        });
+        return this;
+    }
+
+    /**
+     * Check if the string contains any full-width
+     * chars.
+     */
+    isFullWidth() {
+        this.validations.push({
+            validation: 'isFullWidth',
+        });
+        return this;
+    }
+
+    /**
+     * Check if the string contains any half-width
+     * chars.
+     */
+    isHalfWidth() {
+        this.validations.push({
+            validation: 'isHalfWidth',
+        });
+        return this;
+    }
+
+    /**
+     * Check if the string is a hexadecimal
+     * color.
+     */
+    isHexColor() {
+        this.validations.push({
+            validation: 'isHexColor',
+        });
+        return this;
+    }
+
+    /**
+     * Check if the string is a hexadecimal
+     * number.
+     */
+    isHexadecimal() {
+        this.validations.push({
+            validation: 'isHexadecimal',
+        });
+        return this;
+    }
+
+    /**
+     * Check if the string is a valid identity
+     * card code.
+     */
+    isIdentityCard(locale?: IsIdentityCardLocale) {
+        this.validations.push({
+            validation: 'isIdentityCard',
+            options: locale,
         });
         return this;
     }
