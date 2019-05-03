@@ -76,7 +76,7 @@ Motivation behind this module is the awesome experience of using the [express-va
 
 ## Peer dependencies
 
-The usage of the few peer dependencies is a known dececision. As it appears to be slowly growing concern that developers hog thousands of npm pacakges without knowing them, we'd like to make sure the developer knows what's included in this package and actively consider whether to include this pacakge along with it's peer dependencies to the project.
+The usage of the few peer dependencies is a known decision. As it appears to be slowly growing concern that developers hog thousands of npm pacakges without knowing them, we'd like to make sure the developer knows what's included in this package and actively consider whether to include this pacakge along with it's peer dependencies to the project.
 
 Also, since this package is still in very raw state and lots of features are missing, it makes more sense to manually install the [validator.js][validator-site] -module along the project dependencies for the opportunity of using it as is in the application.
 
@@ -90,7 +90,7 @@ All contributions to the project are welcome. Contact the author for now, guidel
 
 # Licence
 
-[MIT Licence][licence-link]
+[ISC Licence][licence-link]
 
 
 [demo-link]:https://github.com/ppeerttu/koa-req-validation/blob/master/demo/index.ts
