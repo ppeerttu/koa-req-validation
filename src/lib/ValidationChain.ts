@@ -488,16 +488,6 @@ export default class ValidationChain {
     }
 
     /**
-     * Check if the string is a magnet uri format.
-     */
-    isMagnetURI() {
-        this.validations.push({
-            validation: 'isMagnetURI',
-        });
-        return this;
-    }
-
-    /**
      * Check if the string represents a decimal number.
      *
      * @param options The options
@@ -530,7 +520,7 @@ export default class ValidationChain {
      * 
      * @param options The options
      */
-    isFQDN(options: IIsFQDNOptions) {
+    isFQDN(options?: IIsFQDNOptions) {
         this.validations.push({
             validation: 'isFQDN',
             options,
@@ -578,18 +568,6 @@ export default class ValidationChain {
     isHexadecimal() {
         this.validations.push({
             validation: 'isHexadecimal',
-        });
-        return this;
-    }
-
-    /**
-     * Check if the string is a valid identity
-     * card code.
-     */
-    isIdentityCard(locale?: IsIdentityCardLocale) {
-        this.validations.push({
-            validation: 'isIdentityCard',
-            options: locale,
         });
         return this;
     }
