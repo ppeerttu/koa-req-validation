@@ -20,6 +20,7 @@ const ValidationResult_1 = __importDefault(require("./ValidationResult"));
 class ValidationChain {
     /**
      * Create a new ValidationChain.
+     *
      * @param parameter Name of the parameter to validate
      * @param location Location of the parameter in request
      */
@@ -64,6 +65,7 @@ class ValidationChain {
     }
     /**
      * Pass a custom message to the validation.
+     *
      * @param message Custom message
      */
     withMessage(message) {
@@ -278,6 +280,7 @@ class ValidationChain {
     }
     /**
      * Check if the parameter matches given regular expression.
+     *
      * @param regExp The regular expression
      */
     matches(regExp) {
@@ -290,6 +293,7 @@ class ValidationChain {
     /**
      * Check if the parameter is some of the allowed
      * values.
+     *
      * @param values Options containing at least `values`
      * property with allowed values
      */
@@ -303,6 +307,7 @@ class ValidationChain {
     /**
      * Check if the string is a date that's after the specified
      * date (defaults to now).
+     *
      * @param date The date
      */
     isAfter(date = new Date().toString()) {
@@ -315,6 +320,7 @@ class ValidationChain {
     /**
      * Check if the string contains only letters. Locale
      * defaults to en-US.
+     *
      * @param locale The locale
      */
     isAlpha(locale) {
@@ -327,6 +333,7 @@ class ValidationChain {
     /**
      * Check if the string contains only letters and numbers.
      * Locale defaults to en-US.
+     *
      * @param locale The locale
      */
     isAlphanumeric(locale) {
@@ -357,6 +364,7 @@ class ValidationChain {
     /**
      * Check if the string is a date that's before
      * the given date. Defaults to now.
+     *
      * @param date The date
      */
     isBefore(date = new Date().toString()) {
@@ -369,6 +377,7 @@ class ValidationChain {
     /**
      * Check if the strin's length (in UTF-8 bytes)
      * falls in range.
+     *
      * @param options The range
      */
     isByteLength(options = { min: 0 }) {
@@ -389,12 +398,119 @@ class ValidationChain {
     }
     /**
      * Check if the string is a valid currency amount.
+     *
      * @param options The options
      */
     isCurrency(options) {
         this.validations.push({
             validation: 'isCurrency',
             options
+        });
+        return this;
+    }
+    /**
+     * Check if the string is a data uri format.
+     */
+    isDataURI() {
+        this.validations.push({
+            validation: 'isDataURI',
+        });
+        return this;
+    }
+    /**
+     * Check if the string represents a decimal number.
+     *
+     * @param options The options
+     */
+    isDecimal(options) {
+        this.validations.push({
+            validation: 'isDecimal',
+            options,
+        });
+        return this;
+    }
+    /**
+     * Check if the string is a number divisible by
+     * given number.
+     *
+     * @param division The division number
+     */
+    isDivisibleBy(division) {
+        this.validations.push({
+            validation: 'isDivisibleBy',
+            options: division,
+        });
+        return this;
+    }
+    /**
+     * Check if the string is fully qualified
+     * domain name.
+     *
+     * @param options The options
+     */
+    isFQDN(options) {
+        this.validations.push({
+            validation: 'isFQDN',
+            options,
+        });
+        return this;
+    }
+    /**
+     * Check if the string contains any full-width
+     * chars.
+     */
+    isFullWidth() {
+        this.validations.push({
+            validation: 'isFullWidth',
+        });
+        return this;
+    }
+    /**
+     * Check if the string contains any half-width
+     * chars.
+     */
+    isHalfWidth() {
+        this.validations.push({
+            validation: 'isHalfWidth',
+        });
+        return this;
+    }
+    /**
+     * Check if the string is a hexadecimal
+     * color.
+     */
+    isHexColor() {
+        this.validations.push({
+            validation: 'isHexColor',
+        });
+        return this;
+    }
+    /**
+     * Check if the string is a hexadecimal
+     * number.
+     */
+    isHexadecimal() {
+        this.validations.push({
+            validation: 'isHexadecimal',
+        });
+        return this;
+    }
+    /**
+     * Check if the string is an IP (ver 4 or 6).
+     */
+    isIP(version) {
+        this.validations.push({
+            validation: 'isIP',
+            options: version,
+        });
+        return this;
+    }
+    /**
+     * Check if the string is an IP range (ver 4 only).
+     */
+    isIPRange() {
+        this.validations.push({
+            validation: 'isIPRange',
         });
         return this;
     }

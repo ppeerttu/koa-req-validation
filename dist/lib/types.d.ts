@@ -21,7 +21,7 @@ export interface IOptionalOptions {
  * General validator options combining all
  * possible options.
  */
-export declare type ValidatorOptions = IMinMaxOptions | RegExp | IsInValuesOptions | IOptionalOptions | string | IsAlphaLocale | IIsCurrencyOptions;
+export declare type ValidatorOptions = IMinMaxOptions | RegExp | IsInValuesOptions | IOptionalOptions | string | number | IsAlphaLocale | IIsCurrencyOptions | IIsDecimalOptions | IIsFQDNOptions | IsIdentityCardLocale;
 /**
  * Custom validation function with context object.
  */
@@ -84,4 +84,21 @@ export interface IIsCurrencyOptions {
     digits_after_decimal?: number[];
     allow_space_after_digits?: boolean;
 }
+/**
+ * Options for isDecimal validation.
+ */
+export interface IIsDecimalOptions {
+    force_decimal?: boolean;
+    decimal_digits?: string;
+    locale?: IsAlphaLocale;
+}
+/**
+ * Options for isFQDN validation.
+ */
+export interface IIsFQDNOptions {
+    require_tld?: boolean;
+    allow_underscores?: boolean;
+    allow_trailing_dot?: boolean;
+}
+export declare type IsIdentityCardLocale = 'any' | 'ES';
 export {};

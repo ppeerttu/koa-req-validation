@@ -5,3 +5,5 @@ tests
 coverage
 
 .travis.yml
+tsconfig.json
+tslint.json

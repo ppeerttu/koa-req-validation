@@ -68,7 +68,7 @@ See the [demo][demo-link] for other examples.
 
 # Documentation
 
-See the [generated TypeDoc][typedocs] for now. Improved documentation is coming up in the future.
+See the [generated TypeDoc][typedocs] and [ValidationChain][validation-chain] for now.
 
 # Motivation
 
@@ -96,6 +96,7 @@ All contributions to the project are welcome. Contact the author for now, guidel
 [demo-link]:https://github.com/ppeerttu/koa-req-validation/blob/master/demo/index.ts
 [licence-link]:https://github.com/ppeerttu/koa-req-validation/blob/master/LICENCE
 [typedocs]:https://ppeerttu.github.io/koa-req-validation/
+[validation-chain]:https://ppeerttu.github.io/koa-req-validation/classes/_lib_validationchain_.validationchain.html
 
 [issue-site]:https://github.com/ppeerttu/koa-req-validation/issues
 [issue-all-filter-site]:https://github.com/ppeerttu/koa-req-validation/issues?utf8=%E2%9C%93&q=is%3Aissue
