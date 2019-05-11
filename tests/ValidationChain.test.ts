@@ -1222,4 +1222,78 @@ describe('ValidationChain', () => {
 
     });
 
+    describe('isIP()', () => {
+
+        test('Returns an error if the value is not an IPv4 address', async () => {
+            const value = '256.255.255.255';
+            const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
+                .isIP(4);
+            const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
+            await validationChain.run()(ctx, next);
+
+            const results = validationResults(ctx);
+            expect(results.mapped()).toHaveProperty(prop);
+        });
+
+        test('Returns an error if the value is not an IPv6 address', async () => {
+            const value = 'ffff0::';
+            const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
+                .isIP(6);
+            const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
+            await validationChain.run()(ctx, next);
+
+            const results = validationResults(ctx);
+            expect(results.mapped()).toHaveProperty(prop);
+        });
+
+        test('Doesn\'t return an error if the value is an IPv4 address', async () => {
+            const value = '255.255.255.255';
+            const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
+                .isIP(4);
+            const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
+            await validationChain.run()(ctx, next);
+
+            const results = validationResults(ctx);
+            expect(results.mapped()).not.toHaveProperty(prop);
+        });
+
+        test('Doesn\'t return an error if the value is an IPv6 address', async () => {
+            const value = '::1';
+            const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
+                .isIP(6);
+            const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
+            await validationChain.run()(ctx, next);
+
+            const results = validationResults(ctx);
+            expect(results.mapped()).not.toHaveProperty(prop);
+        });
+
+    });
+
+    describe('isIPRange()', () => {
+
+        test('Returns an error if the value is not an IP range', async () => {
+            const value = '255.255.255.255/64';
+            const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
+                .isIPRange();
+            const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
+            await validationChain.run()(ctx, next);
+
+            const results = validationResults(ctx);
+            expect(results.mapped()).toHaveProperty(prop);
+        });
+
+        test('Doesn\'t return an error if the value is an IP range', async () => {
+            const value = '255.255.255.255/24';
+            const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
+                .isIPRange();
+            const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
+            await validationChain.run()(ctx, next);
+
+            const results = validationResults(ctx);
+            expect(results.mapped()).not.toHaveProperty(prop);
+        });
+
+    });
+
 });

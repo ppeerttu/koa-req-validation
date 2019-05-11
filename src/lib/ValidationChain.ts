@@ -9,8 +9,7 @@ import {
     IsAlphaLocale,
     IIsCurrencyOptions,
     IIsDecimalOptions,
-    IIsFQDNOptions,
-    IsIdentityCardLocale
+    IIsFQDNOptions
 } from './types';
 import { ParameterizedContext } from 'koa';
 import { IValidationContext, IValidationError } from '..';
@@ -568,6 +567,27 @@ export default class ValidationChain {
     isHexadecimal() {
         this.validations.push({
             validation: 'isHexadecimal',
+        });
+        return this;
+    }
+
+    /**
+     * Check if the string is an IP (ver 4 or 6).
+     */
+    isIP(version?: 4 | 6) {
+        this.validations.push({
+            validation: 'isIP',
+            options: version,
+        });
+        return this;
+    }
+
+    /**
+     * Check if the string is an IP range (ver 4 only).
+     */
+    isIPRange() {
+        this.validations.push({
+            validation: 'isIPRange',
         });
         return this;
     }
