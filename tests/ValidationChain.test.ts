@@ -1014,4 +1014,286 @@ describe('ValidationChain', () => {
 
     });
 
+    describe('isDataURI()', () => {
+
+        test('Returns an error if the value is not data URI', async () => {
+            const value = 'data:base64,iVBORw0KGgoAAA';
+            const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
+                .isDataURI();
+            const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
+            await validationChain.run()(ctx, next);
+
+            const results = validationResults(ctx);
+            expect(results.mapped()).toHaveProperty(prop);
+        });
+
+        test('Doesn\'t return an error if the value is data URI', async () => {
+            const value = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==';
+            const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
+                .isDataURI();
+            const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
+            await validationChain.run()(ctx, next);
+
+            const results = validationResults(ctx);
+            expect(results.mapped()).not.toHaveProperty(prop);
+        });
+
+    });
+
+    describe('isDecimal()', () => {
+
+        test('Returns an error if the value is not decimal number', async () => {
+            const value = '0x01';
+            const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
+                .isDecimal();
+            const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
+            await validationChain.run()(ctx, next);
+
+            const results = validationResults(ctx);
+            expect(results.mapped()).toHaveProperty(prop);
+        });
+
+        test('Doesn\'t return an error if the value is decimal number', async () => {
+            const value = '3.134';
+            const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
+                .isDecimal();
+            const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
+            await validationChain.run()(ctx, next);
+
+            const results = validationResults(ctx);
+            expect(results.mapped()).not.toHaveProperty(prop);
+        });
+
+    });
+
+    describe('isDivisibleBy()', () => {
+
+        test('Returns an error if the value is not divisible by given number', async () => {
+            const value = '7';
+            const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
+                .isDivisibleBy(5);
+            const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
+            await validationChain.run()(ctx, next);
+
+            const results = validationResults(ctx);
+            expect(results.mapped()).toHaveProperty(prop);
+        });
+
+        test('Doesn\'t return an error if the value is divisible by given number', async () => {
+            const value = '15';
+            const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
+                .isDivisibleBy(5);
+            const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
+            await validationChain.run()(ctx, next);
+
+            const results = validationResults(ctx);
+            expect(results.mapped()).not.toHaveProperty(prop);
+        });
+
+    });
+
+    describe('isFQDN()', () => {
+
+        test('Returns an error if the value is not fully qualified domain name', async () => {
+            const value = 'notarealdomainname';
+            const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
+                .isFQDN();
+            const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
+            await validationChain.run()(ctx, next);
+
+            const results = validationResults(ctx);
+            expect(results.mapped()).toHaveProperty(prop);
+        });
+
+        test('Doesn\'t return an error if the value is currency', async () => {
+            const value = 'qualifieddomain.name';
+            const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
+                .isFQDN();
+            const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
+            await validationChain.run()(ctx, next);
+
+            const results = validationResults(ctx);
+            expect(results.mapped()).not.toHaveProperty(prop);
+        });
+
+    });
+
+    describe('isFullWidth()', () => {
+
+        test('Returns an error if the value contains none full width chars', async () => {
+            const value = 'above';
+            const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
+                .isFullWidth();
+            const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
+            await validationChain.run()(ctx, next);
+
+            const results = validationResults(ctx);
+            expect(results.mapped()).toHaveProperty(prop);
+        });
+
+        test('Doesn\'t return an error if the value contains any full width chars', async () => {
+            const value = 'ａｂｏｖｅ';
+            const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
+                .isFullWidth();
+            const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
+            await validationChain.run()(ctx, next);
+
+            const results = validationResults(ctx);
+            expect(results.mapped()).not.toHaveProperty(prop);
+        });
+
+    });
+
+    describe('isHalfWidth()', () => {
+
+        test('Returns an error if the value contains none half width chars', async () => {
+            const value = 'ａｂｏｖｅ';
+            const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
+                .isHalfWidth();
+            const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
+            await validationChain.run()(ctx, next);
+
+            const results = validationResults(ctx);
+            expect(results.mapped()).toHaveProperty(prop);
+        });
+
+        test('Doesn\'t return an error if the value contains any half width chars', async () => {
+            const value = 'abｏｖｅ';
+            const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
+                .isHalfWidth();
+            const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
+            await validationChain.run()(ctx, next);
+
+            const results = validationResults(ctx);
+            expect(results.mapped()).not.toHaveProperty(prop);
+        });
+
+    });
+
+    describe('isHexColor()', () => {
+
+        test('Returns an error if the value is not a hex color', async () => {
+            const value = '#99999g';
+            const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
+                .isHexColor();
+            const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
+            await validationChain.run()(ctx, next);
+
+            const results = validationResults(ctx);
+            expect(results.mapped()).toHaveProperty(prop);
+        });
+
+        test('Doesn\'t return an error if the value is a hex color', async () => {
+            const value = '#9e9392';
+            const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
+                .isHexColor();
+            const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
+            await validationChain.run()(ctx, next);
+
+            const results = validationResults(ctx);
+            expect(results.mapped()).not.toHaveProperty(prop);
+        });
+
+    });
+
+    describe('isHexadecimal()', () => {
+
+        test('Returns an error if the value is not hexadecimal', async () => {
+            const value = 'E892G9';
+            const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
+                .isHexadecimal();
+            const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
+            await validationChain.run()(ctx, next);
+
+            const results = validationResults(ctx);
+            expect(results.mapped()).toHaveProperty(prop);
+        });
+
+        test('Doesn\'t return an error if the value is hexadecimal', async () => {
+            const value = 'D839E';
+            const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
+                .isHexadecimal();
+            const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
+            await validationChain.run()(ctx, next);
+
+            const results = validationResults(ctx);
+            expect(results.mapped()).not.toHaveProperty(prop);
+        });
+
+    });
+
+    describe('isIP()', () => {
+
+        test('Returns an error if the value is not an IPv4 address', async () => {
+            const value = '256.255.255.255';
+            const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
+                .isIP(4);
+            const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
+            await validationChain.run()(ctx, next);
+
+            const results = validationResults(ctx);
+            expect(results.mapped()).toHaveProperty(prop);
+        });
+
+        test('Returns an error if the value is not an IPv6 address', async () => {
+            const value = 'ffff0::';
+            const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
+                .isIP(6);
+            const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
+            await validationChain.run()(ctx, next);
+
+            const results = validationResults(ctx);
+            expect(results.mapped()).toHaveProperty(prop);
+        });
+
+        test('Doesn\'t return an error if the value is an IPv4 address', async () => {
+            const value = '255.255.255.255';
+            const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
+                .isIP(4);
+            const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
+            await validationChain.run()(ctx, next);
+
+            const results = validationResults(ctx);
+            expect(results.mapped()).not.toHaveProperty(prop);
+        });
+
+        test('Doesn\'t return an error if the value is an IPv6 address', async () => {
+            const value = '::1';
+            const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
+                .isIP(6);
+            const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
+            await validationChain.run()(ctx, next);
+
+            const results = validationResults(ctx);
+            expect(results.mapped()).not.toHaveProperty(prop);
+        });
+
+    });
+
+    describe('isIPRange()', () => {
+
+        test('Returns an error if the value is not an IP range', async () => {
+            const value = '255.255.255.255/64';
+            const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
+                .isIPRange();
+            const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
+            await validationChain.run()(ctx, next);
+
+            const results = validationResults(ctx);
+            expect(results.mapped()).toHaveProperty(prop);
+        });
+
+        test('Doesn\'t return an error if the value is an IP range', async () => {
+            const value = '255.255.255.255/24';
+            const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
+                .isIPRange();
+            const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
+            await validationChain.run()(ctx, next);
+
+            const results = validationResults(ctx);
+            expect(results.mapped()).not.toHaveProperty(prop);
+        });
+
+    });
+
 });

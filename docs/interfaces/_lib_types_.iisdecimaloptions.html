@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>ParamLocation | koa-req-validation</title>
+	<title>IIsDecimalOptions | koa-req-validation</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -59,10 +59,10 @@
 					<a href="../modules/_lib_types_.html">&quot;lib/types&quot;</a>
 				</li>
 				<li>
-					<a href="_lib_types_.paramlocation.html">ParamLocation</a>
+					<a href="_lib_types_.iisdecimaloptions.html">IIsDecimalOptions</a>
 				</li>
 			</ul>
-			<h1>Enumeration ParamLocation</h1>
+			<h1>Interface IIsDecimalOptions</h1>
 		</div>
 	</div>
 </header>
@@ -72,54 +72,62 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>Location of the parameter to be validated.</p>
+						<p>Options for isDecimal validation.</p>
 					</div>
 				</div>
+			</section>
+			<section class="tsd-panel tsd-hierarchy">
+				<h3>Hierarchy</h3>
+				<ul class="tsd-hierarchy">
+					<li>
+						<span class="target">IIsDecimalOptions</span>
+					</li>
+				</ul>
 			</section>
 			<section class="tsd-panel-group tsd-index-group">
 				<h2>Index</h2>
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
 						<section class="tsd-index-section ">
-							<h3>Enumeration members</h3>
+							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="_lib_types_.paramlocation.html#body" class="tsd-kind-icon">BODY</a></li>
-								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="_lib_types_.paramlocation.html#param" class="tsd-kind-icon">PARAM</a></li>
-								<li class="tsd-kind-enum-member tsd-parent-kind-enum"><a href="_lib_types_.paramlocation.html#query" class="tsd-kind-icon">QUERY</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_lib_types_.iisdecimaloptions.html#decimal_digits" class="tsd-kind-icon">decimal_<wbr>digits</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_lib_types_.iisdecimaloptions.html#force_decimal" class="tsd-kind-icon">force_<wbr>decimal</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_lib_types_.iisdecimaloptions.html#locale" class="tsd-kind-icon">locale</a></li>
 							</ul>
 						</section>
 					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Enumeration members</h2>
-				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
-					<a name="body" class="tsd-anchor"></a>
-					<h3>BODY</h3>
-					<div class="tsd-signature tsd-kind-icon">BODY<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> =&nbsp;&quot;body&quot;</span></div>
+				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="decimal_digits" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> decimal_<wbr>digits</h3>
+					<div class="tsd-signature tsd-kind-icon">decimal_<wbr>digits<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/ff92aa0/src/lib/types.ts#L136">lib/types.ts:136</a></li>
+							<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/ff92aa0/src/lib/types.ts#L226">lib/types.ts:226</a></li>
 						</ul>
 					</aside>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
-					<a name="param" class="tsd-anchor"></a>
-					<h3>PARAM</h3>
-					<div class="tsd-signature tsd-kind-icon">PARAM<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> =&nbsp;&quot;param&quot;</span></div>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="force_decimal" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> force_<wbr>decimal</h3>
+					<div class="tsd-signature tsd-kind-icon">force_<wbr>decimal<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">true</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/ff92aa0/src/lib/types.ts#L137">lib/types.ts:137</a></li>
+							<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/ff92aa0/src/lib/types.ts#L225">lib/types.ts:225</a></li>
 						</ul>
 					</aside>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-enum-member tsd-parent-kind-enum">
-					<a name="query" class="tsd-anchor"></a>
-					<h3>QUERY</h3>
-					<div class="tsd-signature tsd-kind-icon">QUERY<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol"> =&nbsp;&quot;query&quot;</span></div>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="locale" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> locale</h3>
+					<div class="tsd-signature tsd-kind-icon">locale<span class="tsd-signature-symbol">:</span> <a href="../modules/_lib_types_.html#isalphalocale" class="tsd-signature-type">IsAlphaLocale</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/ff92aa0/src/lib/types.ts#L138">lib/types.ts:138</a></li>
+							<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/ff92aa0/src/lib/types.ts#L227">lib/types.ts:227</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -147,41 +155,41 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
+					<li class=" tsd-kind-enum tsd-parent-kind-external-module">
+						<a href="../enums/_lib_types_.paramlocation.html" class="tsd-kind-icon">Param<wbr>Location</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
+						<a href="_lib_types_.iiscurrencyoptions.html" class="tsd-kind-icon">IIs<wbr>Currency<wbr>Options</a>
+					</li>
 				</ul>
 				<ul class="current">
-					<li class="current tsd-kind-enum tsd-parent-kind-external-module">
-						<a href="_lib_types_.paramlocation.html" class="tsd-kind-icon">Param<wbr>Location</a>
+					<li class="current tsd-kind-interface tsd-parent-kind-external-module">
+						<a href="_lib_types_.iisdecimaloptions.html" class="tsd-kind-icon">IIs<wbr>Decimal<wbr>Options</a>
 						<ul>
-							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
-								<a href="_lib_types_.paramlocation.html#body" class="tsd-kind-icon">BODY</a>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_lib_types_.iisdecimaloptions.html#decimal_digits" class="tsd-kind-icon">decimal_<wbr>digits</a>
 							</li>
-							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
-								<a href="_lib_types_.paramlocation.html#param" class="tsd-kind-icon">PARAM</a>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_lib_types_.iisdecimaloptions.html#force_decimal" class="tsd-kind-icon">force_<wbr>decimal</a>
 							</li>
-							<li class=" tsd-kind-enum-member tsd-parent-kind-enum">
-								<a href="_lib_types_.paramlocation.html#query" class="tsd-kind-icon">QUERY</a>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_lib_types_.iisdecimaloptions.html#locale" class="tsd-kind-icon">locale</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
 					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="../interfaces/_lib_types_.iiscurrencyoptions.html" class="tsd-kind-icon">IIs<wbr>Currency<wbr>Options</a>
+						<a href="_lib_types_.iisfqdnoptions.html" class="tsd-kind-icon">IIsFQDNOptions</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="../interfaces/_lib_types_.iisdecimaloptions.html" class="tsd-kind-icon">IIs<wbr>Decimal<wbr>Options</a>
+						<a href="_lib_types_.iminmaxoptions.html" class="tsd-kind-icon">IMin<wbr>Max<wbr>Options</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="../interfaces/_lib_types_.iisfqdnoptions.html" class="tsd-kind-icon">IIsFQDNOptions</a>
+						<a href="_lib_types_.ioptionaloptions.html" class="tsd-kind-icon">IOptional<wbr>Options</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="../interfaces/_lib_types_.iminmaxoptions.html" class="tsd-kind-icon">IMin<wbr>Max<wbr>Options</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="../interfaces/_lib_types_.ioptionaloptions.html" class="tsd-kind-icon">IOptional<wbr>Options</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="../interfaces/_lib_types_.ivalidationdefinition.html" class="tsd-kind-icon">IValidation<wbr>Definition</a>
+						<a href="_lib_types_.ivalidationdefinition.html" class="tsd-kind-icon">IValidation<wbr>Definition</a>
 					</li>
 					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module">
 						<a href="../modules/_lib_types_.html#customvalidatorfunction" class="tsd-kind-icon">Custom<wbr>Validator<wbr>Function</a>
