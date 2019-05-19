@@ -515,6 +515,106 @@ class ValidationChain {
         return this;
     }
     /**
+     * Check if the string is an ISBN.
+     *
+     * @param version The version
+     */
+    isISBN(version) {
+        this.validations.push({
+            validation: 'isISBN',
+            options: version,
+        });
+        return this;
+    }
+    /**
+     * Check if the string is an ISSN.
+     *
+     * @param options The options
+     */
+    isISSN(options) {
+        this.validations.push({
+            validation: 'isISSN',
+            options,
+        });
+        return this;
+    }
+    /**
+     * Check if the string is an ISIN.
+     */
+    isISIN() {
+        this.validations.push({
+            validation: 'isISIN',
+        });
+        return this;
+    }
+    /**
+     * Check if the string is valid ISO8601 date.
+     */
+    isISO8601() {
+        this.validations.push({
+            validation: 'isISO8601',
+        });
+        return this;
+    }
+    /**
+     * Check if the string is valid RFC3339 date.
+     */
+    isRFC3339() {
+        this.validations.push({
+            validation: 'isRFC3339',
+        });
+        return this;
+    }
+    /**
+     * Check if the string is a valid ISO 3166-1 alpha-2
+     * officially assigned country code.
+     */
+    isISO31661Alpha2() {
+        this.validations.push({
+            validation: 'isISO31661Alpha2',
+        });
+        return this;
+    }
+    /**
+     * Check if the string is a ISRC.
+     */
+    isISRC() {
+        this.validations.push({
+            validation: 'isISRC',
+        });
+        return this;
+    }
+    /**
+     * Check if the string is a MD5 hash.
+     */
+    isMD5() {
+        this.validations.push({
+            validation: 'isMD5',
+        });
+        return this;
+    }
+    /**
+     * Check if the string is a valid MIME type format.
+     */
+    isMimeType() {
+        this.validations.push({
+            validation: 'isMimeType',
+        });
+        return this;
+    }
+    /**
+     * Check if the string is a mobile phone number.
+     *
+     * @param locale The locale, defaults to any
+     */
+    isMobilePhone(locale = 'any') {
+        this.validations.push({
+            validation: 'isMobilePhone',
+            options: locale,
+        });
+        return this;
+    }
+    /**
      * Run the validations and return the results.
      * @param ctx The context
      */

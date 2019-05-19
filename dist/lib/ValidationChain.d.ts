@@ -1,5 +1,5 @@
 /// <reference types="validator" />
-import { ParamLocation, IMinMaxOptions, IOptionalOptions, CustomValidatorFunction, IsInValuesOptions, IsAlphaLocale, IIsCurrencyOptions, IIsDecimalOptions, IIsFQDNOptions } from './types';
+import { ParamLocation, IMinMaxOptions, IOptionalOptions, CustomValidatorFunction, IsInValuesOptions, IsAlphaLocale, IIsCurrencyOptions, IIsDecimalOptions, IIsFQDNOptions, IISSNOptions, IsMobilePhoneLocale } from './types';
 import { ParameterizedContext } from 'koa';
 import { IValidationContext } from '..';
 /**
@@ -264,6 +264,53 @@ export default class ValidationChain {
      * Check if the string is an IP range (ver 4 only).
      */
     isIPRange(): this;
+    /**
+     * Check if the string is an ISBN.
+     *
+     * @param version The version
+     */
+    isISBN(version: 10 | 13): this;
+    /**
+     * Check if the string is an ISSN.
+     *
+     * @param options The options
+     */
+    isISSN(options?: IISSNOptions): this;
+    /**
+     * Check if the string is an ISIN.
+     */
+    isISIN(): this;
+    /**
+     * Check if the string is valid ISO8601 date.
+     */
+    isISO8601(): this;
+    /**
+     * Check if the string is valid RFC3339 date.
+     */
+    isRFC3339(): this;
+    /**
+     * Check if the string is a valid ISO 3166-1 alpha-2
+     * officially assigned country code.
+     */
+    isISO31661Alpha2(): this;
+    /**
+     * Check if the string is a ISRC.
+     */
+    isISRC(): this;
+    /**
+     * Check if the string is a MD5 hash.
+     */
+    isMD5(): this;
+    /**
+     * Check if the string is a valid MIME type format.
+     */
+    isMimeType(): this;
+    /**
+     * Check if the string is a mobile phone number.
+     *
+     * @param locale The locale, defaults to any
+     */
+    isMobilePhone(locale?: 'any' | IsMobilePhoneLocale | IsMobilePhoneLocale[]): this;
     /**
      * Run the validations and return the results.
      * @param ctx The context
