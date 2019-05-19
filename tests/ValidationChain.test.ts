@@ -1296,4 +1296,264 @@ describe('ValidationChain', () => {
 
     });
 
+    describe('isISBN()', () => {
+
+        test('Returns an error if the value is not valid ISBN 10', async () => {
+            const value = '978-951-98548-9-2';
+            const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
+                .isISBN(10);
+            const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
+            await validationChain.run()(ctx, next);
+
+            const results = validationResults(ctx);
+            expect(results.mapped()).toHaveProperty(prop);
+        });
+
+        test('Doesn\'t return an error if the value is valid ISBN 13', async () => {
+            const value = '978-951-98548-9-2';
+            const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
+                .isISBN(13);
+            const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
+            await validationChain.run()(ctx, next);
+
+            const results = validationResults(ctx);
+            expect(results.mapped()).not.toHaveProperty(prop);
+        });
+
+    });
+
+    describe('isISSN()', () => {
+
+        test('Returns an error if the value is not valid ISSN', async () => {
+            const value = '3910-938X';
+            const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
+                .isISSN();
+            const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
+            await validationChain.run()(ctx, next);
+
+            const results = validationResults(ctx);
+            expect(results.mapped()).toHaveProperty(prop);
+        });
+
+        test('Doesn\'t return an error if the value is valid ISSN', async () => {
+            const value = '3910-9380';
+            const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
+                .isISSN();
+            const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
+            await validationChain.run()(ctx, next);
+
+            const results = validationResults(ctx);
+            expect(results.mapped()).not.toHaveProperty(prop);
+        });
+
+    });
+
+    describe('isISIN()', () => {
+
+        test('Returns an error if the value is not valid ISIN', async () => {
+            const value = 'US0378331009';
+            const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
+                .isISIN();
+            const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
+            await validationChain.run()(ctx, next);
+
+            const results = validationResults(ctx);
+            expect(results.mapped()).toHaveProperty(prop);
+        });
+
+        test('Doesn\'t return an error if the value valid ISIN', async () => {
+            const value = 'US0378331005';
+            const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
+                .isISIN();
+            const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
+            await validationChain.run()(ctx, next);
+
+            const results = validationResults(ctx);
+            expect(results.mapped()).not.toHaveProperty(prop);
+        });
+
+    });
+
+    describe('isISO8601()', () => {
+
+        test('Returns an error if the value is not valid ISO8601 date', async () => {
+            const value = new Date().getTime().toString();
+            const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
+                .isISO8601();
+            const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
+            await validationChain.run()(ctx, next);
+
+            const results = validationResults(ctx);
+            expect(results.mapped()).toHaveProperty(prop);
+        });
+
+        test('Doesn\'t return an error if the value is valid ISO8601 date', async () => {
+            const value = new Date().toJSON();
+            const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
+                .isISO8601();
+            const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
+            await validationChain.run()(ctx, next);
+
+            const results = validationResults(ctx);
+            expect(results.mapped()).not.toHaveProperty(prop);
+        });
+
+    });
+
+    describe('isRFC3339()', () => {
+
+        test('Returns an error if the value is not valid RFC3339 date', async () => {
+            const value = new Date().getTime().toString();
+            const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
+                .isRFC3339();
+            const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
+            await validationChain.run()(ctx, next);
+
+            const results = validationResults(ctx);
+            expect(results.mapped()).toHaveProperty(prop);
+        });
+
+        test('Doesn\'t return an error if the value is valid RFC3339 date', async () => {
+            const value = new Date().toJSON();1
+            const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
+                .isRFC3339();
+            const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
+            await validationChain.run()(ctx, next);
+
+            const results = validationResults(ctx);
+            expect(results.mapped()).not.toHaveProperty(prop);
+        });
+
+    });
+
+    describe('isISO31661Alpha2()', () => {
+
+        test('Returns an error if the value is not valid ISO 3166-1 alpha 2 country code', async () => {
+            const value = 'fi-FI';
+            const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
+                .isISO31661Alpha2();
+            const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
+            await validationChain.run()(ctx, next);
+
+            const results = validationResults(ctx);
+            expect(results.mapped()).toHaveProperty(prop);
+        });
+
+        test('Doesn\'t return an error if the value is valid ISO 3166-1 alpha 2 country code', async () => {
+            const value = 'fi';
+            const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
+                .isISO31661Alpha2();
+            const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
+            await validationChain.run()(ctx, next);
+
+            const results = validationResults(ctx);
+            expect(results.mapped()).not.toHaveProperty(prop);
+        });
+
+    });
+
+    describe('isISRC()', () => {
+
+        test('Returns an error if the value is not valid ISRC code', async () => {
+            const value = 'enUSRC17609830';
+            const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
+                .isISRC();
+            const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
+            await validationChain.run()(ctx, next);
+
+            const results = validationResults(ctx);
+            expect(results.mapped()).toHaveProperty(prop);
+        });
+
+        test('Doesn\'t return an error if the value is valid ISRC code', async () => {
+            const value = 'USRC17609830';
+            const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
+                .isISRC();
+            const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
+            await validationChain.run()(ctx, next);
+
+            const results = validationResults(ctx);
+            expect(results.mapped()).not.toHaveProperty(prop);
+        });
+
+    });
+
+    describe('isMD5()', () => {
+
+        test('Returns an error if the value is not valid MD5 hash', async () => {
+            const value = 'e948c22100d29623a1df48e1760494dfbb';
+            const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
+                .isMD5();
+            const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
+            await validationChain.run()(ctx, next);
+
+            const results = validationResults(ctx);
+            expect(results.mapped()).toHaveProperty(prop);
+        });
+
+        test('Doesn\'t return an error if the value is valid MD5 hash', async () => {
+            const value = 'e948c22100d29623a1df48e1760494df';
+            const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
+                .isMD5();
+            const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
+            await validationChain.run()(ctx, next);
+
+            const results = validationResults(ctx);
+            expect(results.mapped()).not.toHaveProperty(prop);
+        });
+
+    });
+
+    describe('isMimeType()', () => {
+
+        test('Returns an error if the value is not valid MIME type', async () => {
+            const value = 'foo/invalid';
+            const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
+                .isMimeType();
+            const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
+            await validationChain.run()(ctx, next);
+
+            const results = validationResults(ctx);
+            expect(results.mapped()).toHaveProperty(prop);
+        });
+
+        test('Doesn\'t return an error if the value is valid MIME type', async () => {
+            const value = 'image/png';
+            const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
+                .isMimeType();
+            const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
+            await validationChain.run()(ctx, next);
+
+            const results = validationResults(ctx);
+            expect(results.mapped()).not.toHaveProperty(prop);
+        });
+
+    });
+
+    describe('isMobilePhone()', () => {
+
+        test('Returns an error if the value is not an IP range', async () => {
+            const value = '+999401231239';
+            const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
+                .isMobilePhone();
+            const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
+            await validationChain.run()(ctx, next);
+
+            const results = validationResults(ctx);
+            expect(results.mapped()).toHaveProperty(prop);
+        });
+
+        test('Doesn\'t return an error if the value is an IP range', async () => {
+            const value = '+358401231231';
+            const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
+                .isMobilePhone();
+            const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
+            await validationChain.run()(ctx, next);
+
+            const results = validationResults(ctx);
+            expect(results.mapped()).not.toHaveProperty(prop);
+        });
+
+    });
+
 });

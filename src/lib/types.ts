@@ -35,7 +35,11 @@ export type ValidatorOptions =  IMinMaxOptions
     | IIsCurrencyOptions
     | IIsDecimalOptions
     | IIsFQDNOptions
-    | IsIdentityCardLocale;
+    | IsIdentityCardLocale
+    | IISSNOptions
+    | 'any'
+    | IsMobilePhoneLocale
+    | IsMobilePhoneLocale[];
 
 /**
  * Custom validation function with context object.
@@ -198,6 +202,78 @@ export type IsAlphaLocale = 'ar'
     | 'uk-UA';
 
 /**
+ * Locales for mobile phone validation.
+ */
+export type IsMobilePhoneLocale = 'ar-AE'
+    | 'ar-DZ'
+    | 'ar-EG'
+    | 'ar-IQ'
+    | 'ar-JO'
+    | 'ar-KW'
+    | 'ar-SA'
+    | 'ar-SY'
+    | 'ar-TN'
+    | 'be-BY'
+    | 'bg-BG'
+    | 'bn-BD'
+    | 'cs-CZ'
+    | 'de-DE'
+    | 'da-DK'
+    | 'el-GR'
+    | 'en-AU'
+    | 'en-CA'
+    | 'en-GB'
+    | 'en-GH'
+    | 'en-HK'
+    | 'en-IE'
+    | 'en-IN'
+    | 'en-KE'
+    | 'en-MU'
+    | 'en-NG'
+    | 'en-NZ'
+    | 'en-RW'
+    | 'en-SG'
+    | 'en-UG'
+    | 'en-US'
+    | 'en-TZ'
+    | 'en-ZA'
+    | 'en-ZM'
+    | 'en-PK'
+    | 'es-ES'
+    | 'es-MX'
+    | 'es-UY'
+    | 'et-EE'
+    | 'fa-IR'
+    | 'fi-FI'
+    | 'fr-FR'
+    | 'he-IL'
+    | 'hu-HU'
+    | 'it-IT'
+    | 'ja-JP'
+    | 'kk-KZ'
+    | 'ko-KR'
+    | 'lt-LT'
+    | 'ms-MY'
+    | 'nb-NO'
+    | 'nn-NO'
+    | 'pl-PL'
+    | 'pt-PT'
+    | 'pt-BR'
+    | 'ro-RO'
+    | 'ru-RU'
+    | 'sl-SI'
+    | 'sk-SK'
+    | 'sr-RS'
+    | 'sv-SE'
+    | 'th-TH'
+    | 'tr-TR'
+    | 'uk-UA'
+    | 'vi-VN'
+    | 'zh-CN'
+    | 'zh-HK'
+    | 'zh-TW';
+
+/**
  * Options for isCurrency validation.
  */
 export interface IIsCurrencyOptions {
@@ -234,6 +310,14 @@ export interface IIsFQDNOptions {
     require_tld?: boolean;
     allow_underscores?: boolean;
     allow_trailing_dot?: boolean;
+}
+
+/**
+ * Options for isISSN validation.
+ */
+export interface IISSNOptions {
+    case_sensitive?: boolean;
+    require_hyphen?: boolean;
 }
 
 export type IsIdentityCardLocale = 'any' | 'ES';
