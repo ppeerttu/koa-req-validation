@@ -21,7 +21,7 @@ export interface IOptionalOptions {
  * General validator options combining all
  * possible options.
  */
-export declare type ValidatorOptions = IMinMaxOptions | RegExp | IsInValuesOptions | IOptionalOptions | string | number | IsAlphaLocale | IIsCurrencyOptions | IIsDecimalOptions | IIsFQDNOptions | IsIdentityCardLocale;
+export declare type ValidatorOptions = IMinMaxOptions | RegExp | IsInValuesOptions | IOptionalOptions | string | number | IsAlphaLocale | IIsCurrencyOptions | IIsDecimalOptions | IIsFQDNOptions | IsIdentityCardLocale | IISSNOptions | 'any' | IsMobilePhoneLocale | IsMobilePhoneLocale[];
 /**
  * Custom validation function with context object.
  */
@@ -65,6 +65,10 @@ export declare type MappedValidationResults = {
  */
 export declare type IsAlphaLocale = 'ar' | 'ar-AE' | 'ar-BH' | 'ar-DZ' | 'ar-EG' | 'ar-IQ' | 'ar-JO' | 'ar-KW' | 'ar-LB' | 'ar-LY' | 'ar-MA' | 'ar-QA' | 'ar-QM' | 'ar-SA' | 'ar-SD' | 'ar-SY' | 'ar-TN' | 'ar-YE' | 'bg-BG' | 'cs-CZ' | 'da-DK' | 'de-DE' | 'el-GR' | 'en-AU' | 'en-GB' | 'en-HK' | 'en-IN' | 'en-NZ' | 'en-US' | 'en-ZA' | 'en-ZM' | 'es-ES' | 'fr-FR' | 'hu-HU' | 'it-IT' | 'ku-IQ' | 'nb-NO' | 'nl-NL' | 'nn-NO' | 'pl-PL' | 'pt-BR' | 'pt-PT' | 'ru-RU' | 'sl-SI' | 'sk-SK' | 'sr-RS' | 'sr-RS@latin' | 'sv-SE' | 'tr-TR' | 'uk-UA';
 /**
+ * Locales for mobile phone validation.
+ */
+export declare type IsMobilePhoneLocale = 'ar-AE' | 'ar-DZ' | 'ar-EG' | 'ar-IQ' | 'ar-JO' | 'ar-KW' | 'ar-SA' | 'ar-SY' | 'ar-TN' | 'be-BY' | 'bg-BG' | 'bn-BD' | 'cs-CZ' | 'de-DE' | 'da-DK' | 'el-GR' | 'en-AU' | 'en-CA' | 'en-GB' | 'en-GH' | 'en-HK' | 'en-IE' | 'en-IN' | 'en-KE' | 'en-MU' | 'en-NG' | 'en-NZ' | 'en-RW' | 'en-SG' | 'en-UG' | 'en-US' | 'en-TZ' | 'en-ZA' | 'en-ZM' | 'en-PK' | 'es-ES' | 'es-MX' | 'es-UY' | 'et-EE' | 'fa-IR' | 'fi-FI' | 'fr-FR' | 'he-IL' | 'hu-HU' | 'it-IT' | 'ja-JP' | 'kk-KZ' | 'ko-KR' | 'lt-LT' | 'ms-MY' | 'nb-NO' | 'nn-NO' | 'pl-PL' | 'pt-PT' | 'pt-BR' | 'ro-RO' | 'ru-RU' | 'sl-SI' | 'sk-SK' | 'sr-RS' | 'sv-SE' | 'th-TH' | 'tr-TR' | 'uk-UA' | 'vi-VN' | 'zh-CN' | 'zh-HK' | 'zh-TW';
+/**
  * Options for isCurrency validation.
  */
 export interface IIsCurrencyOptions {
@@ -99,6 +103,13 @@ export interface IIsFQDNOptions {
     require_tld?: boolean;
     allow_underscores?: boolean;
     allow_trailing_dot?: boolean;
+}
+/**
+ * Options for isISSN validation.
+ */
+export interface IISSNOptions {
+    case_sensitive?: boolean;
+    require_hyphen?: boolean;
 }
 export declare type IsIdentityCardLocale = 'any' | 'ES';
 export {};
