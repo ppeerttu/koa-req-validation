@@ -11,7 +11,9 @@ import {
     IIsDecimalOptions,
     IIsFQDNOptions,
     IISSNOptions,
-    IsMobilePhoneLocale
+    IsMobilePhoneLocale,
+    IsPostalCodeLocale,
+    IIsURLOptions
 } from './types';
 import { ParameterizedContext } from 'koa';
 import { IValidationContext, IValidationError } from '..';
@@ -700,6 +702,75 @@ export default class ValidationChain {
         this.validations.push({
             validation: 'isMobilePhone',
             options: locale,
+        });
+        return this;
+    }
+
+    /**
+     * Check if the string contains one or more multibyte chars.
+     */
+    isMultibyte() {
+        this.validations.push({
+            validation: 'isMultibyte',
+        });
+        return this;
+    }
+    
+    /**
+     * Check if the string is a postal code.
+     *
+     * @param locale The locale to use
+     */
+    isPostalCode(locale: IsPostalCodeLocale = 'any') {
+        this.validations.push({
+            validation: 'isPostalCode',
+            options: locale,
+        });
+        return this;
+    }
+
+    /**
+     * Check if the string contains any surrogate pairs chars.
+     */
+    isSurrogatePair() {
+        this.validations.push({
+            validation: 'isSurrogatePair',
+        });
+        return this;
+    }
+
+    /**
+     * Check if the string is an URL.
+     *
+     * @param options Possible options
+     */
+    isURL(options?: IIsURLOptions) {
+        this.validations.push({
+            validation: 'isURL',
+            options,
+        });
+        return this;
+    }
+
+    /**
+     * Check if the string contains a mixture of full and half-width chars.
+     */
+    isVariableWidth() {
+        this.validations.push({
+            validation: 'isVariableWidth',
+        });
+        return this;
+    }
+
+    /**
+     * Checks characters if they appear in the whitelist.
+     *
+     * @param chars The characters
+     */
+    isWhitelisted(chars: string | string[]) {
+        this.validations.push({
+            validation: 'isWhitelisted',
+            options: chars,
         });
         return this;
     }
