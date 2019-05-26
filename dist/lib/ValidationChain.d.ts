@@ -1,5 +1,5 @@
 /// <reference types="validator" />
-import { ParamLocation, IMinMaxOptions, IOptionalOptions, CustomValidatorFunction, IsInValuesOptions, IsAlphaLocale, IIsCurrencyOptions, IIsDecimalOptions, IIsFQDNOptions, IISSNOptions, IsMobilePhoneLocale } from './types';
+import { ParamLocation, IMinMaxOptions, IOptionalOptions, CustomValidatorFunction, IsInValuesOptions, IsAlphaLocale, IIsCurrencyOptions, IIsDecimalOptions, IIsFQDNOptions, IISSNOptions, IsMobilePhoneLocale, IsPostalCodeLocale, IIsURLOptions } from './types';
 import { ParameterizedContext } from 'koa';
 import { IValidationContext } from '..';
 /**
@@ -311,6 +311,36 @@ export default class ValidationChain {
      * @param locale The locale, defaults to any
      */
     isMobilePhone(locale?: 'any' | IsMobilePhoneLocale | IsMobilePhoneLocale[]): this;
+    /**
+     * Check if the string contains one or more multibyte chars.
+     */
+    isMultibyte(): this;
+    /**
+     * Check if the string is a postal code.
+     *
+     * @param locale The locale to use
+     */
+    isPostalCode(locale?: IsPostalCodeLocale): this;
+    /**
+     * Check if the string contains any surrogate pairs chars.
+     */
+    isSurrogatePair(): this;
+    /**
+     * Check if the string is an URL.
+     *
+     * @param options Possible options
+     */
+    isURL(options?: IIsURLOptions): this;
+    /**
+     * Check if the string contains a mixture of full and half-width chars.
+     */
+    isVariableWidth(): this;
+    /**
+     * Checks characters if they appear in the whitelist.
+     *
+     * @param chars The characters
+     */
+    isWhitelisted(chars: string | string[]): this;
     /**
      * Run the validations and return the results.
      * @param ctx The context

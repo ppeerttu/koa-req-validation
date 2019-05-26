@@ -21,7 +21,7 @@ export interface IOptionalOptions {
  * General validator options combining all
  * possible options.
  */
-export declare type ValidatorOptions = IMinMaxOptions | RegExp | IsInValuesOptions | IOptionalOptions | string | number | IsAlphaLocale | IIsCurrencyOptions | IIsDecimalOptions | IIsFQDNOptions | IsIdentityCardLocale | IISSNOptions | 'any' | IsMobilePhoneLocale | IsMobilePhoneLocale[];
+export declare type ValidatorOptions = IMinMaxOptions | RegExp | IsInValuesOptions | IOptionalOptions | string | number | IsAlphaLocale | IIsCurrencyOptions | IIsDecimalOptions | IIsFQDNOptions | IsIdentityCardLocale | IISSNOptions | 'any' | IsMobilePhoneLocale | IsMobilePhoneLocale[] | IsPostalCodeLocale | IIsURLOptions;
 /**
  * Custom validation function with context object.
  */
@@ -69,6 +69,10 @@ export declare type IsAlphaLocale = 'ar' | 'ar-AE' | 'ar-BH' | 'ar-DZ' | 'ar-EG'
  */
 export declare type IsMobilePhoneLocale = 'ar-AE' | 'ar-DZ' | 'ar-EG' | 'ar-IQ' | 'ar-JO' | 'ar-KW' | 'ar-SA' | 'ar-SY' | 'ar-TN' | 'be-BY' | 'bg-BG' | 'bn-BD' | 'cs-CZ' | 'de-DE' | 'da-DK' | 'el-GR' | 'en-AU' | 'en-CA' | 'en-GB' | 'en-GH' | 'en-HK' | 'en-IE' | 'en-IN' | 'en-KE' | 'en-MU' | 'en-NG' | 'en-NZ' | 'en-RW' | 'en-SG' | 'en-UG' | 'en-US' | 'en-TZ' | 'en-ZA' | 'en-ZM' | 'en-PK' | 'es-ES' | 'es-MX' | 'es-UY' | 'et-EE' | 'fa-IR' | 'fi-FI' | 'fr-FR' | 'he-IL' | 'hu-HU' | 'it-IT' | 'ja-JP' | 'kk-KZ' | 'ko-KR' | 'lt-LT' | 'ms-MY' | 'nb-NO' | 'nn-NO' | 'pl-PL' | 'pt-PT' | 'pt-BR' | 'ro-RO' | 'ru-RU' | 'sl-SI' | 'sk-SK' | 'sr-RS' | 'sv-SE' | 'th-TH' | 'tr-TR' | 'uk-UA' | 'vi-VN' | 'zh-CN' | 'zh-HK' | 'zh-TW';
 /**
+ * Locales for postal code validation.
+ */
+export declare type IsPostalCodeLocale = 'any' | 'AD' | 'AT' | 'AU' | 'BE' | 'BG' | 'CA' | 'CH' | 'CZ' | 'DE' | 'DK' | 'DZ' | 'EE' | 'ES' | 'FI' | 'FR' | 'GB' | 'GR' | 'HR' | 'HU' | 'ID' | 'IL' | 'IN' | 'IS' | 'IT' | 'JP' | 'KE' | 'LI' | 'LT' | 'LU' | 'LV' | 'MX' | 'NL' | 'NO' | 'PL' | 'PT' | 'RO' | 'RU' | 'SA' | 'SE' | 'SI' | 'TN' | 'TW' | 'UA' | 'US' | 'ZA' | 'ZM';
+/**
  * Options for isCurrency validation.
  */
 export interface IIsCurrencyOptions {
@@ -110,6 +114,59 @@ export interface IIsFQDNOptions {
 export interface IISSNOptions {
     case_sensitive?: boolean;
     require_hyphen?: boolean;
+}
+/**
+ * URL protocols
+ */
+export declare type URLProtocol = 'http' | 'https' | 'ftp';
+/**
+ * Options for isURL validation.
+ */
+export interface IIsURLOptions {
+    /**
+     * Protocol of the url, defaults to all
+     */
+    protocols: URLProtocol[];
+    /**
+     * Defaults to `false`
+     */
+    require_tld: boolean;
+    /**
+     * Defaults to `false`
+     */
+    require_protocol: boolean;
+    /**
+     * Defaults to `true`
+     */
+    require_host: boolean;
+    /**
+     * Defaults to `true`
+     */
+    require_valid_protocol: boolean;
+    /**
+     * Defaults to `false`
+     */
+    allow_underscores: boolean;
+    /**
+     * Defaults to `false`
+     */
+    host_whitelist: boolean;
+    /**
+     * Defaults to `false`
+     */
+    host_blacklist: boolean;
+    /**
+     * Defaults to `false`
+     */
+    allow_trailing_dot: boolean;
+    /**
+     * Defaults to `false`
+     */
+    allow_protocol_relative_urls: boolean;
+    /**
+     * Defaults to `false`
+     */
+    disallow_auth: boolean;
 }
 export declare type IsIdentityCardLocale = 'any' | 'ES';
 export {};

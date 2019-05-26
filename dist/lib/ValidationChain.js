@@ -615,6 +615,69 @@ class ValidationChain {
         return this;
     }
     /**
+     * Check if the string contains one or more multibyte chars.
+     */
+    isMultibyte() {
+        this.validations.push({
+            validation: 'isMultibyte',
+        });
+        return this;
+    }
+    /**
+     * Check if the string is a postal code.
+     *
+     * @param locale The locale to use
+     */
+    isPostalCode(locale = 'any') {
+        this.validations.push({
+            validation: 'isPostalCode',
+            options: locale,
+        });
+        return this;
+    }
+    /**
+     * Check if the string contains any surrogate pairs chars.
+     */
+    isSurrogatePair() {
+        this.validations.push({
+            validation: 'isSurrogatePair',
+        });
+        return this;
+    }
+    /**
+     * Check if the string is an URL.
+     *
+     * @param options Possible options
+     */
+    isURL(options) {
+        this.validations.push({
+            validation: 'isURL',
+            options,
+        });
+        return this;
+    }
+    /**
+     * Check if the string contains a mixture of full and half-width chars.
+     */
+    isVariableWidth() {
+        this.validations.push({
+            validation: 'isVariableWidth',
+        });
+        return this;
+    }
+    /**
+     * Checks characters if they appear in the whitelist.
+     *
+     * @param chars The characters
+     */
+    isWhitelisted(chars) {
+        this.validations.push({
+            validation: 'isWhitelisted',
+            options: chars,
+        });
+        return this;
+    }
+    /**
      * Run the validations and return the results.
      * @param ctx The context
      */
