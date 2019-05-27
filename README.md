@@ -6,6 +6,7 @@
 [![peerDependencies Status](https://david-dm.org/ppeerttu/koa-req-validation/peer-status.svg)](https://david-dm.org/ppeerttu/koa-req-validation?type=peer)
 [![codecov](https://codecov.io/gh/ppeerttu/koa-req-validation/branch/master/graph/badge.svg?token=IuGu3GKizF)](https://codecov.io/gh/ppeerttu/koa-req-validation)
 [![npm version](https://badge.fury.io/js/koa-req-validation.svg)](https://badge.fury.io/js/koa-req-validation)
+[![Known Vulnerabilities](https://snyk.io/test/github/ppeerttu/koa-req-validation/badge.svg)](https://snyk.io/test/github/ppeerttu/koa-req-validation)
 
 A [validator][validator-site] middleware for [koa][koa-site]. Inspired by [express-validator][express-validator-site].
 
