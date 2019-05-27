@@ -1,5 +1,5 @@
-import ValidationChain from "../src/lib/ValidationChain";
-import { body } from "../src";
+import { body } from '../src';
+import ValidationChain from '../src/lib/ValidationChain';
 
 describe('body()', () => {
 

@@ -1,9 +1,9 @@
 import http from 'http';
 import Koa, { ParameterizedContext } from 'koa';
-import Router, { IRouterContext } from 'koa-router';
 import bodyParser from 'koa-bodyparser';
+import Router, { IRouterContext } from 'koa-router';
 
-import { query, validationResults, param, IValidationContext } from '../src';
+import { IValidationContext, param, query, validationResults } from '../src';
 
 /**
  * Class returning errors as JSON response.
@@ -28,7 +28,7 @@ class RequestError extends Error {
  * default to 3000.
  */
 function getPort(): number {
-    const port = parseInt(process.env.PORT || '');
+    const port = parseInt(process.env.PORT || '', 10);
     if (isNaN(port)) {
         return 3000;
     }
@@ -44,7 +44,7 @@ const arrayExample = [
         .run(),
     query('name')
         .isLength({ min: 3, max: 20 })
-        .run()
+        .run(),
 ];
 
 router.get(
@@ -60,7 +60,7 @@ router.get(
         }
         const { name } = ctx.query;
         ctx.body = `Hello ${name}`;
-    }
+    },
 );
 
 router.get(
@@ -76,7 +76,7 @@ router.get(
         }
         const { name } = ctx.query;
         ctx.body = `Hello ${name || 'stranger'}`;
-    }
+    },
 );
 
 router.get(
@@ -94,7 +94,7 @@ router.get(
             response += `Hello ${name}\n`;
         }
         ctx.body = response;
-    }
+    },
 );
 
 app
@@ -123,6 +123,7 @@ server.on('error', (error) => {
 });
 
 server.on('listening', () => {
+    // tslint:disable-next-line: no-console
     console.log(`Demo app listening on port ${httpPort}`);
 });
 

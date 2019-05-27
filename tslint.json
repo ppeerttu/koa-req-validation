@@ -10,7 +10,7 @@
     },
     "rules": {
         "max-line-length": {
-            "options": [ 90 ],
+            "options": [ 90 ]
         },
         "no-console": {
             "severity": "warning",
@@ -19,7 +19,8 @@
         "quotemark": [
             true,
             "single"
-        ]
+        ],
+        "object-literal-sort-keys": false
     },
     "rulesDirectory": []
 }

@@ -1,5 +1,5 @@
-import ValidationChain from "../src/lib/ValidationChain";
-import { param } from "../src";
+import { param } from '../src';
+import ValidationChain from '../src/lib/ValidationChain';
 
 describe('param()', () => {
 

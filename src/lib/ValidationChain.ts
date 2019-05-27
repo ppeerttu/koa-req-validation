@@ -1,29 +1,30 @@
+import { ParameterizedContext } from 'koa';
 import validator from 'validator';
+
+import { IValidationContext, IValidationError } from '..';
 import {
-    IValidationDefinition,
-    ParamLocation,
-    IMinMaxOptions,
-    IOptionalOptions,
     CustomValidatorFunction,
-    IsInValuesOptions,
-    IsAlphaLocale,
     IIsCurrencyOptions,
     IIsDecimalOptions,
     IIsFQDNOptions,
     IISSNOptions,
+    IIsURLOptions,
+    IMinMaxOptions,
+    IOptionalOptions,
+    IsAlphaLocale,
+    IsInValuesOptions,
     IsMobilePhoneLocale,
     IsPostalCodeLocale,
-    IIsURLOptions
+    IValidationDefinition,
+    ParamLocation,
 } from './types';
-import { ParameterizedContext } from 'koa';
-import { IValidationContext, IValidationError } from '..';
 import ValidationResult from './ValidationResult';
 
 /**
  * The validation chain object.
  */
 export default class ValidationChain {
-    
+
     /**
      * Default error message when validation fails.
      */
@@ -49,12 +50,12 @@ export default class ValidationChain {
      */
     private isOptional: {
         value: boolean,
-        options?: IOptionalOptions
+        options?: IOptionalOptions,
     };
 
     /**
      * Create a new ValidationChain.
-     * 
+     *
      * @param parameter Name of the parameter to validate
      * @param location Location of the parameter in request
      */
@@ -67,7 +68,7 @@ export default class ValidationChain {
             throw new TypeError(
                 `Param location has to be one of `
                 + Object.values(ParamLocation).join(', ')
-                + ` but received ${location}`
+                + ` but received ${location}`,
             );
         }
         this.location = location;
@@ -87,9 +88,9 @@ export default class ValidationChain {
      * );
      * ```
      */
-    run = () => async (
+    public run = () => async (
         ctx: ParameterizedContext<IValidationContext>,
-        next: () => Promise<void>
+        next: () => Promise<void>,
     ) => {
         const results = await this.checkResults(ctx);
         if (results) {
@@ -104,10 +105,10 @@ export default class ValidationChain {
 
     /**
      * Pass a custom message to the validation.
-     * 
+     *
      * @param message Custom message
      */
-    withMessage(message: string) {
+    public withMessage(message: string) {
         const validationDefinition = this.validations[this.validations.length - 1];
         validationDefinition.message = message;
         return this;
@@ -116,10 +117,10 @@ export default class ValidationChain {
     /**
      * Set this property as optional.
      */
-    optional(options?: IOptionalOptions) {
+    public optional(options?: IOptionalOptions) {
         this.isOptional = {
             value: true,
-            options
+            options,
         };
         return this;
     }
@@ -127,13 +128,13 @@ export default class ValidationChain {
     /**
      * Custom async validation function to execute. The function
      * must throw when the validation fails.
-     * 
+     *
      * @param func The validation function
      */
-    custom(func: CustomValidatorFunction) {
+    public custom(func: CustomValidatorFunction) {
         this.validations.push({
             validation: 'custom',
-            func
+            func,
         });
         return this;
     }
@@ -141,10 +142,10 @@ export default class ValidationChain {
     /**
      * Check if the request property contains the given seed.
      */
-    contains(seed: string) {
+    public contains(seed: string) {
         this.validations.push({
             validation: 'contains',
-            options: seed
+            options: seed,
         });
         return this;
     }
@@ -152,10 +153,10 @@ export default class ValidationChain {
     /**
      * Check if the request property equals the given comparison.
      */
-    equals(comparison: string) {
+    public equals(comparison: string) {
         this.validations.push({
             validation: 'equals',
-            options: comparison
+            options: comparison,
         });
         return this;
     }
@@ -163,23 +164,23 @@ export default class ValidationChain {
     /**
      * Check if the parameter is an integer.
      */
-    isInt(options?: IMinMaxOptions) {
+    public isInt(options?: IMinMaxOptions) {
         this.validations.push({
             validation: 'isInt',
-            options
+            options,
         });
         return this;
     }
 
     /**
      * Check if the string is in given length.
-     * 
+     *
      * @param options Min and max length
      */
-    isLength(options: IMinMaxOptions) {
+    public isLength(options: IMinMaxOptions) {
         this.validations.push({
             validation: 'isLength',
-            options
+            options,
         });
         return this;
     }
@@ -187,9 +188,9 @@ export default class ValidationChain {
     /**
      * Check if the parameter is an email.
      */
-    isEmail() {
+    public isEmail() {
         this.validations.push({
-            validation: 'isEmail'
+            validation: 'isEmail',
         });
         return this;
     }
@@ -197,17 +198,17 @@ export default class ValidationChain {
     /**
      * Check if the parameter is a boolean value.
      */
-    isBoolean() {
+    public isBoolean() {
         this.validations.push({
-            validation: 'isBoolean'
-        })
+            validation: 'isBoolean',
+        });
         return this;
     }
 
     /**
      * Check if the parameter is a zero length string.
      */
-    isEmpty() {
+    public isEmpty() {
         this.validations.push({
             validation: 'isEmpty',
         });
@@ -217,7 +218,7 @@ export default class ValidationChain {
     /**
      * Check if the parameter is a float.
      */
-    isFloat() {
+    public isFloat() {
         this.validations.push({
             validation: 'isFloat',
         });
@@ -226,21 +227,21 @@ export default class ValidationChain {
 
     /**
      * Check if the parameter is an algorithm.
-     * 
+     *
      * @param algorithm The algorithm
      */
-    isHash(algorithm: ValidatorJS.HashAlgorithm) {
+    public isHash(algorithm: ValidatorJS.HashAlgorithm) {
         this.validations.push({
             validation: 'isHash',
-            options: algorithm
+            options: algorithm,
         });
         return this;
     }
-    
+
     /**
      * Check if the parameter is a valid JWT token.
      */
-    isJWT() {
+    public isJWT() {
         this.validations.push({
             validation: 'isJWT',
         });
@@ -251,9 +252,9 @@ export default class ValidationChain {
      * Check if the parameter is a valid JSON. Uses
      * `JSON.parse`.
      */
-    isJSON() {
+    public isJSON() {
         this.validations.push({
-            validation: 'isJSON'
+            validation: 'isJSON',
         });
         return this;
     }
@@ -262,7 +263,7 @@ export default class ValidationChain {
      * Check if the parameter is a latitude-lognitude coordinate
      * in the format `lat,long` or `lat, long`.
      */
-    isLatLong() {
+    public isLatLong() {
         this.validations.push({
             validation: 'isLatLong',
         });
@@ -272,7 +273,7 @@ export default class ValidationChain {
     /**
      * Check if the paramter contains only lowercase characters.
      */
-    isLowercase() {
+    public isLowercase() {
         this.validations.push({
             validation: 'isLowercase',
         });
@@ -282,7 +283,7 @@ export default class ValidationChain {
     /**
      * Check if the parameter is a MAC address.
      */
-    isMACAddress() {
+    public isMACAddress() {
         this.validations.push({
             validation: 'isMACAddress',
         });
@@ -292,7 +293,7 @@ export default class ValidationChain {
     /**
      * Check if the parameter is a valid MongoDB ObjectId.
      */
-    isMongoId() {
+    public isMongoId() {
         this.validations.push({
             validation: 'isMongoId',
         });
@@ -302,7 +303,7 @@ export default class ValidationChain {
     /**
      * Check if the parameter contains only numbers.
      */
-    isNumeric() {
+    public isNumeric() {
         this.validations.push({
             validation: 'isNumeric',
         });
@@ -312,7 +313,7 @@ export default class ValidationChain {
     /**
      * Check if the parameter is a valid port number.
      */
-    isPort() {
+    public isPort() {
         this.validations.push({
             validation: 'isPort',
         });
@@ -322,7 +323,7 @@ export default class ValidationChain {
     /**
      * Check if the parameter is valid UUID (v3, v4 or v5).
      */
-    isUUID() {
+    public isUUID() {
         this.validations.push({
             validation: 'isUUID',
         });
@@ -332,7 +333,7 @@ export default class ValidationChain {
     /**
      * Check if the parameter contains only uppercase characters.
      */
-    isUppercase() {
+    public isUppercase() {
         this.validations.push({
             validation: 'isUppercase',
         });
@@ -341,13 +342,13 @@ export default class ValidationChain {
 
     /**
      * Check if the parameter matches given regular expression.
-     * 
+     *
      * @param regExp The regular expression
      */
-    matches(regExp: RegExp) {
+    public matches(regExp: RegExp) {
         this.validations.push({
             validation: 'matches',
-            options: regExp
+            options: regExp,
         });
         return this;
     }
@@ -355,14 +356,14 @@ export default class ValidationChain {
     /**
      * Check if the parameter is some of the allowed
      * values.
-     * 
+     *
      * @param values Options containing at least `values`
      * property with allowed values
      */
-    isIn(values: IsInValuesOptions) {
+    public isIn(values: IsInValuesOptions) {
         this.validations.push({
             validation: 'isIn',
-            options: values
+            options: values,
         });
         return this;
     }
@@ -370,13 +371,13 @@ export default class ValidationChain {
     /**
      * Check if the string is a date that's after the specified
      * date (defaults to now).
-     * 
+     *
      * @param date The date
      */
-    isAfter(date = new Date().toString()) {
+    public isAfter(date = new Date().toString()) {
         this.validations.push({
             validation: 'isAfter',
-            options: date
+            options: date,
         });
         return this;
     }
@@ -384,13 +385,13 @@ export default class ValidationChain {
     /**
      * Check if the string contains only letters. Locale
      * defaults to en-US.
-     * 
+     *
      * @param locale The locale
      */
-    isAlpha(locale?: IsAlphaLocale) {
+    public isAlpha(locale?: IsAlphaLocale) {
         this.validations.push({
             validation: 'isAlpha',
-            options: locale
+            options: locale,
         });
         return this;
     }
@@ -398,13 +399,13 @@ export default class ValidationChain {
     /**
      * Check if the string contains only letters and numbers.
      * Locale defaults to en-US.
-     * 
+     *
      * @param locale The locale
      */
-    isAlphanumeric(locale?: IsAlphaLocale) {
+    public isAlphanumeric(locale?: IsAlphaLocale) {
         this.validations.push({
             validation: 'isAlphanumeric',
-            options: locale
+            options: locale,
         });
         return this;
     }
@@ -412,7 +413,7 @@ export default class ValidationChain {
     /**
      * Check if the string contains ACII characters only.
      */
-    isAscii() {
+    public isAscii() {
         this.validations.push({
             validation: 'isAscii',
         });
@@ -422,7 +423,7 @@ export default class ValidationChain {
     /**
      * Check if the string is base64 encoded.
      */
-    isBase64() {
+    public isBase64() {
         this.validations.push({
             validation: 'isBase64',
         });
@@ -432,10 +433,10 @@ export default class ValidationChain {
     /**
      * Check if the string is a date that's before
      * the given date. Defaults to now.
-     * 
+     *
      * @param date The date
      */
-    isBefore(date = new Date().toString()) {
+    public isBefore(date = new Date().toString()) {
         this.validations.push({
             validation: 'isBefore',
             options: date,
@@ -446,21 +447,21 @@ export default class ValidationChain {
     /**
      * Check if the strin's length (in UTF-8 bytes)
      * falls in range.
-     * 
+     *
      * @param options The range
      */
-    isByteLength(options: IMinMaxOptions = { min: 0 }) {
+    public isByteLength(options: IMinMaxOptions = { min: 0 }) {
         this.validations.push({
             validation: 'isByteLength',
             options,
         });
         return this;
     }
-    
+
     /**
      * Check if the string is a credit card.
      */
-    isCreditCard() {
+    public isCreditCard() {
         this.validations.push({
             validation: 'isCreditCard',
         });
@@ -469,13 +470,13 @@ export default class ValidationChain {
 
     /**
      * Check if the string is a valid currency amount.
-     * 
+     *
      * @param options The options
      */
-    isCurrency(options?: IIsCurrencyOptions) {
+    public isCurrency(options?: IIsCurrencyOptions) {
         this.validations.push({
             validation: 'isCurrency',
-            options
+            options,
         });
         return this;
     }
@@ -483,7 +484,7 @@ export default class ValidationChain {
     /**
      * Check if the string is a data uri format.
      */
-    isDataURI() {
+    public isDataURI() {
         this.validations.push({
             validation: 'isDataURI',
         });
@@ -495,7 +496,7 @@ export default class ValidationChain {
      *
      * @param options The options
      */
-    isDecimal(options?: IIsDecimalOptions) {
+    public isDecimal(options?: IIsDecimalOptions) {
         this.validations.push({
             validation: 'isDecimal',
             options,
@@ -504,12 +505,12 @@ export default class ValidationChain {
     }
 
     /**
-     * Check if the string is a number divisible by 
+     * Check if the string is a number divisible by
      * given number.
-     * 
+     *
      * @param division The division number
      */
-    isDivisibleBy(division: number) {
+    public isDivisibleBy(division: number) {
         this.validations.push({
             validation: 'isDivisibleBy',
             options: division,
@@ -520,10 +521,10 @@ export default class ValidationChain {
     /**
      * Check if the string is fully qualified
      * domain name.
-     * 
+     *
      * @param options The options
      */
-    isFQDN(options?: IIsFQDNOptions) {
+    public isFQDN(options?: IIsFQDNOptions) {
         this.validations.push({
             validation: 'isFQDN',
             options,
@@ -535,7 +536,7 @@ export default class ValidationChain {
      * Check if the string contains any full-width
      * chars.
      */
-    isFullWidth() {
+    public isFullWidth() {
         this.validations.push({
             validation: 'isFullWidth',
         });
@@ -546,7 +547,7 @@ export default class ValidationChain {
      * Check if the string contains any half-width
      * chars.
      */
-    isHalfWidth() {
+    public isHalfWidth() {
         this.validations.push({
             validation: 'isHalfWidth',
         });
@@ -557,7 +558,7 @@ export default class ValidationChain {
      * Check if the string is a hexadecimal
      * color.
      */
-    isHexColor() {
+    public isHexColor() {
         this.validations.push({
             validation: 'isHexColor',
         });
@@ -568,7 +569,7 @@ export default class ValidationChain {
      * Check if the string is a hexadecimal
      * number.
      */
-    isHexadecimal() {
+    public isHexadecimal() {
         this.validations.push({
             validation: 'isHexadecimal',
         });
@@ -578,7 +579,7 @@ export default class ValidationChain {
     /**
      * Check if the string is an IP (ver 4 or 6).
      */
-    isIP(version?: 4 | 6) {
+    public isIP(version?: 4 | 6) {
         this.validations.push({
             validation: 'isIP',
             options: version,
@@ -589,7 +590,7 @@ export default class ValidationChain {
     /**
      * Check if the string is an IP range (ver 4 only).
      */
-    isIPRange() {
+    public isIPRange() {
         this.validations.push({
             validation: 'isIPRange',
         });
@@ -598,10 +599,10 @@ export default class ValidationChain {
 
     /**
      * Check if the string is an ISBN.
-     * 
+     *
      * @param version The version
      */
-    isISBN(version: 10 | 13) {
+    public isISBN(version: 10 | 13) {
         this.validations.push({
             validation: 'isISBN',
             options: version,
@@ -611,10 +612,10 @@ export default class ValidationChain {
 
     /**
      * Check if the string is an ISSN.
-     * 
+     *
      * @param options The options
      */
-    isISSN(options?: IISSNOptions) {
+    public isISSN(options?: IISSNOptions) {
         this.validations.push({
             validation: 'isISSN',
             options,
@@ -625,7 +626,7 @@ export default class ValidationChain {
     /**
      * Check if the string is an ISIN.
      */
-    isISIN() {
+    public isISIN() {
         this.validations.push({
             validation: 'isISIN',
         });
@@ -635,7 +636,7 @@ export default class ValidationChain {
     /**
      * Check if the string is valid ISO8601 date.
      */
-    isISO8601() {
+    public isISO8601() {
         this.validations.push({
             validation: 'isISO8601',
         });
@@ -645,7 +646,7 @@ export default class ValidationChain {
     /**
      * Check if the string is valid RFC3339 date.
      */
-    isRFC3339() {
+    public isRFC3339() {
         this.validations.push({
             validation: 'isRFC3339',
         });
@@ -656,7 +657,7 @@ export default class ValidationChain {
      * Check if the string is a valid ISO 3166-1 alpha-2
      * officially assigned country code.
      */
-    isISO31661Alpha2() {
+    public isISO31661Alpha2() {
         this.validations.push({
             validation: 'isISO31661Alpha2',
         });
@@ -666,7 +667,7 @@ export default class ValidationChain {
     /**
      * Check if the string is a ISRC.
      */
-    isISRC() {
+    public isISRC() {
         this.validations.push({
             validation: 'isISRC',
         });
@@ -676,7 +677,7 @@ export default class ValidationChain {
     /**
      * Check if the string is a MD5 hash.
      */
-    isMD5() {
+    public isMD5() {
         this.validations.push({
             validation: 'isMD5',
         });
@@ -686,7 +687,7 @@ export default class ValidationChain {
     /**
      * Check if the string is a valid MIME type format.
      */
-    isMimeType() {
+    public isMimeType() {
         this.validations.push({
             validation: 'isMimeType',
         });
@@ -695,10 +696,12 @@ export default class ValidationChain {
 
     /**
      * Check if the string is a mobile phone number.
-     * 
+     *
      * @param locale The locale, defaults to any
      */
-    isMobilePhone(locale: 'any' | IsMobilePhoneLocale | IsMobilePhoneLocale[] = 'any') {
+    public isMobilePhone(
+        locale: 'any' | IsMobilePhoneLocale | IsMobilePhoneLocale[] = 'any',
+    ) {
         this.validations.push({
             validation: 'isMobilePhone',
             options: locale,
@@ -709,19 +712,19 @@ export default class ValidationChain {
     /**
      * Check if the string contains one or more multibyte chars.
      */
-    isMultibyte() {
+    public isMultibyte() {
         this.validations.push({
             validation: 'isMultibyte',
         });
         return this;
     }
-    
+
     /**
      * Check if the string is a postal code.
      *
      * @param locale The locale to use
      */
-    isPostalCode(locale: IsPostalCodeLocale = 'any') {
+    public isPostalCode(locale: IsPostalCodeLocale = 'any') {
         this.validations.push({
             validation: 'isPostalCode',
             options: locale,
@@ -732,7 +735,7 @@ export default class ValidationChain {
     /**
      * Check if the string contains any surrogate pairs chars.
      */
-    isSurrogatePair() {
+    public isSurrogatePair() {
         this.validations.push({
             validation: 'isSurrogatePair',
         });
@@ -744,7 +747,7 @@ export default class ValidationChain {
      *
      * @param options Possible options
      */
-    isURL(options?: IIsURLOptions) {
+    public isURL(options?: IIsURLOptions) {
         this.validations.push({
             validation: 'isURL',
             options,
@@ -755,7 +758,7 @@ export default class ValidationChain {
     /**
      * Check if the string contains a mixture of full and half-width chars.
      */
-    isVariableWidth() {
+    public isVariableWidth() {
         this.validations.push({
             validation: 'isVariableWidth',
         });
@@ -767,7 +770,7 @@ export default class ValidationChain {
      *
      * @param chars The characters
      */
-    isWhitelisted(chars: string | string[]) {
+    public isWhitelisted(chars: string | string[]) {
         this.validations.push({
             validation: 'isWhitelisted',
             options: chars,
@@ -780,7 +783,7 @@ export default class ValidationChain {
      * @param ctx The context
      */
     private async checkResults(
-        ctx: ParameterizedContext<IValidationContext>
+        ctx: ParameterizedContext<IValidationContext>,
     ): Promise<ValidationResult | null> {
         let input: any;
         let originalInput: any;
@@ -822,7 +825,7 @@ export default class ValidationChain {
                     if (!func) {
                         throw new Error(
                             `No custom validation function defined for `
-                            + `param ${this.parameter} at ${this.location}`
+                            + `param ${this.parameter} at ${this.location}`,
                         );
                     }
                     try {
@@ -832,7 +835,7 @@ export default class ValidationChain {
                             msg: message || e.message || this.defaultErrorMessage,
                             location: this.location,
                             param: this.parameter,
-                            value: originalInput + ''
+                            value: originalInput + '',
                         });
                     }
 
@@ -842,13 +845,13 @@ export default class ValidationChain {
                         msg: message || this.defaultErrorMessage,
                         location: this.location,
                         param: this.parameter,
-                        value: originalInput + ''
+                        value: originalInput + '',
                     });
                 }
 
                 return arr;
             },
-            Promise.resolve([])
+            Promise.resolve([]),
         );
         return new ValidationResult(errors);
     }

@@ -1,5 +1,5 @@
 import { IValidationError } from '..';
-import { MappedValidationResults } from './types';
+import { IMappedValidationResults } from './types';
 /**
  * Validation result set.
  */
@@ -17,5 +17,5 @@ export default class ValidationResult {
     /**
      * Return the validation results as mapped validation results.
      */
-    mapped(): MappedValidationResults;
+    mapped(): IMappedValidationResults;
 }

@@ -1,5 +1,5 @@
 import { IValidationError } from '..';
-import { MappedValidationResults } from './types';
+import { IMappedValidationResults } from './types';
 
 /**
  * Validation result set.
@@ -13,7 +13,7 @@ export default class ValidationResult {
             if (!Array.isArray(results)) {
                 throw new TypeError(
                     `Parameter for ValidationResult constructor must be an`
-                    + ` array but received ${results}`
+                    + ` array but received ${results}`,
                 );
             }
             this.results = results;
@@ -39,10 +39,10 @@ export default class ValidationResult {
     /**
      * Return the validation results as mapped validation results.
      */
-    public mapped(): MappedValidationResults {
-        const validation: MappedValidationResults = {};
+    public mapped(): IMappedValidationResults {
+        const validation: IMappedValidationResults = {};
         for (const result of this.results) {
-            validation[result.param]= result;
+            validation[result.param] = result;
         }
         return validation;
     }
