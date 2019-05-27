@@ -1,7 +1,7 @@
 /// <reference types="validator" />
-import { ParamLocation, IMinMaxOptions, IOptionalOptions, CustomValidatorFunction, IsInValuesOptions, IsAlphaLocale, IIsCurrencyOptions, IIsDecimalOptions, IIsFQDNOptions, IISSNOptions, IsMobilePhoneLocale, IsPostalCodeLocale, IIsURLOptions } from './types';
 import { ParameterizedContext } from 'koa';
 import { IValidationContext } from '..';
+import { CustomValidatorFunction, IIsCurrencyOptions, IIsDecimalOptions, IIsFQDNOptions, IISSNOptions, IIsURLOptions, IMinMaxOptions, IOptionalOptions, IsAlphaLocale, IsInValuesOptions, IsMobilePhoneLocale, IsPostalCodeLocale, ParamLocation } from './types';
 /**
  * The validation chain object.
  */

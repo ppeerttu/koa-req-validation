@@ -1,5 +1,5 @@
-import ValidationChain from "../src/lib/ValidationChain";
-import { query } from "../src";
+import { query } from '../src';
+import ValidationChain from '../src/lib/ValidationChain';
 
 describe('query()', () => {
 

@@ -1,3 +1,4 @@
+import { IValidationError } from '../src';
 import ValidationResult from '../src/lib/ValidationResult';
 
 describe('ValidationResult', () => {
@@ -6,15 +7,15 @@ describe('ValidationResult', () => {
 
         test('Constructs without exceptions', () => {
             expect(() => {
-                new ValidationResult();
-                new ValidationResult([]);
+                const results1 = new ValidationResult();
+                const results2 = new ValidationResult([]);
             }).not.toThrow();
         });
-    
+
         test('Throws a TypeError when initializing with invalid value', () => {
             expect(() => {
                 const param: any = {};
-                new ValidationResult(param);
+                const restults = new ValidationResult(param);
             }).toThrow(TypeError);
         });
 
@@ -33,7 +34,7 @@ describe('ValidationResult', () => {
                 param: 'foo',
                 msg: 'Invalid value',
                 location: 'body',
-                value: ''
+                value: '',
             }]);
 
             expect(results.hasErrors()).toBe(true);
@@ -44,13 +45,13 @@ describe('ValidationResult', () => {
     describe('array()', () => {
 
         test('Should return the array of validation errors', () => {
-            const errors = [
+            const errors: IValidationError[] = [
                 {
                     param: 'foo',
                     msg: 'Invalid value',
                     location: 'body',
-                    value: ''
-                }
+                    value: '',
+                },
             ];
             const result1 = new ValidationResult();
             const result2 = new ValidationResult(errors);
@@ -64,13 +65,13 @@ describe('ValidationResult', () => {
     describe('mapped()', () => {
 
         test('Should return the array of validation errors as mapped object', () => {
-            const errors = [
+            const errors: IValidationError[] = [
                 {
                     param: 'foo',
                     msg: 'Invalid value',
                     location: 'body',
-                    value: ''
-                }
+                    value: '',
+                },
             ];
             const result1 = new ValidationResult();
             const result2 = new ValidationResult(errors);
@@ -78,7 +79,7 @@ describe('ValidationResult', () => {
             expect(Object.keys(result1.mapped()).length).toBe(0);
             const mapped = result2.mapped();
             expect(Object.keys(mapped).length).toBe(1);
-            expect(mapped['foo']).toBe(errors[0]);
+            expect(mapped.foo).toBe(errors[0]);
         });
 
     });

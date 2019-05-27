@@ -79,7 +79,7 @@ class ValidationChain {
     optional(options) {
         this.isOptional = {
             value: true,
-            options
+            options,
         };
         return this;
     }
@@ -92,7 +92,7 @@ class ValidationChain {
     custom(func) {
         this.validations.push({
             validation: 'custom',
-            func
+            func,
         });
         return this;
     }
@@ -102,7 +102,7 @@ class ValidationChain {
     contains(seed) {
         this.validations.push({
             validation: 'contains',
-            options: seed
+            options: seed,
         });
         return this;
     }
@@ -112,7 +112,7 @@ class ValidationChain {
     equals(comparison) {
         this.validations.push({
             validation: 'equals',
-            options: comparison
+            options: comparison,
         });
         return this;
     }
@@ -122,7 +122,7 @@ class ValidationChain {
     isInt(options) {
         this.validations.push({
             validation: 'isInt',
-            options
+            options,
         });
         return this;
     }
@@ -134,7 +134,7 @@ class ValidationChain {
     isLength(options) {
         this.validations.push({
             validation: 'isLength',
-            options
+            options,
         });
         return this;
     }
@@ -143,7 +143,7 @@ class ValidationChain {
      */
     isEmail() {
         this.validations.push({
-            validation: 'isEmail'
+            validation: 'isEmail',
         });
         return this;
     }
@@ -152,7 +152,7 @@ class ValidationChain {
      */
     isBoolean() {
         this.validations.push({
-            validation: 'isBoolean'
+            validation: 'isBoolean',
         });
         return this;
     }
@@ -182,7 +182,7 @@ class ValidationChain {
     isHash(algorithm) {
         this.validations.push({
             validation: 'isHash',
-            options: algorithm
+            options: algorithm,
         });
         return this;
     }
@@ -201,7 +201,7 @@ class ValidationChain {
      */
     isJSON() {
         this.validations.push({
-            validation: 'isJSON'
+            validation: 'isJSON',
         });
         return this;
     }
@@ -286,7 +286,7 @@ class ValidationChain {
     matches(regExp) {
         this.validations.push({
             validation: 'matches',
-            options: regExp
+            options: regExp,
         });
         return this;
     }
@@ -300,7 +300,7 @@ class ValidationChain {
     isIn(values) {
         this.validations.push({
             validation: 'isIn',
-            options: values
+            options: values,
         });
         return this;
     }
@@ -313,7 +313,7 @@ class ValidationChain {
     isAfter(date = new Date().toString()) {
         this.validations.push({
             validation: 'isAfter',
-            options: date
+            options: date,
         });
         return this;
     }
@@ -326,7 +326,7 @@ class ValidationChain {
     isAlpha(locale) {
         this.validations.push({
             validation: 'isAlpha',
-            options: locale
+            options: locale,
         });
         return this;
     }
@@ -339,7 +339,7 @@ class ValidationChain {
     isAlphanumeric(locale) {
         this.validations.push({
             validation: 'isAlphanumeric',
-            options: locale
+            options: locale,
         });
         return this;
     }
@@ -404,7 +404,7 @@ class ValidationChain {
     isCurrency(options) {
         this.validations.push({
             validation: 'isCurrency',
-            options
+            options,
         });
         return this;
     }
@@ -729,7 +729,7 @@ class ValidationChain {
                             msg: message || e.message || this.defaultErrorMessage,
                             location: this.location,
                             param: this.parameter,
-                            value: originalInput + ''
+                            value: originalInput + '',
                         });
                     }
                     // @ts-ignore
@@ -739,7 +739,7 @@ class ValidationChain {
                         msg: message || this.defaultErrorMessage,
                         location: this.location,
                         param: this.parameter,
-                        value: originalInput + ''
+                        value: originalInput + '',
                     });
                 }
                 return arr;

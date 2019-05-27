@@ -1,5 +1,5 @@
-import { ParameterizedContext } from "koa";
-import { IValidationError } from "..";
+import { ParameterizedContext } from 'koa';
+import { IValidationError } from '..';
 
 /**
  * Options containing properties min and max.
@@ -109,7 +109,7 @@ export type ValidatorFunctionName = 'custom'
     | 'isISO8601'
     | 'isRFC3339'
     | 'isISO31661Alpha2'
-    //| 'isISO31661Alpha3'
+    // | 'isISO31661Alpha3'
     | 'isISRC'
     | 'isIn'
     | 'isInt'
@@ -141,13 +141,15 @@ export type ValidatorFunctionName = 'custom'
 export enum ParamLocation {
     BODY = 'body',
     PARAM = 'param',
-    QUERY = 'query'
+    QUERY = 'query',
 }
 
 /**
  * Validation results as mapped object.
  */
-export type MappedValidationResults = { [key: string]: IValidationError };
+export interface IMappedValidationResults {
+    [key: string]: IValidationError;
+}
 
 /**
  * Possibile locales.

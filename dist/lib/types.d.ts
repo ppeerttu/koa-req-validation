@@ -1,5 +1,5 @@
-import { ParameterizedContext } from "koa";
-import { IValidationError } from "..";
+import { ParameterizedContext } from 'koa';
+import { IValidationError } from '..';
 /**
  * Options containing properties min and max.
  */
@@ -57,9 +57,9 @@ export declare enum ParamLocation {
 /**
  * Validation results as mapped object.
  */
-export declare type MappedValidationResults = {
+export interface IMappedValidationResults {
     [key: string]: IValidationError;
-};
+}
 /**
  * Possibile locales.
  */
