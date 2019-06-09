@@ -17,6 +17,8 @@ import {
     IsPostalCodeLocale,
     IValidationDefinition,
     ParamLocation,
+    ISanitationDefinition,
+    INormalizeEmailOptions,
 } from './types';
 import ValidationResult from './ValidationResult';
 
@@ -38,7 +40,12 @@ export default class ValidationChain {
     /**
      * Validations to be excecuted.
      */
-    private validations: IValidationDefinition[];
+    private validations: IValidationDefinition[] = [];
+
+    /**
+     * Sanitations to be executed.
+     */
+    private sanitations: ISanitationDefinition[] = [];
 
     /**
      * Location of the given parameter.
@@ -51,7 +58,7 @@ export default class ValidationChain {
     private isOptional: {
         value: boolean,
         options?: IOptionalOptions,
-    };
+    } = { value: false };
 
     /**
      * Create a new ValidationChain.
@@ -72,8 +79,6 @@ export default class ValidationChain {
             );
         }
         this.location = location;
-        this.validations = [];
-        this.isOptional = { value: false };
     }
 
     /**
@@ -854,5 +859,54 @@ export default class ValidationChain {
             Promise.resolve([]),
         );
         return new ValidationResult(errors);
+    }
+
+    /**
+     * Sanitize the given input value according to sanitation definitions.
+     *
+     * @param input The input as string
+     */
+    private sanitize(input: string): string | boolean | Date | number {
+        let value: string | boolean | Date | number = input;
+        for (const { sanitation, options } of this.sanitations) {
+            if (typeof value !== 'string') {
+                // Once a to-starting sanitation has been done, the sanitation process
+                // has to end
+                break;
+            }
+            switch (sanitation) {
+                case 'blacklist':
+                case 'whitelist':
+                    value = validator[sanitation](value, options as string);
+                    break;
+                case 'escape':
+                case 'unescape':
+                    value = validator[sanitation](value);
+                    break;
+                case 'ltrim':
+                case 'rtrim':
+                case 'trim':
+                    value = validator[sanitation](value, options as string | undefined);
+                    break;
+                case 'normalizeEmail':
+                    value = validator.normalizeEmail(
+                        value,
+                        options as INormalizeEmailOptions | undefined,
+                    );
+                    break;
+                case 'stripLow':
+                case 'toBoolean':
+                    value = validator[sanitation](value, options as boolean | undefined);
+                    break;
+                case 'toDate':
+                case 'toFloat':
+                    value = validator[sanitation](value);
+                    break;
+                case 'toInt':
+                    value = validator[sanitation](value, options as number | undefined);
+                    break;
+            }
+        }
+        return value;
     }
 }
