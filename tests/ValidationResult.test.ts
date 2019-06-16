@@ -118,4 +118,34 @@ describe('ValidationResult', () => {
 
     });
 
+    describe('passedData()', () => {
+
+        test('Should return passed values in an object', () => {
+            const err1: IValidationError = {
+                msg: 'Invalid value',
+                value: 'null',
+                param: 'name',
+                location: 'body',
+            };
+            const err2: IValidationError = {
+                msg: 'Invalid value',
+                value: '31-31-2019',
+                param: 'startDate',
+                location: 'body',
+            };
+            const result1 = new ValidationResult('foo', undefined, [err1]);
+            const result2 = new ValidationResult([], [], [err2]);
+            const result3 = new ValidationResult(['biz', 'baz'], [new Date(), 2], []);
+
+            const merged = ValidationResult.fromResults([result1, result2, result3]);
+
+            const passed = merged.passedData();
+
+            expect(passed.biz).toBeInstanceOf(Date);
+            expect(passed.baz).toBe(2);
+            expect(Object.keys(passed).length).toBe(2);
+        });
+
+    });
+
 });
