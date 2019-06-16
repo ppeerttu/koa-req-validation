@@ -13,14 +13,18 @@ import { ParamLocation } from '../../src/lib/types';
  * // Later in code extracting the body parameters from the request
  * const { foo, bar } = ctx.request.body;
  */
-export function mockContext(location?: ParamLocation, properties?: {}): any {
+export function mockContext(
+    location?: ParamLocation,
+    properties?: {},
+    state: any = {},
+): any {
     const ctx = {
         request: {
             body: {},
         },
         query: {},
         params: {},
-        state: {},
+        state,
     };
     if (properties) {
         switch (location) {

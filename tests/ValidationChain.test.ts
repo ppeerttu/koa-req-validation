@@ -1,5 +1,5 @@
 import { validationResults } from '../src';
-import { ParamLocation } from '../src/lib/types';
+import { CustomErrorMessageFunction, ParamLocation } from '../src/lib/types';
 import ValidationChain from '../src/lib/ValidationChain';
 import { mockContext } from './helpers';
 
@@ -43,7 +43,7 @@ describe('ValidationChain', () => {
         });
 
     });
-
+    
     describe('Chaining', () => {
 
         test('Stores validations', async () => {
@@ -266,18 +266,47 @@ describe('ValidationChain', () => {
 
     describe('withMessage()', () => {
 
-        test('Return the given message when validation returns an error', async () => {
-            const message = 'Has to be a real email';
-            const validationChain = new ValidationChain('email', ParamLocation.BODY)
-                .isEmail()
-                .withMessage(message);
-            const ctx = mockContext(ParamLocation.BODY, { email: 'foobar.com' });
-            await validationChain.run()(ctx, next);
-            const results = validationResults(ctx);
-            const mappedResults = results.mapped();
-            expect(mappedResults).toHaveProperty('email');
-            expect(mappedResults.email).toHaveProperty('msg', message);
-        });
+        test(
+            'Return the given string message when validation returns an error',
+            async () => {
+                const message = 'Has to be a real email';
+                const validationChain = new ValidationChain('email', ParamLocation.BODY)
+                    .isEmail()
+                    .withMessage(message);
+                const ctx = mockContext(ParamLocation.BODY, { email: 'foobar.com' });
+                await validationChain.run()(ctx, next);
+                const results = validationResults(ctx);
+                const mappedResults = results.mapped();
+                expect(mappedResults).toHaveProperty('email');
+                expect(mappedResults.email).toHaveProperty('msg', message);
+            },
+        );
+
+        test(
+            'Return the value of given function when validation returns an error',
+            async () => {
+                const localizedMessage = 'This email address has already been taken:';
+                const messageFn: CustomErrorMessageFunction = (context, value) =>
+                    `${context.state.localizedMessage} ${value}`;
+                const validationChain = new ValidationChain('email', ParamLocation.BODY)
+                    .isEmail()
+                    .withMessage(messageFn);
+
+                const ctx = mockContext(
+                    ParamLocation.BODY,
+                    { email: 'foobar.com' },
+                    { localizedMessage }, // This object goes to ctx.state
+                );
+                await validationChain.run()(ctx, next);
+                const results = validationResults(ctx);
+                const mappedResults = results.mapped();
+                expect(mappedResults).toHaveProperty('email');
+                expect(mappedResults.email).toHaveProperty(
+                    'msg',
+                    `${localizedMessage} foobar.com`,
+                );
+            },
+        );
 
     });
 

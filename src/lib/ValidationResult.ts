@@ -6,9 +6,47 @@ import { IMappedValidationResults } from './types';
  */
 export default class ValidationResult {
 
+    /**
+     * Merge multiple validation error results into a single one.
+     *
+     * @param results An array of validation error results
+     */
+    public static fromResults(results: ValidationResult[]): ValidationResult {
+        const parameters: string[] = [];
+        const finalValues: Array<undefined | string | boolean | Date | number> = [];
+        const errors: IValidationError[] = [];
+
+        for (const result of results) {
+            parameters.push(...result.parameters);
+            finalValues.push(...result.finalValues);
+            errors.push(...result.array());
+        }
+        return new ValidationResult(parameters, finalValues, errors);
+    }
+
+    public readonly parameters: string[];
+
+    public readonly finalValues: Array<undefined | string | boolean | Date | number>;
+
     private results: IValidationError[];
 
-    constructor(results?: IValidationError[]) {
+    constructor(
+        parameter: string | string[] = [],
+        // tslint:disable-next-line: max-line-length
+        finalValue?: undefined | string | boolean | Date | number | Array<undefined | string | boolean | Date | number>,
+        results?: IValidationError[],
+    ) {
+        this.parameters = Array.isArray(parameter) ? parameter : [parameter];
+        this.finalValues = Array.isArray(finalValue)
+            ? finalValue
+            : (this.parameters.length ? [finalValue] : []);
+
+        if (this.parameters.length !== this.finalValues.length) {
+            throw new Error(
+                `Invalid ValidationResult state: parameters (${this.parameters.length})`
+                + ` and finalValues (${this.finalValues.length}) do not match`,
+            );
+        }
         if (results) {
             if (!Array.isArray(results)) {
                 throw new TypeError(
@@ -47,4 +85,16 @@ export default class ValidationResult {
         return validation;
     }
 
+    /**
+     * Return final values that have been stored within this validation result.
+     */
+    public passedData(): { [key: string]: any; } {
+        const results: any = {};
+        for (let i = 0; i < this.parameters.length; i++) {
+            if (typeof this.finalValues[i] !== 'undefined') {
+                results[this.parameters[i]] = this.finalValues[i];
+            }
+        }
+        return results;
+    }
 }

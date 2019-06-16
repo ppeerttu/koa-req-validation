@@ -3,6 +3,7 @@ import validator from 'validator';
 
 import { IValidationContext, IValidationError } from '..';
 import {
+    CustomErrorMessageFunction,
     CustomValidatorFunction,
     IIsCurrencyOptions,
     IIsDecimalOptions,
@@ -10,15 +11,15 @@ import {
     IISSNOptions,
     IIsURLOptions,
     IMinMaxOptions,
+    INormalizeEmailOptions,
     IOptionalOptions,
     IsAlphaLocale,
+    ISanitationDefinition,
     IsInValuesOptions,
     IsMobilePhoneLocale,
     IsPostalCodeLocale,
     IValidationDefinition,
     ParamLocation,
-    ISanitationDefinition,
-    INormalizeEmailOptions,
 } from './types';
 import ValidationResult from './ValidationResult';
 
@@ -112,8 +113,16 @@ export default class ValidationChain {
      * Pass a custom message to the validation.
      *
      * @param message Custom message
+     *
+     * @throws {Error} No validation has been set before `withMessage()` has been called
      */
-    public withMessage(message: string) {
+    public withMessage(message: string | CustomErrorMessageFunction) {
+        if (this.validations.length < 1) {
+            throw new Error(
+                `Can't set a validation error message using withMessage() when `
+                + `no validations have been defined`,
+            );
+        }
         const validationDefinition = this.validations[this.validations.length - 1];
         validationDefinition.message = message;
         return this;
@@ -824,20 +833,26 @@ export default class ValidationChain {
             async (arrP: Promise<IValidationError[]>, current) => {
                 const arr = await arrP;
                 const { validation, options, message, func } = current;
+
+                const finalMessage: string | undefined = typeof message === 'function'
+                    ? message(ctx, input)
+                    : message;
+
                 if (validation === 'custom') {
                     // Has to be thrown before the try-catch
                     // in order to notify the developer during development
                     if (!func) {
                         throw new Error(
                             `No custom validation function defined for `
-                            + `param ${this.parameter} at ${this.location}`,
+                            + `parameter ${this.parameter} at request `
+                            + `location ${this.location}`,
                         );
                     }
                     try {
                         await func(input, ctx);
                     } catch (e) {
                         arr.push({
-                            msg: message || e.message || this.defaultErrorMessage,
+                            msg: finalMessage || e.message || this.defaultErrorMessage,
                             location: this.location,
                             param: this.parameter,
                             value: originalInput + '',
@@ -847,7 +862,7 @@ export default class ValidationChain {
                     // @ts-ignore
                 } else if (input === null || !validator[validation](input, options)) {
                     arr.push({
-                        msg: message || this.defaultErrorMessage,
+                        msg: finalMessage || this.defaultErrorMessage,
                         location: this.location,
                         param: this.parameter,
                         value: originalInput + '',
@@ -858,7 +873,12 @@ export default class ValidationChain {
             },
             Promise.resolve([]),
         );
-        return new ValidationResult(errors);
+
+        let finalValue: undefined | number | string | boolean | Date;
+        if (errors.length === 0) {
+            finalValue = this.sanitize(input);
+        }
+        return new ValidationResult(this.parameter, finalValue, errors);
     }
 
     /**

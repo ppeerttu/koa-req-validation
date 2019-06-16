@@ -58,16 +58,9 @@ export const validationResults = (
     ctx: ParameterizedContext<IValidationContext>,
 ): ValidationResult => {
     if (Array.isArray(ctx.state.validationResults)) {
-        let results: IValidationError[] = [];
-        for (const result of ctx.state.validationResults) {
-            results = [
-                ...results,
-                ...result.array(),
-            ];
-        }
-        return new ValidationResult(results);
+        return ValidationResult.fromResults(ctx.state.validationResults);
     }
-    return new ValidationResult();
+    return new ValidationResult([], []);
 };
 
 /**

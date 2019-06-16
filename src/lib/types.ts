@@ -69,11 +69,21 @@ export type CustomValidatorFunction = (
 ) => Promise<void>;
 
 /**
+ * Custom validation error message function. This function will receive the request
+ * context and the user's input for the parameter, and it has to return the error
+ * message as a result.f
+ */
+export type CustomErrorMessageFunction = (
+    ctx: ParameterizedContext,
+    input: string,
+) => string;
+
+/**
  * Validation definition for internal module usage.
  */
 export interface IValidationDefinition {
     validation: ValidatorFunctionName;
-    message?: string;
+    message?: string | CustomErrorMessageFunction;
     options?: ValidatorOptions;
     func?: CustomValidatorFunction | CustomValidatorFunctionWithContext;
 }
