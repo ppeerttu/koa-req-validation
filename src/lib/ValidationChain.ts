@@ -828,20 +828,26 @@ export default class ValidationChain {
 
     /**
      * Trim characters from the left-side of the input.
+     *
+     * @param chars The characters to trim
      */
-    public ltrim() {
+    public ltrim(chars?: string) {
         this.sanitations.push({
             sanitation: 'ltrim',
+            options: chars,
         });
         return this;
     }
 
     /**
      * Trim characters from the right-side of the input.
+     *
+     * @param chars The characters to trim
      */
-    public rtrim() {
+    public rtrim(chars?: string) {
         this.sanitations.push({
             sanitation: 'rtrim',
+            options: chars,
         });
         return this;
     }
@@ -853,7 +859,7 @@ export default class ValidationChain {
      *
      * @see https://github.com/chriso/validator.js For details
      */
-    public normalizeEmail(options: INormalizeEmailOptions) {
+    public normalizeEmail(options?: INormalizeEmailOptions) {
         this.sanitations.push({
             sanitation: 'normalizeEmail',
             options,

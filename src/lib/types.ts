@@ -507,32 +507,32 @@ export interface INormalizeEmailOptions {
      * way (although in practice most - yet not all - providers don't). The domain part
      * of the email address is always lowercased, as it's case insensitive per RFC 1035.
      */
-    all_lowercase: boolean;
+    all_lowercase?: boolean;
 
     /**
      * GMail addresses are known to be case-insensitive, so this switch allows lowercasing
      * them even when all_lowercase is set to false. Please note that when all_lowercase
      * is true, GMail addresses are lowercased regardless of the value of this setting.
      */
-    gmail_lowercase: boolean;
+    gmail_lowercase?: boolean;
 
     /**
      * Removes dots from the local part of the email address, as GMail ignores
      * them (e.g. "john.doe" and "johndoe" are considered equal).
      */
-    gmail_remove_dots: boolean;
+    gmail_remove_dots?: boolean;
 
     /**
      * Normalizes addresses by removing "sub-addresses", which is the part following
      * a "+" sign (e.g. "foo+bar@gmail.com" becomes "foo@gmail.com").
      */
-    gmail_remove_subaddress: boolean;
+    gmail_remove_subaddress?: boolean;
 
     /**
      * Converts addresses with domain @googlemail.com to @gmail.com, as
      * they're equivalent.
      */
-    gmail_convert_googlemaildotcom: boolean;
+    gmail_convert_googlemaildotcom?: boolean;
 
     /**
      * Outlook.com addresses (including Windows Live and Hotmail) are known to be
@@ -540,13 +540,13 @@ export interface INormalizeEmailOptions {
      * is set to false. Please note that when all_lowercase is true, Outlook.com addresses
      * are lowercased regardless of the value of this setting.
      */
-    outlookdotcom_lowercase: boolean;
+    outlookdotcom_lowercase?: boolean;
 
     /**
      * Normalizes addresses by removing "sub-addresses", which is the part following
      * a "+" sign (e.g. "foo+bar@outlook.com" becomes "foo@outlook.com").
      */
-    outlookdotcom_remove_subaddress: boolean;
+    outlookdotcom_remove_subaddress?: boolean;
 
     /**
      * Yahoo Mail addresses are known to be case-insensitive, so this switch allows
@@ -554,13 +554,13 @@ export interface INormalizeEmailOptions {
      * all_lowercase is true, Yahoo Mail addresses are lowercased regardless of the value
      * of this setting.
      */
-    yahoo_lowercase: boolean;
+    yahoo_lowercase?: boolean;
 
     /**
      * Normalizes addresses by removing "sub-addresses", which is the part following a "-"
      * sign (e.g. "foo-bar@yahoo.com" becomes "foo@yahoo.com").
      */
-    yahoo_remove_subaddress: boolean;
+    yahoo_remove_subaddress?: boolean;
 
     /**
      * iCloud addresses (including MobileMe) are known to be case-insensitive, so this
@@ -568,11 +568,11 @@ export interface INormalizeEmailOptions {
      * note that when all_lowercase is true, iCloud addresses are lowercased regardless
      * of the value of this setting.
      */
-    icloud_lowercase: boolean;
+    icloud_lowercase?: boolean;
 
     /**
      * Normalizes addresses by removing "sub-addresses", which is the part following a "+"
      * sign (e.g. "foo+bar@icloud.com" becomes "foo@icloud.com").
      */
-    icloud_remove_subaddress: boolean;
+    icloud_remove_subaddress?: boolean;
 }

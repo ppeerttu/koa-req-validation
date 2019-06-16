@@ -117,12 +117,3 @@ export const param = (routeParam: string) => {
     const validationChain = new ValidationChain(routeParam, ParamLocation.PARAM);
     return validationChain;
 };
-
-export const matchedData = (
-    ctx: ParameterizedContext<IValidationContext>,
-): IMatchedData => {
-    if (ctx.state.matchedData) {
-        return typeof ctx.state.matchedData === 'object' ? ctx.state.matchedData : {};
-    }
-    return {};
-};
