@@ -793,6 +793,160 @@ export default class ValidationChain {
     }
 
     /**
+     * Remove characters that appear in the blacklist. The characters are used in a RegExp
+     *  and so you will need to escape some chars, e.g. blacklist(input, '\\[\\]').
+     *
+     * @param chars Characters to blacklist
+     */
+    public blacklist(chars: string) {
+        this.sanitations.push({
+            sanitation: 'blacklist',
+            options: chars,
+        });
+        return this;
+    }
+
+    /**
+     * Replace <, >, &, ', " and / with HTML entities.
+     */
+    public escape() {
+        this.sanitations.push({
+            sanitation: 'escape',
+        });
+        return this;
+    }
+
+    /**
+     * Replaces HTML encoded entities with <, >, &, ', " and /.
+     */
+    public unescape() {
+        this.sanitations.push({
+            sanitation: 'unescape',
+        });
+        return this;
+    }
+
+    /**
+     * Trim characters from the left-side of the input.
+     */
+    public ltrim() {
+        this.sanitations.push({
+            sanitation: 'ltrim',
+        });
+        return this;
+    }
+
+    /**
+     * Trim characters from the right-side of the input.
+     */
+    public rtrim() {
+        this.sanitations.push({
+            sanitation: 'rtrim',
+        });
+        return this;
+    }
+
+    /**
+     * Normalize email address.
+     *
+     * @param options The options
+     *
+     * @see https://github.com/chriso/validator.js For details
+     */
+    public normalizeEmail(options: INormalizeEmailOptions) {
+        this.sanitations.push({
+            sanitation: 'normalizeEmail',
+            options,
+        });
+        return this;
+    }
+
+    /**
+     * Remove characters with a numerical value < 32 and 127, mostly control characters.
+     * If keep_new_lines is true, newline characters are preserved (\n and \r, hex 0xA
+     * and 0xD). Unicode-safe in JavaScript.
+     *
+     * @param keepNewLines
+     */
+    public stripLow(keepNewLines: boolean = false) {
+        this.sanitations.push({
+            sanitation: 'stripLow',
+            options: keepNewLines,
+        });
+        return this;
+    }
+
+    /**
+     * convert the input string to a boolean. Everything except for '0', 'false' and ''
+     * returns true. In strict mode only '1' and 'true' return true.
+     */
+    public toBoolean(strict = false) {
+        this.sanitations.push({
+            sanitation: 'toBoolean',
+            options: strict,
+        });
+        return this;
+    }
+
+    /**
+     * Convert the input string to a date.
+     */
+    public toDate() {
+        this.sanitations.push({
+            sanitation: 'toDate',
+        });
+        return this;
+    }
+
+    /**
+     * Convert the input string to a float.
+     */
+    public toFloat() {
+        this.sanitations.push({
+            sanitation: 'toFloat',
+        });
+        return this;
+    }
+
+    /**
+     * Convert the input string to an integer, or NaN if the input is not an integer.
+     */
+    public toInt(radix: number = 10) {
+        this.sanitations.push({
+            sanitation: 'toInt',
+            options: radix,
+        });
+        return this;
+    }
+
+    /**
+     * Trim characters (whitespace by default) from both sides of the input.
+     *
+     * @param chars The characters to trim
+     */
+    public trim(chars?: string) {
+        this.sanitations.push({
+            sanitation: 'trim',
+            options: chars,
+        });
+        return this;
+    }
+
+    /**
+     * Remove characters that do not appear in the whitelist. The characters are used in a
+     * RegExp and so you will need to escape some chars, e.g. whitelist(input, '\\[\\]').
+     *
+     * @param chars Characters to whitelist
+     */
+    public whitelist(chars: string) {
+        this.sanitations.push({
+            sanitation: 'whitelist',
+            options: chars,
+        });
+        return this;
+    }
+
+    /**
      * Run the validations and return the results.
      * @param ctx The context
      */
