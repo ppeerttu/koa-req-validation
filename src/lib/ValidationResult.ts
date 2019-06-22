@@ -85,7 +85,8 @@ export default class ValidationResult {
     }
 
     /**
-     * Return final values that have been stored within this validation result.
+     * Return final values that have been stored within this validation result. This can
+     * be used for retrieving all values that have passed validations and been sanitized.
      */
     public passedData(): { [key: string]: any; } {
         const results: any = {};

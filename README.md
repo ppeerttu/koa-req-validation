@@ -75,8 +75,18 @@ This module offers various validation and sanitation functions. Please note the 
   * The validations and sanitations are being run in order they've been called in the validation chain
 * No sanitations are run for a chain after some of the validations has failed
   * This is due to the fact that some of the sanitizers rely on "valid" value (for example valid email address)
+* The sanitized values can be accessed only through `ValidationResult.passedData()`
 
-See the [generated TypeDoc][typedocs] and [ValidationChain][validation-chain] for APIs.
+```typescript
+const result = validationResults(ctx);
+if (result.hasErrors()) {
+    throw new RequestError(422, result.mapped());
+}
+const passed = result.passedData();
+```
+
+
+See the [generated TypeDoc][typedocs] and [ValidationChain][validation-chain] for API documentation.
 
 # Motivation
 
