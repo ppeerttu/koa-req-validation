@@ -1,8 +1,14 @@
 {
   "name": "koa-req-validation",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "description": "A request validation middleware for Koa.",
-  "keywords": ["nodejs", "javascript", "typescript", "koa2", "validation"],
+  "keywords": [
+    "nodejs",
+    "javascript",
+    "typescript",
+    "koa2",
+    "validation"
+  ],
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
@@ -34,10 +40,10 @@
     "tslint": "^5.13.1",
     "typedoc": "^0.14.2",
     "typescript": "^3.3.3333",
-    "validator": "^10.11.0"
+    "validator": "^11.0.0"
   },
   "peerDependencies": {
-    "validator": "^10.11.x",
+    "validator": "^11.0.x",
     "koa-bodyparser": "^4.2.x",
     "koa-router": "^7.4.x"
   },
