@@ -271,6 +271,29 @@ describe('ValidatorChain validators', () => {
             }).toThrowError();
         });
 
+        test('Handles missing values in CustomErrorMessageFunction', async () => {
+            const localizedMessage = 'This email address has already been taken:';
+            const messageFn: CustomErrorMessageFunction = (context, value) =>
+                `${context.state.localizedMessage} ${value}`;
+            const validationChain = new ValidationChain('email', ParamLocation.BODY)
+                .isEmail()
+                .withMessage(messageFn);
+
+            const ctx = mockContext(
+                ParamLocation.BODY,
+                { email: null },
+                { localizedMessage }, // This object goes to ctx.state
+            );
+            await validationChain.run()(ctx, next);
+            const results = validationResults(ctx);
+            const mappedResults = results.mapped();
+            expect(mappedResults).toHaveProperty('email');
+            expect(mappedResults.email).toHaveProperty(
+                'msg',
+                `${localizedMessage} `,
+            );
+        });
+
     });
 
     describe('contains()', () => {
