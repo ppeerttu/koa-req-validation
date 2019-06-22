@@ -1,7 +1,7 @@
 /// <reference types="validator" />
 import { ParameterizedContext } from 'koa';
 import { IValidationContext } from '..';
-import { CustomValidatorFunction, IIsCurrencyOptions, IIsDecimalOptions, IIsFQDNOptions, IISSNOptions, IIsURLOptions, IMinMaxOptions, IOptionalOptions, IsAlphaLocale, IsInValuesOptions, IsMobilePhoneLocale, IsPostalCodeLocale, ParamLocation } from './types';
+import { CustomErrorMessageFunction, CustomValidatorFunction, IIsCurrencyOptions, IIsDecimalOptions, IIsFQDNOptions, IISSNOptions, IIsURLOptions, IMinMaxOptions, INormalizeEmailOptions, IOptionalOptions, IsAlphaLocale, IsInValuesOptions, IsMobilePhoneLocale, IsPostalCodeLocale, ParamLocation } from './types';
 /**
  * The validation chain object.
  */
@@ -15,9 +15,9 @@ export default class ValidationChain {
      */
     private parameter;
     /**
-     * Validations to be excecuted.
+     * Validations and sanitations to be executed.
      */
-    private validations;
+    private operations;
     /**
      * Location of the given parameter.
      */
@@ -50,8 +50,10 @@ export default class ValidationChain {
      * Pass a custom message to the validation.
      *
      * @param message Custom message
+     *
+     * @throws {Error} No validation has been set before `withMessage()` has been called
      */
-    withMessage(message: string): this;
+    withMessage(message: string | CustomErrorMessageFunction): this;
     /**
      * Set this property as optional.
      */
@@ -342,8 +344,87 @@ export default class ValidationChain {
      */
     isWhitelisted(chars: string | string[]): this;
     /**
+     * Remove characters that appear in the blacklist. The characters are used in a RegExp
+     *  and so you will need to escape some chars, e.g. blacklist(input, '\\[\\]').
+     *
+     * @param chars Characters to blacklist
+     */
+    blacklist(chars: string): this;
+    /**
+     * Replace <, >, &, ', " and / with HTML entities.
+     */
+    escape(): this;
+    /**
+     * Replaces HTML encoded entities with <, >, &, ', " and /.
+     */
+    unescape(): this;
+    /**
+     * Trim characters from the left-side of the input.
+     *
+     * @param chars The characters to trim
+     */
+    ltrim(chars?: string): this;
+    /**
+     * Trim characters from the right-side of the input.
+     *
+     * @param chars The characters to trim
+     */
+    rtrim(chars?: string): this;
+    /**
+     * Normalize email address.
+     *
+     * @param options The options
+     *
+     * @see https://github.com/chriso/validator.js For details
+     */
+    normalizeEmail(options?: INormalizeEmailOptions): this;
+    /**
+     * Remove characters with a numerical value < 32 and 127, mostly control characters.
+     * If keep_new_lines is true, newline characters are preserved (\n and \r, hex 0xA
+     * and 0xD). Unicode-safe in JavaScript.
+     *
+     * @param keepNewLines
+     */
+    stripLow(keepNewLines?: boolean): this;
+    /**
+     * convert the input string to a boolean. Everything except for '0', 'false' and ''
+     * returns true. In strict mode only '1' and 'true' return true.
+     */
+    toBoolean(strict?: boolean): this;
+    /**
+     * Convert the input string to a date.
+     */
+    toDate(): this;
+    /**
+     * Convert the input string to a float.
+     */
+    toFloat(): this;
+    /**
+     * Convert the input string to an integer, or NaN if the input is not an integer.
+     */
+    toInt(radix?: number): this;
+    /**
+     * Trim characters (whitespace by default) from both sides of the input.
+     *
+     * @param chars The characters to trim
+     */
+    trim(chars?: string): this;
+    /**
+     * Remove characters that do not appear in the whitelist. The characters are used in a
+     * RegExp and so you will need to escape some chars, e.g. whitelist(input, '\\[\\]').
+     *
+     * @param chars Characters to whitelist
+     */
+    whitelist(chars: string): this;
+    /**
      * Run the validations and return the results.
      * @param ctx The context
      */
     private checkResults;
+    /**
+     * Sanitize the given input value with given sanitation definition.
+     *
+     * @param input The input as string
+     */
+    private sanitize;
 }

@@ -70,20 +70,21 @@
 					<a href="https://david-dm.org/ppeerttu/koa-req-validation?type=dev"><img src="https://david-dm.org/ppeerttu/koa-req-validation/dev-status.svg" alt="devDependencies Status"></a>
 					<a href="https://david-dm.org/ppeerttu/koa-req-validation?type=peer"><img src="https://david-dm.org/ppeerttu/koa-req-validation/peer-status.svg" alt="peerDependencies Status"></a>
 					<a href="https://codecov.io/gh/ppeerttu/koa-req-validation"><img src="https://codecov.io/gh/ppeerttu/koa-req-validation/branch/master/graph/badge.svg?token=IuGu3GKizF" alt="codecov"></a>
-				<a href="https://badge.fury.io/js/koa-req-validation"><img src="https://badge.fury.io/js/koa-req-validation.svg" alt="npm version"></a></p>
+					<a href="https://badge.fury.io/js/koa-req-validation"><img src="https://badge.fury.io/js/koa-req-validation.svg" alt="npm version"></a>
+				<a href="https://snyk.io/test/github/ppeerttu/koa-req-validation"><img src="https://snyk.io/test/github/ppeerttu/koa-req-validation/badge.svg" alt="Known Vulnerabilities"></a></p>
 				<p>A <a href="https://github.com/chriso/validator.js">validator</a> middleware for <a href="https://koajs.com/">koa</a>. Inspired by <a href="https://github.com/express-validator/express-validator">express-validator</a>.</p>
 				<ul>
 					<li><a href="#koa-req-validation">koa-req-validation</a></li>
-					<li><a href="#installation">Installation</a></li>
-					<li><a href="#getting-started">Getting started</a></li>
-					<li><a href="#documentation">Documentation</a></li>
-					<li><a href="#motivation">Motivation</a><ul>
-							<li><a href="#peer-dependencies">Peer dependencies</a></li>
+					<li><a href="#Installation">Installation</a></li>
+					<li><a href="#Getting-started">Getting started</a></li>
+					<li><a href="#Documentation">Documentation</a></li>
+					<li><a href="#Motivation">Motivation</a><ul>
+							<li><a href="#Peer-dependencies">Peer dependencies</a></li>
 						</ul>
 					</li>
-					<li><a href="#issues">Issues</a></li>
-					<li><a href="#contribution">Contribution</a></li>
-					<li><a href="#licence">Licence</a></li>
+					<li><a href="#Issues">Issues</a></li>
+					<li><a href="#Contribution">Contribution</a></li>
+					<li><a href="#Licence">Licence</a></li>
 				</ul>
 				<h1 id="installation">Installation</h1>
 				<p>The <strong>koa-req-validation</strong> requires <a href="https://github.com/chriso/validator.js">validator</a>, <a href="https://github.com/ZijianHe/koa-router">koa-router</a> and <a href="https://github.com/koajs/bodyparser">koa-bodyparser</a> as peer dependencies.</p>
@@ -115,7 +116,24 @@ router.get(
 );</code></pre>
 				<p>See the <a href="https://github.com/ppeerttu/koa-req-validation/blob/master/demo/index.ts">demo</a> for other examples.</p>
 				<h1 id="documentation">Documentation</h1>
-				<p>See the <a href="https://ppeerttu.github.io/koa-req-validation/">generated TypeDoc</a> and <a href="https://ppeerttu.github.io/koa-req-validation/classes/_lib_validationchain_.validationchain.html">ValidationChain</a> for now.</p>
+				<p>This module offers various validation and sanitation functions. Please note the following things:</p>
+				<ul>
+					<li>The <strong>order matters</strong><ul>
+							<li>The validations and sanitations are being run in order they&#39;ve been called in the validation chain</li>
+						</ul>
+					</li>
+					<li>No sanitations are run for a chain after some of the validations has failed<ul>
+							<li>This is due to the fact that some of the sanitizers rely on &quot;valid&quot; value (for example valid email address)</li>
+						</ul>
+					</li>
+					<li>The sanitized values can be accessed only through <code>ValidationResult.passedData()</code></li>
+				</ul>
+				<pre><code class="language-typescript"><span class="hljs-keyword">const</span> result = validationResults(ctx);
+<span class="hljs-keyword">if</span> (result.hasErrors()) {
+    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> RequestError(<span class="hljs-number">422</span>, result.mapped());
+}
+<span class="hljs-keyword">const</span> passed = result.passedData();</code></pre>
+				<p>See the <a href="https://ppeerttu.github.io/koa-req-validation/">generated TypeDoc</a> and <a href="https://ppeerttu.github.io/koa-req-validation/classes/_lib_validationchain_.validationchain.html">ValidationChain</a> for API documentation.</p>
 				<h1 id="motivation">Motivation</h1>
 				<p>Motivation behind this module is the awesome experience of using the <a href="https://github.com/express-validator/express-validator">express-validator</a>. However, due to various reasons the <code>express-validator</code> doesn&#39;t suit it and it seems that there is quite a lot of request validation packages out there mainly for <code>koa</code> v1 without warranty for active maintenance. This package tries to mimic the <code>express-validator</code> pacakge and eventually provide most of the features.</p>
 				<h2 id="peer-dependencies">Peer dependencies</h2>
