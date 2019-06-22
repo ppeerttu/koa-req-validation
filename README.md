@@ -11,14 +11,14 @@
 A [validator][validator-site] middleware for [koa][koa-site]. Inspired by [express-validator][express-validator-site].
 
 - [koa-req-validation](#koa-req-validation)
-- [Installation](#installation)
-- [Getting started](#getting-started)
-- [Documentation](#documentation)
-- [Motivation](#motivation)
-  - [Peer dependencies](#peer-dependencies)
-- [Issues](#issues)
-- [Contribution](#contribution)
-- [Licence](#licence)
+- [Installation](#Installation)
+- [Getting started](#Getting-started)
+- [Documentation](#Documentation)
+- [Motivation](#Motivation)
+  - [Peer dependencies](#Peer-dependencies)
+- [Issues](#Issues)
+- [Contribution](#Contribution)
+- [Licence](#Licence)
 
 
 # Installation
@@ -70,7 +70,13 @@ See the [demo][demo-link] for other examples.
 
 # Documentation
 
-See the [generated TypeDoc][typedocs] and [ValidationChain][validation-chain] for now.
+This module offers various validation and sanitation functions. Please note the following things:
+* The **order matters**
+  * The validations and sanitations are being run in order they've been called in the validation chain
+* No sanitations are run for a chain after some of the validations has failed
+  * This is due to the fact that some of the sanitizers rely on "valid" value (for example valid email address)
+
+See the [generated TypeDoc][typedocs] and [ValidationChain][validation-chain] for APIs.
 
 # Motivation
 
