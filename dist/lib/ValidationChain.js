@@ -30,6 +30,14 @@ class ValidationChain {
          */
         this.defaultErrorMessage = 'Invalid value';
         /**
+         * Validations and sanitations to be executed.
+         */
+        this.operations = [];
+        /**
+         * Is this parameter optional?
+         */
+        this.isOptional = { value: false };
+        /**
          * Run the validation. This method has to be called
          * at the end of each validation.
          * ```typescript
@@ -60,16 +68,25 @@ class ValidationChain {
                 + ` but received ${location}`);
         }
         this.location = location;
-        this.validations = [];
-        this.isOptional = { value: false };
     }
     /**
      * Pass a custom message to the validation.
      *
      * @param message Custom message
+     *
+     * @throws {Error} No validation has been set before `withMessage()` has been called
      */
     withMessage(message) {
-        const validationDefinition = this.validations[this.validations.length - 1];
+        if (this.operations.length < 1) {
+            throw new Error(`Can't set a validation error message using withMessage() when `
+                + `no validations have been defined`);
+        }
+        const validationDefinition = this.operations[this.operations.length - 1];
+        if (validationDefinition.type === 'sanitation') {
+            throw new Error(`Can't set a validation error message using withMessage() `
+                + `to a sanitizer definition! Please call withMessage() immediately after `
+                + `the validation definition.`);
+        }
         validationDefinition.message = message;
         return this;
     }
@@ -90,7 +107,8 @@ class ValidationChain {
      * @param func The validation function
      */
     custom(func) {
-        this.validations.push({
+        this.operations.push({
+            type: 'validation',
             validation: 'custom',
             func,
         });
@@ -100,7 +118,8 @@ class ValidationChain {
      * Check if the request property contains the given seed.
      */
     contains(seed) {
-        this.validations.push({
+        this.operations.push({
+            type: 'validation',
             validation: 'contains',
             options: seed,
         });
@@ -110,7 +129,8 @@ class ValidationChain {
      * Check if the request property equals the given comparison.
      */
     equals(comparison) {
-        this.validations.push({
+        this.operations.push({
+            type: 'validation',
             validation: 'equals',
             options: comparison,
         });
@@ -120,7 +140,8 @@ class ValidationChain {
      * Check if the parameter is an integer.
      */
     isInt(options) {
-        this.validations.push({
+        this.operations.push({
+            type: 'validation',
             validation: 'isInt',
             options,
         });
@@ -132,7 +153,8 @@ class ValidationChain {
      * @param options Min and max length
      */
     isLength(options) {
-        this.validations.push({
+        this.operations.push({
+            type: 'validation',
             validation: 'isLength',
             options,
         });
@@ -142,7 +164,8 @@ class ValidationChain {
      * Check if the parameter is an email.
      */
     isEmail() {
-        this.validations.push({
+        this.operations.push({
+            type: 'validation',
             validation: 'isEmail',
         });
         return this;
@@ -151,7 +174,8 @@ class ValidationChain {
      * Check if the parameter is a boolean value.
      */
     isBoolean() {
-        this.validations.push({
+        this.operations.push({
+            type: 'validation',
             validation: 'isBoolean',
         });
         return this;
@@ -160,7 +184,8 @@ class ValidationChain {
      * Check if the parameter is a zero length string.
      */
     isEmpty() {
-        this.validations.push({
+        this.operations.push({
+            type: 'validation',
             validation: 'isEmpty',
         });
         return this;
@@ -169,7 +194,8 @@ class ValidationChain {
      * Check if the parameter is a float.
      */
     isFloat() {
-        this.validations.push({
+        this.operations.push({
+            type: 'validation',
             validation: 'isFloat',
         });
         return this;
@@ -180,7 +206,8 @@ class ValidationChain {
      * @param algorithm The algorithm
      */
     isHash(algorithm) {
-        this.validations.push({
+        this.operations.push({
+            type: 'validation',
             validation: 'isHash',
             options: algorithm,
         });
@@ -190,7 +217,8 @@ class ValidationChain {
      * Check if the parameter is a valid JWT token.
      */
     isJWT() {
-        this.validations.push({
+        this.operations.push({
+            type: 'validation',
             validation: 'isJWT',
         });
         return this;
@@ -200,7 +228,8 @@ class ValidationChain {
      * `JSON.parse`.
      */
     isJSON() {
-        this.validations.push({
+        this.operations.push({
+            type: 'validation',
             validation: 'isJSON',
         });
         return this;
@@ -210,7 +239,8 @@ class ValidationChain {
      * in the format `lat,long` or `lat, long`.
      */
     isLatLong() {
-        this.validations.push({
+        this.operations.push({
+            type: 'validation',
             validation: 'isLatLong',
         });
         return this;
@@ -219,7 +249,8 @@ class ValidationChain {
      * Check if the paramter contains only lowercase characters.
      */
     isLowercase() {
-        this.validations.push({
+        this.operations.push({
+            type: 'validation',
             validation: 'isLowercase',
         });
         return this;
@@ -228,7 +259,8 @@ class ValidationChain {
      * Check if the parameter is a MAC address.
      */
     isMACAddress() {
-        this.validations.push({
+        this.operations.push({
+            type: 'validation',
             validation: 'isMACAddress',
         });
         return this;
@@ -237,7 +269,8 @@ class ValidationChain {
      * Check if the parameter is a valid MongoDB ObjectId.
      */
     isMongoId() {
-        this.validations.push({
+        this.operations.push({
+            type: 'validation',
             validation: 'isMongoId',
         });
         return this;
@@ -246,7 +279,8 @@ class ValidationChain {
      * Check if the parameter contains only numbers.
      */
     isNumeric() {
-        this.validations.push({
+        this.operations.push({
+            type: 'validation',
             validation: 'isNumeric',
         });
         return this;
@@ -255,7 +289,8 @@ class ValidationChain {
      * Check if the parameter is a valid port number.
      */
     isPort() {
-        this.validations.push({
+        this.operations.push({
+            type: 'validation',
             validation: 'isPort',
         });
         return this;
@@ -264,7 +299,8 @@ class ValidationChain {
      * Check if the parameter is valid UUID (v3, v4 or v5).
      */
     isUUID() {
-        this.validations.push({
+        this.operations.push({
+            type: 'validation',
             validation: 'isUUID',
         });
         return this;
@@ -273,7 +309,8 @@ class ValidationChain {
      * Check if the parameter contains only uppercase characters.
      */
     isUppercase() {
-        this.validations.push({
+        this.operations.push({
+            type: 'validation',
             validation: 'isUppercase',
         });
         return this;
@@ -284,7 +321,8 @@ class ValidationChain {
      * @param regExp The regular expression
      */
     matches(regExp) {
-        this.validations.push({
+        this.operations.push({
+            type: 'validation',
             validation: 'matches',
             options: regExp,
         });
@@ -298,7 +336,8 @@ class ValidationChain {
      * property with allowed values
      */
     isIn(values) {
-        this.validations.push({
+        this.operations.push({
+            type: 'validation',
             validation: 'isIn',
             options: values,
         });
@@ -311,7 +350,8 @@ class ValidationChain {
      * @param date The date
      */
     isAfter(date = new Date().toString()) {
-        this.validations.push({
+        this.operations.push({
+            type: 'validation',
             validation: 'isAfter',
             options: date,
         });
@@ -324,7 +364,8 @@ class ValidationChain {
      * @param locale The locale
      */
     isAlpha(locale) {
-        this.validations.push({
+        this.operations.push({
+            type: 'validation',
             validation: 'isAlpha',
             options: locale,
         });
@@ -337,7 +378,8 @@ class ValidationChain {
      * @param locale The locale
      */
     isAlphanumeric(locale) {
-        this.validations.push({
+        this.operations.push({
+            type: 'validation',
             validation: 'isAlphanumeric',
             options: locale,
         });
@@ -347,7 +389,8 @@ class ValidationChain {
      * Check if the string contains ACII characters only.
      */
     isAscii() {
-        this.validations.push({
+        this.operations.push({
+            type: 'validation',
             validation: 'isAscii',
         });
         return this;
@@ -356,7 +399,8 @@ class ValidationChain {
      * Check if the string is base64 encoded.
      */
     isBase64() {
-        this.validations.push({
+        this.operations.push({
+            type: 'validation',
             validation: 'isBase64',
         });
         return this;
@@ -368,7 +412,8 @@ class ValidationChain {
      * @param date The date
      */
     isBefore(date = new Date().toString()) {
-        this.validations.push({
+        this.operations.push({
+            type: 'validation',
             validation: 'isBefore',
             options: date,
         });
@@ -381,7 +426,8 @@ class ValidationChain {
      * @param options The range
      */
     isByteLength(options = { min: 0 }) {
-        this.validations.push({
+        this.operations.push({
+            type: 'validation',
             validation: 'isByteLength',
             options,
         });
@@ -391,7 +437,8 @@ class ValidationChain {
      * Check if the string is a credit card.
      */
     isCreditCard() {
-        this.validations.push({
+        this.operations.push({
+            type: 'validation',
             validation: 'isCreditCard',
         });
         return this;
@@ -402,7 +449,8 @@ class ValidationChain {
      * @param options The options
      */
     isCurrency(options) {
-        this.validations.push({
+        this.operations.push({
+            type: 'validation',
             validation: 'isCurrency',
             options,
         });
@@ -412,7 +460,8 @@ class ValidationChain {
      * Check if the string is a data uri format.
      */
     isDataURI() {
-        this.validations.push({
+        this.operations.push({
+            type: 'validation',
             validation: 'isDataURI',
         });
         return this;
@@ -423,7 +472,8 @@ class ValidationChain {
      * @param options The options
      */
     isDecimal(options) {
-        this.validations.push({
+        this.operations.push({
+            type: 'validation',
             validation: 'isDecimal',
             options,
         });
@@ -436,7 +486,8 @@ class ValidationChain {
      * @param division The division number
      */
     isDivisibleBy(division) {
-        this.validations.push({
+        this.operations.push({
+            type: 'validation',
             validation: 'isDivisibleBy',
             options: division,
         });
@@ -449,7 +500,8 @@ class ValidationChain {
      * @param options The options
      */
     isFQDN(options) {
-        this.validations.push({
+        this.operations.push({
+            type: 'validation',
             validation: 'isFQDN',
             options,
         });
@@ -460,7 +512,8 @@ class ValidationChain {
      * chars.
      */
     isFullWidth() {
-        this.validations.push({
+        this.operations.push({
+            type: 'validation',
             validation: 'isFullWidth',
         });
         return this;
@@ -470,7 +523,8 @@ class ValidationChain {
      * chars.
      */
     isHalfWidth() {
-        this.validations.push({
+        this.operations.push({
+            type: 'validation',
             validation: 'isHalfWidth',
         });
         return this;
@@ -480,7 +534,8 @@ class ValidationChain {
      * color.
      */
     isHexColor() {
-        this.validations.push({
+        this.operations.push({
+            type: 'validation',
             validation: 'isHexColor',
         });
         return this;
@@ -490,7 +545,8 @@ class ValidationChain {
      * number.
      */
     isHexadecimal() {
-        this.validations.push({
+        this.operations.push({
+            type: 'validation',
             validation: 'isHexadecimal',
         });
         return this;
@@ -499,7 +555,8 @@ class ValidationChain {
      * Check if the string is an IP (ver 4 or 6).
      */
     isIP(version) {
-        this.validations.push({
+        this.operations.push({
+            type: 'validation',
             validation: 'isIP',
             options: version,
         });
@@ -509,7 +566,8 @@ class ValidationChain {
      * Check if the string is an IP range (ver 4 only).
      */
     isIPRange() {
-        this.validations.push({
+        this.operations.push({
+            type: 'validation',
             validation: 'isIPRange',
         });
         return this;
@@ -520,7 +578,8 @@ class ValidationChain {
      * @param version The version
      */
     isISBN(version) {
-        this.validations.push({
+        this.operations.push({
+            type: 'validation',
             validation: 'isISBN',
             options: version,
         });
@@ -532,7 +591,8 @@ class ValidationChain {
      * @param options The options
      */
     isISSN(options) {
-        this.validations.push({
+        this.operations.push({
+            type: 'validation',
             validation: 'isISSN',
             options,
         });
@@ -542,7 +602,8 @@ class ValidationChain {
      * Check if the string is an ISIN.
      */
     isISIN() {
-        this.validations.push({
+        this.operations.push({
+            type: 'validation',
             validation: 'isISIN',
         });
         return this;
@@ -551,7 +612,8 @@ class ValidationChain {
      * Check if the string is valid ISO8601 date.
      */
     isISO8601() {
-        this.validations.push({
+        this.operations.push({
+            type: 'validation',
             validation: 'isISO8601',
         });
         return this;
@@ -560,7 +622,8 @@ class ValidationChain {
      * Check if the string is valid RFC3339 date.
      */
     isRFC3339() {
-        this.validations.push({
+        this.operations.push({
+            type: 'validation',
             validation: 'isRFC3339',
         });
         return this;
@@ -570,7 +633,8 @@ class ValidationChain {
      * officially assigned country code.
      */
     isISO31661Alpha2() {
-        this.validations.push({
+        this.operations.push({
+            type: 'validation',
             validation: 'isISO31661Alpha2',
         });
         return this;
@@ -579,7 +643,8 @@ class ValidationChain {
      * Check if the string is a ISRC.
      */
     isISRC() {
-        this.validations.push({
+        this.operations.push({
+            type: 'validation',
             validation: 'isISRC',
         });
         return this;
@@ -588,7 +653,8 @@ class ValidationChain {
      * Check if the string is a MD5 hash.
      */
     isMD5() {
-        this.validations.push({
+        this.operations.push({
+            type: 'validation',
             validation: 'isMD5',
         });
         return this;
@@ -597,7 +663,8 @@ class ValidationChain {
      * Check if the string is a valid MIME type format.
      */
     isMimeType() {
-        this.validations.push({
+        this.operations.push({
+            type: 'validation',
             validation: 'isMimeType',
         });
         return this;
@@ -608,7 +675,8 @@ class ValidationChain {
      * @param locale The locale, defaults to any
      */
     isMobilePhone(locale = 'any') {
-        this.validations.push({
+        this.operations.push({
+            type: 'validation',
             validation: 'isMobilePhone',
             options: locale,
         });
@@ -618,7 +686,8 @@ class ValidationChain {
      * Check if the string contains one or more multibyte chars.
      */
     isMultibyte() {
-        this.validations.push({
+        this.operations.push({
+            type: 'validation',
             validation: 'isMultibyte',
         });
         return this;
@@ -629,7 +698,8 @@ class ValidationChain {
      * @param locale The locale to use
      */
     isPostalCode(locale = 'any') {
-        this.validations.push({
+        this.operations.push({
+            type: 'validation',
             validation: 'isPostalCode',
             options: locale,
         });
@@ -639,7 +709,8 @@ class ValidationChain {
      * Check if the string contains any surrogate pairs chars.
      */
     isSurrogatePair() {
-        this.validations.push({
+        this.operations.push({
+            type: 'validation',
             validation: 'isSurrogatePair',
         });
         return this;
@@ -650,7 +721,8 @@ class ValidationChain {
      * @param options Possible options
      */
     isURL(options) {
-        this.validations.push({
+        this.operations.push({
+            type: 'validation',
             validation: 'isURL',
             options,
         });
@@ -660,7 +732,8 @@ class ValidationChain {
      * Check if the string contains a mixture of full and half-width chars.
      */
     isVariableWidth() {
-        this.validations.push({
+        this.operations.push({
+            type: 'validation',
             validation: 'isVariableWidth',
         });
         return this;
@@ -671,8 +744,169 @@ class ValidationChain {
      * @param chars The characters
      */
     isWhitelisted(chars) {
-        this.validations.push({
+        this.operations.push({
+            type: 'validation',
             validation: 'isWhitelisted',
+            options: chars,
+        });
+        return this;
+    }
+    /**
+     * Remove characters that appear in the blacklist. The characters are used in a RegExp
+     *  and so you will need to escape some chars, e.g. blacklist(input, '\\[\\]').
+     *
+     * @param chars Characters to blacklist
+     */
+    blacklist(chars) {
+        this.operations.push({
+            type: 'sanitation',
+            sanitation: 'blacklist',
+            options: chars,
+        });
+        return this;
+    }
+    /**
+     * Replace <, >, &, ', " and / with HTML entities.
+     */
+    escape() {
+        this.operations.push({
+            type: 'sanitation',
+            sanitation: 'escape',
+        });
+        return this;
+    }
+    /**
+     * Replaces HTML encoded entities with <, >, &, ', " and /.
+     */
+    unescape() {
+        this.operations.push({
+            type: 'sanitation',
+            sanitation: 'unescape',
+        });
+        return this;
+    }
+    /**
+     * Trim characters from the left-side of the input.
+     *
+     * @param chars The characters to trim
+     */
+    ltrim(chars) {
+        this.operations.push({
+            type: 'sanitation',
+            sanitation: 'ltrim',
+            options: chars,
+        });
+        return this;
+    }
+    /**
+     * Trim characters from the right-side of the input.
+     *
+     * @param chars The characters to trim
+     */
+    rtrim(chars) {
+        this.operations.push({
+            type: 'sanitation',
+            sanitation: 'rtrim',
+            options: chars,
+        });
+        return this;
+    }
+    /**
+     * Normalize email address.
+     *
+     * @param options The options
+     *
+     * @see https://github.com/chriso/validator.js For details
+     */
+    normalizeEmail(options) {
+        this.operations.push({
+            type: 'sanitation',
+            sanitation: 'normalizeEmail',
+            options,
+        });
+        return this;
+    }
+    /**
+     * Remove characters with a numerical value < 32 and 127, mostly control characters.
+     * If keep_new_lines is true, newline characters are preserved (\n and \r, hex 0xA
+     * and 0xD). Unicode-safe in JavaScript.
+     *
+     * @param keepNewLines
+     */
+    stripLow(keepNewLines = false) {
+        this.operations.push({
+            type: 'sanitation',
+            sanitation: 'stripLow',
+            options: keepNewLines,
+        });
+        return this;
+    }
+    /**
+     * convert the input string to a boolean. Everything except for '0', 'false' and ''
+     * returns true. In strict mode only '1' and 'true' return true.
+     */
+    toBoolean(strict = false) {
+        this.operations.push({
+            type: 'sanitation',
+            sanitation: 'toBoolean',
+            options: strict,
+        });
+        return this;
+    }
+    /**
+     * Convert the input string to a date.
+     */
+    toDate() {
+        this.operations.push({
+            type: 'sanitation',
+            sanitation: 'toDate',
+        });
+        return this;
+    }
+    /**
+     * Convert the input string to a float.
+     */
+    toFloat() {
+        this.operations.push({
+            type: 'sanitation',
+            sanitation: 'toFloat',
+        });
+        return this;
+    }
+    /**
+     * Convert the input string to an integer, or NaN if the input is not an integer.
+     */
+    toInt(radix = 10) {
+        this.operations.push({
+            type: 'sanitation',
+            sanitation: 'toInt',
+            options: radix,
+        });
+        return this;
+    }
+    /**
+     * Trim characters (whitespace by default) from both sides of the input.
+     *
+     * @param chars The characters to trim
+     */
+    trim(chars) {
+        this.operations.push({
+            type: 'sanitation',
+            sanitation: 'trim',
+            options: chars,
+        });
+        return this;
+    }
+    /**
+     * Remove characters that do not appear in the whitelist. The characters are used in a
+     * RegExp and so you will need to escape some chars, e.g. whitelist(input, '\\[\\]').
+     *
+     * @param chars Characters to whitelist
+     */
+    whitelist(chars) {
+        this.operations.push({
+            type: 'sanitation',
+            sanitation: 'whitelist',
             options: chars,
         });
         return this;
@@ -711,22 +945,35 @@ class ValidationChain {
             else {
                 input = input.toString();
             }
-            const errors = yield this.validations.reduce((arrP, current) => __awaiter(this, void 0, void 0, function* () {
+            const errors = yield this.operations.reduce((arrP, current) => __awaiter(this, void 0, void 0, function* () {
                 const arr = yield arrP;
-                const { validation, options, message, func } = current;
+                const { type } = current;
+                if (type === 'sanitation' && input !== null) {
+                    // If some of the validations has failed, we can't do any sanitations
+                    if (arr.length) {
+                        return arr;
+                    }
+                    input = this.sanitize(input, current);
+                    return arr;
+                }
+                const { validation, options, message, func, } = current;
+                const finalMessage = typeof message === 'function'
+                    ? message(ctx, input === null ? '' : input + '')
+                    : message;
                 if (validation === 'custom') {
                     // Has to be thrown before the try-catch
                     // in order to notify the developer during development
                     if (!func) {
                         throw new Error(`No custom validation function defined for `
-                            + `param ${this.parameter} at ${this.location}`);
+                            + `parameter ${this.parameter} at request `
+                            + `location ${this.location}`);
                     }
                     try {
                         yield func(input, ctx);
                     }
                     catch (e) {
                         arr.push({
-                            msg: message || e.message || this.defaultErrorMessage,
+                            msg: finalMessage || e.message || this.defaultErrorMessage,
                             location: this.location,
                             param: this.parameter,
                             value: originalInput + '',
@@ -736,7 +983,7 @@ class ValidationChain {
                 }
                 else if (input === null || !validator_1.default[validation](input, options)) {
                     arr.push({
-                        msg: message || this.defaultErrorMessage,
+                        msg: finalMessage || this.defaultErrorMessage,
                         location: this.location,
                         param: this.parameter,
                         value: originalInput + '',
@@ -744,8 +991,47 @@ class ValidationChain {
                 }
                 return arr;
             }), Promise.resolve([]));
-            return new ValidationResult_1.default(errors);
+            return new ValidationResult_1.default(this.parameter, errors.length ? undefined : input, errors);
         });
+    }
+    /**
+     * Sanitize the given input value with given sanitation definition.
+     *
+     * @param input The input as string
+     */
+    sanitize(input, sanitationDefinition) {
+        let value = input;
+        const { sanitation, options } = sanitationDefinition;
+        switch (sanitation) {
+            case 'blacklist':
+            case 'whitelist':
+                value = validator_1.default[sanitation](value, options);
+                break;
+            case 'escape':
+            case 'unescape':
+                value = validator_1.default[sanitation](value);
+                break;
+            case 'ltrim':
+            case 'rtrim':
+            case 'trim':
+                value = validator_1.default[sanitation](value, options);
+                break;
+            case 'normalizeEmail':
+                value = validator_1.default.normalizeEmail(value, options);
+                break;
+            case 'stripLow':
+            case 'toBoolean':
+                value = validator_1.default[sanitation](value, options);
+                break;
+            case 'toDate':
+            case 'toFloat':
+                value = validator_1.default[sanitation](value);
+                break;
+            case 'toInt':
+                value = validator_1.default[sanitation](value, options);
+                break;
+        }
+        return value;
     }
 }
 exports.default = ValidationChain;

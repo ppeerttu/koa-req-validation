@@ -3,18 +3,12 @@ import { IRouterContext } from 'koa-router';
 import ValidationChain from './lib/ValidationChain';
 import ValidationResult from './lib/ValidationResult';
 /**
- * Interface describing validation errors.
- */
-export interface IValidationError {
-    param: string;
-    location: string;
-    msg: string;
-    value: string;
-}
-/**
  * Koa context for validation operations.
  */
 export interface IValidationContext extends IRouterContext {
+    /**
+     * Validation results
+     */
     validationResults: ValidationResult[];
 }
 /**
@@ -25,15 +19,15 @@ export interface IValidationContext extends IRouterContext {
  * @example
  * // In request controller
  * const errors = validationResults(ctx);
- * if (errors) {
- *     throw new RequestError(422, errors);
+ * if (errors.hasErrors()) {
+ *     throw new RequestError(422, errors.mapped());
  * }
  */
 export declare const validationResults: (ctx: ParameterizedContext<IValidationContext, {}>) => ValidationResult;
 /**
  * Validate request body.
  *
- * @param param The parameter to be validated from request.
+ * @param bodyParam The parameter to be validated from request.
  *
  * ```typescript
  * router.post(
@@ -44,11 +38,11 @@ export declare const validationResults: (ctx: ParameterizedContext<IValidationCo
  * );
  * ```
  */
-export declare const body: (param: string) => ValidationChain;
+export declare const body: (bodyParam: string) => ValidationChain;
 /**
  * Validate request query.
  *
- * @param param The parameter to be validated from request.
+ * @param queryString The parameter to be validated from request.
  *
  * ```typescript
  * router.get(
@@ -58,11 +52,11 @@ export declare const body: (param: string) => ValidationChain;
  * );
  * ```
  */
-export declare const query: (param: string) => ValidationChain;
+export declare const query: (queryString: string) => ValidationChain;
 /**
  * Validate request param.
  *
- * @param param The parameter to be validated from request.
+ * @param routeParam The parameter to be validated from request.
  *
  * ```typescript
  * router.get(
@@ -72,4 +66,5 @@ export declare const query: (param: string) => ValidationChain;
  * );
  * ```
  */
-export declare const param: (param: string) => ValidationChain;
+export declare const param: (routeParam: string) => ValidationChain;
+export * from './lib/types';

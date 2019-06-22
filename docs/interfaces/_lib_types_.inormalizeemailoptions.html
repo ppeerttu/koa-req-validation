@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>IIsURLOptions | koa-req-validation</title>
+	<title>INormalizeEmailOptions | koa-req-validation</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -59,10 +59,10 @@
 					<a href="../modules/_lib_types_.html">&quot;lib/types&quot;</a>
 				</li>
 				<li>
-					<a href="_lib_types_.iisurloptions.html">IIsURLOptions</a>
+					<a href="_lib_types_.inormalizeemailoptions.html">INormalizeEmailOptions</a>
 				</li>
 			</ul>
-			<h1>Interface IIsURLOptions</h1>
+			<h1>Interface INormalizeEmailOptions</h1>
 		</div>
 	</div>
 </header>
@@ -72,7 +72,8 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>Options for isURL validation.</p>
+						<p>Options for normalizing email address. Documentation straight from the validator.js
+						documentation at <a href="https://github.com/chriso/validator.js#sanitizers">https://github.com/chriso/validator.js#sanitizers</a>.</p>
 					</div>
 				</div>
 			</section>
@@ -80,7 +81,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">IIsURLOptions</span>
+						<span class="target">INormalizeEmailOptions</span>
 					</li>
 				</ul>
 			</section>
@@ -91,17 +92,17 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_lib_types_.iisurloptions.html#allow_protocol_relative_urls" class="tsd-kind-icon">allow_<wbr>protocol_<wbr>relative_<wbr>urls</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_lib_types_.iisurloptions.html#allow_trailing_dot" class="tsd-kind-icon">allow_<wbr>trailing_<wbr>dot</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_lib_types_.iisurloptions.html#allow_underscores" class="tsd-kind-icon">allow_<wbr>underscores</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_lib_types_.iisurloptions.html#disallow_auth" class="tsd-kind-icon">disallow_<wbr>auth</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_lib_types_.iisurloptions.html#host_blacklist" class="tsd-kind-icon">host_<wbr>blacklist</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_lib_types_.iisurloptions.html#host_whitelist" class="tsd-kind-icon">host_<wbr>whitelist</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_lib_types_.iisurloptions.html#protocols" class="tsd-kind-icon">protocols</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_lib_types_.iisurloptions.html#require_host" class="tsd-kind-icon">require_<wbr>host</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_lib_types_.iisurloptions.html#require_protocol" class="tsd-kind-icon">require_<wbr>protocol</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_lib_types_.iisurloptions.html#require_tld" class="tsd-kind-icon">require_<wbr>tld</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_lib_types_.iisurloptions.html#require_valid_protocol" class="tsd-kind-icon">require_<wbr>valid_<wbr>protocol</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_lib_types_.inormalizeemailoptions.html#all_lowercase" class="tsd-kind-icon">all_<wbr>lowercase</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_lib_types_.inormalizeemailoptions.html#gmail_convert_googlemaildotcom" class="tsd-kind-icon">gmail_<wbr>convert_<wbr>googlemaildotcom</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_lib_types_.inormalizeemailoptions.html#gmail_lowercase" class="tsd-kind-icon">gmail_<wbr>lowercase</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_lib_types_.inormalizeemailoptions.html#gmail_remove_dots" class="tsd-kind-icon">gmail_<wbr>remove_<wbr>dots</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_lib_types_.inormalizeemailoptions.html#gmail_remove_subaddress" class="tsd-kind-icon">gmail_<wbr>remove_<wbr>subaddress</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_lib_types_.inormalizeemailoptions.html#icloud_lowercase" class="tsd-kind-icon">icloud_<wbr>lowercase</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_lib_types_.inormalizeemailoptions.html#icloud_remove_subaddress" class="tsd-kind-icon">icloud_<wbr>remove_<wbr>subaddress</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_lib_types_.inormalizeemailoptions.html#outlookdotcom_lowercase" class="tsd-kind-icon">outlookdotcom_<wbr>lowercase</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_lib_types_.inormalizeemailoptions.html#outlookdotcom_remove_subaddress" class="tsd-kind-icon">outlookdotcom_<wbr>remove_<wbr>subaddress</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_lib_types_.inormalizeemailoptions.html#yahoo_lowercase" class="tsd-kind-icon">yahoo_<wbr>lowercase</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_lib_types_.inormalizeemailoptions.html#yahoo_remove_subaddress" class="tsd-kind-icon">yahoo_<wbr>remove_<wbr>subaddress</a></li>
 							</ul>
 						</section>
 					</div>
@@ -110,167 +111,188 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="allow_protocol_relative_urls" class="tsd-anchor"></a>
-					<h3>allow_<wbr>protocol_<wbr>relative_<wbr>urls</h3>
-					<div class="tsd-signature tsd-kind-icon">allow_<wbr>protocol_<wbr>relative_<wbr>urls<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<a name="all_lowercase" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> all_<wbr>lowercase</h3>
+					<div class="tsd-signature tsd-kind-icon">all_<wbr>lowercase<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">true</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/7ee32b8/src/lib/types.ts#L524">lib/types.ts:524</a></li>
+							<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/7ee32b8/src/lib/types.ts#L547">lib/types.ts:547</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>Defaults to <code>false</code></p>
+							<p>Transforms the local part (before the @ symbol) of all email addresses to
+								lowercase. Please note that this may violate RFC 5321, which gives providers
+								the possibility to treat the local part of email addresses in a case sensitive
+								way (although in practice most - yet not all - providers don&#39;t). The domain part
+							of the email address is always lowercased, as it&#39;s case insensitive per RFC 1035.</p>
 						</div>
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="allow_trailing_dot" class="tsd-anchor"></a>
-					<h3>allow_<wbr>trailing_<wbr>dot</h3>
-					<div class="tsd-signature tsd-kind-icon">allow_<wbr>trailing_<wbr>dot<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<a name="gmail_convert_googlemaildotcom" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> gmail_<wbr>convert_<wbr>googlemaildotcom</h3>
+					<div class="tsd-signature tsd-kind-icon">gmail_<wbr>convert_<wbr>googlemaildotcom<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">true</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/7ee32b8/src/lib/types.ts#L519">lib/types.ts:519</a></li>
+							<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/7ee32b8/src/lib/types.ts#L572">lib/types.ts:572</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>Defaults to <code>false</code></p>
+							<p>Converts addresses with domain @googlemail.com to @gmail.com, as
+							they&#39;re equivalent.</p>
 						</div>
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="allow_underscores" class="tsd-anchor"></a>
-					<h3>allow_<wbr>underscores</h3>
-					<div class="tsd-signature tsd-kind-icon">allow_<wbr>underscores<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<a name="gmail_lowercase" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> gmail_<wbr>lowercase</h3>
+					<div class="tsd-signature tsd-kind-icon">gmail_<wbr>lowercase<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">true</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/7ee32b8/src/lib/types.ts#L504">lib/types.ts:504</a></li>
+							<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/7ee32b8/src/lib/types.ts#L554">lib/types.ts:554</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>Defaults to <code>false</code></p>
+							<p>GMail addresses are known to be case-insensitive, so this switch allows lowercasing
+								them even when all_lowercase is set to false. Please note that when all_lowercase
+							is true, GMail addresses are lowercased regardless of the value of this setting.</p>
 						</div>
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="disallow_auth" class="tsd-anchor"></a>
-					<h3>disallow_<wbr>auth</h3>
-					<div class="tsd-signature tsd-kind-icon">disallow_<wbr>auth<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<a name="gmail_remove_dots" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> gmail_<wbr>remove_<wbr>dots</h3>
+					<div class="tsd-signature tsd-kind-icon">gmail_<wbr>remove_<wbr>dots<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">true</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/7ee32b8/src/lib/types.ts#L529">lib/types.ts:529</a></li>
+							<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/7ee32b8/src/lib/types.ts#L560">lib/types.ts:560</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>Defaults to <code>false</code></p>
+							<p>Removes dots from the local part of the email address, as GMail ignores
+							them (e.g. &quot;john.doe&quot; and &quot;johndoe&quot; are considered equal).</p>
 						</div>
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="host_blacklist" class="tsd-anchor"></a>
-					<h3>host_<wbr>blacklist</h3>
-					<div class="tsd-signature tsd-kind-icon">host_<wbr>blacklist<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<a name="gmail_remove_subaddress" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> gmail_<wbr>remove_<wbr>subaddress</h3>
+					<div class="tsd-signature tsd-kind-icon">gmail_<wbr>remove_<wbr>subaddress<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">true</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/7ee32b8/src/lib/types.ts#L514">lib/types.ts:514</a></li>
+							<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/7ee32b8/src/lib/types.ts#L566">lib/types.ts:566</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>Defaults to <code>false</code></p>
+							<p>Normalizes addresses by removing &quot;sub-addresses&quot;, which is the part following
+							a &quot;+&quot; sign (e.g. &quot;<a href="mailto:foo+bar@gmail.com">foo+bar@gmail.com</a>&quot; becomes &quot;<a href="mailto:foo@gmail.com">foo@gmail.com</a>&quot;).</p>
 						</div>
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="host_whitelist" class="tsd-anchor"></a>
-					<h3>host_<wbr>whitelist</h3>
-					<div class="tsd-signature tsd-kind-icon">host_<wbr>whitelist<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<a name="icloud_lowercase" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> icloud_<wbr>lowercase</h3>
+					<div class="tsd-signature tsd-kind-icon">icloud_<wbr>lowercase<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">true</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/7ee32b8/src/lib/types.ts#L509">lib/types.ts:509</a></li>
+							<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/7ee32b8/src/lib/types.ts#L608">lib/types.ts:608</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>Defaults to <code>false</code></p>
+							<p>iCloud addresses (including MobileMe) are known to be case-insensitive, so this
+								switch allows lowercasing them even when all_lowercase is set to false. Please
+								note that when all_lowercase is true, iCloud addresses are lowercased regardless
+							of the value of this setting.</p>
 						</div>
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="protocols" class="tsd-anchor"></a>
-					<h3>protocols</h3>
-					<div class="tsd-signature tsd-kind-icon">protocols<span class="tsd-signature-symbol">:</span> <a href="../modules/_lib_types_.html#urlprotocol" class="tsd-signature-type">URLProtocol</a><span class="tsd-signature-symbol">[]</span></div>
+					<a name="icloud_remove_subaddress" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> icloud_<wbr>remove_<wbr>subaddress</h3>
+					<div class="tsd-signature tsd-kind-icon">icloud_<wbr>remove_<wbr>subaddress<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">true</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/7ee32b8/src/lib/types.ts#L479">lib/types.ts:479</a></li>
+							<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/7ee32b8/src/lib/types.ts#L614">lib/types.ts:614</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>Protocol of the url, defaults to all</p>
+							<p>Normalizes addresses by removing &quot;sub-addresses&quot;, which is the part following a &quot;+&quot;
+							sign (e.g. &quot;<a href="mailto:foo+bar@icloud.com">foo+bar@icloud.com</a>&quot; becomes &quot;<a href="mailto:foo@icloud.com">foo@icloud.com</a>&quot;).</p>
 						</div>
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="require_host" class="tsd-anchor"></a>
-					<h3>require_<wbr>host</h3>
-					<div class="tsd-signature tsd-kind-icon">require_<wbr>host<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<a name="outlookdotcom_lowercase" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> outlookdotcom_<wbr>lowercase</h3>
+					<div class="tsd-signature tsd-kind-icon">outlookdotcom_<wbr>lowercase<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">true</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/7ee32b8/src/lib/types.ts#L494">lib/types.ts:494</a></li>
+							<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/7ee32b8/src/lib/types.ts#L580">lib/types.ts:580</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>Defaults to <code>true</code></p>
+							<p>Outlook.com addresses (including Windows Live and Hotmail) are known to be
+								case-insensitive, so this switch allows lowercasing them even when all_lowercase
+								is set to false. Please note that when all_lowercase is true, Outlook.com addresses
+							are lowercased regardless of the value of this setting.</p>
 						</div>
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="require_protocol" class="tsd-anchor"></a>
-					<h3>require_<wbr>protocol</h3>
-					<div class="tsd-signature tsd-kind-icon">require_<wbr>protocol<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<a name="outlookdotcom_remove_subaddress" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> outlookdotcom_<wbr>remove_<wbr>subaddress</h3>
+					<div class="tsd-signature tsd-kind-icon">outlookdotcom_<wbr>remove_<wbr>subaddress<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">true</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/7ee32b8/src/lib/types.ts#L489">lib/types.ts:489</a></li>
+							<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/7ee32b8/src/lib/types.ts#L586">lib/types.ts:586</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>Defaults to <code>false</code></p>
+							<p>Normalizes addresses by removing &quot;sub-addresses&quot;, which is the part following
+							a &quot;+&quot; sign (e.g. &quot;<a href="mailto:foo+bar@outlook.com">foo+bar@outlook.com</a>&quot; becomes &quot;<a href="mailto:foo@outlook.com">foo@outlook.com</a>&quot;).</p>
 						</div>
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="require_tld" class="tsd-anchor"></a>
-					<h3>require_<wbr>tld</h3>
-					<div class="tsd-signature tsd-kind-icon">require_<wbr>tld<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<a name="yahoo_lowercase" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> yahoo_<wbr>lowercase</h3>
+					<div class="tsd-signature tsd-kind-icon">yahoo_<wbr>lowercase<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">true</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/7ee32b8/src/lib/types.ts#L484">lib/types.ts:484</a></li>
+							<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/7ee32b8/src/lib/types.ts#L594">lib/types.ts:594</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>Defaults to <code>false</code></p>
+							<p>Yahoo Mail addresses are known to be case-insensitive, so this switch allows
+								lowercasing them even when all_lowercase is set to false. Please note that when
+								all_lowercase is true, Yahoo Mail addresses are lowercased regardless of the value
+							of this setting.</p>
 						</div>
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="require_valid_protocol" class="tsd-anchor"></a>
-					<h3>require_<wbr>valid_<wbr>protocol</h3>
-					<div class="tsd-signature tsd-kind-icon">require_<wbr>valid_<wbr>protocol<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<a name="yahoo_remove_subaddress" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> yahoo_<wbr>remove_<wbr>subaddress</h3>
+					<div class="tsd-signature tsd-kind-icon">yahoo_<wbr>remove_<wbr>subaddress<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">true</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/7ee32b8/src/lib/types.ts#L499">lib/types.ts:499</a></li>
+							<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/7ee32b8/src/lib/types.ts#L600">lib/types.ts:600</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>Defaults to <code>true</code></p>
+							<p>Normalizes addresses by removing &quot;sub-addresses&quot;, which is the part following a &quot;-&quot;
+							sign (e.g. &quot;<a href="mailto:foo-bar@yahoo.com">foo-bar@yahoo.com</a>&quot; becomes &quot;<a href="mailto:foo@yahoo.com">foo@yahoo.com</a>&quot;).</p>
 						</div>
 					</div>
 				</section>
@@ -313,57 +335,57 @@
 					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
 						<a href="_lib_types_.iisfqdnoptions.html" class="tsd-kind-icon">IIsFQDNOptions</a>
 					</li>
-				</ul>
-				<ul class="current">
-					<li class="current tsd-kind-interface tsd-parent-kind-external-module">
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
 						<a href="_lib_types_.iisurloptions.html" class="tsd-kind-icon">IIsURLOptions</a>
-						<ul>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_lib_types_.iisurloptions.html#allow_protocol_relative_urls" class="tsd-kind-icon">allow_<wbr>protocol_<wbr>relative_<wbr>urls</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_lib_types_.iisurloptions.html#allow_trailing_dot" class="tsd-kind-icon">allow_<wbr>trailing_<wbr>dot</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_lib_types_.iisurloptions.html#allow_underscores" class="tsd-kind-icon">allow_<wbr>underscores</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_lib_types_.iisurloptions.html#disallow_auth" class="tsd-kind-icon">disallow_<wbr>auth</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_lib_types_.iisurloptions.html#host_blacklist" class="tsd-kind-icon">host_<wbr>blacklist</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_lib_types_.iisurloptions.html#host_whitelist" class="tsd-kind-icon">host_<wbr>whitelist</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_lib_types_.iisurloptions.html#protocols" class="tsd-kind-icon">protocols</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_lib_types_.iisurloptions.html#require_host" class="tsd-kind-icon">require_<wbr>host</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_lib_types_.iisurloptions.html#require_protocol" class="tsd-kind-icon">require_<wbr>protocol</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_lib_types_.iisurloptions.html#require_tld" class="tsd-kind-icon">require_<wbr>tld</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_lib_types_.iisurloptions.html#require_valid_protocol" class="tsd-kind-icon">require_<wbr>valid_<wbr>protocol</a>
-							</li>
-						</ul>
 					</li>
-				</ul>
-				<ul class="after-current">
 					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
 						<a href="_lib_types_.imappedvalidationresults.html" class="tsd-kind-icon">IMapped<wbr>Validation<wbr>Results</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
 						<a href="_lib_types_.iminmaxoptions.html" class="tsd-kind-icon">IMin<wbr>Max<wbr>Options</a>
 					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-interface tsd-parent-kind-external-module">
 						<a href="_lib_types_.inormalizeemailoptions.html" class="tsd-kind-icon">INormalize<wbr>Email<wbr>Options</a>
+						<ul>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_lib_types_.inormalizeemailoptions.html#all_lowercase" class="tsd-kind-icon">all_<wbr>lowercase</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_lib_types_.inormalizeemailoptions.html#gmail_convert_googlemaildotcom" class="tsd-kind-icon">gmail_<wbr>convert_<wbr>googlemaildotcom</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_lib_types_.inormalizeemailoptions.html#gmail_lowercase" class="tsd-kind-icon">gmail_<wbr>lowercase</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_lib_types_.inormalizeemailoptions.html#gmail_remove_dots" class="tsd-kind-icon">gmail_<wbr>remove_<wbr>dots</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_lib_types_.inormalizeemailoptions.html#gmail_remove_subaddress" class="tsd-kind-icon">gmail_<wbr>remove_<wbr>subaddress</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_lib_types_.inormalizeemailoptions.html#icloud_lowercase" class="tsd-kind-icon">icloud_<wbr>lowercase</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_lib_types_.inormalizeemailoptions.html#icloud_remove_subaddress" class="tsd-kind-icon">icloud_<wbr>remove_<wbr>subaddress</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_lib_types_.inormalizeemailoptions.html#outlookdotcom_lowercase" class="tsd-kind-icon">outlookdotcom_<wbr>lowercase</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_lib_types_.inormalizeemailoptions.html#outlookdotcom_remove_subaddress" class="tsd-kind-icon">outlookdotcom_<wbr>remove_<wbr>subaddress</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_lib_types_.inormalizeemailoptions.html#yahoo_lowercase" class="tsd-kind-icon">yahoo_<wbr>lowercase</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_lib_types_.inormalizeemailoptions.html#yahoo_remove_subaddress" class="tsd-kind-icon">yahoo_<wbr>remove_<wbr>subaddress</a>
+							</li>
+						</ul>
 					</li>
+				</ul>
+				<ul class="after-current">
 					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
 						<a href="_lib_types_.ioptionaloptions.html" class="tsd-kind-icon">IOptional<wbr>Options</a>
 					</li>

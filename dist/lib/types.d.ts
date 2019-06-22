@@ -1,5 +1,13 @@
 import { ParameterizedContext } from 'koa';
-import { IValidationError } from '..';
+/**
+ * Interface describing validation errors.
+ */
+export interface IValidationError {
+    param: string;
+    location: string;
+    msg: string;
+    value: string;
+}
 /**
  * Options containing properties min and max.
  */
@@ -23,6 +31,10 @@ export interface IOptionalOptions {
  */
 export declare type ValidatorOptions = IMinMaxOptions | RegExp | IsInValuesOptions | IOptionalOptions | string | number | IsAlphaLocale | IIsCurrencyOptions | IIsDecimalOptions | IIsFQDNOptions | IsIdentityCardLocale | IISSNOptions | 'any' | IsMobilePhoneLocale | IsMobilePhoneLocale[] | IsPostalCodeLocale | IIsURLOptions;
 /**
+ * Sanitation options types
+ */
+export declare type SanitationOptions = boolean | string | number | INormalizeEmailOptions;
+/**
  * Custom validation function with context object.
  */
 declare type CustomValidatorFunctionWithContext = (input: any, ctx: ParameterizedContext) => Promise<void>;
@@ -33,12 +45,35 @@ declare type CustomValidatorFunctionWithContext = (input: any, ctx: Parameterize
  */
 export declare type CustomValidatorFunction = (input: any) => Promise<void>;
 /**
+ * Custom validation error message function. This function will receive the request
+ * context and the user's input for the parameter, and it has to return the error
+ * message as a result.f
+ */
+export declare type CustomErrorMessageFunction = (ctx: ParameterizedContext, input: string) => string;
+/**
  * Validation definition for internal module usage.
  */
 export interface IValidationDefinition {
+    /**
+     * Just a helper type for separating validation definitions from
+     * sanitation definitions.
+     */
+    type: 'validation';
+    /**
+     * Validation function
+     */
     validation: ValidatorFunctionName;
-    message?: string;
-    options?: ValidatorOptions | string;
+    /**
+     * Message for invalid value
+     */
+    message?: string | CustomErrorMessageFunction;
+    /**
+     * Options for validation function
+     */
+    options?: ValidatorOptions;
+    /**
+     * Custom validation function
+     */
     func?: CustomValidatorFunction | CustomValidatorFunctionWithContext;
 }
 /**
@@ -46,6 +81,28 @@ export interface IValidationDefinition {
  * of validators in the validator.js -module.
  */
 export declare type ValidatorFunctionName = 'custom' | 'contains' | 'equals' | 'isAfter' | 'isAlpha' | 'isAlphanumeric' | 'isAscii' | 'isBase64' | 'isBefore' | 'isBoolean' | 'isByteLength' | 'isCreditCard' | 'isCurrency' | 'isDataURI' | 'isMagnetURI' | 'isDecimal' | 'isDivisibleBy' | 'isEmail' | 'isEmpty' | 'isFQDN' | 'isFloat' | 'isFullWidth' | 'isHalfWidth' | 'isHash' | 'isHexColor' | 'isHexadecimal' | 'isIdentityCard' | 'isIP' | 'isIPRange' | 'isISBN' | 'isISSN' | 'isISIN' | 'isISO8601' | 'isRFC3339' | 'isISO31661Alpha2' | 'isISRC' | 'isIn' | 'isInt' | 'isJSON' | 'isJWT' | 'isLatLong' | 'isLength' | 'isLowercase' | 'isMACAddress' | 'isMD5' | 'isMimeType' | 'isMobilePhone' | 'isMongoId' | 'isMultibyte' | 'isNumeric' | 'isPort' | 'isPostalCode' | 'isSurrogatePair' | 'isURL' | 'isUUID' | 'isUppercase' | 'isVariableWidth' | 'isWhitelisted' | 'matches';
+/**
+ * Sanitation definition.
+ */
+export interface ISanitationDefinition {
+    /**
+     * Just a type helper for separating sanitation definitions from
+     * validation definitions
+     */
+    type: 'sanitation';
+    /**
+     * The sanitation function name
+     */
+    sanitation: SanitationFunctionName;
+    /**
+     * Options for the sanitation
+     */
+    options?: SanitationOptions;
+}
+/**
+ * Allowed sanitation functions by validator.
+ */
+export declare type SanitationFunctionName = 'blacklist' | 'escape' | 'unescape' | 'ltrim' | 'normalizeEmail' | 'rtrim' | 'stripLow' | 'toBoolean' | 'toDate' | 'toFloat' | 'toInt' | 'trim' | 'whitelist';
 /**
  * Location of the parameter to be validated.
  */
@@ -169,4 +226,75 @@ export interface IIsURLOptions {
     disallow_auth: boolean;
 }
 export declare type IsIdentityCardLocale = 'any' | 'ES';
+/**
+ * Options for normalizing email address. Documentation straight from the validator.js
+ * documentation at https://github.com/chriso/validator.js#sanitizers.
+ */
+export interface INormalizeEmailOptions {
+    /**
+     * Transforms the local part (before the @ symbol) of all email addresses to
+     * lowercase. Please note that this may violate RFC 5321, which gives providers
+     * the possibility to treat the local part of email addresses in a case sensitive
+     * way (although in practice most - yet not all - providers don't). The domain part
+     * of the email address is always lowercased, as it's case insensitive per RFC 1035.
+     */
+    all_lowercase?: boolean;
+    /**
+     * GMail addresses are known to be case-insensitive, so this switch allows lowercasing
+     * them even when all_lowercase is set to false. Please note that when all_lowercase
+     * is true, GMail addresses are lowercased regardless of the value of this setting.
+     */
+    gmail_lowercase?: boolean;
+    /**
+     * Removes dots from the local part of the email address, as GMail ignores
+     * them (e.g. "john.doe" and "johndoe" are considered equal).
+     */
+    gmail_remove_dots?: boolean;
+    /**
+     * Normalizes addresses by removing "sub-addresses", which is the part following
+     * a "+" sign (e.g. "foo+bar@gmail.com" becomes "foo@gmail.com").
+     */
+    gmail_remove_subaddress?: boolean;
+    /**
+     * Converts addresses with domain @googlemail.com to @gmail.com, as
+     * they're equivalent.
+     */
+    gmail_convert_googlemaildotcom?: boolean;
+    /**
+     * Outlook.com addresses (including Windows Live and Hotmail) are known to be
+     * case-insensitive, so this switch allows lowercasing them even when all_lowercase
+     * is set to false. Please note that when all_lowercase is true, Outlook.com addresses
+     * are lowercased regardless of the value of this setting.
+     */
+    outlookdotcom_lowercase?: boolean;
+    /**
+     * Normalizes addresses by removing "sub-addresses", which is the part following
+     * a "+" sign (e.g. "foo+bar@outlook.com" becomes "foo@outlook.com").
+     */
+    outlookdotcom_remove_subaddress?: boolean;
+    /**
+     * Yahoo Mail addresses are known to be case-insensitive, so this switch allows
+     * lowercasing them even when all_lowercase is set to false. Please note that when
+     * all_lowercase is true, Yahoo Mail addresses are lowercased regardless of the value
+     * of this setting.
+     */
+    yahoo_lowercase?: boolean;
+    /**
+     * Normalizes addresses by removing "sub-addresses", which is the part following a "-"
+     * sign (e.g. "foo-bar@yahoo.com" becomes "foo@yahoo.com").
+     */
+    yahoo_remove_subaddress?: boolean;
+    /**
+     * iCloud addresses (including MobileMe) are known to be case-insensitive, so this
+     * switch allows lowercasing them even when all_lowercase is set to false. Please
+     * note that when all_lowercase is true, iCloud addresses are lowercased regardless
+     * of the value of this setting.
+     */
+    icloud_lowercase?: boolean;
+    /**
+     * Normalizes addresses by removing "sub-addresses", which is the part following a "+"
+     * sign (e.g. "foo+bar@icloud.com" becomes "foo@icloud.com").
+     */
+    icloud_remove_subaddress?: boolean;
+}
 export {};

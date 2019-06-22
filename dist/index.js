@@ -1,10 +1,13 @@
 "use strict";
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const ValidationChain_1 = __importDefault(require("./lib/ValidationChain"));
 const types_1 = require("./lib/types");
+const ValidationChain_1 = __importDefault(require("./lib/ValidationChain"));
 const ValidationResult_1 = __importDefault(require("./lib/ValidationResult"));
 /**
  * Get validation results out of the context.
@@ -14,27 +17,20 @@ const ValidationResult_1 = __importDefault(require("./lib/ValidationResult"));
  * @example
  * // In request controller
  * const errors = validationResults(ctx);
- * if (errors) {
- *     throw new RequestError(422, errors);
+ * if (errors.hasErrors()) {
+ *     throw new RequestError(422, errors.mapped());
  * }
  */
 exports.validationResults = (ctx) => {
     if (Array.isArray(ctx.state.validationResults)) {
-        let results = [];
-        for (const result of ctx.state.validationResults) {
-            results = [
-                ...results,
-                ...result.array()
-            ];
-        }
-        return new ValidationResult_1.default(results);
+        return ValidationResult_1.default.fromResults(ctx.state.validationResults);
     }
-    return new ValidationResult_1.default();
+    return new ValidationResult_1.default([], []);
 };
 /**
  * Validate request body.
  *
- * @param param The parameter to be validated from request.
+ * @param bodyParam The parameter to be validated from request.
  *
  * ```typescript
  * router.post(
@@ -45,14 +41,14 @@ exports.validationResults = (ctx) => {
  * );
  * ```
  */
-exports.body = (param) => {
-    const validationChain = new ValidationChain_1.default(param, types_1.ParamLocation.BODY);
+exports.body = (bodyParam) => {
+    const validationChain = new ValidationChain_1.default(bodyParam, types_1.ParamLocation.BODY);
     return validationChain;
 };
 /**
  * Validate request query.
  *
- * @param param The parameter to be validated from request.
+ * @param queryString The parameter to be validated from request.
  *
  * ```typescript
  * router.get(
@@ -62,14 +58,14 @@ exports.body = (param) => {
  * );
  * ```
  */
-exports.query = (param) => {
-    const validationChain = new ValidationChain_1.default(param, types_1.ParamLocation.QUERY);
+exports.query = (queryString) => {
+    const validationChain = new ValidationChain_1.default(queryString, types_1.ParamLocation.QUERY);
     return validationChain;
 };
 /**
  * Validate request param.
  *
- * @param param The parameter to be validated from request.
+ * @param routeParam The parameter to be validated from request.
  *
  * ```typescript
  * router.get(
@@ -79,8 +75,9 @@ exports.query = (param) => {
  * );
  * ```
  */
-exports.param = (param) => {
-    const validationChain = new ValidationChain_1.default(param, types_1.ParamLocation.PARAM);
+exports.param = (routeParam) => {
+    const validationChain = new ValidationChain_1.default(routeParam, types_1.ParamLocation.PARAM);
     return validationChain;
 };
+__export(require("./lib/types"));
 //# sourceMappingURL=index.js.map

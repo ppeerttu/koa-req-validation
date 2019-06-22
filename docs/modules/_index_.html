@@ -74,7 +74,6 @@
 							<h3>Interfaces</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-interface tsd-parent-kind-external-module"><a href="../interfaces/_index_.ivalidationcontext.html" class="tsd-kind-icon">IValidation<wbr>Context</a></li>
-								<li class="tsd-kind-interface tsd-parent-kind-external-module"><a href="../interfaces/_index_.ivalidationerror.html" class="tsd-kind-icon">IValidation<wbr>Error</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
@@ -95,13 +94,13 @@
 					<a name="body" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagConst">Const</span> body</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
-						<li class="tsd-signature tsd-kind-icon">body<span class="tsd-signature-symbol">(</span>param<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../classes/_lib_validationchain_.validationchain.html" class="tsd-signature-type">ValidationChain</a></li>
+						<li class="tsd-signature tsd-kind-icon">body<span class="tsd-signature-symbol">(</span>bodyParam<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../classes/_lib_validationchain_.validationchain.html" class="tsd-signature-type">ValidationChain</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/219ba60/src/index.ts#L67">index.ts:67</a></li>
+									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/7ee32b8/src/index.ts#L54">index.ts:54</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -112,7 +111,7 @@
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>param: <span class="tsd-signature-type">string</span></h5>
+									<h5>bodyParam: <span class="tsd-signature-type">string</span></h5>
 									<div class="tsd-comment tsd-typography">
 										<div class="lead">
 											<p>The parameter to be validated from request.</p>
@@ -134,30 +133,34 @@
 					<a name="param" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagConst">Const</span> param</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
-						<li class="tsd-signature tsd-kind-icon">param<span class="tsd-signature-symbol">(</span>param<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../classes/_lib_validationchain_.validationchain.html" class="tsd-signature-type">ValidationChain</a></li>
+						<li class="tsd-signature tsd-kind-icon">param<span class="tsd-signature-symbol">(</span>routeParam<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../classes/_lib_validationchain_.validationchain.html" class="tsd-signature-type">ValidationChain</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/219ba60/src/index.ts#L103">index.ts:103</a></li>
+									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/7ee32b8/src/index.ts#L90">index.ts:90</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
 									<p>Validate request param.</p>
 								</div>
-								<p>The parameter to be validated from request.</p>
-								<pre><code class="language-typescript">router.get(
-    <span class="hljs-string">'/api/users/:id'</span>,
-    param(<span class="hljs-string">'id'</span>).isInt().run(),
-    handler
-);</code></pre>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>param: <span class="tsd-signature-type">string</span></h5>
+									<h5>routeParam: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<div class="lead">
+											<p>The parameter to be validated from request.</p>
+											<pre><code class="language-typescript">router.get(
+    <span class="hljs-string">'/api/users/:id'</span>,
+    param(<span class="hljs-string">'id'</span>).isInt().run(),
+    handler
+);</code></pre>
+										</div>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="../classes/_lib_validationchain_.validationchain.html" class="tsd-signature-type">ValidationChain</a></h4>
@@ -168,13 +171,13 @@
 					<a name="query" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagConst">Const</span> query</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
-						<li class="tsd-signature tsd-kind-icon">query<span class="tsd-signature-symbol">(</span>param<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../classes/_lib_validationchain_.validationchain.html" class="tsd-signature-type">ValidationChain</a></li>
+						<li class="tsd-signature tsd-kind-icon">query<span class="tsd-signature-symbol">(</span>queryString<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../classes/_lib_validationchain_.validationchain.html" class="tsd-signature-type">ValidationChain</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/219ba60/src/index.ts#L85">index.ts:85</a></li>
+									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/7ee32b8/src/index.ts#L72">index.ts:72</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -185,7 +188,7 @@
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>param: <span class="tsd-signature-type">string</span></h5>
+									<h5>queryString: <span class="tsd-signature-type">string</span></h5>
 									<div class="tsd-comment tsd-typography">
 										<div class="lead">
 											<p>The parameter to be validated from request.</p>
@@ -212,7 +215,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/219ba60/src/index.ts#L37">index.ts:37</a></li>
+									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/7ee32b8/src/index.ts#L31">index.ts:31</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -261,9 +264,6 @@
 				<ul class="before-current">
 					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
 						<a href="../interfaces/_index_.ivalidationcontext.html" class="tsd-kind-icon">IValidation<wbr>Context</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="../interfaces/_index_.ivalidationerror.html" class="tsd-kind-icon">IValidation<wbr>Error</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-external-module">
 						<a href="_index_.html#body" class="tsd-kind-icon">body</a>
