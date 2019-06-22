@@ -1,5 +1,4 @@
-import { IValidationError } from '..';
-import { IMappedValidationResults } from './types';
+import { IMappedValidationResults, IValidationError } from './types';
 
 /**
  * Validation result set.

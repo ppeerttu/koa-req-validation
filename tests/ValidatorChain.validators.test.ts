@@ -261,7 +261,13 @@ describe('ValidatorChain validators', () => {
         test('Throws when trying to set a message with no validations', () => {
             expect(() => {
                 const validationChain = new ValidationChain('param', ParamLocation.BODY)
-                    .withMessage('Invalid valie');
+                    .withMessage('Invalid value');
+            }).toThrowError();
+
+            expect(() => {
+                const validationChain = new ValidationChain('param', ParamLocation.BODY)
+                    .toInt()
+                    .withMessage('Invalid value');
             }).toThrowError();
         });
 

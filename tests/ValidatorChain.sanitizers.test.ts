@@ -1,5 +1,5 @@
 import { validationResults } from '../src';
-import { CustomErrorMessageFunction, ParamLocation } from '../src/lib/types';
+import { ParamLocation } from '../src/lib/types';
 import ValidationChain from '../src/lib/ValidationChain';
 import { mockContext } from './helpers';
 
@@ -17,22 +17,6 @@ const prop = 'property';
  * ValidatorChain sanitizer functions
  */
 describe('ValidatorChain sanitizers', () => {
-
-    test('Stops sanitation if the value primitive changes from string', async () => {
-        const value = '3232';
-
-        const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
-            .toInt()
-            .toDate();
-        const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
-        await validationChain.run()(ctx, next);
-
-        const results = validationResults(ctx);
-        expect(results.mapped()).not.toHaveProperty(prop);
-
-        const passedData = results.passedData();
-        expect(passedData[prop]).toEqual(3232);
-    });
 
     test('blacklist()', async () => {
         const chars = 'l ';

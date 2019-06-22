@@ -1,5 +1,14 @@
 import { ParameterizedContext } from 'koa';
-import { IValidationError } from '..';
+
+/**
+ * Interface describing validation errors.
+ */
+export interface IValidationError {
+    param: string;
+    location: string;
+    msg: string;
+    value: string;
+}
 
 /**
  * Options containing properties min and max.
@@ -82,9 +91,31 @@ export type CustomErrorMessageFunction = (
  * Validation definition for internal module usage.
  */
 export interface IValidationDefinition {
+
+    /**
+     * Just a helper type for separating validation definitions from
+     * sanitation definitions.
+     */
+    type: 'validation';
+
+    /**
+     * Validation function
+     */
     validation: ValidatorFunctionName;
+
+    /**
+     * Message for invalid value
+     */
     message?: string | CustomErrorMessageFunction;
+
+    /**
+     * Options for validation function
+     */
     options?: ValidatorOptions;
+
+    /**
+     * Custom validation function
+     */
     func?: CustomValidatorFunction | CustomValidatorFunctionWithContext;
 }
 
@@ -157,6 +188,12 @@ export type ValidatorFunctionName = 'custom'
  * Sanitation definition.
  */
 export interface ISanitationDefinition {
+
+    /**
+     * Just a type helper for separating sanitation definitions from
+     * validation definitions
+     */
+    type: 'sanitation';
 
     /**
      * The sanitation function name

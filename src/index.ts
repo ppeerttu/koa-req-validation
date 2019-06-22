@@ -6,27 +6,6 @@ import ValidationChain from './lib/ValidationChain';
 import ValidationResult from './lib/ValidationResult';
 
 /**
- * Interface describing validation errors.
- */
-export interface IValidationError {
-    param: string;
-    location: string;
-    msg: string;
-    value: string;
-}
-
-/**
- * Interface describing matched data.
- */
-export interface IMatchedData {
-
-    /**
-     * Each validated (and sanitated) parameter has a string key
-     */
-    [key: string]: string | number | boolean | Date;
-}
-
-/**
  * Koa context for validation operations.
  */
 export interface IValidationContext extends IRouterContext {
@@ -35,18 +14,13 @@ export interface IValidationContext extends IRouterContext {
      * Validation results
      */
     validationResults: ValidationResult[];
-
-    /**
-     * Data that has passed validation
-     */
-    matchedData: IMatchedData;
 }
 
 /**
  * Get validation results out of the context.
- * 
+ *
  * @param ctx The request context
- * 
+ *
  * @example
  * // In request controller
  * const errors = validationResults(ctx);
@@ -65,9 +39,9 @@ export const validationResults = (
 
 /**
  * Validate request body.
- * 
+ *
  * @param bodyParam The parameter to be validated from request.
- * 
+ *
  * ```typescript
  * router.post(
  *     '/auth/login',
@@ -84,9 +58,9 @@ export const body = (bodyParam: string) => {
 
 /**
  * Validate request query.
- * 
+ *
  * @param queryString The parameter to be validated from request.
- * 
+ *
  * ```typescript
  * router.get(
  *     '/api/tags',
@@ -102,9 +76,9 @@ export const query = (queryString: string) => {
 
 /**
  * Validate request param.
- * 
+ *
  * @param routeParam The parameter to be validated from request.
- * 
+ *
  * ```typescript
  * router.get(
  *     '/api/users/:id',
@@ -117,3 +91,6 @@ export const param = (routeParam: string) => {
     const validationChain = new ValidationChain(routeParam, ParamLocation.PARAM);
     return validationChain;
 };
+
+
+export * from './lib/types';

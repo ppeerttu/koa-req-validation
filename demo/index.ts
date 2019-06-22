@@ -3,7 +3,13 @@ import Koa, { ParameterizedContext } from 'koa';
 import bodyParser from 'koa-bodyparser';
 import Router, { IRouterContext } from 'koa-router';
 
-import { IValidationContext, param, query, validationResults } from '../src';
+import {
+    CustomErrorMessageFunction,
+    IValidationContext,
+    param,
+    query,
+    validationResults,
+} from '../src';
 
 /**
  * Class returning errors as JSON response.
@@ -38,12 +44,23 @@ function getPort(): number {
 const app = new Koa();
 const router = new Router();
 
+const customErrorMessage: CustomErrorMessageFunction = (
+    ctx: ParameterizedContext,
+    value: string,
+) => {
+    return `The name has to be between 3 and 20 `
+        + `characters long but received length ${value.length}`;
+};
+
 const arrayExample = [
     param('count')
         .isInt({ min: 1, max: 100 })
+        .toInt()
         .run(),
     query('name')
+        .trim()
         .isLength({ min: 3, max: 20 })
+        .withMessage(customErrorMessage)
         .run(),
 ];
 
@@ -87,8 +104,7 @@ router.get(
         if (results.hasErrors()) {
             throw new RequestError(422, results.mapped());
         }
-        const { count } = ctx.params;
-        const { name } = ctx.query;
+        const { count, name } = results.passedData();
         let response = '';
         for (let i = 0; i < count; i++) {
             response += `Hello ${name}\n`;
