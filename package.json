@@ -40,10 +40,10 @@
     "tslint": "^5.13.1",
     "typedoc": "^0.15.0",
     "typescript": "^3.3.3333",
-    "validator": "^11.0.0"
+    "validator": "^12.0.0"
   },
   "peerDependencies": {
-    "validator": "^11.0.x",
+    "validator": "^12.0.x",
     "koa-bodyparser": "^4.2.x",
     "koa-router": "^7.4.x"
   },

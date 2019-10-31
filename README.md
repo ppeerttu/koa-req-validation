@@ -11,14 +11,14 @@
 A [validator][validator-site] middleware for [koa][koa-site]. Inspired by [express-validator][express-validator-site].
 
 - [koa-req-validation](#koa-req-validation)
-- [Installation](#Installation)
-- [Getting started](#Getting-started)
-- [Documentation](#Documentation)
-- [Motivation](#Motivation)
-  - [Peer dependencies](#Peer-dependencies)
-- [Issues](#Issues)
-- [Contribution](#Contribution)
-- [Licence](#Licence)
+- [Installation](#installation)
+- [Getting started](#getting-started)
+- [Documentation](#documentation)
+- [Motivation](#motivation)
+  - [Peer dependencies](#peer-dependencies)
+- [Issues](#issues)
+- [Contribution](#contribution)
+- [Licence](#licence)
 
 
 # Installation
@@ -104,7 +104,7 @@ We use [GitHub][issue-site] for issue tracking. Please look from [previously sub
 
 # Contribution
 
-All contributions to the project are welcome. Contact the author for now, guidelines for contributions will be defined later.
+All contributions to the project are welcome.
 
 # Licence
 
