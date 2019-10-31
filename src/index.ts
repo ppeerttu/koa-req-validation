@@ -92,5 +92,4 @@ export const param = (routeParam: string) => {
     return validationChain;
 };
 
-
 export * from './lib/types';
