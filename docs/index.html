@@ -64,7 +64,9 @@
 	<div class="row">
 		<div class="col-8 col-content">
 			<div class="tsd-panel tsd-typography">
-				<h1 id="koa-req-validation">koa-req-validation</h1>
+				<a href="#koa-req-validation" id="koa-req-validation" style="color: inherit; text-decoration: none;">
+					<h1>koa-req-validation</h1>
+				</a>
 				<p><a href="https://travis-ci.org/ppeerttu/koa-req-validation"><img src="https://travis-ci.org/ppeerttu/koa-req-validation.svg?branch=master" alt="Build Status"></a>
 					<a href="https://david-dm.org/ppeerttu/koa-req-validation"><img src="https://david-dm.org/ppeerttu/koa-req-validation/status.svg" alt="dependencies Status"></a>
 					<a href="https://david-dm.org/ppeerttu/koa-req-validation?type=dev"><img src="https://david-dm.org/ppeerttu/koa-req-validation/dev-status.svg" alt="devDependencies Status"></a>
@@ -75,22 +77,27 @@
 				<p>A <a href="https://github.com/chriso/validator.js">validator</a> middleware for <a href="https://koajs.com/">koa</a>. Inspired by <a href="https://github.com/express-validator/express-validator">express-validator</a>.</p>
 				<ul>
 					<li><a href="#koa-req-validation">koa-req-validation</a></li>
-					<li><a href="#Installation">Installation</a></li>
-					<li><a href="#Getting-started">Getting started</a></li>
-					<li><a href="#Documentation">Documentation</a></li>
-					<li><a href="#Motivation">Motivation</a><ul>
-							<li><a href="#Peer-dependencies">Peer dependencies</a></li>
+					<li><a href="#installation">Installation</a></li>
+					<li><a href="#getting-started">Getting started</a></li>
+					<li><a href="#documentation">Documentation</a></li>
+					<li><a href="#motivation">Motivation</a><ul>
+							<li><a href="#peer-dependencies">Peer dependencies</a></li>
 						</ul>
 					</li>
-					<li><a href="#Issues">Issues</a></li>
-					<li><a href="#Contribution">Contribution</a></li>
-					<li><a href="#Licence">Licence</a></li>
+					<li><a href="#issues">Issues</a></li>
+					<li><a href="#contribution">Contribution</a></li>
+					<li><a href="#licence">Licence</a></li>
 				</ul>
-				<h1 id="installation">Installation</h1>
+				<a href="#installation" id="installation" style="color: inherit; text-decoration: none;">
+					<h1>Installation</h1>
+				</a>
 				<p>The <strong>koa-req-validation</strong> requires <a href="https://github.com/chriso/validator.js">validator</a>, <a href="https://github.com/ZijianHe/koa-router">koa-router</a> and <a href="https://github.com/koajs/bodyparser">koa-bodyparser</a> as peer dependencies.</p>
 				<p>Install peer dependencies</p>
 				<pre><code>npm <span class="hljs-keyword">install </span>validator koa-<span class="hljs-keyword">bodyparser </span>koa-router</code></pre><p>Install <strong>koa-req-validation</strong></p>
-				<pre><code>npm <span class="hljs-keyword">install</span> koa-req-<span class="hljs-keyword">validation</span></code></pre><h1 id="getting-started">Getting started</h1>
+				<pre><code>npm <span class="hljs-keyword">install</span> koa-req-<span class="hljs-keyword">validation</span></code></pre>
+				<a href="#getting-started" id="getting-started" style="color: inherit; text-decoration: none;">
+					<h1>Getting started</h1>
+				</a>
 				<p>A basic usage example</p>
 				<pre><code class="language-typescript"><span class="hljs-keyword">import</span> Router, { IRouterContext } <span class="hljs-keyword">from</span> <span class="hljs-string">'koa-router'</span>;
 <span class="hljs-keyword">import</span> { query, validationResults, IValidationContext } <span class="hljs-keyword">from</span> <span class="hljs-string">'koa-req-validation'</span>;
@@ -115,7 +122,9 @@ router.get(
     }
 );</code></pre>
 				<p>See the <a href="https://github.com/ppeerttu/koa-req-validation/blob/master/demo/index.ts">demo</a> for other examples.</p>
-				<h1 id="documentation">Documentation</h1>
+				<a href="#documentation" id="documentation" style="color: inherit; text-decoration: none;">
+					<h1>Documentation</h1>
+				</a>
 				<p>This module offers various validation and sanitation functions. Please note the following things:</p>
 				<ul>
 					<li>The <strong>order matters</strong><ul>
@@ -134,16 +143,26 @@ router.get(
 }
 <span class="hljs-keyword">const</span> passed = result.passedData();</code></pre>
 				<p>See the <a href="https://ppeerttu.github.io/koa-req-validation/">generated TypeDoc</a> and <a href="https://ppeerttu.github.io/koa-req-validation/classes/_lib_validationchain_.validationchain.html">ValidationChain</a> for API documentation.</p>
-				<h1 id="motivation">Motivation</h1>
+				<a href="#motivation" id="motivation" style="color: inherit; text-decoration: none;">
+					<h1>Motivation</h1>
+				</a>
 				<p>Motivation behind this module is the awesome experience of using the <a href="https://github.com/express-validator/express-validator">express-validator</a>. However, due to various reasons the <code>express-validator</code> doesn&#39;t suit it and it seems that there is quite a lot of request validation packages out there mainly for <code>koa</code> v1 without warranty for active maintenance. This package tries to mimic the <code>express-validator</code> pacakge and eventually provide most of the features.</p>
-				<h2 id="peer-dependencies">Peer dependencies</h2>
+				<a href="#peer-dependencies" id="peer-dependencies" style="color: inherit; text-decoration: none;">
+					<h2>Peer dependencies</h2>
+				</a>
 				<p>The usage of the few peer dependencies is a known decision. As it appears to be slowly growing concern that developers hog thousands of npm pacakges without knowing them, we&#39;d like to make sure the developer knows what&#39;s included in this package and actively consider whether to include this pacakge along with it&#39;s peer dependencies to the project.</p>
 				<p>Also, since this package is still in very raw state and lots of features are missing, it makes more sense to manually install the <a href="https://github.com/chriso/validator.js">validator.js</a> -module along the project dependencies for the opportunity of using it as is in the application.</p>
-				<h1 id="issues">Issues</h1>
+				<a href="#issues" id="issues" style="color: inherit; text-decoration: none;">
+					<h1>Issues</h1>
+				</a>
 				<p>We use <a href="https://github.com/ppeerttu/koa-req-validation/issues">GitHub</a> for issue tracking. Please look from <a href="https://github.com/ppeerttu/koa-req-validation/issues?utf8=%E2%9C%93&amp;q=is%3Aissue">previously submitted issues</a> if someone else has already submitted the same issue.</p>
-				<h1 id="contribution">Contribution</h1>
-				<p>All contributions to the project are welcome. Contact the author for now, guidelines for contributions will be defined later.</p>
-				<h1 id="licence">Licence</h1>
+				<a href="#contribution" id="contribution" style="color: inherit; text-decoration: none;">
+					<h1>Contribution</h1>
+				</a>
+				<p>All contributions to the project are welcome.</p>
+				<a href="#licence" id="licence" style="color: inherit; text-decoration: none;">
+					<h1>Licence</h1>
+				</a>
 				<p><a href="https://github.com/ppeerttu/koa-req-validation/blob/master/LICENCE">ISC Licence</a></p>
 			</div>
 		</div>
@@ -186,6 +205,7 @@ router.get(
 				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
 				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
 				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+				<li class="tsd-kind-type-alias tsd-has-type-parameter"><span class="tsd-kind-icon">Type alias with type parameter</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
@@ -234,7 +254,7 @@ router.get(
 	</div>
 </footer>
 <div class="container tsd-generator">
-	<p>Generated using <a href="http://typedoc.org/" target="_blank">TypeDoc</a></p>
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
 </div>
 <div class="overlay"></div>
 <script src="assets/js/main.js"></script>
