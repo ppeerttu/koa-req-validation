@@ -1,3 +1,4 @@
+/// <reference types="koa-bodyparser" />
 import { ParameterizedContext } from 'koa';
 import { IRouterContext } from 'koa-router';
 import ValidationChain from './lib/ValidationChain';
@@ -23,7 +24,7 @@ export interface IValidationContext extends IRouterContext {
  *     throw new RequestError(422, errors.mapped());
  * }
  */
-export declare const validationResults: (ctx: ParameterizedContext<IValidationContext, {}>) => ValidationResult;
+export declare const validationResults: (ctx: ParameterizedContext<IValidationContext, import("koa").DefaultContext>) => ValidationResult;
 /**
  * Validate request body.
  *

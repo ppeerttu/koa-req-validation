@@ -1,6 +1,6 @@
 {
   "name": "koa-req-validation",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "description": "A request validation middleware for Koa.",
   "keywords": [
     "nodejs",
@@ -28,11 +28,11 @@
   "license": "ISC",
   "devDependencies": {
     "@types/jest": "^24.0.11",
-    "@types/koa": "^2.0.48",
+    "@types/koa": "^2.11.0",
     "@types/koa-bodyparser": "^4.2.2",
-    "@types/validator": "^10.9.0",
+    "@types/validator": "^12.0.1",
     "jest": "^24.3.1",
-    "koa": "^2.7.0",
+    "koa": "^2.11.0",
     "koa-bodyparser": "^4.2.1",
     "koa-router": "^7.4.0",
     "ts-jest": "^24.0.0",
@@ -40,15 +40,15 @@
     "tslint": "^5.13.1",
     "typedoc": "^0.15.0",
     "typescript": "^3.3.3333",
-    "validator": "^12.0.0"
+    "validator": "^12.2.0"
   },
   "peerDependencies": {
-    "validator": "^12.0.x",
+    "validator": "^12.2.x",
     "koa-bodyparser": "^4.2.x",
     "koa-router": "^7.4.x"
   },
   "dependencies": {
-    "@types/koa-router": "^7.0.40"
+    "@types/koa-router": "^7.4.0"
   },
   "jest": {
     "preset": "ts-jest",

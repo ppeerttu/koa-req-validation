@@ -254,7 +254,7 @@ export default class ValidationChain {
      *
      * @param algorithm The algorithm
      */
-    public isHash(algorithm: ValidatorJS.HashAlgorithm) {
+    public isHash(algorithm: validator.HashAlgorithm) {
         this.operations.push({
             type: 'validation',
             validation: 'isHash',
@@ -1165,7 +1165,10 @@ export default class ValidationChain {
                 break;
             case 'toDate':
             case 'toFloat':
-                value = validator[sanitation](value);
+                // validator.toDate doesn't guarantee Date object (it may return `null`),
+                // but we just have to trust that the validation has been done properly
+                // and real Date is produced
+                value = validator[sanitation](value) as (number | Date);
                 break;
             case 'toInt':
                 value = validator[sanitation](value, options as number | undefined);
