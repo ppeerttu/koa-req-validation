@@ -1025,6 +1025,9 @@ class ValidationChain {
                 break;
             case 'toDate':
             case 'toFloat':
+                // validator.toDate doesn't guarantee Date object (it may return `null`),
+                // but we just have to trust that the validation has been done properly
+                // and real Date is produced
                 value = validator_1.default[sanitation](value);
                 break;
             case 'toInt':

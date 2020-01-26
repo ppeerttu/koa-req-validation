@@ -1,5 +1,6 @@
-/// <reference types="validator" />
+/// <reference types="koa-bodyparser" />
 import { ParameterizedContext } from 'koa';
+import validator from 'validator';
 import { IValidationContext } from '..';
 import { CustomErrorMessageFunction, CustomValidatorFunction, IIsCurrencyOptions, IIsDecimalOptions, IIsFQDNOptions, IISSNOptions, IIsURLOptions, IMinMaxOptions, INormalizeEmailOptions, IOptionalOptions, IsAlphaLocale, IsInValuesOptions, IsMobilePhoneLocale, IsPostalCodeLocale, ParamLocation } from './types';
 /**
@@ -45,7 +46,7 @@ export default class ValidationChain {
      * );
      * ```
      */
-    run: () => (ctx: ParameterizedContext<IValidationContext, {}>, next: () => Promise<void>) => Promise<void>;
+    run: () => (ctx: ParameterizedContext<IValidationContext, import("koa").DefaultContext>, next: () => Promise<void>) => Promise<void>;
     /**
      * Pass a custom message to the validation.
      *
@@ -104,7 +105,7 @@ export default class ValidationChain {
      *
      * @param algorithm The algorithm
      */
-    isHash(algorithm: ValidatorJS.HashAlgorithm): this;
+    isHash(algorithm: validator.HashAlgorithm): this;
     /**
      * Check if the parameter is a valid JWT token.
      */
