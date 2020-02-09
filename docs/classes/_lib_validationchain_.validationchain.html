@@ -69,6 +69,13 @@
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>The validation chain object.</p>
+					</div>
+				</div>
+			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
@@ -197,16 +204,31 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/a1570e6/src/lib/ValidationChain.ts#L58">lib/ValidationChain.ts:58</a></li>
+									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/6bfeaf6/src/lib/ValidationChain.ts#L58">lib/ValidationChain.ts:58</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Create a new ValidationChain.</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>parameter: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<div class="lead">
+											<p>Name of the parameter to validate</p>
+										</div>
+									</div>
 								</li>
 								<li>
 									<h5>location: <a href="../enums/_lib_types_.paramlocation.html" class="tsd-signature-type">ParamLocation</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<div class="lead">
+											<p>Location of the parameter in request</p>
+										</div>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="_lib_validationchain_.validationchain.html" class="tsd-signature-type">ValidationChain</a></h4>
@@ -219,12 +241,17 @@
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="defaulterrormessage" class="tsd-anchor"></a>
 					<h3>default<wbr>Error<wbr>Message</h3>
-					<div class="tsd-signature tsd-kind-icon">default<wbr>Error<wbr>Message<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"Invalid value"</span><span class="tsd-signature-symbol"> =&nbsp;&quot;Invalid value&quot;</span></div>
+					<div class="tsd-signature tsd-kind-icon">default<wbr>Error<wbr>Message<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"Invalid value"</span><span class="tsd-signature-symbol"> = &quot;Invalid value&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/a1570e6/src/lib/ValidationChain.ts#L35">lib/ValidationChain.ts:35</a></li>
+							<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/6bfeaf6/src/lib/ValidationChain.ts#L35">lib/ValidationChain.ts:35</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Default error message when validation fails.</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
 					<a name="location" class="tsd-anchor"></a>
@@ -232,19 +259,29 @@
 					<div class="tsd-signature tsd-kind-icon">location<span class="tsd-signature-symbol">:</span> <a href="../enums/_lib_types_.paramlocation.html" class="tsd-signature-type">ParamLocation</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/a1570e6/src/lib/ValidationChain.ts#L50">lib/ValidationChain.ts:50</a></li>
+							<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/6bfeaf6/src/lib/ValidationChain.ts#L50">lib/ValidationChain.ts:50</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Location of the given parameter.</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
 					<a name="operations" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagPrivate">Private</span> operations</h3>
-					<div class="tsd-signature tsd-kind-icon">operations<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_lib_types_.ivalidationdefinition.html" class="tsd-signature-type">IValidationDefinition</a><span class="tsd-signature-symbol"> | </span><a href="../interfaces/_lib_types_.isanitationdefinition.html" class="tsd-signature-type">ISanitationDefinition</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> =&nbsp;[]</span></div>
+					<div class="tsd-signature tsd-kind-icon">operations<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span><a href="../interfaces/_lib_types_.ivalidationdefinition.html" class="tsd-signature-type">IValidationDefinition</a><span class="tsd-signature-symbol"> | </span><a href="../interfaces/_lib_types_.isanitationdefinition.html" class="tsd-signature-type">ISanitationDefinition</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> = []</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/a1570e6/src/lib/ValidationChain.ts#L45">lib/ValidationChain.ts:45</a></li>
+							<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/6bfeaf6/src/lib/ValidationChain.ts#L45">lib/ValidationChain.ts:45</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Validations and sanitations to be executed.</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
 					<a name="parameter" class="tsd-anchor"></a>
@@ -252,9 +289,14 @@
 					<div class="tsd-signature tsd-kind-icon">parameter<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/a1570e6/src/lib/ValidationChain.ts#L40">lib/ValidationChain.ts:40</a></li>
+							<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/6bfeaf6/src/lib/ValidationChain.ts#L40">lib/ValidationChain.ts:40</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Parameter to be validated.</p>
+						</div>
+					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
@@ -269,13 +311,22 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/a1570e6/src/lib/ValidationChain.ts#L859">lib/ValidationChain.ts:859</a></li>
+									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/6bfeaf6/src/lib/ValidationChain.ts#L859">lib/ValidationChain.ts:859</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Remove characters that appear in the blacklist. The characters are used in a RegExp
+									and so you will need to escape some chars, e.g. blacklist(input, &#39;\[\]&#39;).</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>chars: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Characters to blacklist</p>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
@@ -286,19 +337,27 @@
 					<a name="checkresults" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagPrivate">Private</span> check<wbr>Results</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
-						<li class="tsd-signature tsd-kind-icon">check<wbr>Results<span class="tsd-signature-symbol">(</span>ctx<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ParameterizedContext</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_index_.ivalidationcontext.html" class="tsd-signature-type">IValidationContext</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="_lib_validationresult_.validationresult.html" class="tsd-signature-type">ValidationResult</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">check<wbr>Results<span class="tsd-signature-symbol">(</span>ctx<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">RouterContext</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_index_.ivalidationstate.html" class="tsd-signature-type">IValidationState</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="_lib_validationresult_.validationresult.html" class="tsd-signature-type">ValidationResult</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/a1570e6/src/lib/ValidationChain.ts#L1030">lib/ValidationChain.ts:1030</a></li>
+									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/6bfeaf6/src/lib/ValidationChain.ts#L1030">lib/ValidationChain.ts:1030</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Run the validations and return the results.</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>ctx: <span class="tsd-signature-type">ParameterizedContext</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_index_.ivalidationcontext.html" class="tsd-signature-type">IValidationContext</a><span class="tsd-signature-symbol">&gt;</span></h5>
+									<h5>ctx: <span class="tsd-signature-type">RouterContext</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_index_.ivalidationstate.html" class="tsd-signature-type">IValidationState</a><span class="tsd-signature-symbol">&gt;</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The context</p>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="_lib_validationresult_.validationresult.html" class="tsd-signature-type">ValidationResult</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -315,9 +374,14 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/a1570e6/src/lib/ValidationChain.ts#L161">lib/ValidationChain.ts:161</a></li>
+									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/6bfeaf6/src/lib/ValidationChain.ts#L161">lib/ValidationChain.ts:161</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Check if the request property contains the given seed.</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
@@ -338,13 +402,22 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/a1570e6/src/lib/ValidationChain.ts#L149">lib/ValidationChain.ts:149</a></li>
+									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/6bfeaf6/src/lib/ValidationChain.ts#L149">lib/ValidationChain.ts:149</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Custom async validation function to execute. The function
+									must throw when the validation fails.</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>func: <a href="../modules/_lib_types_.html#customvalidatorfunction" class="tsd-signature-type">CustomValidatorFunction</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The validation function</p>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
@@ -361,9 +434,14 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/a1570e6/src/lib/ValidationChain.ts#L173">lib/ValidationChain.ts:173</a></li>
+									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/6bfeaf6/src/lib/ValidationChain.ts#L173">lib/ValidationChain.ts:173</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Check if the request property equals the given comparison.</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
@@ -384,9 +462,14 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/a1570e6/src/lib/ValidationChain.ts#L871">lib/ValidationChain.ts:871</a></li>
+									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/6bfeaf6/src/lib/ValidationChain.ts#L871">lib/ValidationChain.ts:871</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Replace &lt;, &gt;, &amp;, &#39;, &quot; and / with HTML entities.</p>
+								</div>
+							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
 						</li>
 					</ul>
@@ -401,13 +484,22 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/a1570e6/src/lib/ValidationChain.ts#L414">lib/ValidationChain.ts:414</a></li>
+									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/6bfeaf6/src/lib/ValidationChain.ts#L414">lib/ValidationChain.ts:414</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Check if the string is a date that&#39;s after the specified
+									date (defaults to now).</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> date: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;new Date().toString()</span></h5>
+									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> date: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = new Date().toString()</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The date</p>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
@@ -418,19 +510,28 @@
 					<a name="isalpha" class="tsd-anchor"></a>
 					<h3>is<wbr>Alpha</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">is<wbr>Alpha<span class="tsd-signature-symbol">(</span>locale<span class="tsd-signature-symbol">: </span><a href="../modules/_lib_types_.html#isalphalocale" class="tsd-signature-type">IsAlphaLocale</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
+						<li class="tsd-signature tsd-kind-icon">is<wbr>Alpha<span class="tsd-signature-symbol">(</span>locale<span class="tsd-signature-symbol">?: </span><a href="../modules/_lib_types_.html#isalphalocale" class="tsd-signature-type">IsAlphaLocale</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/a1570e6/src/lib/ValidationChain.ts#L429">lib/ValidationChain.ts:429</a></li>
+									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/6bfeaf6/src/lib/ValidationChain.ts#L429">lib/ValidationChain.ts:429</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Check if the string contains only letters. Locale
+									defaults to en-US.</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5><span class="tsd-flag ts-flagOptional">Optional</span> locale: <a href="../modules/_lib_types_.html#isalphalocale" class="tsd-signature-type">IsAlphaLocale</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The locale</p>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
@@ -441,19 +542,28 @@
 					<a name="isalphanumeric" class="tsd-anchor"></a>
 					<h3>is<wbr>Alphanumeric</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">is<wbr>Alphanumeric<span class="tsd-signature-symbol">(</span>locale<span class="tsd-signature-symbol">: </span><a href="../modules/_lib_types_.html#isalphalocale" class="tsd-signature-type">IsAlphaLocale</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
+						<li class="tsd-signature tsd-kind-icon">is<wbr>Alphanumeric<span class="tsd-signature-symbol">(</span>locale<span class="tsd-signature-symbol">?: </span><a href="../modules/_lib_types_.html#isalphalocale" class="tsd-signature-type">IsAlphaLocale</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/a1570e6/src/lib/ValidationChain.ts#L444">lib/ValidationChain.ts:444</a></li>
+									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/6bfeaf6/src/lib/ValidationChain.ts#L444">lib/ValidationChain.ts:444</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Check if the string contains only letters and numbers.
+									Locale defaults to en-US.</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5><span class="tsd-flag ts-flagOptional">Optional</span> locale: <a href="../modules/_lib_types_.html#isalphalocale" class="tsd-signature-type">IsAlphaLocale</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The locale</p>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
@@ -470,9 +580,14 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/a1570e6/src/lib/ValidationChain.ts#L456">lib/ValidationChain.ts:456</a></li>
+									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/6bfeaf6/src/lib/ValidationChain.ts#L456">lib/ValidationChain.ts:456</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Check if the string contains ACII characters only.</p>
+								</div>
+							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
 						</li>
 					</ul>
@@ -487,9 +602,14 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/a1570e6/src/lib/ValidationChain.ts#L467">lib/ValidationChain.ts:467</a></li>
+									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/6bfeaf6/src/lib/ValidationChain.ts#L467">lib/ValidationChain.ts:467</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Check if the string is base64 encoded.</p>
+								</div>
+							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
 						</li>
 					</ul>
@@ -504,13 +624,22 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/a1570e6/src/lib/ValidationChain.ts#L481">lib/ValidationChain.ts:481</a></li>
+									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/6bfeaf6/src/lib/ValidationChain.ts#L481">lib/ValidationChain.ts:481</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Check if the string is a date that&#39;s before
+									the given date. Defaults to now.</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> date: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;new Date().toString()</span></h5>
+									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> date: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = new Date().toString()</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The date</p>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
@@ -527,9 +656,14 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/a1570e6/src/lib/ValidationChain.ts#L222">lib/ValidationChain.ts:222</a></li>
+									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/6bfeaf6/src/lib/ValidationChain.ts#L222">lib/ValidationChain.ts:222</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Check if the parameter is a boolean value.</p>
+								</div>
+							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
 						</li>
 					</ul>
@@ -544,13 +678,22 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/a1570e6/src/lib/ValidationChain.ts#L496">lib/ValidationChain.ts:496</a></li>
+									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/6bfeaf6/src/lib/ValidationChain.ts#L496">lib/ValidationChain.ts:496</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Check if the strin&#39;s length (in UTF-8 bytes)
+									falls in range.</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> options: <a href="../interfaces/_lib_types_.iminmaxoptions.html" class="tsd-signature-type">IMinMaxOptions</a><span class="tsd-signature-symbol"> =&nbsp;{ min: 0 }</span></h5>
+									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> options: <a href="../interfaces/_lib_types_.iminmaxoptions.html" class="tsd-signature-type">IMinMaxOptions</a><span class="tsd-signature-symbol"> = { min: 0 }</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The range</p>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
@@ -567,9 +710,14 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/a1570e6/src/lib/ValidationChain.ts#L508">lib/ValidationChain.ts:508</a></li>
+									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/6bfeaf6/src/lib/ValidationChain.ts#L508">lib/ValidationChain.ts:508</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Check if the string is a credit card.</p>
+								</div>
+							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
 						</li>
 					</ul>
@@ -578,19 +726,27 @@
 					<a name="iscurrency" class="tsd-anchor"></a>
 					<h3>is<wbr>Currency</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">is<wbr>Currency<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">: </span><a href="../interfaces/_lib_types_.iiscurrencyoptions.html" class="tsd-signature-type">IIsCurrencyOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
+						<li class="tsd-signature tsd-kind-icon">is<wbr>Currency<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">?: </span><a href="../interfaces/_lib_types_.iiscurrencyoptions.html" class="tsd-signature-type">IIsCurrencyOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/a1570e6/src/lib/ValidationChain.ts#L521">lib/ValidationChain.ts:521</a></li>
+									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/6bfeaf6/src/lib/ValidationChain.ts#L521">lib/ValidationChain.ts:521</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Check if the string is a valid currency amount.</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <a href="../interfaces/_lib_types_.iiscurrencyoptions.html" class="tsd-signature-type">IIsCurrencyOptions</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The options</p>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
@@ -607,9 +763,14 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/a1570e6/src/lib/ValidationChain.ts#L533">lib/ValidationChain.ts:533</a></li>
+									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/6bfeaf6/src/lib/ValidationChain.ts#L533">lib/ValidationChain.ts:533</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Check if the string is a data uri format.</p>
+								</div>
+							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
 						</li>
 					</ul>
@@ -618,19 +779,27 @@
 					<a name="isdecimal" class="tsd-anchor"></a>
 					<h3>is<wbr>Decimal</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">is<wbr>Decimal<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">: </span><a href="../interfaces/_lib_types_.iisdecimaloptions.html" class="tsd-signature-type">IIsDecimalOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
+						<li class="tsd-signature tsd-kind-icon">is<wbr>Decimal<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">?: </span><a href="../interfaces/_lib_types_.iisdecimaloptions.html" class="tsd-signature-type">IIsDecimalOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/a1570e6/src/lib/ValidationChain.ts#L546">lib/ValidationChain.ts:546</a></li>
+									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/6bfeaf6/src/lib/ValidationChain.ts#L546">lib/ValidationChain.ts:546</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Check if the string represents a decimal number.</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <a href="../interfaces/_lib_types_.iisdecimaloptions.html" class="tsd-signature-type">IIsDecimalOptions</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The options</p>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
@@ -647,13 +816,22 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/a1570e6/src/lib/ValidationChain.ts#L561">lib/ValidationChain.ts:561</a></li>
+									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/6bfeaf6/src/lib/ValidationChain.ts#L561">lib/ValidationChain.ts:561</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Check if the string is a number divisible by
+									given number.</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>division: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The division number</p>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
@@ -670,9 +848,14 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/a1570e6/src/lib/ValidationChain.ts#L211">lib/ValidationChain.ts:211</a></li>
+									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/6bfeaf6/src/lib/ValidationChain.ts#L211">lib/ValidationChain.ts:211</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Check if the parameter is an email.</p>
+								</div>
+							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
 						</li>
 					</ul>
@@ -687,9 +870,14 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/a1570e6/src/lib/ValidationChain.ts#L233">lib/ValidationChain.ts:233</a></li>
+									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/6bfeaf6/src/lib/ValidationChain.ts#L233">lib/ValidationChain.ts:233</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Check if the parameter is a zero length string.</p>
+								</div>
+							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
 						</li>
 					</ul>
@@ -698,19 +886,28 @@
 					<a name="isfqdn" class="tsd-anchor"></a>
 					<h3>isFQDN</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">isFQDN<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">: </span><a href="../interfaces/_lib_types_.iisfqdnoptions.html" class="tsd-signature-type">IIsFQDNOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
+						<li class="tsd-signature tsd-kind-icon">isFQDN<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">?: </span><a href="../interfaces/_lib_types_.iisfqdnoptions.html" class="tsd-signature-type">IIsFQDNOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/a1570e6/src/lib/ValidationChain.ts#L576">lib/ValidationChain.ts:576</a></li>
+									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/6bfeaf6/src/lib/ValidationChain.ts#L576">lib/ValidationChain.ts:576</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Check if the string is fully qualified
+									domain name.</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <a href="../interfaces/_lib_types_.iisfqdnoptions.html" class="tsd-signature-type">IIsFQDNOptions</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The options</p>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
@@ -727,9 +924,14 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/a1570e6/src/lib/ValidationChain.ts#L244">lib/ValidationChain.ts:244</a></li>
+									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/6bfeaf6/src/lib/ValidationChain.ts#L244">lib/ValidationChain.ts:244</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Check if the parameter is a float.</p>
+								</div>
+							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
 						</li>
 					</ul>
@@ -744,9 +946,15 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/a1570e6/src/lib/ValidationChain.ts#L589">lib/ValidationChain.ts:589</a></li>
+									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/6bfeaf6/src/lib/ValidationChain.ts#L589">lib/ValidationChain.ts:589</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Check if the string contains any full-width
+									chars.</p>
+								</div>
+							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
 						</li>
 					</ul>
@@ -761,9 +969,15 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/a1570e6/src/lib/ValidationChain.ts#L601">lib/ValidationChain.ts:601</a></li>
+									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/6bfeaf6/src/lib/ValidationChain.ts#L601">lib/ValidationChain.ts:601</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Check if the string contains any half-width
+									chars.</p>
+								</div>
+							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
 						</li>
 					</ul>
@@ -778,13 +992,21 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/a1570e6/src/lib/ValidationChain.ts#L257">lib/ValidationChain.ts:257</a></li>
+									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/6bfeaf6/src/lib/ValidationChain.ts#L257">lib/ValidationChain.ts:257</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Check if the parameter is an algorithm.</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>algorithm: <span class="tsd-signature-type">validator.HashAlgorithm</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The algorithm</p>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
@@ -801,9 +1023,15 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/a1570e6/src/lib/ValidationChain.ts#L613">lib/ValidationChain.ts:613</a></li>
+									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/6bfeaf6/src/lib/ValidationChain.ts#L613">lib/ValidationChain.ts:613</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Check if the string is a hexadecimal
+									color.</p>
+								</div>
+							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
 						</li>
 					</ul>
@@ -818,9 +1046,15 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/a1570e6/src/lib/ValidationChain.ts#L625">lib/ValidationChain.ts:625</a></li>
+									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/6bfeaf6/src/lib/ValidationChain.ts#L625">lib/ValidationChain.ts:625</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Check if the string is a hexadecimal
+									number.</p>
+								</div>
+							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
 						</li>
 					</ul>
@@ -829,15 +1063,20 @@
 					<a name="isip" class="tsd-anchor"></a>
 					<h3>isIP</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">isIP<span class="tsd-signature-symbol">(</span>version<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">4</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">6</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
+						<li class="tsd-signature tsd-kind-icon">isIP<span class="tsd-signature-symbol">(</span>version<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">4</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">6</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/a1570e6/src/lib/ValidationChain.ts#L636">lib/ValidationChain.ts:636</a></li>
+									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/6bfeaf6/src/lib/ValidationChain.ts#L636">lib/ValidationChain.ts:636</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Check if the string is an IP (ver 4 or 6).</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
@@ -858,9 +1097,14 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/a1570e6/src/lib/ValidationChain.ts#L648">lib/ValidationChain.ts:648</a></li>
+									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/6bfeaf6/src/lib/ValidationChain.ts#L648">lib/ValidationChain.ts:648</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Check if the string is an IP range (ver 4 only).</p>
+								</div>
+							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
 						</li>
 					</ul>
@@ -875,13 +1119,21 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/a1570e6/src/lib/ValidationChain.ts#L661">lib/ValidationChain.ts:661</a></li>
+									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/6bfeaf6/src/lib/ValidationChain.ts#L661">lib/ValidationChain.ts:661</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Check if the string is an ISBN.</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>version: <span class="tsd-signature-type">10</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">13</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The version</p>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
@@ -898,9 +1150,14 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/a1570e6/src/lib/ValidationChain.ts#L687">lib/ValidationChain.ts:687</a></li>
+									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/6bfeaf6/src/lib/ValidationChain.ts#L687">lib/ValidationChain.ts:687</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Check if the string is an ISIN.</p>
+								</div>
+							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
 						</li>
 					</ul>
@@ -915,9 +1172,15 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/a1570e6/src/lib/ValidationChain.ts#L721">lib/ValidationChain.ts:721</a></li>
+									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/6bfeaf6/src/lib/ValidationChain.ts#L721">lib/ValidationChain.ts:721</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Check if the string is a valid ISO 3166-1 alpha-2
+									officially assigned country code.</p>
+								</div>
+							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
 						</li>
 					</ul>
@@ -932,9 +1195,14 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/a1570e6/src/lib/ValidationChain.ts#L698">lib/ValidationChain.ts:698</a></li>
+									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/6bfeaf6/src/lib/ValidationChain.ts#L698">lib/ValidationChain.ts:698</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Check if the string is valid ISO8601 date.</p>
+								</div>
+							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
 						</li>
 					</ul>
@@ -949,9 +1217,14 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/a1570e6/src/lib/ValidationChain.ts#L732">lib/ValidationChain.ts:732</a></li>
+									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/6bfeaf6/src/lib/ValidationChain.ts#L732">lib/ValidationChain.ts:732</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Check if the string is a ISRC.</p>
+								</div>
+							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
 						</li>
 					</ul>
@@ -960,19 +1233,27 @@
 					<a name="isissn" class="tsd-anchor"></a>
 					<h3>isISSN</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">isISSN<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">: </span><a href="../interfaces/_lib_types_.iissnoptions.html" class="tsd-signature-type">IISSNOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
+						<li class="tsd-signature tsd-kind-icon">isISSN<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">?: </span><a href="../interfaces/_lib_types_.iissnoptions.html" class="tsd-signature-type">IISSNOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/a1570e6/src/lib/ValidationChain.ts#L675">lib/ValidationChain.ts:675</a></li>
+									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/6bfeaf6/src/lib/ValidationChain.ts#L675">lib/ValidationChain.ts:675</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Check if the string is an ISSN.</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <a href="../interfaces/_lib_types_.iissnoptions.html" class="tsd-signature-type">IISSNOptions</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The options</p>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
@@ -989,13 +1270,23 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/a1570e6/src/lib/ValidationChain.ts#L399">lib/ValidationChain.ts:399</a></li>
+									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/6bfeaf6/src/lib/ValidationChain.ts#L399">lib/ValidationChain.ts:399</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Check if the parameter is some of the allowed
+									values.</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>values: <a href="../modules/_lib_types_.html#isinvaluesoptions" class="tsd-signature-type">IsInValuesOptions</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Options containing at least <code>values</code>
+										property with allowed values</p>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
@@ -1006,15 +1297,20 @@
 					<a name="isint" class="tsd-anchor"></a>
 					<h3>is<wbr>Int</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">is<wbr>Int<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">: </span><a href="../interfaces/_lib_types_.iminmaxoptions.html" class="tsd-signature-type">IMinMaxOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
+						<li class="tsd-signature tsd-kind-icon">is<wbr>Int<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">?: </span><a href="../interfaces/_lib_types_.iminmaxoptions.html" class="tsd-signature-type">IMinMaxOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/a1570e6/src/lib/ValidationChain.ts#L185">lib/ValidationChain.ts:185</a></li>
+									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/6bfeaf6/src/lib/ValidationChain.ts#L185">lib/ValidationChain.ts:185</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Check if the parameter is an integer.</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
@@ -1035,9 +1331,15 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/a1570e6/src/lib/ValidationChain.ts#L281">lib/ValidationChain.ts:281</a></li>
+									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/6bfeaf6/src/lib/ValidationChain.ts#L281">lib/ValidationChain.ts:281</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Check if the parameter is a valid JSON. Uses
+									<code>JSON.parse</code>.</p>
+								</div>
+							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
 						</li>
 					</ul>
@@ -1052,9 +1354,14 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/a1570e6/src/lib/ValidationChain.ts#L269">lib/ValidationChain.ts:269</a></li>
+									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/6bfeaf6/src/lib/ValidationChain.ts#L269">lib/ValidationChain.ts:269</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Check if the parameter is a valid JWT token.</p>
+								</div>
+							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
 						</li>
 					</ul>
@@ -1069,9 +1376,15 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/a1570e6/src/lib/ValidationChain.ts#L293">lib/ValidationChain.ts:293</a></li>
+									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/6bfeaf6/src/lib/ValidationChain.ts#L293">lib/ValidationChain.ts:293</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Check if the parameter is a latitude-lognitude coordinate
+									in the format <code>lat,long</code> or <code>lat, long</code>.</p>
+								</div>
+							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
 						</li>
 					</ul>
@@ -1086,13 +1399,21 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/a1570e6/src/lib/ValidationChain.ts#L199">lib/ValidationChain.ts:199</a></li>
+									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/6bfeaf6/src/lib/ValidationChain.ts#L199">lib/ValidationChain.ts:199</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Check if the string is in given length.</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>options: <a href="../interfaces/_lib_types_.iminmaxoptions.html" class="tsd-signature-type">IMinMaxOptions</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Min and max length</p>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
@@ -1109,9 +1430,14 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/a1570e6/src/lib/ValidationChain.ts#L304">lib/ValidationChain.ts:304</a></li>
+									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/6bfeaf6/src/lib/ValidationChain.ts#L304">lib/ValidationChain.ts:304</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Check if the paramter contains only lowercase characters.</p>
+								</div>
+							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
 						</li>
 					</ul>
@@ -1126,9 +1452,14 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/a1570e6/src/lib/ValidationChain.ts#L315">lib/ValidationChain.ts:315</a></li>
+									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/6bfeaf6/src/lib/ValidationChain.ts#L315">lib/ValidationChain.ts:315</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Check if the parameter is a MAC address.</p>
+								</div>
+							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
 						</li>
 					</ul>
@@ -1143,9 +1474,14 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/a1570e6/src/lib/ValidationChain.ts#L743">lib/ValidationChain.ts:743</a></li>
+									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/6bfeaf6/src/lib/ValidationChain.ts#L743">lib/ValidationChain.ts:743</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Check if the string is a MD5 hash.</p>
+								</div>
+							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
 						</li>
 					</ul>
@@ -1160,9 +1496,14 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/a1570e6/src/lib/ValidationChain.ts#L754">lib/ValidationChain.ts:754</a></li>
+									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/6bfeaf6/src/lib/ValidationChain.ts#L754">lib/ValidationChain.ts:754</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Check if the string is a valid MIME type format.</p>
+								</div>
+							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
 						</li>
 					</ul>
@@ -1177,13 +1518,21 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/a1570e6/src/lib/ValidationChain.ts#L767">lib/ValidationChain.ts:767</a></li>
+									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/6bfeaf6/src/lib/ValidationChain.ts#L767">lib/ValidationChain.ts:767</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Check if the string is a mobile phone number.</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> locale: <span class="tsd-signature-type">"any"</span><span class="tsd-signature-symbol"> | </span><a href="../modules/_lib_types_.html#ismobilephonelocale" class="tsd-signature-type">IsMobilePhoneLocale</a><span class="tsd-signature-symbol"> | </span><a href="../modules/_lib_types_.html#ismobilephonelocale" class="tsd-signature-type">IsMobilePhoneLocale</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> =&nbsp;&quot;any&quot;</span></h5>
+									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> locale: <span class="tsd-signature-type">"any"</span><span class="tsd-signature-symbol"> | </span><a href="../modules/_lib_types_.html#ismobilephonelocale" class="tsd-signature-type">IsMobilePhoneLocale</a><span class="tsd-signature-symbol"> | </span><a href="../modules/_lib_types_.html#ismobilephonelocale" class="tsd-signature-type">IsMobilePhoneLocale</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> = &quot;any&quot;</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The locale, defaults to any</p>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
@@ -1200,9 +1549,14 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/a1570e6/src/lib/ValidationChain.ts#L326">lib/ValidationChain.ts:326</a></li>
+									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/6bfeaf6/src/lib/ValidationChain.ts#L326">lib/ValidationChain.ts:326</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Check if the parameter is a valid MongoDB ObjectId.</p>
+								</div>
+							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
 						</li>
 					</ul>
@@ -1217,9 +1571,14 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/a1570e6/src/lib/ValidationChain.ts#L781">lib/ValidationChain.ts:781</a></li>
+									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/6bfeaf6/src/lib/ValidationChain.ts#L781">lib/ValidationChain.ts:781</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Check if the string contains one or more multibyte chars.</p>
+								</div>
+							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
 						</li>
 					</ul>
@@ -1234,9 +1593,14 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/a1570e6/src/lib/ValidationChain.ts#L337">lib/ValidationChain.ts:337</a></li>
+									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/6bfeaf6/src/lib/ValidationChain.ts#L337">lib/ValidationChain.ts:337</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Check if the parameter contains only numbers.</p>
+								</div>
+							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
 						</li>
 					</ul>
@@ -1251,9 +1615,14 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/a1570e6/src/lib/ValidationChain.ts#L348">lib/ValidationChain.ts:348</a></li>
+									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/6bfeaf6/src/lib/ValidationChain.ts#L348">lib/ValidationChain.ts:348</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Check if the parameter is a valid port number.</p>
+								</div>
+							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
 						</li>
 					</ul>
@@ -1268,13 +1637,21 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/a1570e6/src/lib/ValidationChain.ts#L794">lib/ValidationChain.ts:794</a></li>
+									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/6bfeaf6/src/lib/ValidationChain.ts#L794">lib/ValidationChain.ts:794</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Check if the string is a postal code.</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> locale: <a href="../modules/_lib_types_.html#ispostalcodelocale" class="tsd-signature-type">IsPostalCodeLocale</a><span class="tsd-signature-symbol"> =&nbsp;&quot;any&quot;</span></h5>
+									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> locale: <a href="../modules/_lib_types_.html#ispostalcodelocale" class="tsd-signature-type">IsPostalCodeLocale</a><span class="tsd-signature-symbol"> = &quot;any&quot;</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The locale to use</p>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
@@ -1291,9 +1668,14 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/a1570e6/src/lib/ValidationChain.ts#L709">lib/ValidationChain.ts:709</a></li>
+									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/6bfeaf6/src/lib/ValidationChain.ts#L709">lib/ValidationChain.ts:709</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Check if the string is valid RFC3339 date.</p>
+								</div>
+							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
 						</li>
 					</ul>
@@ -1308,9 +1690,14 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/a1570e6/src/lib/ValidationChain.ts#L806">lib/ValidationChain.ts:806</a></li>
+									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/6bfeaf6/src/lib/ValidationChain.ts#L806">lib/ValidationChain.ts:806</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Check if the string contains any surrogate pairs chars.</p>
+								</div>
+							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
 						</li>
 					</ul>
@@ -1319,19 +1706,27 @@
 					<a name="isurl" class="tsd-anchor"></a>
 					<h3>isURL</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">isURL<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">: </span><a href="../interfaces/_lib_types_.iisurloptions.html" class="tsd-signature-type">IIsURLOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
+						<li class="tsd-signature tsd-kind-icon">isURL<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">?: </span><a href="../interfaces/_lib_types_.iisurloptions.html" class="tsd-signature-type">IIsURLOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/a1570e6/src/lib/ValidationChain.ts#L819">lib/ValidationChain.ts:819</a></li>
+									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/6bfeaf6/src/lib/ValidationChain.ts#L819">lib/ValidationChain.ts:819</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Check if the string is an URL.</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <a href="../interfaces/_lib_types_.iisurloptions.html" class="tsd-signature-type">IIsURLOptions</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Possible options</p>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
@@ -1348,9 +1743,14 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/a1570e6/src/lib/ValidationChain.ts#L359">lib/ValidationChain.ts:359</a></li>
+									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/6bfeaf6/src/lib/ValidationChain.ts#L359">lib/ValidationChain.ts:359</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Check if the parameter is valid UUID (v3, v4 or v5).</p>
+								</div>
+							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
 						</li>
 					</ul>
@@ -1365,9 +1765,14 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/a1570e6/src/lib/ValidationChain.ts#L370">lib/ValidationChain.ts:370</a></li>
+									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/6bfeaf6/src/lib/ValidationChain.ts#L370">lib/ValidationChain.ts:370</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Check if the parameter contains only uppercase characters.</p>
+								</div>
+							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
 						</li>
 					</ul>
@@ -1382,9 +1787,14 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/a1570e6/src/lib/ValidationChain.ts#L831">lib/ValidationChain.ts:831</a></li>
+									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/6bfeaf6/src/lib/ValidationChain.ts#L831">lib/ValidationChain.ts:831</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Check if the string contains a mixture of full and half-width chars.</p>
+								</div>
+							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
 						</li>
 					</ul>
@@ -1399,13 +1809,21 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/a1570e6/src/lib/ValidationChain.ts#L844">lib/ValidationChain.ts:844</a></li>
+									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/6bfeaf6/src/lib/ValidationChain.ts#L844">lib/ValidationChain.ts:844</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Checks characters if they appear in the whitelist.</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>chars: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The characters</p>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
@@ -1416,19 +1834,27 @@
 					<a name="ltrim" class="tsd-anchor"></a>
 					<h3>ltrim</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">ltrim<span class="tsd-signature-symbol">(</span>chars<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
+						<li class="tsd-signature tsd-kind-icon">ltrim<span class="tsd-signature-symbol">(</span>chars<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/a1570e6/src/lib/ValidationChain.ts#L895">lib/ValidationChain.ts:895</a></li>
+									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/6bfeaf6/src/lib/ValidationChain.ts#L895">lib/ValidationChain.ts:895</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Trim characters from the left-side of the input.</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5><span class="tsd-flag ts-flagOptional">Optional</span> chars: <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The characters to trim</p>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
@@ -1445,13 +1871,21 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/a1570e6/src/lib/ValidationChain.ts#L383">lib/ValidationChain.ts:383</a></li>
+									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/6bfeaf6/src/lib/ValidationChain.ts#L383">lib/ValidationChain.ts:383</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Check if the parameter matches given regular expression.</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>regExp: <span class="tsd-signature-type">RegExp</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The regular expression</p>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
@@ -1462,19 +1896,32 @@
 					<a name="normalizeemail" class="tsd-anchor"></a>
 					<h3>normalize<wbr>Email</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">normalize<wbr>Email<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">: </span><a href="../interfaces/_lib_types_.inormalizeemailoptions.html" class="tsd-signature-type">INormalizeEmailOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
+						<li class="tsd-signature tsd-kind-icon">normalize<wbr>Email<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">?: </span><a href="../interfaces/_lib_types_.inormalizeemailoptions.html" class="tsd-signature-type">INormalizeEmailOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/a1570e6/src/lib/ValidationChain.ts#L925">lib/ValidationChain.ts:925</a></li>
+									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/6bfeaf6/src/lib/ValidationChain.ts#L925">lib/ValidationChain.ts:925</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Normalize email address.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>see</dt>
+									<dd><p><a href="https://github.com/chriso/validator.js">https://github.com/chriso/validator.js</a> For details</p>
+									</dd>
+								</dl>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <a href="../interfaces/_lib_types_.inormalizeemailoptions.html" class="tsd-signature-type">INormalizeEmailOptions</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The options</p>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
@@ -1485,15 +1932,20 @@
 					<a name="optional" class="tsd-anchor"></a>
 					<h3>optional</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">optional<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">: </span><a href="../interfaces/_lib_types_.ioptionaloptions.html" class="tsd-signature-type">IOptionalOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
+						<li class="tsd-signature tsd-kind-icon">optional<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">?: </span><a href="../interfaces/_lib_types_.ioptionaloptions.html" class="tsd-signature-type">IOptionalOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/a1570e6/src/lib/ValidationChain.ts#L135">lib/ValidationChain.ts:135</a></li>
+									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/6bfeaf6/src/lib/ValidationChain.ts#L135">lib/ValidationChain.ts:135</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Set this property as optional.</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
@@ -1508,19 +1960,27 @@
 					<a name="rtrim" class="tsd-anchor"></a>
 					<h3>rtrim</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">rtrim<span class="tsd-signature-symbol">(</span>chars<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
+						<li class="tsd-signature tsd-kind-icon">rtrim<span class="tsd-signature-symbol">(</span>chars<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/a1570e6/src/lib/ValidationChain.ts#L909">lib/ValidationChain.ts:909</a></li>
+									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/6bfeaf6/src/lib/ValidationChain.ts#L909">lib/ValidationChain.ts:909</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Trim characters from the right-side of the input.</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5><span class="tsd-flag ts-flagOptional">Optional</span> chars: <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The characters to trim</p>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
@@ -1537,9 +1997,21 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/a1570e6/src/lib/ValidationChain.ts#L93">lib/ValidationChain.ts:93</a></li>
+									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/6bfeaf6/src/lib/ValidationChain.ts#L93">lib/ValidationChain.ts:93</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Run the validation. This method has to be called
+									at the end of each validation.</p>
+									<pre><code class="language-typescript">router.post(
+    <span class="hljs-string">'/auth/login'</span>,
+    body(<span class="hljs-string">'username'</span>).equals(<span class="hljs-string">'user'</span>).run(),
+    body(<span class="hljs-string">'password'</span>).equals(<span class="hljs-string">'pass'</span>).run(),
+    handler
+);</code></pre>
+								</div>
+							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">(Anonymous function)</span></h4>
 						</li>
 					</ul>
@@ -1554,26 +2026,27 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/a1570e6/src/lib/ValidationChain.ts#L1136">lib/ValidationChain.ts:1136</a></li>
+									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/6bfeaf6/src/lib/ValidationChain.ts#L1136">lib/ValidationChain.ts:1136</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Sanitize the given input value with given sanitation definition.</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>input: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The input as string</p>
+									</div>
 								</li>
 								<li>
 									<h5>sanitationDefinition: <a href="../interfaces/_lib_types_.isanitationdefinition.html" class="tsd-signature-type">ISanitationDefinition</a></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span>
-								<span class="tsd-signature-symbol"> | </span>
-								<span class="tsd-signature-type">boolean</span>
-								<span class="tsd-signature-symbol"> | </span>
-								<span class="tsd-signature-type">Date</span>
-								<span class="tsd-signature-symbol"> | </span>
-								<span class="tsd-signature-type">number</span>
-							</h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Date</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -1587,13 +2060,22 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/a1570e6/src/lib/ValidationChain.ts#L941">lib/ValidationChain.ts:941</a></li>
+									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/6bfeaf6/src/lib/ValidationChain.ts#L941">lib/ValidationChain.ts:941</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Remove characters with a numerical value &lt; 32 and 127, mostly control characters.
+										If keep_new_lines is true, newline characters are preserved (\n and \r, hex 0xA
+									and 0xD). Unicode-safe in JavaScript.</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> keepNewLines: <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> =&nbsp;false</span></h5>
+									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> keepNewLines: <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></h5>
+									<div class="tsd-comment tsd-typography">
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
@@ -1610,13 +2092,19 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/a1570e6/src/lib/ValidationChain.ts#L954">lib/ValidationChain.ts:954</a></li>
+									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/6bfeaf6/src/lib/ValidationChain.ts#L954">lib/ValidationChain.ts:954</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>convert the input string to a boolean. Everything except for &#39;0&#39;, &#39;false&#39; and &#39;&#39;
+									returns true. In strict mode only &#39;1&#39; and &#39;true&#39; return true.</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> strict: <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> =&nbsp;false</span></h5>
+									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> strict: <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
@@ -1633,9 +2121,14 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/a1570e6/src/lib/ValidationChain.ts#L966">lib/ValidationChain.ts:966</a></li>
+									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/6bfeaf6/src/lib/ValidationChain.ts#L966">lib/ValidationChain.ts:966</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Convert the input string to a date.</p>
+								</div>
+							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
 						</li>
 					</ul>
@@ -1650,9 +2143,14 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/a1570e6/src/lib/ValidationChain.ts#L977">lib/ValidationChain.ts:977</a></li>
+									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/6bfeaf6/src/lib/ValidationChain.ts#L977">lib/ValidationChain.ts:977</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Convert the input string to a float.</p>
+								</div>
+							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
 						</li>
 					</ul>
@@ -1667,13 +2165,18 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/a1570e6/src/lib/ValidationChain.ts#L988">lib/ValidationChain.ts:988</a></li>
+									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/6bfeaf6/src/lib/ValidationChain.ts#L988">lib/ValidationChain.ts:988</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Convert the input string to an integer, or NaN if the input is not an integer.</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> radix: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;10</span></h5>
+									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> radix: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> = 10</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
@@ -1684,19 +2187,27 @@
 					<a name="trim" class="tsd-anchor"></a>
 					<h3>trim</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">trim<span class="tsd-signature-symbol">(</span>chars<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
+						<li class="tsd-signature tsd-kind-icon">trim<span class="tsd-signature-symbol">(</span>chars<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">this</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/a1570e6/src/lib/ValidationChain.ts#L1002">lib/ValidationChain.ts:1002</a></li>
+									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/6bfeaf6/src/lib/ValidationChain.ts#L1002">lib/ValidationChain.ts:1002</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Trim characters (whitespace by default) from both sides of the input.</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5><span class="tsd-flag ts-flagOptional">Optional</span> chars: <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The characters to trim</p>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
@@ -1713,9 +2224,14 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/a1570e6/src/lib/ValidationChain.ts#L882">lib/ValidationChain.ts:882</a></li>
+									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/6bfeaf6/src/lib/ValidationChain.ts#L882">lib/ValidationChain.ts:882</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Replaces HTML encoded entities with &lt;, &gt;, &amp;, &#39;, &quot; and /.</p>
+								</div>
+							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
 						</li>
 					</ul>
@@ -1730,13 +2246,22 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/a1570e6/src/lib/ValidationChain.ts#L1017">lib/ValidationChain.ts:1017</a></li>
+									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/6bfeaf6/src/lib/ValidationChain.ts#L1017">lib/ValidationChain.ts:1017</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Remove characters that do not appear in the whitelist. The characters are used in a
+									RegExp and so you will need to escape some chars, e.g. whitelist(input, &#39;\[\]&#39;).</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>chars: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Characters to whitelist</p>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
@@ -1753,13 +2278,26 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/a1570e6/src/lib/ValidationChain.ts#L115">lib/ValidationChain.ts:115</a></li>
+									<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/6bfeaf6/src/lib/ValidationChain.ts#L115">lib/ValidationChain.ts:115</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Pass a custom message to the validation.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>throws</dt>
+									<dd><p>{Error} No validation has been set before <code>withMessage()</code> has been called</p>
+									</dd>
+								</dl>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>message: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><a href="../modules/_lib_types_.html#customerrormessagefunction" class="tsd-signature-type">CustomErrorMessageFunction</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Custom message</p>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">this</span></h4>
@@ -1775,16 +2313,21 @@
 					<div class="tsd-signature tsd-kind-icon">is<wbr>Optional<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/a1570e6/src/lib/ValidationChain.ts#L55">lib/ValidationChain.ts:55</a></li>
+							<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/6bfeaf6/src/lib/ValidationChain.ts#L55">lib/ValidationChain.ts:55</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Is this parameter optional?</p>
+						</div>
+					</div>
 					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
 						<a name="isoptional.value" class="tsd-anchor"></a>
 						<h3>value</h3>
-						<div class="tsd-signature tsd-kind-icon">value<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> =&nbsp;false</span></div>
+						<div class="tsd-signature tsd-kind-icon">value<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> = false</span></div>
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/a1570e6/src/lib/ValidationChain.ts#L58">lib/ValidationChain.ts:58</a></li>
+								<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/6bfeaf6/src/lib/ValidationChain.ts#L58">lib/ValidationChain.ts:58</a></li>
 							</ul>
 						</aside>
 					</section>
@@ -1798,16 +2341,16 @@
 						<a href="../globals.html"><em>Globals</em></a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="../modules/_index_.html">"index"</a>
+						<a href="../modules/_index_.html">&quot;index&quot;</a>
 					</li>
 					<li class="current tsd-kind-external-module">
-						<a href="../modules/_lib_validationchain_.html">"lib/<wbr>Validation<wbr>Chain"</a>
+						<a href="../modules/_lib_validationchain_.html">&quot;lib/<wbr>Validation<wbr>Chain&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="../modules/_lib_validationresult_.html">"lib/<wbr>Validation<wbr>Result"</a>
+						<a href="../modules/_lib_validationresult_.html">&quot;lib/<wbr>Validation<wbr>Result&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="../modules/_lib_types_.html">"lib/types"</a>
+						<a href="../modules/_lib_types_.html">&quot;lib/types&quot;</a>
 					</li>
 				</ul>
 			</nav>

@@ -1,4 +1,5 @@
-import { ParameterizedContext } from 'koa';
+/// <reference types="koa__router" />
+import { RouterContext } from '@koa/router';
 /**
  * Interface describing validation errors.
  */
@@ -37,7 +38,7 @@ export declare type SanitationOptions = boolean | string | number | INormalizeEm
 /**
  * Custom validation function with context object.
  */
-declare type CustomValidatorFunctionWithContext = (input: any, ctx: ParameterizedContext) => Promise<void>;
+declare type CustomValidatorFunctionWithContext = (input: any, ctx: RouterContext) => Promise<void>;
 /**
  * Definition of custom validation function. Custom
  * validation function should throw an error
@@ -49,7 +50,7 @@ export declare type CustomValidatorFunction = (input: any) => Promise<void>;
  * context and the user's input for the parameter, and it has to return the error
  * message as a result.f
  */
-export declare type CustomErrorMessageFunction = (ctx: ParameterizedContext, input: string) => string;
+export declare type CustomErrorMessageFunction = (ctx: RouterContext, input: string) => string;
 /**
  * Validation definition for internal module usage.
  */

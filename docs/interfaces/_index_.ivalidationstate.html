@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>IOptionalOptions | koa-req-validation</title>
+	<title>IValidationState | koa-req-validation</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,13 +56,13 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="../modules/_lib_types_.html">&quot;lib/types&quot;</a>
+					<a href="../modules/_index_.html">&quot;index&quot;</a>
 				</li>
 				<li>
-					<a href="_lib_types_.ioptionaloptions.html">IOptionalOptions</a>
+					<a href="_index_.ivalidationstate.html">IValidationState</a>
 				</li>
 			</ul>
-			<h1>Interface IOptionalOptions</h1>
+			<h1>Interface IValidationState</h1>
 		</div>
 	</div>
 </header>
@@ -72,7 +72,7 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>Options containing allowNull flag.</p>
+						<p>Koa context for validation operations.</p>
 					</div>
 				</div>
 			</section>
@@ -80,7 +80,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">IOptionalOptions</span>
+						<span class="target">IValidationState</span>
 					</li>
 				</ul>
 			</section>
@@ -91,7 +91,7 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_lib_types_.ioptionaloptions.html#allownull" class="tsd-kind-icon">allow<wbr>Null</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_index_.ivalidationstate.html#validationresults" class="tsd-kind-icon">validation<wbr>Results</a></li>
 							</ul>
 						</section>
 					</div>
@@ -100,14 +100,19 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="allownull" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> allow<wbr>Null</h3>
-					<div class="tsd-signature tsd-kind-icon">allow<wbr>Null<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">true</span></div>
+					<a name="validationresults" class="tsd-anchor"></a>
+					<h3>validation<wbr>Results</h3>
+					<div class="tsd-signature tsd-kind-icon">validation<wbr>Results<span class="tsd-signature-symbol">:</span> <a href="../classes/_lib_validationresult_.validationresult.html" class="tsd-signature-type">ValidationResult</a><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/6bfeaf6/src/lib/types.ts#L30">lib/types.ts:30</a></li>
+							<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/6bfeaf6/src/index.ts#L15">index.ts:15</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Validation results</p>
+						</div>
+					</div>
 				</section>
 			</section>
 		</div>
@@ -117,7 +122,7 @@
 					<li class="globals  ">
 						<a href="../globals.html"><em>Globals</em></a>
 					</li>
-					<li class=" tsd-kind-external-module">
+					<li class="current tsd-kind-external-module">
 						<a href="../modules/_index_.html">&quot;index&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
@@ -126,99 +131,111 @@
 					<li class=" tsd-kind-external-module">
 						<a href="../modules/_lib_validationresult_.html">&quot;lib/<wbr>Validation<wbr>Result&quot;</a>
 					</li>
-					<li class="current tsd-kind-external-module">
+					<li class=" tsd-kind-external-module">
 						<a href="../modules/_lib_types_.html">&quot;lib/types&quot;</a>
 					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-enum tsd-parent-kind-external-module">
-						<a href="../enums/_lib_types_.paramlocation.html" class="tsd-kind-icon">Param<wbr>Location</a>
+					<li class=" tsd-kind-reference tsd-parent-kind-external-module">
+						<a href="../modules/_index_.html#customerrormessagefunction" class="tsd-kind-icon">Custom<wbr>Error<wbr>Message<wbr>Function</a>
 					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="_lib_types_.iissnoptions.html" class="tsd-kind-icon">IISSNOptions</a>
+					<li class=" tsd-kind-reference tsd-parent-kind-external-module">
+						<a href="../modules/_index_.html#customvalidatorfunction" class="tsd-kind-icon">Custom<wbr>Validator<wbr>Function</a>
 					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="_lib_types_.iiscurrencyoptions.html" class="tsd-kind-icon">IIs<wbr>Currency<wbr>Options</a>
+					<li class=" tsd-kind-reference tsd-parent-kind-external-module">
+						<a href="../modules/_index_.html#iissnoptions" class="tsd-kind-icon">IISSNOptions</a>
 					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="_lib_types_.iisdecimaloptions.html" class="tsd-kind-icon">IIs<wbr>Decimal<wbr>Options</a>
+					<li class=" tsd-kind-reference tsd-parent-kind-external-module">
+						<a href="../modules/_index_.html#iiscurrencyoptions" class="tsd-kind-icon">IIs<wbr>Currency<wbr>Options</a>
 					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="_lib_types_.iisfqdnoptions.html" class="tsd-kind-icon">IIsFQDNOptions</a>
+					<li class=" tsd-kind-reference tsd-parent-kind-external-module">
+						<a href="../modules/_index_.html#iisdecimaloptions" class="tsd-kind-icon">IIs<wbr>Decimal<wbr>Options</a>
 					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="_lib_types_.iisurloptions.html" class="tsd-kind-icon">IIsURLOptions</a>
+					<li class=" tsd-kind-reference tsd-parent-kind-external-module">
+						<a href="../modules/_index_.html#iisfqdnoptions" class="tsd-kind-icon">IIsFQDNOptions</a>
 					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="_lib_types_.imappedvalidationresults.html" class="tsd-kind-icon">IMapped<wbr>Validation<wbr>Results</a>
+					<li class=" tsd-kind-reference tsd-parent-kind-external-module">
+						<a href="../modules/_index_.html#iisurloptions" class="tsd-kind-icon">IIsURLOptions</a>
 					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="_lib_types_.iminmaxoptions.html" class="tsd-kind-icon">IMin<wbr>Max<wbr>Options</a>
+					<li class=" tsd-kind-reference tsd-parent-kind-external-module">
+						<a href="../modules/_index_.html#imappedvalidationresults" class="tsd-kind-icon">IMapped<wbr>Validation<wbr>Results</a>
 					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="_lib_types_.inormalizeemailoptions.html" class="tsd-kind-icon">INormalize<wbr>Email<wbr>Options</a>
+					<li class=" tsd-kind-reference tsd-parent-kind-external-module">
+						<a href="../modules/_index_.html#iminmaxoptions" class="tsd-kind-icon">IMin<wbr>Max<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-reference tsd-parent-kind-external-module">
+						<a href="../modules/_index_.html#inormalizeemailoptions" class="tsd-kind-icon">INormalize<wbr>Email<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-reference tsd-parent-kind-external-module">
+						<a href="../modules/_index_.html#ioptionaloptions" class="tsd-kind-icon">IOptional<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-reference tsd-parent-kind-external-module">
+						<a href="../modules/_index_.html#isanitationdefinition" class="tsd-kind-icon">ISanitation<wbr>Definition</a>
+					</li>
+					<li class=" tsd-kind-reference tsd-parent-kind-external-module">
+						<a href="../modules/_index_.html#ivalidationdefinition" class="tsd-kind-icon">IValidation<wbr>Definition</a>
+					</li>
+					<li class=" tsd-kind-reference tsd-parent-kind-external-module">
+						<a href="../modules/_index_.html#ivalidationerror" class="tsd-kind-icon">IValidation<wbr>Error</a>
+					</li>
+					<li class=" tsd-kind-reference tsd-parent-kind-external-module">
+						<a href="../modules/_index_.html#isalphalocale" class="tsd-kind-icon">Is<wbr>Alpha<wbr>Locale</a>
+					</li>
+					<li class=" tsd-kind-reference tsd-parent-kind-external-module">
+						<a href="../modules/_index_.html#isidentitycardlocale" class="tsd-kind-icon">Is<wbr>Identity<wbr>Card<wbr>Locale</a>
+					</li>
+					<li class=" tsd-kind-reference tsd-parent-kind-external-module">
+						<a href="../modules/_index_.html#isinvaluesoptions" class="tsd-kind-icon">Is<wbr>InValues<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-reference tsd-parent-kind-external-module">
+						<a href="../modules/_index_.html#ismobilephonelocale" class="tsd-kind-icon">Is<wbr>Mobile<wbr>Phone<wbr>Locale</a>
+					</li>
+					<li class=" tsd-kind-reference tsd-parent-kind-external-module">
+						<a href="../modules/_index_.html#ispostalcodelocale" class="tsd-kind-icon">Is<wbr>Postal<wbr>Code<wbr>Locale</a>
+					</li>
+					<li class=" tsd-kind-reference tsd-parent-kind-external-module">
+						<a href="../modules/_index_.html#paramlocation" class="tsd-kind-icon">Param<wbr>Location</a>
+					</li>
+					<li class=" tsd-kind-reference tsd-parent-kind-external-module">
+						<a href="../modules/_index_.html#sanitationfunctionname" class="tsd-kind-icon">Sanitation<wbr>Function<wbr>Name</a>
+					</li>
+					<li class=" tsd-kind-reference tsd-parent-kind-external-module">
+						<a href="../modules/_index_.html#sanitationoptions" class="tsd-kind-icon">Sanitation<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-reference tsd-parent-kind-external-module">
+						<a href="../modules/_index_.html#urlprotocol" class="tsd-kind-icon">URLProtocol</a>
+					</li>
+					<li class=" tsd-kind-reference tsd-parent-kind-external-module">
+						<a href="../modules/_index_.html#validatorfunctionname" class="tsd-kind-icon">Validator<wbr>Function<wbr>Name</a>
+					</li>
+					<li class=" tsd-kind-reference tsd-parent-kind-external-module">
+						<a href="../modules/_index_.html#validatoroptions" class="tsd-kind-icon">Validator<wbr>Options</a>
 					</li>
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="_lib_types_.ioptionaloptions.html" class="tsd-kind-icon">IOptional<wbr>Options</a>
+						<a href="_index_.ivalidationstate.html" class="tsd-kind-icon">IValidation<wbr>State</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="_lib_types_.ioptionaloptions.html#allownull" class="tsd-kind-icon">allow<wbr>Null</a>
+								<a href="_index_.ivalidationstate.html#validationresults" class="tsd-kind-icon">validation<wbr>Results</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="_lib_types_.isanitationdefinition.html" class="tsd-kind-icon">ISanitation<wbr>Definition</a>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module">
+						<a href="../modules/_index_.html#body" class="tsd-kind-icon">body</a>
 					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="_lib_types_.ivalidationdefinition.html" class="tsd-kind-icon">IValidation<wbr>Definition</a>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module">
+						<a href="../modules/_index_.html#param" class="tsd-kind-icon">param</a>
 					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="_lib_types_.ivalidationerror.html" class="tsd-kind-icon">IValidation<wbr>Error</a>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module">
+						<a href="../modules/_index_.html#query" class="tsd-kind-icon">query</a>
 					</li>
-					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module">
-						<a href="../modules/_lib_types_.html#customerrormessagefunction" class="tsd-kind-icon">Custom<wbr>Error<wbr>Message<wbr>Function</a>
-					</li>
-					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module">
-						<a href="../modules/_lib_types_.html#customvalidatorfunction" class="tsd-kind-icon">Custom<wbr>Validator<wbr>Function</a>
-					</li>
-					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module tsd-is-not-exported">
-						<a href="../modules/_lib_types_.html#customvalidatorfunctionwithcontext" class="tsd-kind-icon">Custom<wbr>Validator<wbr>Function<wbr>With<wbr>Context</a>
-					</li>
-					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module">
-						<a href="../modules/_lib_types_.html#isalphalocale" class="tsd-kind-icon">Is<wbr>Alpha<wbr>Locale</a>
-					</li>
-					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module">
-						<a href="../modules/_lib_types_.html#isidentitycardlocale" class="tsd-kind-icon">Is<wbr>Identity<wbr>Card<wbr>Locale</a>
-					</li>
-					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module">
-						<a href="../modules/_lib_types_.html#isinvaluesoptions" class="tsd-kind-icon">Is<wbr>InValues<wbr>Options</a>
-					</li>
-					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module">
-						<a href="../modules/_lib_types_.html#ismobilephonelocale" class="tsd-kind-icon">Is<wbr>Mobile<wbr>Phone<wbr>Locale</a>
-					</li>
-					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module">
-						<a href="../modules/_lib_types_.html#ispostalcodelocale" class="tsd-kind-icon">Is<wbr>Postal<wbr>Code<wbr>Locale</a>
-					</li>
-					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module">
-						<a href="../modules/_lib_types_.html#sanitationfunctionname" class="tsd-kind-icon">Sanitation<wbr>Function<wbr>Name</a>
-					</li>
-					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module">
-						<a href="../modules/_lib_types_.html#sanitationoptions" class="tsd-kind-icon">Sanitation<wbr>Options</a>
-					</li>
-					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module">
-						<a href="../modules/_lib_types_.html#urlprotocol" class="tsd-kind-icon">URLProtocol</a>
-					</li>
-					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module">
-						<a href="../modules/_lib_types_.html#validatorfunctionname" class="tsd-kind-icon">Validator<wbr>Function<wbr>Name</a>
-					</li>
-					<li class=" tsd-kind-type-alias tsd-parent-kind-external-module">
-						<a href="../modules/_lib_types_.html#validatoroptions" class="tsd-kind-icon">Validator<wbr>Options</a>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module">
+						<a href="../modules/_index_.html#validationresults" class="tsd-kind-icon">validation<wbr>Results</a>
 					</li>
 				</ul>
 			</nav>

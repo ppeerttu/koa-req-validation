@@ -1,11 +1,11 @@
+import Router, { RouterContext } from '@koa/router';
 import http from 'http';
-import Koa, { ParameterizedContext } from 'koa';
+import Koa from 'koa';
 import bodyParser from 'koa-bodyparser';
-import Router, { IRouterContext } from 'koa-router';
 
 import {
     CustomErrorMessageFunction,
-    IValidationContext,
+    IValidationState,
     param,
     query,
     validationResults,
@@ -45,7 +45,7 @@ const app = new Koa();
 const router = new Router();
 
 const customErrorMessage: CustomErrorMessageFunction = (
-    ctx: ParameterizedContext,
+    ctx: RouterContext,
     value: string,
 ) => {
     return `The name has to be between 3 and 20 `
@@ -70,7 +70,7 @@ router.get(
         .isLength({ min: 3, max: 20 })
         .withMessage('The name has to be between 3 and 20 characters')
         .run(),
-    async (ctx: ParameterizedContext<IValidationContext>) => {
+    async (ctx: RouterContext<IValidationState>) => {
         const results = validationResults(ctx);
         if (results.hasErrors()) {
             throw new RequestError(422, results.mapped());
@@ -86,7 +86,7 @@ router.get(
         .isLength({ min: 3, max: 20 })
         .optional()
         .run(),
-    async (ctx: ParameterizedContext<IValidationContext>) => {
+    async (ctx: RouterContext<IValidationState>) => {
         const results = validationResults(ctx);
         if (results.hasErrors()) {
             throw new RequestError(422, results.mapped());
@@ -99,7 +99,7 @@ router.get(
 router.get(
     '/api/hello/:count',
     ...arrayExample,
-    async (ctx: ParameterizedContext<IValidationContext>) => {
+    async (ctx: RouterContext<IValidationState>) => {
         const results = validationResults(ctx);
         if (results.hasErrors()) {
             throw new RequestError(422, results.mapped());
@@ -115,7 +115,7 @@ router.get(
 
 app
     .use(bodyParser())
-    .use(async (ctx: ParameterizedContext<IRouterContext>, next) => {
+    .use(async (ctx: RouterContext<IValidationState>, next) => {
         try {
             await next();
         } catch (e) {

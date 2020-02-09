@@ -41,10 +41,7 @@ exports.validationResults = (ctx) => {
  * );
  * ```
  */
-exports.body = (bodyParam) => {
-    const validationChain = new ValidationChain_1.default(bodyParam, types_1.ParamLocation.BODY);
-    return validationChain;
-};
+exports.body = (bodyParam) => new ValidationChain_1.default(bodyParam, types_1.ParamLocation.BODY);
 /**
  * Validate request query.
  *
@@ -58,10 +55,7 @@ exports.body = (bodyParam) => {
  * );
  * ```
  */
-exports.query = (queryString) => {
-    const validationChain = new ValidationChain_1.default(queryString, types_1.ParamLocation.QUERY);
-    return validationChain;
-};
+exports.query = (queryString) => new ValidationChain_1.default(queryString, types_1.ParamLocation.QUERY);
 /**
  * Validate request param.
  *
@@ -75,9 +69,6 @@ exports.query = (queryString) => {
  * );
  * ```
  */
-exports.param = (routeParam) => {
-    const validationChain = new ValidationChain_1.default(routeParam, types_1.ParamLocation.PARAM);
-    return validationChain;
-};
+exports.param = (routeParam) => new ValidationChain_1.default(routeParam, types_1.ParamLocation.PARAM);
 __export(require("./lib/types"));
 //# sourceMappingURL=index.js.map

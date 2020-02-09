@@ -1,5 +1,4 @@
-import { ParameterizedContext } from 'koa';
-import { IRouterContext } from 'koa-router';
+import { RouterContext } from '@koa/router';
 
 import { ParamLocation } from './lib/types';
 import ValidationChain from './lib/ValidationChain';
@@ -8,7 +7,7 @@ import ValidationResult from './lib/ValidationResult';
 /**
  * Koa context for validation operations.
  */
-export interface IValidationContext extends IRouterContext {
+export interface IValidationState {
 
     /**
      * Validation results
@@ -29,7 +28,7 @@ export interface IValidationContext extends IRouterContext {
  * }
  */
 export const validationResults = (
-    ctx: ParameterizedContext<IValidationContext>,
+    ctx: RouterContext<IValidationState>,
 ): ValidationResult => {
     if (Array.isArray(ctx.state.validationResults)) {
         return ValidationResult.fromResults(ctx.state.validationResults);
@@ -51,10 +50,10 @@ export const validationResults = (
  * );
  * ```
  */
-export const body = (bodyParam: string) => {
-    const validationChain = new ValidationChain(bodyParam, ParamLocation.BODY);
-    return validationChain;
-};
+export const body = (bodyParam: string) => new ValidationChain(
+    bodyParam,
+    ParamLocation.BODY,
+);
 
 /**
  * Validate request query.
@@ -69,10 +68,10 @@ export const body = (bodyParam: string) => {
  * );
  * ```
  */
-export const query = (queryString: string) => {
-    const validationChain = new ValidationChain(queryString, ParamLocation.QUERY);
-    return validationChain;
-};
+export const query = (queryString: string) => new ValidationChain(
+    queryString,
+    ParamLocation.QUERY,
+);
 
 /**
  * Validate request param.
@@ -87,9 +86,9 @@ export const query = (queryString: string) => {
  * );
  * ```
  */
-export const param = (routeParam: string) => {
-    const validationChain = new ValidationChain(routeParam, ParamLocation.PARAM);
-    return validationChain;
-};
+export const param = (routeParam: string) => new ValidationChain(
+    routeParam,
+    ParamLocation.PARAM,
+);
 
 export * from './lib/types';

@@ -56,7 +56,7 @@
 					<a href="globals.html">Globals</a>
 				</li>
 			</ul>
-			<h1> koa-req-validation</h1>
+			<h1>koa-req-validation</h1>
 		</div>
 	</div>
 </header>
@@ -85,6 +85,7 @@
 						</ul>
 					</li>
 					<li><a href="#issues">Issues</a></li>
+					<li><a href="#changelog">Changelog</a></li>
 					<li><a href="#contribution">Contribution</a></li>
 					<li><a href="#licence">Licence</a></li>
 				</ul>
@@ -99,8 +100,8 @@
 					<h1>Getting started</h1>
 				</a>
 				<p>A basic usage example</p>
-				<pre><code class="language-typescript"><span class="hljs-keyword">import</span> Router, { IRouterContext } <span class="hljs-keyword">from</span> <span class="hljs-string">'koa-router'</span>;
-<span class="hljs-keyword">import</span> { query, validationResults, IValidationContext } <span class="hljs-keyword">from</span> <span class="hljs-string">'koa-req-validation'</span>;
+				<pre><code class="language-typescript"><span class="hljs-keyword">import</span> Router, { RouterContext } <span class="hljs-keyword">from</span> <span class="hljs-string">'@koa/router'</span>;
+<span class="hljs-keyword">import</span> { query, validationResults, IValidationState } <span class="hljs-keyword">from</span> <span class="hljs-string">'koa-req-validation'</span>;
 
 <span class="hljs-comment">// ...</span>
 
@@ -112,7 +113,7 @@ router.get(
         .isLength({ min: <span class="hljs-number">3</span>, max: <span class="hljs-number">20</span> })
         .withMessage(<span class="hljs-string">'The name has to be between 3 and 20 characters'</span>)
         .run(), <span class="hljs-comment">// &lt;-- This is required at the end of each validation</span>
-    <span class="hljs-keyword">async</span> (ctx: ParameterizedContext&lt;IValidationContext&gt;) =&gt; {
+    <span class="hljs-keyword">async</span> (ctx: RouterContext&lt;IValidationState&gt;) =&gt; {
         <span class="hljs-keyword">const</span> result = validationResults(ctx);
         <span class="hljs-keyword">if</span> (result.hasErrors()) {
             <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> RequestError(<span class="hljs-number">422</span>, result.mapped());
@@ -151,11 +152,14 @@ router.get(
 					<h2>Peer dependencies</h2>
 				</a>
 				<p>The usage of the few peer dependencies is a known decision. As it appears to be slowly growing concern that developers hog thousands of npm pacakges without knowing them, we&#39;d like to make sure the developer knows what&#39;s included in this package and actively consider whether to include this pacakge along with it&#39;s peer dependencies to the project.</p>
-				<p>Also, since this package is still in very raw state and lots of features are missing, it makes more sense to manually install the <a href="https://github.com/chriso/validator.js">validator.js</a> -module along the project dependencies for the opportunity of using it as is in the application.</p>
 				<a href="#issues" id="issues" style="color: inherit; text-decoration: none;">
 					<h1>Issues</h1>
 				</a>
 				<p>We use <a href="https://github.com/ppeerttu/koa-req-validation/issues">GitHub</a> for issue tracking. Please look from <a href="https://github.com/ppeerttu/koa-req-validation/issues?utf8=%E2%9C%93&amp;q=is%3Aissue">previously submitted issues</a> if someone else has already submitted the same issue.</p>
+				<a href="#changelog" id="changelog" style="color: inherit; text-decoration: none;">
+					<h1>Changelog</h1>
+				</a>
+				<p>Please see <a href="https://github.com/ppeerttu/koa-req-validation/releases">releases</a>.</p>
 				<a href="#contribution" id="contribution" style="color: inherit; text-decoration: none;">
 					<h1>Contribution</h1>
 				</a>
@@ -173,16 +177,16 @@ router.get(
 						<a href="globals.html"><em>Globals</em></a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_index_.html">"index"</a>
+						<a href="modules/_index_.html">&quot;index&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_lib_validationchain_.html">"lib/<wbr>Validation<wbr>Chain"</a>
+						<a href="modules/_lib_validationchain_.html">&quot;lib/<wbr>Validation<wbr>Chain&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_lib_validationresult_.html">"lib/<wbr>Validation<wbr>Result"</a>
+						<a href="modules/_lib_validationresult_.html">&quot;lib/<wbr>Validation<wbr>Result&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_lib_types_.html">"lib/types"</a>
+						<a href="modules/_lib_types_.html">&quot;lib/types&quot;</a>
 					</li>
 				</ul>
 			</nav>
