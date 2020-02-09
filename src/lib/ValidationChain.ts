@@ -1,7 +1,7 @@
-import { ParameterizedContext } from 'koa';
+import { RouterContext } from '@koa/router';
 import validator from 'validator';
 
-import { IValidationContext } from '..';
+import { IValidationState } from '..';
 import {
     CustomErrorMessageFunction,
     CustomValidatorFunction,
@@ -91,7 +91,7 @@ export default class ValidationChain {
      * ```
      */
     public run = () => async (
-        ctx: ParameterizedContext<IValidationContext>,
+        ctx: RouterContext<IValidationState>,
         next: () => Promise<void>,
     ) => {
         const results = await this.checkResults(ctx);
@@ -1028,7 +1028,7 @@ export default class ValidationChain {
      * @param ctx The context
      */
     private async checkResults(
-        ctx: ParameterizedContext<IValidationContext>,
+        ctx: RouterContext<IValidationState>,
     ): Promise<ValidationResult | null> {
         let input: any;
         let originalInput: any;

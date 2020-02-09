@@ -1,4 +1,4 @@
-import { ParameterizedContext } from 'koa';
+import { RouterContext } from '@koa/router';
 
 /**
  * Interface describing validation errors.
@@ -65,7 +65,7 @@ export type SanitationOptions = boolean
  */
 type CustomValidatorFunctionWithContext = (
     input: any,
-    ctx: ParameterizedContext,
+    ctx: RouterContext,
 ) => Promise<void>;
 
 /**
@@ -83,7 +83,7 @@ export type CustomValidatorFunction = (
  * message as a result.f
  */
 export type CustomErrorMessageFunction = (
-    ctx: ParameterizedContext,
+    ctx: RouterContext,
     input: string,
 ) => string;
 
