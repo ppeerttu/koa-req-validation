@@ -17,6 +17,7 @@ A [validator][validator-site] middleware for [koa][koa-site]. Inspired by [expre
 - [Motivation](#motivation)
   - [Peer dependencies](#peer-dependencies)
 - [Issues](#issues)
+- [Changelog](#changelog)
 - [Contribution](#contribution)
 - [Licence](#licence)
 
@@ -42,8 +43,8 @@ npm install koa-req-validation
 A basic usage example
 
 ```typescript
-import Router, { IRouterContext } from 'koa-router';
-import { query, validationResults, IValidationContext } from 'koa-req-validation';
+import Router, { RouterContext } from '@koa/router';
+import { query, validationResults, IValidationState } from 'koa-req-validation';
 
 // ...
 
@@ -55,7 +56,7 @@ router.get(
         .isLength({ min: 3, max: 20 })
         .withMessage('The name has to be between 3 and 20 characters')
         .run(), // <-- This is required at the end of each validation
-    async (ctx: ParameterizedContext<IValidationContext>) => {
+    async (ctx: RouterContext<IValidationState>) => {
         const result = validationResults(ctx);
         if (result.hasErrors()) {
             throw new RequestError(422, result.mapped());
@@ -96,11 +97,13 @@ Motivation behind this module is the awesome experience of using the [express-va
 
 The usage of the few peer dependencies is a known decision. As it appears to be slowly growing concern that developers hog thousands of npm pacakges without knowing them, we'd like to make sure the developer knows what's included in this package and actively consider whether to include this pacakge along with it's peer dependencies to the project.
 
-Also, since this package is still in very raw state and lots of features are missing, it makes more sense to manually install the [validator.js][validator-site] -module along the project dependencies for the opportunity of using it as is in the application.
-
 # Issues
 
 We use [GitHub][issue-site] for issue tracking. Please look from [previously submitted issues][issue-all-filter-site] if someone else has already submitted the same issue.
+
+# Changelog
+
+Please see [releases][releases-site].
 
 # Contribution
 
@@ -118,6 +121,7 @@ All contributions to the project are welcome.
 
 [issue-site]:https://github.com/ppeerttu/koa-req-validation/issues
 [issue-all-filter-site]:https://github.com/ppeerttu/koa-req-validation/issues?utf8=%E2%9C%93&q=is%3Aissue
+[releases-site]:https://github.com/ppeerttu/koa-req-validation/releases
 
 [koa-site]:https://koajs.com/
 [koa-router-site]:https://github.com/ZijianHe/koa-router

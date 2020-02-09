@@ -34,7 +34,7 @@ export interface IOptionalOptions {
  * General validator options combining all
  * possible options.
  */
-export type ValidatorOptions =  IMinMaxOptions
+export type ValidatorOptions = IMinMaxOptions
     | RegExp
     | IsInValuesOptions
     | IOptionalOptions

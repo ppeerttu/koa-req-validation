@@ -42,7 +42,7 @@ export default class ValidationChain {
     /**
      * Validations and sanitations to be executed.
      */
-    private operations: Array<IValidationDefinition | ISanitationDefinition> = [];
+    private operations: (IValidationDefinition | ISanitationDefinition)[] = [];
 
     /**
      * Location of the given parameter.
