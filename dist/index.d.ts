@@ -1,12 +1,12 @@
+/// <reference types="koa__router" />
+/// <reference types="koa" />
 /// <reference types="koa-bodyparser" />
-import { ParameterizedContext } from 'koa';
-import { IRouterContext } from 'koa-router';
 import ValidationChain from './lib/ValidationChain';
 import ValidationResult from './lib/ValidationResult';
 /**
  * Koa context for validation operations.
  */
-export interface IValidationContext extends IRouterContext {
+export interface IValidationState {
     /**
      * Validation results
      */
@@ -24,7 +24,7 @@ export interface IValidationContext extends IRouterContext {
  *     throw new RequestError(422, errors.mapped());
  * }
  */
-export declare const validationResults: (ctx: ParameterizedContext<IValidationContext, import("koa").DefaultContext>) => ValidationResult;
+export declare const validationResults: (ctx: import("koa").ParameterizedContext<IValidationState, import("@koa/router").RouterParamContext<IValidationState, {}>>) => ValidationResult;
 /**
  * Validate request body.
  *

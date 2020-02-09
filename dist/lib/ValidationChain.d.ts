@@ -1,7 +1,8 @@
+/// <reference types="koa__router" />
+/// <reference types="koa" />
 /// <reference types="koa-bodyparser" />
-import { ParameterizedContext } from 'koa';
 import validator from 'validator';
-import { IValidationContext } from '..';
+import { IValidationState } from '..';
 import { CustomErrorMessageFunction, CustomValidatorFunction, IIsCurrencyOptions, IIsDecimalOptions, IIsFQDNOptions, IISSNOptions, IIsURLOptions, IMinMaxOptions, INormalizeEmailOptions, IOptionalOptions, IsAlphaLocale, IsInValuesOptions, IsMobilePhoneLocale, IsPostalCodeLocale, ParamLocation } from './types';
 /**
  * The validation chain object.
@@ -46,7 +47,7 @@ export default class ValidationChain {
      * );
      * ```
      */
-    run: () => (ctx: ParameterizedContext<IValidationContext, import("koa").DefaultContext>, next: () => Promise<void>) => Promise<void>;
+    run: () => (ctx: import("koa").ParameterizedContext<IValidationState, import("@koa/router").RouterParamContext<IValidationState, {}>>, next: () => Promise<void>) => Promise<void>;
     /**
      * Pass a custom message to the validation.
      *
