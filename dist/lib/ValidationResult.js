@@ -52,7 +52,7 @@ class ValidationResult {
      * Reuturn the validation results as an array.
      */
     array() {
-        return this.results;
+        return [...this.results];
     }
     /**
      * Return the validation results as mapped validation results.

@@ -10,9 +10,9 @@ export default class ValidationResult {
      */
     static fromResults(results: ValidationResult[]): ValidationResult;
     readonly parameters: string[];
-    readonly finalValues: Array<undefined | string | boolean | Date | number>;
+    readonly finalValues: (undefined | string | boolean | Date | number)[];
     private results;
-    constructor(parameter?: string | string[], finalValue?: undefined | string | boolean | Date | number | Array<undefined | string | boolean | Date | number>, results?: IValidationError[]);
+    constructor(parameter?: string | string[], finalValue?: undefined | string | boolean | Date | number | (undefined | string | boolean | Date | number)[], results?: IValidationError[]);
     /**
      * See if validation result has any validation errors.
      */

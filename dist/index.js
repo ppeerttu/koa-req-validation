@@ -35,8 +35,8 @@ exports.validationResults = (ctx) => {
  * ```typescript
  * router.post(
  *     '/auth/login',
- *     body('username').equals('user').run(),
- *     body('password').equals('pass').run(),
+ *     body('username').equals('user').build(),
+ *     body('password').equals('pass').build(),
  *     handler
  * );
  * ```
@@ -50,7 +50,7 @@ exports.body = (bodyParam) => new ValidationChain_1.default(bodyParam, types_1.P
  * ```typescript
  * router.get(
  *     '/api/tags',
- *     query('search').contains('_').run(),
+ *     query('search').contains('_').build(),
  *     handler
  * );
  * ```
@@ -64,7 +64,7 @@ exports.query = (queryString) => new ValidationChain_1.default(queryString, type
  * ```typescript
  * router.get(
  *     '/api/users/:id',
- *     param('id').isInt().run(),
+ *     param('id').isInt().build(),
  *     handler
  * );
  * ```

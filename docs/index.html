@@ -94,7 +94,7 @@
 				</a>
 				<p>The <strong>koa-req-validation</strong> requires <a href="https://github.com/chriso/validator.js">validator</a>, <a href="https://github.com/ZijianHe/koa-router">koa-router</a> and <a href="https://github.com/koajs/bodyparser">koa-bodyparser</a> as peer dependencies.</p>
 				<p>Install peer dependencies</p>
-				<pre><code>npm <span class="hljs-keyword">install </span>validator koa-<span class="hljs-keyword">bodyparser </span>koa-router</code></pre><p>Install <strong>koa-req-validation</strong></p>
+				<pre><code>npm install <span class="hljs-symbol">validator@</span><span class="hljs-number">12</span> koa-<span class="hljs-symbol">bodyparser@</span><span class="hljs-number">4</span> @koa/<span class="hljs-symbol">router@</span><span class="hljs-number">8</span></code></pre><p>Install <strong>koa-req-validation</strong></p>
 				<pre><code>npm <span class="hljs-keyword">install</span> koa-req-<span class="hljs-keyword">validation</span></code></pre>
 				<a href="#getting-started" id="getting-started" style="color: inherit; text-decoration: none;">
 					<h1>Getting started</h1>
@@ -112,7 +112,7 @@ router.get(
     query(<span class="hljs-string">'name'</span>)
         .isLength({ min: <span class="hljs-number">3</span>, max: <span class="hljs-number">20</span> })
         .withMessage(<span class="hljs-string">'The name has to be between 3 and 20 characters'</span>)
-        .run(), <span class="hljs-comment">// &lt;-- This is required at the end of each validation</span>
+        .build(), <span class="hljs-comment">// &lt;-- This is required at the end of each validation</span>
     <span class="hljs-keyword">async</span> (ctx: RouterContext&lt;IValidationState&gt;) =&gt; {
         <span class="hljs-keyword">const</span> result = validationResults(ctx);
         <span class="hljs-keyword">if</span> (result.hasErrors()) {
@@ -147,11 +147,11 @@ router.get(
 				<a href="#motivation" id="motivation" style="color: inherit; text-decoration: none;">
 					<h1>Motivation</h1>
 				</a>
-				<p>Motivation behind this module is the awesome experience of using the <a href="https://github.com/express-validator/express-validator">express-validator</a>. However, due to various reasons the <code>express-validator</code> doesn&#39;t suit it and it seems that there is quite a lot of request validation packages out there mainly for <code>koa</code> v1 without warranty for active maintenance. This package tries to mimic the <code>express-validator</code> pacakge and eventually provide most of the features.</p>
+				<p>Motivation behind this module is the awesome experience of using the <a href="https://github.com/express-validator/express-validator">express-validator</a>. However, due to various reasons the <code>express-validator</code> doesn&#39;t suit <code>koa</code> and it seems that there are quite a lot of request validation packages out there mainly for <code>koa</code> v1 without warranty for active maintenance. This package tries to mimic the <code>express-validator</code> pacakge and eventually provide most of the features.</p>
 				<a href="#peer-dependencies" id="peer-dependencies" style="color: inherit; text-decoration: none;">
 					<h2>Peer dependencies</h2>
 				</a>
-				<p>The usage of the few peer dependencies is a known decision. As it appears to be slowly growing concern that developers hog thousands of npm pacakges without knowing them, we&#39;d like to make sure the developer knows what&#39;s included in this package and actively consider whether to include this pacakge along with it&#39;s peer dependencies to the project.</p>
+				<p>As it appears to be slowly growing concern that developers hog thousands of npm pacakges without knowing them, we&#39;d like to make sure the developer knows what&#39;s included in this package and actively consider whether to include this pacakge along with it&#39;s peer dependencies to their projects.</p>
 				<a href="#issues" id="issues" style="color: inherit; text-decoration: none;">
 					<h1>Issues</h1>
 				</a>

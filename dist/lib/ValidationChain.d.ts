@@ -3,7 +3,7 @@
 /// <reference types="koa-bodyparser" />
 import validator from 'validator';
 import { IValidationState } from '..';
-import { CustomErrorMessageFunction, CustomValidatorFunction, IIsCurrencyOptions, IIsDecimalOptions, IIsFQDNOptions, IISSNOptions, IIsURLOptions, IMinMaxOptions, INormalizeEmailOptions, IOptionalOptions, IsAlphaLocale, IsInValuesOptions, IsMobilePhoneLocale, IsPostalCodeLocale, ParamLocation } from './types';
+import { CustomErrorMessageFunction, CustomValidatorFunction, IOptionalOptions, ParamLocation } from './types';
 /**
  * The validation chain object.
  */
@@ -36,16 +36,21 @@ export default class ValidationChain {
      */
     constructor(parameter: string, location: ParamLocation);
     /**
-     * Run the validation. This method has to be called
-     * at the end of each validation.
+     * Build the validation chain. This method has to be called at the end of each
+     * validation.
+     *
      * ```typescript
      * router.post(
      *     '/auth/login',
-     *     body('username').equals('user').run(),
-     *     body('password').equals('pass').run(),
+     *     body('username').equals('user').build(),
+     *     body('password').equals('pass').build(),
      *     handler
      * );
      * ```
+     */
+    build: () => (ctx: import("koa").ParameterizedContext<IValidationState, import("@koa/router").RouterParamContext<IValidationState, {}>>, next: () => Promise<void>) => Promise<void>;
+    /**
+     * @deprecated Use `build()` instead
      */
     run: () => (ctx: import("koa").ParameterizedContext<IValidationState, import("@koa/router").RouterParamContext<IValidationState, {}>>, next: () => Promise<void>) => Promise<void>;
     /**
@@ -78,17 +83,17 @@ export default class ValidationChain {
     /**
      * Check if the parameter is an integer.
      */
-    isInt(options?: IMinMaxOptions): this;
+    isInt(options?: validator.IsIntOptions): this;
     /**
      * Check if the string is in given length.
      *
      * @param options Min and max length
      */
-    isLength(options: IMinMaxOptions): this;
+    isLength(options: validator.IsLengthOptions): this;
     /**
      * Check if the parameter is an email.
      */
-    isEmail(): this;
+    isEmail(options?: validator.IsEmailOptions): this;
     /**
      * Check if the parameter is a boolean value.
      */
@@ -96,11 +101,11 @@ export default class ValidationChain {
     /**
      * Check if the parameter is a zero length string.
      */
-    isEmpty(): this;
+    isEmpty(options?: validator.IsEmptyOptions): this;
     /**
      * Check if the parameter is a float.
      */
-    isFloat(): this;
+    isFloat(options?: validator.IsFloatOptions): this;
     /**
      * Check if the parameter is an algorithm.
      *
@@ -128,7 +133,7 @@ export default class ValidationChain {
     /**
      * Check if the parameter is a MAC address.
      */
-    isMACAddress(): this;
+    isMACAddress(options?: validator.IsMACAddressOptions): this;
     /**
      * Check if the parameter is a valid MongoDB ObjectId.
      */
@@ -136,7 +141,7 @@ export default class ValidationChain {
     /**
      * Check if the parameter contains only numbers.
      */
-    isNumeric(): this;
+    isNumeric(options?: validator.IsNumericOptions): this;
     /**
      * Check if the parameter is a valid port number.
      */
@@ -144,7 +149,7 @@ export default class ValidationChain {
     /**
      * Check if the parameter is valid UUID (v3, v4 or v5).
      */
-    isUUID(): this;
+    isUUID(version?: 3 | 4 | 5 | '3' | '4' | '5' | 'all'): this;
     /**
      * Check if the parameter contains only uppercase characters.
      */
@@ -162,12 +167,12 @@ export default class ValidationChain {
      * @param values Options containing at least `values`
      * property with allowed values
      */
-    isIn(values: IsInValuesOptions): this;
+    isIn(values: any[]): this;
     /**
      * Check if the string is a date that's after the specified
      * date (defaults to now).
      *
-     * @param date The date
+     * @param date The date (defaults to now)
      */
     isAfter(date?: string): this;
     /**
@@ -176,14 +181,14 @@ export default class ValidationChain {
      *
      * @param locale The locale
      */
-    isAlpha(locale?: IsAlphaLocale): this;
+    isAlpha(locale?: validator.AlphaLocale): this;
     /**
      * Check if the string contains only letters and numbers.
      * Locale defaults to en-US.
      *
      * @param locale The locale
      */
-    isAlphanumeric(locale?: IsAlphaLocale): this;
+    isAlphanumeric(locale?: validator.AlphanumericLocale): this;
     /**
      * Check if the string contains ACII characters only.
      */
@@ -194,9 +199,9 @@ export default class ValidationChain {
     isBase64(): this;
     /**
      * Check if the string is a date that's before
-     * the given date. Defaults to now.
+     * the given date, which defaults to now.
      *
-     * @param date The date
+     * @param date The date (defaults to now)
      */
     isBefore(date?: string): this;
     /**
@@ -205,7 +210,7 @@ export default class ValidationChain {
      *
      * @param options The range
      */
-    isByteLength(options?: IMinMaxOptions): this;
+    isByteLength(options?: validator.IsByteLengthOptions): this;
     /**
      * Check if the string is a credit card.
      */
@@ -215,7 +220,7 @@ export default class ValidationChain {
      *
      * @param options The options
      */
-    isCurrency(options?: IIsCurrencyOptions): this;
+    isCurrency(options?: validator.IsCurrencyOptions): this;
     /**
      * Check if the string is a data uri format.
      */
@@ -225,7 +230,7 @@ export default class ValidationChain {
      *
      * @param options The options
      */
-    isDecimal(options?: IIsDecimalOptions): this;
+    isDecimal(options?: validator.IsDecimalOptions): this;
     /**
      * Check if the string is a number divisible by
      * given number.
@@ -239,7 +244,7 @@ export default class ValidationChain {
      *
      * @param options The options
      */
-    isFQDN(options?: IIsFQDNOptions): this;
+    isFQDN(options?: validator.IsFQDNOptions): this;
     /**
      * Check if the string contains any full-width
      * chars.
@@ -263,7 +268,7 @@ export default class ValidationChain {
     /**
      * Check if the string is an IP (ver 4 or 6).
      */
-    isIP(version?: 4 | 6): this;
+    isIP(version?: 4 | 6 | '4' | '6'): this;
     /**
      * Check if the string is an IP range (ver 4 only).
      */
@@ -273,13 +278,13 @@ export default class ValidationChain {
      *
      * @param version The version
      */
-    isISBN(version: 10 | 13): this;
+    isISBN(version: 10 | 13 | '10' | '13'): this;
     /**
      * Check if the string is an ISSN.
      *
      * @param options The options
      */
-    isISSN(options?: IISSNOptions): this;
+    isISSN(options?: validator.IsISSNOptions): this;
     /**
      * Check if the string is an ISIN.
      */
@@ -287,7 +292,7 @@ export default class ValidationChain {
     /**
      * Check if the string is valid ISO8601 date.
      */
-    isISO8601(): this;
+    isISO8601(options?: validator.IsISO8601Options): this;
     /**
      * Check if the string is valid RFC3339 date.
      */
@@ -297,6 +302,11 @@ export default class ValidationChain {
      * officially assigned country code.
      */
     isISO31661Alpha2(): this;
+    /**
+     * Check if the string is a valid ISO 3166-1 alpha-3
+     * officially assigned country code.
+     */
+    isISO31661Alpha3(): this;
     /**
      * Check if the string is a ISRC.
      */
@@ -314,7 +324,7 @@ export default class ValidationChain {
      *
      * @param locale The locale, defaults to any
      */
-    isMobilePhone(locale?: 'any' | IsMobilePhoneLocale | IsMobilePhoneLocale[]): this;
+    isMobilePhone(locale?: validator.MobilePhoneLocale | validator.MobilePhoneLocale[] | 'any'): this;
     /**
      * Check if the string contains one or more multibyte chars.
      */
@@ -324,7 +334,7 @@ export default class ValidationChain {
      *
      * @param locale The locale to use
      */
-    isPostalCode(locale?: IsPostalCodeLocale): this;
+    isPostalCode(locale?: validator.PostalCodeLocale | 'any'): this;
     /**
      * Check if the string contains any surrogate pairs chars.
      */
@@ -334,7 +344,7 @@ export default class ValidationChain {
      *
      * @param options Possible options
      */
-    isURL(options?: IIsURLOptions): this;
+    isURL(options?: validator.IsURLOptions): this;
     /**
      * Check if the string contains a mixture of full and half-width chars.
      */
@@ -353,11 +363,11 @@ export default class ValidationChain {
      */
     blacklist(chars: string): this;
     /**
-     * Replace <, >, &, ', " and / with HTML entities.
+     * Replace <, >, &, ', ' and / with HTML entities.
      */
     escape(): this;
     /**
-     * Replaces HTML encoded entities with <, >, &, ', " and /.
+     * Replaces HTML encoded entities with <, >, &, ", ' and /.
      */
     unescape(): this;
     /**
@@ -379,7 +389,7 @@ export default class ValidationChain {
      *
      * @see https://github.com/chriso/validator.js For details
      */
-    normalizeEmail(options?: INormalizeEmailOptions): this;
+    normalizeEmail(options?: validator.NormalizeEmailOptions): this;
     /**
      * Remove characters with a numerical value < 32 and 127, mostly control characters.
      * If keep_new_lines is true, newline characters are preserved (\n and \r, hex 0xA
