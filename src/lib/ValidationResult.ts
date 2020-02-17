@@ -70,7 +70,7 @@ export default class ValidationResult {
      * Reuturn the validation results as an array.
      */
     public array(): IValidationError[] {
-        return this.results;
+        return [ ...this.results ];
     }
 
     /**

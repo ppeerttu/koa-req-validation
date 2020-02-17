@@ -5,19 +5,10 @@ import { IValidationState } from '..';
 import {
     CustomErrorMessageFunction,
     CustomValidatorFunction,
-    IIsCurrencyOptions,
-    IIsDecimalOptions,
-    IIsFQDNOptions,
-    IISSNOptions,
-    IIsURLOptions,
-    IMinMaxOptions,
     INormalizeEmailOptions,
     IOptionalOptions,
-    IsAlphaLocale,
     ISanitationDefinition,
     IsInValuesOptions,
-    IsMobilePhoneLocale,
-    IsPostalCodeLocale,
     IValidationDefinition,
     IValidationError,
     ParamLocation,
@@ -79,18 +70,19 @@ export default class ValidationChain {
     }
 
     /**
-     * Run the validation. This method has to be called
-     * at the end of each validation.
+     * Build the validation chain. This method has to be called at the end of each
+     * validation.
+     *
      * ```typescript
      * router.post(
      *     '/auth/login',
-     *     body('username').equals('user').run(),
-     *     body('password').equals('pass').run(),
+     *     body('username').equals('user').build(),
+     *     body('password').equals('pass').build(),
      *     handler
      * );
      * ```
      */
-    public run = () => async (
+    public build = () => async (
         ctx: RouterContext<IValidationState>,
         next: () => Promise<void>,
     ) => {
@@ -103,6 +95,14 @@ export default class ValidationChain {
             }
         }
         await next();
+    }
+
+    /**
+     * @deprecated Use `build()` instead
+     */
+    public run = () => {
+        console.warn('ValidationChain.run() is deprecated. Please use .build() instead.');
+        return this.build();
     }
 
     /**
@@ -182,7 +182,7 @@ export default class ValidationChain {
     /**
      * Check if the parameter is an integer.
      */
-    public isInt(options?: IMinMaxOptions) {
+    public isInt(options?: validator.IsIntOptions) {
         this.operations.push({
             type: 'validation',
             validation: 'isInt',
@@ -196,7 +196,7 @@ export default class ValidationChain {
      *
      * @param options Min and max length
      */
-    public isLength(options: IMinMaxOptions) {
+    public isLength(options: validator.IsLengthOptions) {
         this.operations.push({
             type: 'validation',
             validation: 'isLength',
@@ -208,10 +208,11 @@ export default class ValidationChain {
     /**
      * Check if the parameter is an email.
      */
-    public isEmail() {
+    public isEmail(options?: validator.IsEmailOptions) {
         this.operations.push({
             type: 'validation',
             validation: 'isEmail',
+            options,
         });
         return this;
     }
@@ -230,10 +231,11 @@ export default class ValidationChain {
     /**
      * Check if the parameter is a zero length string.
      */
-    public isEmpty() {
+    public isEmpty(options?: validator.IsEmptyOptions) {
         this.operations.push({
             type: 'validation',
             validation: 'isEmpty',
+            options,
         });
         return this;
     }
@@ -241,10 +243,11 @@ export default class ValidationChain {
     /**
      * Check if the parameter is a float.
      */
-    public isFloat() {
+    public isFloat(options?: validator.IsFloatOptions) {
         this.operations.push({
             type: 'validation',
             validation: 'isFloat',
+            options,
         });
         return this;
     }
@@ -312,10 +315,11 @@ export default class ValidationChain {
     /**
      * Check if the parameter is a MAC address.
      */
-    public isMACAddress() {
+    public isMACAddress(options?: validator.IsMACAddressOptions) {
         this.operations.push({
             type: 'validation',
             validation: 'isMACAddress',
+            options,
         });
         return this;
     }
@@ -334,10 +338,11 @@ export default class ValidationChain {
     /**
      * Check if the parameter contains only numbers.
      */
-    public isNumeric() {
+    public isNumeric(options?: validator.IsNumericOptions) {
         this.operations.push({
             type: 'validation',
             validation: 'isNumeric',
+            options,
         });
         return this;
     }
@@ -356,10 +361,11 @@ export default class ValidationChain {
     /**
      * Check if the parameter is valid UUID (v3, v4 or v5).
      */
-    public isUUID() {
+    public isUUID(version?: 3 | 4 | 5 | '3' | '4' | '5' | 'all') {
         this.operations.push({
             type: 'validation',
             validation: 'isUUID',
+            options: version,
         });
         return this;
     }
@@ -409,9 +415,9 @@ export default class ValidationChain {
      * Check if the string is a date that's after the specified
      * date (defaults to now).
      *
-     * @param date The date
+     * @param date The date (defaults to now)
      */
-    public isAfter(date = new Date().toString()) {
+    public isAfter(date?: string) {
         this.operations.push({
             type: 'validation',
             validation: 'isAfter',
@@ -426,7 +432,7 @@ export default class ValidationChain {
      *
      * @param locale The locale
      */
-    public isAlpha(locale?: IsAlphaLocale) {
+    public isAlpha(locale?: validator.AlphaLocale) {
         this.operations.push({
             type: 'validation',
             validation: 'isAlpha',
@@ -441,7 +447,7 @@ export default class ValidationChain {
      *
      * @param locale The locale
      */
-    public isAlphanumeric(locale?: IsAlphaLocale) {
+    public isAlphanumeric(locale?: validator.AlphanumericLocale) {
         this.operations.push({
             type: 'validation',
             validation: 'isAlphanumeric',
@@ -474,11 +480,11 @@ export default class ValidationChain {
 
     /**
      * Check if the string is a date that's before
-     * the given date. Defaults to now.
+     * the given date, which defaults to now.
      *
-     * @param date The date
+     * @param date The date (defaults to now)
      */
-    public isBefore(date = new Date().toString()) {
+    public isBefore(date?: string) {
         this.operations.push({
             type: 'validation',
             validation: 'isBefore',
@@ -493,7 +499,7 @@ export default class ValidationChain {
      *
      * @param options The range
      */
-    public isByteLength(options: IMinMaxOptions = { min: 0 }) {
+    public isByteLength(options: validator.IsByteLengthOptions = { min: 0 }) {
         this.operations.push({
             type: 'validation',
             validation: 'isByteLength',
@@ -518,7 +524,7 @@ export default class ValidationChain {
      *
      * @param options The options
      */
-    public isCurrency(options?: IIsCurrencyOptions) {
+    public isCurrency(options?: validator.IsCurrencyOptions) {
         this.operations.push({
             type: 'validation',
             validation: 'isCurrency',
@@ -543,7 +549,7 @@ export default class ValidationChain {
      *
      * @param options The options
      */
-    public isDecimal(options?: IIsDecimalOptions) {
+    public isDecimal(options?: validator.IsDecimalOptions) {
         this.operations.push({
             type: 'validation',
             validation: 'isDecimal',
@@ -573,7 +579,7 @@ export default class ValidationChain {
      *
      * @param options The options
      */
-    public isFQDN(options?: IIsFQDNOptions) {
+    public isFQDN(options?: validator.IsFQDNOptions) {
         this.operations.push({
             type: 'validation',
             validation: 'isFQDN',
@@ -633,7 +639,7 @@ export default class ValidationChain {
     /**
      * Check if the string is an IP (ver 4 or 6).
      */
-    public isIP(version?: 4 | 6) {
+    public isIP(version?: 4 | 6 | '4' | '6') {
         this.operations.push({
             type: 'validation',
             validation: 'isIP',
@@ -658,7 +664,7 @@ export default class ValidationChain {
      *
      * @param version The version
      */
-    public isISBN(version: 10 | 13) {
+    public isISBN(version: 10 | 13 | '10' | '13') {
         this.operations.push({
             type: 'validation',
             validation: 'isISBN',
@@ -672,7 +678,7 @@ export default class ValidationChain {
      *
      * @param options The options
      */
-    public isISSN(options?: IISSNOptions) {
+    public isISSN(options?: validator.IsISSNOptions) {
         this.operations.push({
             type: 'validation',
             validation: 'isISSN',
@@ -695,10 +701,11 @@ export default class ValidationChain {
     /**
      * Check if the string is valid ISO8601 date.
      */
-    public isISO8601() {
+    public isISO8601(options?: validator.IsISO8601Options) {
         this.operations.push({
             type: 'validation',
             validation: 'isISO8601',
+            options,
         });
         return this;
     }
@@ -765,7 +772,7 @@ export default class ValidationChain {
      * @param locale The locale, defaults to any
      */
     public isMobilePhone(
-        locale: 'any' | IsMobilePhoneLocale | IsMobilePhoneLocale[] = 'any',
+        locale: validator.MobilePhoneLocale | validator.MobilePhoneLocale[] | 'any' = 'any',
     ) {
         this.operations.push({
             type: 'validation',
@@ -791,7 +798,7 @@ export default class ValidationChain {
      *
      * @param locale The locale to use
      */
-    public isPostalCode(locale: IsPostalCodeLocale = 'any') {
+    public isPostalCode(locale: validator.PostalCodeLocale | 'any' = 'any') {
         this.operations.push({
             type: 'validation',
             validation: 'isPostalCode',
@@ -816,7 +823,7 @@ export default class ValidationChain {
      *
      * @param options Possible options
      */
-    public isURL(options?: IIsURLOptions) {
+    public isURL(options?: validator.IsURLOptions) {
         this.operations.push({
             type: 'validation',
             validation: 'isURL',
@@ -866,7 +873,7 @@ export default class ValidationChain {
     }
 
     /**
-     * Replace <, >, &, ', " and / with HTML entities.
+     * Replace <, >, &, ', ' and / with HTML entities.
      */
     public escape() {
         this.operations.push({
@@ -877,7 +884,7 @@ export default class ValidationChain {
     }
 
     /**
-     * Replaces HTML encoded entities with <, >, &, ', " and /.
+     * Replaces HTML encoded entities with <, >, &, ", ' and /.
      */
     public unescape() {
         this.operations.push({
@@ -922,7 +929,7 @@ export default class ValidationChain {
      *
      * @see https://github.com/chriso/validator.js For details
      */
-    public normalizeEmail(options?: INormalizeEmailOptions) {
+    public normalizeEmail(options?: validator.NormalizeEmailOptions) {
         this.operations.push({
             type: 'sanitation',
             sanitation: 'normalizeEmail',
@@ -1136,44 +1143,12 @@ export default class ValidationChain {
     private sanitize(
         input: string,
         sanitationDefinition: ISanitationDefinition,
-    ): string | boolean | Date | number {
-        let value: string | boolean | Date | number = input;
+    ): any {
         const { sanitation, options } = sanitationDefinition;
-        switch (sanitation) {
-            case 'blacklist':
-            case 'whitelist':
-                value = validator[sanitation](value, options as string);
-                break;
-            case 'escape':
-            case 'unescape':
-                value = validator[sanitation](value);
-                break;
-            case 'ltrim':
-            case 'rtrim':
-            case 'trim':
-                value = validator[sanitation](value, options as string | undefined);
-                break;
-            case 'normalizeEmail':
-                value = validator.normalizeEmail(
-                    value,
-                    options as INormalizeEmailOptions | undefined,
-                );
-                break;
-            case 'stripLow':
-            case 'toBoolean':
-                value = validator[sanitation](value, options as boolean | undefined);
-                break;
-            case 'toDate':
-            case 'toFloat':
-                // validator.toDate doesn't guarantee Date object (it may return `null`),
-                // but we just have to trust that the validation has been done properly
-                // and real Date is produced
-                value = validator[sanitation](value) as (number | Date);
-                break;
-            case 'toInt':
-                value = validator[sanitation](value, options as number | undefined);
-                break;
+        const fn = validator[sanitation] as (input: string, options?: any) => any;
+        if (typeof fn === 'undefined') {
+            throw new Error(`Given sanitation ${sanitation} is not implemented`);
         }
-        return value;
+        return fn(input, options);
     }
 }

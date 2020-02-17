@@ -111,7 +111,7 @@ export interface IValidationDefinition {
     /**
      * Options for validation function
      */
-    options?: ValidatorOptions;
+    options?: any;
 
     /**
      * Custom validation function
@@ -203,7 +203,7 @@ export interface ISanitationDefinition {
     /**
      * Options for the sanitation
      */
-    options?: SanitationOptions;
+    options?: any;
 }
 
 /**

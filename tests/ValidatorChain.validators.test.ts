@@ -35,7 +35,7 @@ describe('ValidatorChain validators', () => {
                 .optional();
 
             const ctx: any = mockContext();
-            await validationChain.run()(ctx, next);
+            await validationChain.build()(ctx, next);
             const results = validationResults(ctx);
             expect(results.hasErrors()).toBe(false);
             expect(results.array().length).toBe(0);
@@ -47,7 +47,7 @@ describe('ValidatorChain validators', () => {
                 .optional();
 
             const ctx: any = mockContext(ParamLocation.BODY, { param: null });
-            await validationChain.run()(ctx, next);
+            await validationChain.build()(ctx, next);
             const results = validationResults(ctx);
             expect(results.hasErrors()).toBe(true);
             expect(results.array().length).toBe(1);
@@ -59,7 +59,7 @@ describe('ValidatorChain validators', () => {
                 .optional({ allowNull: true });
 
             const ctx: any = mockContext(ParamLocation.BODY, { param: null });
-            await validationChain.run()(ctx, next);
+            await validationChain.build()(ctx, next);
             const results = validationResults(ctx);
             expect(results.hasErrors()).toBe(false);
             expect(results.array().length).toBe(0);
@@ -79,7 +79,7 @@ describe('ValidatorChain validators', () => {
                     },
                 );
             const ctx: any = mockContext(ParamLocation.BODY, { int: '12' });
-            await validationChain.run()(ctx, next);
+            await validationChain.build()(ctx, next);
             expect(validationResults(ctx).array().length).toBe(1);
         });
 
@@ -88,7 +88,7 @@ describe('ValidatorChain validators', () => {
             const validationChain = new ValidationChain('int', ParamLocation.BODY)
                 .custom();
             const ctx: any = mockContext(ParamLocation.BODY, { int: '12' });
-            await expect(validationChain.run()(ctx, next)).rejects.toThrow();
+            await expect(validationChain.build()(ctx, next)).rejects.toThrow();
         });
 
         test(
@@ -103,7 +103,7 @@ describe('ValidatorChain validators', () => {
                         },
                     );
                 const ctx: any = mockContext(ParamLocation.BODY, { int: '12' });
-                await validationChain.run()(ctx, next);
+                await validationChain.build()(ctx, next);
                 const results = validationResults(ctx).mapped();
                 expect(results).toHaveProperty('int');
                 expect(results.int)
@@ -121,7 +121,7 @@ describe('ValidatorChain validators', () => {
                     },
                 );
             const ctx: any = mockContext(ParamLocation.BODY, { int: 12 });
-            await validationChain.run()(ctx, next);
+            await validationChain.build()(ctx, next);
             expect(validationResults(ctx).array().length).toBe(0);
         });
 
@@ -133,7 +133,7 @@ describe('ValidatorChain validators', () => {
             const validationChain = new ValidationChain('int', ParamLocation.BODY)
                 .isInt();
             const ctx: any = mockContext(ParamLocation.BODY, { int: '12' });
-            await validationChain.run()(ctx, next);
+            await validationChain.build()(ctx, next);
             expect(validationResults(ctx).array().length).toBe(0);
         });
 
@@ -141,7 +141,7 @@ describe('ValidatorChain validators', () => {
             const validationChain = new ValidationChain('int', ParamLocation.BODY)
                 .isInt();
             const ctx: any = mockContext(ParamLocation.BODY, { int: 'abc' });
-            await validationChain.run()(ctx, next);
+            await validationChain.build()(ctx, next);
             expect(validationResults(ctx).mapped()).toHaveProperty('int');
         });
 
@@ -149,7 +149,7 @@ describe('ValidatorChain validators', () => {
             const validationChain = new ValidationChain('int', ParamLocation.BODY)
                 .isInt({ min: 5});
             const ctx: any = mockContext(ParamLocation.BODY, { int: '-9' });
-            await validationChain.run()(ctx, next);
+            await validationChain.build()(ctx, next);
             expect(validationResults(ctx).mapped()).toHaveProperty('int');
         });
 
@@ -157,7 +157,7 @@ describe('ValidatorChain validators', () => {
             const validationChain = new ValidationChain('int', ParamLocation.BODY)
                 .isInt({ max: 5 });
             const ctx: any = mockContext(ParamLocation.BODY, { int: '9' });
-            await validationChain.run()(ctx, next);
+            await validationChain.build()(ctx, next);
             expect(validationResults(ctx).mapped()).toHaveProperty('int');
         });
 
@@ -169,7 +169,7 @@ describe('ValidatorChain validators', () => {
             const validationChain = new ValidationChain('string', ParamLocation.PARAM)
                 .isLength({ min: 5, max: 7 });
             const ctx: any = mockContext(ParamLocation.PARAM, { string: 'abcabc' });
-            await validationChain.run()(ctx, next);
+            await validationChain.build()(ctx, next);
             expect(validationResults(ctx).array().length).toBe(0);
         });
 
@@ -177,7 +177,7 @@ describe('ValidatorChain validators', () => {
             const validationChain = new ValidationChain('string', ParamLocation.PARAM)
                 .isLength({ min: 5 });
             const ctx: any = mockContext(ParamLocation.PARAM, { string: 'ab' });
-            await validationChain.run()(ctx, next);
+            await validationChain.build()(ctx, next);
             expect(validationResults(ctx).mapped()).toHaveProperty('string');
         });
 
@@ -185,7 +185,7 @@ describe('ValidatorChain validators', () => {
             const validationChain = new ValidationChain('string', ParamLocation.PARAM)
                 .isLength({ max: 5 });
             const ctx: any = mockContext(ParamLocation.PARAM, { string: 'abcabc' });
-            await validationChain.run()(ctx, next);
+            await validationChain.build()(ctx, next);
             expect(validationResults(ctx).mapped()).toHaveProperty('string');
         });
 
@@ -197,7 +197,7 @@ describe('ValidatorChain validators', () => {
             const validationChain = new ValidationChain('email', ParamLocation.BODY)
                 .isEmail();
             const ctx = mockContext(ParamLocation.BODY, { email: 'foo@bar.com' });
-            await validationChain.run()(ctx, next);
+            await validationChain.build()(ctx, next);
             expect(validationResults(ctx).array().length).toBe(0);
         });
 
@@ -206,8 +206,8 @@ describe('ValidatorChain validators', () => {
                 .isEmail();
             const ctx = mockContext(ParamLocation.BODY, { email: 'foobar.com' });
             const ctx2 = mockContext(ParamLocation.BODY, { email: 'foo@bar' });
-            await validationChain.run()(ctx, next);
-            await validationChain.run()(ctx2, next);
+            await validationChain.build()(ctx, next);
+            await validationChain.build()(ctx2, next);
             expect(validationResults(ctx).mapped()).toHaveProperty('email');
             expect(validationResults(ctx2).mapped()).toHaveProperty('email');
         });
@@ -224,7 +224,7 @@ describe('ValidatorChain validators', () => {
                     .isEmail()
                     .withMessage(message);
                 const ctx = mockContext(ParamLocation.BODY, { email: 'foobar.com' });
-                await validationChain.run()(ctx, next);
+                await validationChain.build()(ctx, next);
                 const results = validationResults(ctx);
                 const mappedResults = results.mapped();
                 expect(mappedResults).toHaveProperty('email');
@@ -247,7 +247,7 @@ describe('ValidatorChain validators', () => {
                     { email: 'foobar.com' },
                     { localizedMessage }, // This object goes to ctx.state
                 );
-                await validationChain.run()(ctx, next);
+                await validationChain.build()(ctx, next);
                 const results = validationResults(ctx);
                 const mappedResults = results.mapped();
                 expect(mappedResults).toHaveProperty('email');
@@ -284,7 +284,7 @@ describe('ValidatorChain validators', () => {
                 { email: null },
                 { localizedMessage }, // This object goes to ctx.state
             );
-            await validationChain.run()(ctx, next);
+            await validationChain.build()(ctx, next);
             const results = validationResults(ctx);
             const mappedResults = results.mapped();
             expect(mappedResults).toHaveProperty('email');
@@ -304,7 +304,7 @@ describe('ValidatorChain validators', () => {
             const validationChain = new ValidationChain(prop, ParamLocation.BODY)
                 .contains(seed);
             const ctx = mockContext(ParamLocation.BODY, { [prop]: haystack });
-            await validationChain.run()(ctx, next);
+            await validationChain.build()(ctx, next);
             const results = validationResults(ctx);
             expect(results.mapped()).toHaveProperty(prop);
         });
@@ -315,7 +315,7 @@ describe('ValidatorChain validators', () => {
             const validationChain = new ValidationChain(prop, ParamLocation.BODY)
                 .contains(seed);
             const ctx = mockContext(ParamLocation.BODY, { [prop]: haystack });
-            await validationChain.run()(ctx, next);
+            await validationChain.build()(ctx, next);
             const results = validationResults(ctx);
             expect(results.mapped()).not.toHaveProperty(prop);
         });
@@ -331,7 +331,7 @@ describe('ValidatorChain validators', () => {
                 .equals(comparison);
 
             const ctx = mockContext(ParamLocation.BODY, { [prop]: value });
-            await validationChain.run()(ctx, next);
+            await validationChain.build()(ctx, next);
 
             const results = validationResults(ctx);
             expect(results.mapped()).toHaveProperty(prop);
@@ -344,7 +344,7 @@ describe('ValidatorChain validators', () => {
                 .equals(comparison);
 
             const ctx = mockContext(ParamLocation.BODY, { [prop]: value });
-            await validationChain.run()(ctx, next);
+            await validationChain.build()(ctx, next);
 
             const results = validationResults(ctx);
             expect(results.mapped()).not.toHaveProperty(prop);
@@ -360,7 +360,7 @@ describe('ValidatorChain validators', () => {
                 .isBoolean();
 
             const ctx = mockContext(ParamLocation.BODY, { [prop]: value });
-            await validationChain.run()(ctx, next);
+            await validationChain.build()(ctx, next);
 
             const results = validationResults(ctx);
             expect(results.mapped()).toHaveProperty(prop);
@@ -372,7 +372,7 @@ describe('ValidatorChain validators', () => {
                 .isBoolean();
 
             const ctx = mockContext(ParamLocation.BODY, { [prop]: value });
-            await validationChain.run()(ctx, next);
+            await validationChain.build()(ctx, next);
 
             const results = validationResults(ctx);
             expect(results.mapped()).not.toHaveProperty(prop);
@@ -388,7 +388,7 @@ describe('ValidatorChain validators', () => {
                 .isEmpty();
 
             const ctx = mockContext(ParamLocation.BODY, { [prop]: value });
-            await validationChain.run()(ctx, next);
+            await validationChain.build()(ctx, next);
 
             const results = validationResults(ctx);
             expect(results.mapped()).toHaveProperty(prop);
@@ -400,7 +400,7 @@ describe('ValidatorChain validators', () => {
                 .isEmpty();
 
             const ctx = mockContext(ParamLocation.BODY, { [prop]: value });
-            await validationChain.run()(ctx, next);
+            await validationChain.build()(ctx, next);
 
             const results = validationResults(ctx);
             expect(results.mapped()).not.toHaveProperty(prop);
@@ -415,7 +415,7 @@ describe('ValidatorChain validators', () => {
             const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
                 .isFloat();
             const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
-            await validationChain.run()(ctx, next);
+            await validationChain.build()(ctx, next);
 
             const results = validationResults(ctx);
             expect(results.mapped()).toHaveProperty(prop);
@@ -426,7 +426,7 @@ describe('ValidatorChain validators', () => {
             const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
                 .isFloat();
             const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
-            await validationChain.run()(ctx, next);
+            await validationChain.build()(ctx, next);
 
             const results = validationResults(ctx);
             expect(results.mapped()).not.toHaveProperty(prop);
@@ -441,7 +441,7 @@ describe('ValidatorChain validators', () => {
             const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
                 .isHash('sha256');
             const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
-            await validationChain.run()(ctx, next);
+            await validationChain.build()(ctx, next);
 
             const results = validationResults(ctx);
             expect(results.mapped()).toHaveProperty(prop);
@@ -452,7 +452,7 @@ describe('ValidatorChain validators', () => {
             const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
                 .isHash('md5');
             const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
-            await validationChain.run()(ctx, next);
+            await validationChain.build()(ctx, next);
 
             const results = validationResults(ctx);
             expect(results.mapped()).not.toHaveProperty(prop);
@@ -467,7 +467,7 @@ describe('ValidatorChain validators', () => {
             const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
                 .isJWT();
             const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
-            await validationChain.run()(ctx, next);
+            await validationChain.build()(ctx, next);
 
             const results = validationResults(ctx);
             expect(results.mapped()).toHaveProperty(prop);
@@ -479,7 +479,7 @@ describe('ValidatorChain validators', () => {
             const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
                 .isJWT();
             const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
-            await validationChain.run()(ctx, next);
+            await validationChain.build()(ctx, next);
 
             const results = validationResults(ctx);
             expect(results.mapped()).not.toHaveProperty(prop);
@@ -494,7 +494,7 @@ describe('ValidatorChain validators', () => {
             const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
                 .isJSON();
             const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
-            await validationChain.run()(ctx, next);
+            await validationChain.build()(ctx, next);
 
             const results = validationResults(ctx);
             expect(results.mapped()).toHaveProperty(prop);
@@ -505,7 +505,7 @@ describe('ValidatorChain validators', () => {
             const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
                 .isJSON();
             const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
-            await validationChain.run()(ctx, next);
+            await validationChain.build()(ctx, next);
 
             const results = validationResults(ctx);
             expect(results.mapped()).not.toHaveProperty(prop);
@@ -520,7 +520,7 @@ describe('ValidatorChain validators', () => {
             const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
                 .isLatLong();
             const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
-            await validationChain.run()(ctx, next);
+            await validationChain.build()(ctx, next);
 
             const results = validationResults(ctx);
             expect(results.mapped()).toHaveProperty(prop);
@@ -531,7 +531,7 @@ describe('ValidatorChain validators', () => {
             const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
                 .isLatLong();
             const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
-            await validationChain.run()(ctx, next);
+            await validationChain.build()(ctx, next);
 
             const results = validationResults(ctx);
             expect(results.mapped()).not.toHaveProperty(prop);
@@ -546,7 +546,7 @@ describe('ValidatorChain validators', () => {
             const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
                 .isLowercase();
             const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
-            await validationChain.run()(ctx, next);
+            await validationChain.build()(ctx, next);
 
             const results = validationResults(ctx);
             expect(results.mapped()).toHaveProperty(prop);
@@ -557,7 +557,7 @@ describe('ValidatorChain validators', () => {
             const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
                 .isLowercase();
             const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
-            await validationChain.run()(ctx, next);
+            await validationChain.build()(ctx, next);
 
             const results = validationResults(ctx);
             expect(results.mapped()).not.toHaveProperty(prop);
@@ -572,7 +572,7 @@ describe('ValidatorChain validators', () => {
             const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
                 .isMACAddress();
             const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
-            await validationChain.run()(ctx, next);
+            await validationChain.build()(ctx, next);
 
             const results = validationResults(ctx);
             expect(results.mapped()).toHaveProperty(prop);
@@ -583,7 +583,7 @@ describe('ValidatorChain validators', () => {
             const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
                 .isMACAddress();
             const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
-            await validationChain.run()(ctx, next);
+            await validationChain.build()(ctx, next);
 
             const results = validationResults(ctx);
             expect(results.mapped()).not.toHaveProperty(prop);
@@ -598,7 +598,7 @@ describe('ValidatorChain validators', () => {
             const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
                 .isMongoId();
             const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
-            await validationChain.run()(ctx, next);
+            await validationChain.build()(ctx, next);
 
             const results = validationResults(ctx);
             expect(results.mapped()).toHaveProperty(prop);
@@ -609,7 +609,7 @@ describe('ValidatorChain validators', () => {
             const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
                 .isMongoId();
             const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
-            await validationChain.run()(ctx, next);
+            await validationChain.build()(ctx, next);
 
             const results = validationResults(ctx);
             expect(results.mapped()).not.toHaveProperty(prop);
@@ -624,7 +624,7 @@ describe('ValidatorChain validators', () => {
             const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
                 .isNumeric();
             const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
-            await validationChain.run()(ctx, next);
+            await validationChain.build()(ctx, next);
 
             const results = validationResults(ctx);
             expect(results.mapped()).toHaveProperty(prop);
@@ -635,7 +635,7 @@ describe('ValidatorChain validators', () => {
             const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
                 .isNumeric();
             const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
-            await validationChain.run()(ctx, next);
+            await validationChain.build()(ctx, next);
 
             const results = validationResults(ctx);
             expect(results.mapped()).not.toHaveProperty(prop);
@@ -650,7 +650,7 @@ describe('ValidatorChain validators', () => {
             const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
                 .isPort();
             const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
-            await validationChain.run()(ctx, next);
+            await validationChain.build()(ctx, next);
 
             const results = validationResults(ctx);
             expect(results.mapped()).toHaveProperty(prop);
@@ -661,7 +661,7 @@ describe('ValidatorChain validators', () => {
             const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
                 .isPort();
             const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
-            await validationChain.run()(ctx, next);
+            await validationChain.build()(ctx, next);
 
             const results = validationResults(ctx);
             expect(results.mapped()).not.toHaveProperty(prop);
@@ -676,7 +676,7 @@ describe('ValidatorChain validators', () => {
             const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
                 .isUUID();
             const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
-            await validationChain.run()(ctx, next);
+            await validationChain.build()(ctx, next);
 
             const results = validationResults(ctx);
             expect(results.mapped()).toHaveProperty(prop);
@@ -687,7 +687,7 @@ describe('ValidatorChain validators', () => {
             const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
                 .isUUID();
             const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
-            await validationChain.run()(ctx, next);
+            await validationChain.build()(ctx, next);
 
             const results = validationResults(ctx);
             expect(results.mapped()).not.toHaveProperty(prop);
@@ -702,7 +702,7 @@ describe('ValidatorChain validators', () => {
             const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
                 .isUppercase();
             const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
-            await validationChain.run()(ctx, next);
+            await validationChain.build()(ctx, next);
 
             const results = validationResults(ctx);
             expect(results.mapped()).toHaveProperty(prop);
@@ -713,7 +713,7 @@ describe('ValidatorChain validators', () => {
             const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
                 .isUppercase();
             const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
-            await validationChain.run()(ctx, next);
+            await validationChain.build()(ctx, next);
 
             const results = validationResults(ctx);
             expect(results.mapped()).not.toHaveProperty(prop);
@@ -731,7 +731,7 @@ describe('ValidatorChain validators', () => {
             const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
                 .isIn(allowedValues);
             const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
-            await validationChain.run()(ctx, next);
+            await validationChain.build()(ctx, next);
 
             const results = validationResults(ctx);
             expect(results.mapped()).toHaveProperty(prop);
@@ -744,7 +744,7 @@ describe('ValidatorChain validators', () => {
                 const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
                     .isIn(allowedValues);
                 const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
-                await validationChain.run()(ctx, next);
+                await validationChain.build()(ctx, next);
 
                 const results = validationResults(ctx);
                 expect(results.mapped()).not.toHaveProperty(prop);
@@ -760,7 +760,7 @@ describe('ValidatorChain validators', () => {
             const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
                 .matches(/^[0-9]{1,10}$/);
             const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
-            await validationChain.run()(ctx, next);
+            await validationChain.build()(ctx, next);
 
             const results = validationResults(ctx);
             expect(results.mapped()).toHaveProperty(prop);
@@ -771,7 +771,7 @@ describe('ValidatorChain validators', () => {
             const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
                 .matches(/^[0-9x]{1,10}$/);
             const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
-            await validationChain.run()(ctx, next);
+            await validationChain.build()(ctx, next);
 
             const results = validationResults(ctx);
             expect(results.mapped()).not.toHaveProperty(prop);
@@ -786,7 +786,7 @@ describe('ValidatorChain validators', () => {
             const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
                 .isIn([ '123', '321' ]);
             const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
-            await validationChain.run()(ctx, next);
+            await validationChain.build()(ctx, next);
 
             const results = validationResults(ctx);
             expect(results.mapped()).toHaveProperty(prop);
@@ -797,7 +797,7 @@ describe('ValidatorChain validators', () => {
             const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
                 .isIn([ '123', '321' ]);
             const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
-            await validationChain.run()(ctx, next);
+            await validationChain.build()(ctx, next);
 
             const results = validationResults(ctx);
             expect(results.mapped()).not.toHaveProperty(prop);
@@ -812,7 +812,7 @@ describe('ValidatorChain validators', () => {
             const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
                 .isAfter();
             const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
-            await validationChain.run()(ctx, next);
+            await validationChain.build()(ctx, next);
 
             const results = validationResults(ctx);
             expect(results.mapped()).toHaveProperty(prop);
@@ -823,7 +823,7 @@ describe('ValidatorChain validators', () => {
             const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
                 .isAfter(new Date(2018).toString());
             const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
-            await validationChain.run()(ctx, next);
+            await validationChain.build()(ctx, next);
 
             const results = validationResults(ctx);
             expect(results.mapped()).not.toHaveProperty(prop);
@@ -838,7 +838,7 @@ describe('ValidatorChain validators', () => {
             const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
                 .isAlpha();
             const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
-            await validationChain.run()(ctx, next);
+            await validationChain.build()(ctx, next);
 
             const results = validationResults(ctx);
             expect(results.mapped()).toHaveProperty(prop);
@@ -849,7 +849,7 @@ describe('ValidatorChain validators', () => {
             const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
                 .isAlpha();
             const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
-            await validationChain.run()(ctx, next);
+            await validationChain.build()(ctx, next);
 
             const results = validationResults(ctx);
             expect(results.mapped()).not.toHaveProperty(prop);
@@ -864,7 +864,7 @@ describe('ValidatorChain validators', () => {
             const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
                 .isAlphanumeric();
             const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
-            await validationChain.run()(ctx, next);
+            await validationChain.build()(ctx, next);
 
             const results = validationResults(ctx);
             expect(results.mapped()).toHaveProperty(prop);
@@ -875,7 +875,7 @@ describe('ValidatorChain validators', () => {
             const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
                 .isAlphanumeric();
             const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
-            await validationChain.run()(ctx, next);
+            await validationChain.build()(ctx, next);
 
             const results = validationResults(ctx);
             expect(results.mapped()).not.toHaveProperty(prop);
@@ -890,7 +890,7 @@ describe('ValidatorChain validators', () => {
             const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
                 .isAscii();
             const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
-            await validationChain.run()(ctx, next);
+            await validationChain.build()(ctx, next);
 
             const results = validationResults(ctx);
             expect(results.mapped()).toHaveProperty(prop);
@@ -901,7 +901,7 @@ describe('ValidatorChain validators', () => {
             const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
                 .isAscii();
             const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
-            await validationChain.run()(ctx, next);
+            await validationChain.build()(ctx, next);
 
             const results = validationResults(ctx);
             expect(results.mapped()).not.toHaveProperty(prop);
@@ -916,7 +916,7 @@ describe('ValidatorChain validators', () => {
             const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
                 .isBase64();
             const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
-            await validationChain.run()(ctx, next);
+            await validationChain.build()(ctx, next);
 
             const results = validationResults(ctx);
             expect(results.mapped()).toHaveProperty(prop);
@@ -927,7 +927,7 @@ describe('ValidatorChain validators', () => {
             const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
                 .isBase64();
             const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
-            await validationChain.run()(ctx, next);
+            await validationChain.build()(ctx, next);
 
             const results = validationResults(ctx);
             expect(results.mapped()).not.toHaveProperty(prop);
@@ -942,7 +942,7 @@ describe('ValidatorChain validators', () => {
             const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
                 .isBefore(new Date(2018).toJSON());
             const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
-            await validationChain.run()(ctx, next);
+            await validationChain.build()(ctx, next);
 
             const results = validationResults(ctx);
             expect(results.mapped()).toHaveProperty(prop);
@@ -955,7 +955,7 @@ describe('ValidatorChain validators', () => {
                 const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
                     .isBefore(); // Defaults to current datetime
                 const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
-                await validationChain.run()(ctx, next);
+                await validationChain.build()(ctx, next);
 
                 const results = validationResults(ctx);
                 expect(results.mapped()).not.toHaveProperty(prop);
@@ -971,7 +971,7 @@ describe('ValidatorChain validators', () => {
             const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
                 .isByteLength({ min: 8, max: 128 });
             const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
-            await validationChain.run()(ctx, next);
+            await validationChain.build()(ctx, next);
 
             const results = validationResults(ctx);
             expect(results.mapped()).toHaveProperty(prop);
@@ -984,7 +984,7 @@ describe('ValidatorChain validators', () => {
                 const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
                     .isByteLength(); // Defaults to { min: 0 }
                 const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
-                await validationChain.run()(ctx, next);
+                await validationChain.build()(ctx, next);
 
                 const results = validationResults(ctx);
                 expect(results.mapped()).not.toHaveProperty(prop);
@@ -1000,7 +1000,7 @@ describe('ValidatorChain validators', () => {
             const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
                 .isCreditCard();
             const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
-            await validationChain.run()(ctx, next);
+            await validationChain.build()(ctx, next);
 
             const results = validationResults(ctx);
             expect(results.mapped()).toHaveProperty(prop);
@@ -1011,7 +1011,7 @@ describe('ValidatorChain validators', () => {
             const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
                 .isCreditCard();
             const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
-            await validationChain.run()(ctx, next);
+            await validationChain.build()(ctx, next);
 
             const results = validationResults(ctx);
             expect(results.mapped()).not.toHaveProperty(prop);
@@ -1026,7 +1026,7 @@ describe('ValidatorChain validators', () => {
             const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
                 .isCurrency();
             const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
-            await validationChain.run()(ctx, next);
+            await validationChain.build()(ctx, next);
 
             const results = validationResults(ctx);
             expect(results.mapped()).toHaveProperty(prop);
@@ -1037,7 +1037,7 @@ describe('ValidatorChain validators', () => {
             const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
                 .isCurrency();
             const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
-            await validationChain.run()(ctx, next);
+            await validationChain.build()(ctx, next);
 
             const results = validationResults(ctx);
             expect(results.mapped()).not.toHaveProperty(prop);
@@ -1052,7 +1052,7 @@ describe('ValidatorChain validators', () => {
             const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
                 .isDataURI();
             const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
-            await validationChain.run()(ctx, next);
+            await validationChain.build()(ctx, next);
 
             const results = validationResults(ctx);
             expect(results.mapped()).toHaveProperty(prop);
@@ -1064,7 +1064,7 @@ describe('ValidatorChain validators', () => {
             const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
                 .isDataURI();
             const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
-            await validationChain.run()(ctx, next);
+            await validationChain.build()(ctx, next);
 
             const results = validationResults(ctx);
             expect(results.mapped()).not.toHaveProperty(prop);
@@ -1079,7 +1079,7 @@ describe('ValidatorChain validators', () => {
             const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
                 .isDecimal();
             const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
-            await validationChain.run()(ctx, next);
+            await validationChain.build()(ctx, next);
 
             const results = validationResults(ctx);
             expect(results.mapped()).toHaveProperty(prop);
@@ -1090,7 +1090,7 @@ describe('ValidatorChain validators', () => {
             const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
                 .isDecimal();
             const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
-            await validationChain.run()(ctx, next);
+            await validationChain.build()(ctx, next);
 
             const results = validationResults(ctx);
             expect(results.mapped()).not.toHaveProperty(prop);
@@ -1107,7 +1107,7 @@ describe('ValidatorChain validators', () => {
                 const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
                     .isDivisibleBy(5);
                 const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
-                await validationChain.run()(ctx, next);
+                await validationChain.build()(ctx, next);
 
                 const results = validationResults(ctx);
                 expect(results.mapped()).toHaveProperty(prop);
@@ -1121,7 +1121,7 @@ describe('ValidatorChain validators', () => {
                 const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
                     .isDivisibleBy(5);
                 const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
-                await validationChain.run()(ctx, next);
+                await validationChain.build()(ctx, next);
 
                 const results = validationResults(ctx);
                 expect(results.mapped()).not.toHaveProperty(prop);
@@ -1139,7 +1139,7 @@ describe('ValidatorChain validators', () => {
                 const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
                     .isFQDN();
                 const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
-                await validationChain.run()(ctx, next);
+                await validationChain.build()(ctx, next);
 
                 const results = validationResults(ctx);
                 expect(results.mapped()).toHaveProperty(prop);
@@ -1151,7 +1151,7 @@ describe('ValidatorChain validators', () => {
             const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
                 .isFQDN();
             const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
-            await validationChain.run()(ctx, next);
+            await validationChain.build()(ctx, next);
 
             const results = validationResults(ctx);
             expect(results.mapped()).not.toHaveProperty(prop);
@@ -1166,7 +1166,7 @@ describe('ValidatorChain validators', () => {
             const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
                 .isFullWidth();
             const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
-            await validationChain.run()(ctx, next);
+            await validationChain.build()(ctx, next);
 
             const results = validationResults(ctx);
             expect(results.mapped()).toHaveProperty(prop);
@@ -1179,7 +1179,7 @@ describe('ValidatorChain validators', () => {
                 const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
                     .isFullWidth();
                 const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
-                await validationChain.run()(ctx, next);
+                await validationChain.build()(ctx, next);
 
                 const results = validationResults(ctx);
                 expect(results.mapped()).not.toHaveProperty(prop);
@@ -1195,7 +1195,7 @@ describe('ValidatorChain validators', () => {
             const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
                 .isHalfWidth();
             const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
-            await validationChain.run()(ctx, next);
+            await validationChain.build()(ctx, next);
 
             const results = validationResults(ctx);
             expect(results.mapped()).toHaveProperty(prop);
@@ -1208,7 +1208,7 @@ describe('ValidatorChain validators', () => {
                 const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
                     .isHalfWidth();
                 const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
-                await validationChain.run()(ctx, next);
+                await validationChain.build()(ctx, next);
 
                 const results = validationResults(ctx);
                 expect(results.mapped()).not.toHaveProperty(prop);
@@ -1224,7 +1224,7 @@ describe('ValidatorChain validators', () => {
             const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
                 .isHexColor();
             const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
-            await validationChain.run()(ctx, next);
+            await validationChain.build()(ctx, next);
 
             const results = validationResults(ctx);
             expect(results.mapped()).toHaveProperty(prop);
@@ -1235,7 +1235,7 @@ describe('ValidatorChain validators', () => {
             const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
                 .isHexColor();
             const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
-            await validationChain.run()(ctx, next);
+            await validationChain.build()(ctx, next);
 
             const results = validationResults(ctx);
             expect(results.mapped()).not.toHaveProperty(prop);
@@ -1250,7 +1250,7 @@ describe('ValidatorChain validators', () => {
             const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
                 .isHexadecimal();
             const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
-            await validationChain.run()(ctx, next);
+            await validationChain.build()(ctx, next);
 
             const results = validationResults(ctx);
             expect(results.mapped()).toHaveProperty(prop);
@@ -1261,7 +1261,7 @@ describe('ValidatorChain validators', () => {
             const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
                 .isHexadecimal();
             const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
-            await validationChain.run()(ctx, next);
+            await validationChain.build()(ctx, next);
 
             const results = validationResults(ctx);
             expect(results.mapped()).not.toHaveProperty(prop);
@@ -1276,7 +1276,7 @@ describe('ValidatorChain validators', () => {
             const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
                 .isIP(4);
             const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
-            await validationChain.run()(ctx, next);
+            await validationChain.build()(ctx, next);
 
             const results = validationResults(ctx);
             expect(results.mapped()).toHaveProperty(prop);
@@ -1287,7 +1287,7 @@ describe('ValidatorChain validators', () => {
             const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
                 .isIP(6);
             const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
-            await validationChain.run()(ctx, next);
+            await validationChain.build()(ctx, next);
 
             const results = validationResults(ctx);
             expect(results.mapped()).toHaveProperty(prop);
@@ -1298,7 +1298,7 @@ describe('ValidatorChain validators', () => {
             const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
                 .isIP(4);
             const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
-            await validationChain.run()(ctx, next);
+            await validationChain.build()(ctx, next);
 
             const results = validationResults(ctx);
             expect(results.mapped()).not.toHaveProperty(prop);
@@ -1309,7 +1309,7 @@ describe('ValidatorChain validators', () => {
             const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
                 .isIP(6);
             const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
-            await validationChain.run()(ctx, next);
+            await validationChain.build()(ctx, next);
 
             const results = validationResults(ctx);
             expect(results.mapped()).not.toHaveProperty(prop);
@@ -1324,7 +1324,7 @@ describe('ValidatorChain validators', () => {
             const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
                 .isIPRange();
             const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
-            await validationChain.run()(ctx, next);
+            await validationChain.build()(ctx, next);
 
             const results = validationResults(ctx);
             expect(results.mapped()).toHaveProperty(prop);
@@ -1335,7 +1335,7 @@ describe('ValidatorChain validators', () => {
             const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
                 .isIPRange();
             const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
-            await validationChain.run()(ctx, next);
+            await validationChain.build()(ctx, next);
 
             const results = validationResults(ctx);
             expect(results.mapped()).not.toHaveProperty(prop);
@@ -1350,7 +1350,7 @@ describe('ValidatorChain validators', () => {
             const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
                 .isISBN(10);
             const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
-            await validationChain.run()(ctx, next);
+            await validationChain.build()(ctx, next);
 
             const results = validationResults(ctx);
             expect(results.mapped()).toHaveProperty(prop);
@@ -1361,7 +1361,7 @@ describe('ValidatorChain validators', () => {
             const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
                 .isISBN(13);
             const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
-            await validationChain.run()(ctx, next);
+            await validationChain.build()(ctx, next);
 
             const results = validationResults(ctx);
             expect(results.mapped()).not.toHaveProperty(prop);
@@ -1376,7 +1376,7 @@ describe('ValidatorChain validators', () => {
             const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
                 .isISSN();
             const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
-            await validationChain.run()(ctx, next);
+            await validationChain.build()(ctx, next);
 
             const results = validationResults(ctx);
             expect(results.mapped()).toHaveProperty(prop);
@@ -1387,7 +1387,7 @@ describe('ValidatorChain validators', () => {
             const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
                 .isISSN();
             const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
-            await validationChain.run()(ctx, next);
+            await validationChain.build()(ctx, next);
 
             const results = validationResults(ctx);
             expect(results.mapped()).not.toHaveProperty(prop);
@@ -1402,7 +1402,7 @@ describe('ValidatorChain validators', () => {
             const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
                 .isISIN();
             const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
-            await validationChain.run()(ctx, next);
+            await validationChain.build()(ctx, next);
 
             const results = validationResults(ctx);
             expect(results.mapped()).toHaveProperty(prop);
@@ -1413,7 +1413,7 @@ describe('ValidatorChain validators', () => {
             const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
                 .isISIN();
             const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
-            await validationChain.run()(ctx, next);
+            await validationChain.build()(ctx, next);
 
             const results = validationResults(ctx);
             expect(results.mapped()).not.toHaveProperty(prop);
@@ -1428,7 +1428,7 @@ describe('ValidatorChain validators', () => {
             const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
                 .isISO8601();
             const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
-            await validationChain.run()(ctx, next);
+            await validationChain.build()(ctx, next);
 
             const results = validationResults(ctx);
             expect(results.mapped()).toHaveProperty(prop);
@@ -1439,7 +1439,7 @@ describe('ValidatorChain validators', () => {
             const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
                 .isISO8601();
             const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
-            await validationChain.run()(ctx, next);
+            await validationChain.build()(ctx, next);
 
             const results = validationResults(ctx);
             expect(results.mapped()).not.toHaveProperty(prop);
@@ -1454,7 +1454,7 @@ describe('ValidatorChain validators', () => {
             const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
                 .isRFC3339();
             const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
-            await validationChain.run()(ctx, next);
+            await validationChain.build()(ctx, next);
 
             const results = validationResults(ctx);
             expect(results.mapped()).toHaveProperty(prop);
@@ -1465,7 +1465,7 @@ describe('ValidatorChain validators', () => {
             const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
                 .isRFC3339();
             const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
-            await validationChain.run()(ctx, next);
+            await validationChain.build()(ctx, next);
 
             const results = validationResults(ctx);
             expect(results.mapped()).not.toHaveProperty(prop);
@@ -1482,7 +1482,7 @@ describe('ValidatorChain validators', () => {
                 const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
                     .isISO31661Alpha2();
                 const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
-                await validationChain.run()(ctx, next);
+                await validationChain.build()(ctx, next);
 
                 const results = validationResults(ctx);
                 expect(results.mapped()).toHaveProperty(prop);
@@ -1497,7 +1497,7 @@ describe('ValidatorChain validators', () => {
                 const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
                     .isISO31661Alpha2();
                 const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
-                await validationChain.run()(ctx, next);
+                await validationChain.build()(ctx, next);
 
                 const results = validationResults(ctx);
                 expect(results.mapped()).not.toHaveProperty(prop);
@@ -1513,7 +1513,7 @@ describe('ValidatorChain validators', () => {
             const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
                 .isISRC();
             const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
-            await validationChain.run()(ctx, next);
+            await validationChain.build()(ctx, next);
 
             const results = validationResults(ctx);
             expect(results.mapped()).toHaveProperty(prop);
@@ -1524,7 +1524,7 @@ describe('ValidatorChain validators', () => {
             const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
                 .isISRC();
             const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
-            await validationChain.run()(ctx, next);
+            await validationChain.build()(ctx, next);
 
             const results = validationResults(ctx);
             expect(results.mapped()).not.toHaveProperty(prop);
@@ -1539,7 +1539,7 @@ describe('ValidatorChain validators', () => {
             const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
                 .isMD5();
             const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
-            await validationChain.run()(ctx, next);
+            await validationChain.build()(ctx, next);
 
             const results = validationResults(ctx);
             expect(results.mapped()).toHaveProperty(prop);
@@ -1550,7 +1550,7 @@ describe('ValidatorChain validators', () => {
             const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
                 .isMD5();
             const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
-            await validationChain.run()(ctx, next);
+            await validationChain.build()(ctx, next);
 
             const results = validationResults(ctx);
             expect(results.mapped()).not.toHaveProperty(prop);
@@ -1565,7 +1565,7 @@ describe('ValidatorChain validators', () => {
             const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
                 .isMimeType();
             const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
-            await validationChain.run()(ctx, next);
+            await validationChain.build()(ctx, next);
 
             const results = validationResults(ctx);
             expect(results.mapped()).toHaveProperty(prop);
@@ -1576,7 +1576,7 @@ describe('ValidatorChain validators', () => {
             const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
                 .isMimeType();
             const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
-            await validationChain.run()(ctx, next);
+            await validationChain.build()(ctx, next);
 
             const results = validationResults(ctx);
             expect(results.mapped()).not.toHaveProperty(prop);
@@ -1591,7 +1591,7 @@ describe('ValidatorChain validators', () => {
             const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
                 .isMobilePhone();
             const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
-            await validationChain.run()(ctx, next);
+            await validationChain.build()(ctx, next);
 
             const results = validationResults(ctx);
             expect(results.mapped()).toHaveProperty(prop);
@@ -1604,7 +1604,7 @@ describe('ValidatorChain validators', () => {
                 const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
                     .isMobilePhone();
                 const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
-                await validationChain.run()(ctx, next);
+                await validationChain.build()(ctx, next);
 
                 const results = validationResults(ctx);
                 expect(results.mapped()).not.toHaveProperty(prop);
@@ -1622,7 +1622,7 @@ describe('ValidatorChain validators', () => {
                 const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
                     .isMultibyte();
                 const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
-                await validationChain.run()(ctx, next);
+                await validationChain.build()(ctx, next);
 
                 const results = validationResults(ctx);
                 expect(results.mapped()).toHaveProperty(prop);
@@ -1636,7 +1636,7 @@ describe('ValidatorChain validators', () => {
                 const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
                     .isMultibyte();
                 const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
-                await validationChain.run()(ctx, next);
+                await validationChain.build()(ctx, next);
 
                 const results = validationResults(ctx);
                 expect(results.mapped()).not.toHaveProperty(prop);
@@ -1652,7 +1652,7 @@ describe('ValidatorChain validators', () => {
             const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
                 .isPostalCode();
             const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
-            await validationChain.run()(ctx, next);
+            await validationChain.build()(ctx, next);
 
             const results = validationResults(ctx);
             expect(results.mapped()).toHaveProperty(prop);
@@ -1663,7 +1663,7 @@ describe('ValidatorChain validators', () => {
             const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
                 .isPostalCode();
             const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
-            await validationChain.run()(ctx, next);
+            await validationChain.build()(ctx, next);
 
             const results = validationResults(ctx);
             expect(results.mapped()).not.toHaveProperty(prop);
@@ -1680,7 +1680,7 @@ describe('ValidatorChain validators', () => {
                 const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
                     .isSurrogatePair();
                 const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
-                await validationChain.run()(ctx, next);
+                await validationChain.build()(ctx, next);
 
                 const results = validationResults(ctx);
                 expect(results.mapped()).toHaveProperty(prop);
@@ -1694,7 +1694,7 @@ describe('ValidatorChain validators', () => {
                 const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
                     .isSurrogatePair();
                 const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
-                await validationChain.run()(ctx, next);
+                await validationChain.build()(ctx, next);
 
                 const results = validationResults(ctx);
                 expect(results.mapped()).not.toHaveProperty(prop);
@@ -1710,7 +1710,7 @@ describe('ValidatorChain validators', () => {
             const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
                 .isURL();
             const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
-            await validationChain.run()(ctx, next);
+            await validationChain.build()(ctx, next);
 
             const results = validationResults(ctx);
             expect(results.mapped()).toHaveProperty(prop);
@@ -1721,7 +1721,7 @@ describe('ValidatorChain validators', () => {
             const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
                 .isURL();
             const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
-            await validationChain.run()(ctx, next);
+            await validationChain.build()(ctx, next);
 
             const results = validationResults(ctx);
             expect(results.mapped()).not.toHaveProperty(prop);
@@ -1736,7 +1736,7 @@ describe('ValidatorChain validators', () => {
             const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
                 .isVariableWidth();
             const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
-            await validationChain.run()(ctx, next);
+            await validationChain.build()(ctx, next);
 
             const results = validationResults(ctx);
             expect(results.mapped()).toHaveProperty(prop);
@@ -1747,7 +1747,7 @@ describe('ValidatorChain validators', () => {
             const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
                 .isVariableWidth();
             const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
-            await validationChain.run()(ctx, next);
+            await validationChain.build()(ctx, next);
 
             const results = validationResults(ctx);
             expect(results.mapped()).not.toHaveProperty(prop);
@@ -1764,7 +1764,7 @@ describe('ValidatorChain validators', () => {
                 const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
                     .isWhitelisted(['a', 'b', 'c']);
                 const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
-                await validationChain.run()(ctx, next);
+                await validationChain.build()(ctx, next);
 
                 const results = validationResults(ctx);
                 expect(results.mapped()).toHaveProperty(prop);
@@ -1778,7 +1778,7 @@ describe('ValidatorChain validators', () => {
                 const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
                     .isWhitelisted('afLoxzy ');
                 const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
-                await validationChain.run()(ctx, next);
+                await validationChain.build()(ctx, next);
 
                 const results = validationResults(ctx);
                 expect(results.mapped()).not.toHaveProperty(prop);

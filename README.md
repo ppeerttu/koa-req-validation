@@ -55,7 +55,7 @@ router.get(
     query('name')
         .isLength({ min: 3, max: 20 })
         .withMessage('The name has to be between 3 and 20 characters')
-        .run(), // <-- This is required at the end of each validation
+        .build(), // <-- This is required at the end of each validation
     async (ctx: RouterContext<IValidationState>) => {
         const result = validationResults(ctx);
         if (result.hasErrors()) {

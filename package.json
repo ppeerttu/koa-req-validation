@@ -31,7 +31,6 @@
     "@types/jest": "^25.1.2",
     "@types/koa": "^2.11.0",
     "@types/koa-bodyparser": "^4.2.2",
-    "@types/validator": "^12.0.1",
     "jest": "^25.1.0",
     "koa": "^2.11.0",
     "koa-bodyparser": "^4.2.1",
@@ -48,7 +47,8 @@
     "validator": "^12.2.x"
   },
   "dependencies": {
-    "@types/koa__router": "^8.0.2"
+    "@types/koa__router": "^8.0.2",
+    "@types/validator": "^12.0.1"
   },
   "jest": {
     "preset": "ts-jest",

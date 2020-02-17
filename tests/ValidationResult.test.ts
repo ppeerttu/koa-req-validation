@@ -91,7 +91,7 @@ describe('ValidationResult', () => {
             const result2 = new ValidationResult([], [], errors);
 
             expect(result1.array()).toHaveProperty('length', 0);
-            expect(result2.array()).toBe(errors);
+            expect(result2.array()).toStrictEqual(errors);
         });
 
     });
