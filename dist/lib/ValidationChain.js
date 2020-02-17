@@ -38,18 +38,19 @@ class ValidationChain {
          */
         this.isOptional = { value: false };
         /**
-         * Run the validation. This method has to be called
-         * at the end of each validation.
+         * Build the validation chain. This method has to be called at the end of each
+         * validation.
+         *
          * ```typescript
          * router.post(
          *     '/auth/login',
-         *     body('username').equals('user').run(),
-         *     body('password').equals('pass').run(),
+         *     body('username').equals('user').build(),
+         *     body('password').equals('pass').build(),
          *     handler
          * );
          * ```
          */
-        this.run = () => (ctx, next) => __awaiter(this, void 0, void 0, function* () {
+        this.build = () => (ctx, next) => __awaiter(this, void 0, void 0, function* () {
             const results = yield this.checkResults(ctx);
             if (results) {
                 if (Array.isArray(ctx.state.validationResults)) {
@@ -61,6 +62,13 @@ class ValidationChain {
             }
             yield next();
         });
+        /**
+         * @deprecated Use `build()` instead
+         */
+        this.run = () => {
+            console.warn('ValidationChain.run() is deprecated. Please use .build() instead.');
+            return this.build();
+        };
         this.parameter = parameter;
         if (!Object.values(types_1.ParamLocation).includes(location)) {
             throw new TypeError(`Param location has to be one of `
@@ -107,6 +115,9 @@ class ValidationChain {
      * @param func The validation function
      */
     custom(func) {
+        if (typeof func === 'undefined') {
+            throw new TypeError(`Expected to receive a custom validation function but received: ${func}`);
+        }
         this.operations.push({
             type: 'validation',
             validation: 'custom',
@@ -163,10 +174,11 @@ class ValidationChain {
     /**
      * Check if the parameter is an email.
      */
-    isEmail() {
+    isEmail(options) {
         this.operations.push({
             type: 'validation',
             validation: 'isEmail',
+            options,
         });
         return this;
     }
@@ -183,20 +195,22 @@ class ValidationChain {
     /**
      * Check if the parameter is a zero length string.
      */
-    isEmpty() {
+    isEmpty(options) {
         this.operations.push({
             type: 'validation',
             validation: 'isEmpty',
+            options,
         });
         return this;
     }
     /**
      * Check if the parameter is a float.
      */
-    isFloat() {
+    isFloat(options) {
         this.operations.push({
             type: 'validation',
             validation: 'isFloat',
+            options,
         });
         return this;
     }
@@ -258,10 +272,11 @@ class ValidationChain {
     /**
      * Check if the parameter is a MAC address.
      */
-    isMACAddress() {
+    isMACAddress(options) {
         this.operations.push({
             type: 'validation',
             validation: 'isMACAddress',
+            options,
         });
         return this;
     }
@@ -278,10 +293,11 @@ class ValidationChain {
     /**
      * Check if the parameter contains only numbers.
      */
-    isNumeric() {
+    isNumeric(options) {
         this.operations.push({
             type: 'validation',
             validation: 'isNumeric',
+            options,
         });
         return this;
     }
@@ -298,10 +314,11 @@ class ValidationChain {
     /**
      * Check if the parameter is valid UUID (v3, v4 or v5).
      */
-    isUUID() {
+    isUUID(version) {
         this.operations.push({
             type: 'validation',
             validation: 'isUUID',
+            options: version,
         });
         return this;
     }
@@ -347,9 +364,9 @@ class ValidationChain {
      * Check if the string is a date that's after the specified
      * date (defaults to now).
      *
-     * @param date The date
+     * @param date The date (defaults to now)
      */
-    isAfter(date = new Date().toString()) {
+    isAfter(date) {
         this.operations.push({
             type: 'validation',
             validation: 'isAfter',
@@ -407,11 +424,11 @@ class ValidationChain {
     }
     /**
      * Check if the string is a date that's before
-     * the given date. Defaults to now.
+     * the given date, which defaults to now.
      *
-     * @param date The date
+     * @param date The date (defaults to now)
      */
-    isBefore(date = new Date().toString()) {
+    isBefore(date) {
         this.operations.push({
             type: 'validation',
             validation: 'isBefore',
@@ -611,10 +628,11 @@ class ValidationChain {
     /**
      * Check if the string is valid ISO8601 date.
      */
-    isISO8601() {
+    isISO8601(options) {
         this.operations.push({
             type: 'validation',
             validation: 'isISO8601',
+            options,
         });
         return this;
     }
@@ -636,6 +654,17 @@ class ValidationChain {
         this.operations.push({
             type: 'validation',
             validation: 'isISO31661Alpha2',
+        });
+        return this;
+    }
+    /**
+     * Check if the string is a valid ISO 3166-1 alpha-3
+     * officially assigned country code.
+     */
+    isISO31661Alpha3() {
+        this.operations.push({
+            type: 'validation',
+            validation: 'isISO31661Alpha3',
         });
         return this;
     }
@@ -766,7 +795,7 @@ class ValidationChain {
         return this;
     }
     /**
-     * Replace <, >, &, ', " and / with HTML entities.
+     * Replace <, >, &, ', ' and / with HTML entities.
      */
     escape() {
         this.operations.push({
@@ -776,7 +805,7 @@ class ValidationChain {
         return this;
     }
     /**
-     * Replaces HTML encoded entities with <, >, &, ', " and /.
+     * Replaces HTML encoded entities with <, >, &, ", ' and /.
      */
     unescape() {
         this.operations.push({
@@ -961,13 +990,6 @@ class ValidationChain {
                     ? message(ctx, input === null ? '' : input + '')
                     : message;
                 if (validation === 'custom') {
-                    // Has to be thrown before the try-catch
-                    // in order to notify the developer during development
-                    if (!func) {
-                        throw new Error(`No custom validation function defined for `
-                            + `parameter ${this.parameter} at request `
-                            + `location ${this.location}`);
-                    }
                     try {
                         yield func(input, ctx);
                     }
@@ -1000,41 +1022,9 @@ class ValidationChain {
      * @param input The input as string
      */
     sanitize(input, sanitationDefinition) {
-        let value = input;
         const { sanitation, options } = sanitationDefinition;
-        switch (sanitation) {
-            case 'blacklist':
-            case 'whitelist':
-                value = validator_1.default[sanitation](value, options);
-                break;
-            case 'escape':
-            case 'unescape':
-                value = validator_1.default[sanitation](value);
-                break;
-            case 'ltrim':
-            case 'rtrim':
-            case 'trim':
-                value = validator_1.default[sanitation](value, options);
-                break;
-            case 'normalizeEmail':
-                value = validator_1.default.normalizeEmail(value, options);
-                break;
-            case 'stripLow':
-            case 'toBoolean':
-                value = validator_1.default[sanitation](value, options);
-                break;
-            case 'toDate':
-            case 'toFloat':
-                // validator.toDate doesn't guarantee Date object (it may return `null`),
-                // but we just have to trust that the validation has been done properly
-                // and real Date is produced
-                value = validator_1.default[sanitation](value);
-                break;
-            case 'toInt':
-                value = validator_1.default[sanitation](value, options);
-                break;
-        }
-        return value;
+        const fn = validator_1.default[sanitation];
+        return fn(input, options);
     }
 }
 exports.default = ValidationChain;

@@ -56,12 +56,12 @@ const arrayExample = [
     param('count')
         .isInt({ min: 1, max: 100 })
         .toInt()
-        .run(),
+        .build(),
     query('name')
         .trim()
         .isLength({ min: 3, max: 20 })
         .withMessage(customErrorMessage)
-        .run(),
+        .build(),
 ];
 
 router.get(
@@ -69,7 +69,7 @@ router.get(
     query('name')
         .isLength({ min: 3, max: 20 })
         .withMessage('The name has to be between 3 and 20 characters')
-        .run(),
+        .build(),
     async (ctx: RouterContext<IValidationState>) => {
         const results = validationResults(ctx);
         if (results.hasErrors()) {
@@ -85,7 +85,7 @@ router.get(
     query('name')
         .isLength({ min: 3, max: 20 })
         .optional()
-        .run(),
+        .build(),
     async (ctx: RouterContext<IValidationState>) => {
         const results = validationResults(ctx);
         if (results.hasErrors()) {

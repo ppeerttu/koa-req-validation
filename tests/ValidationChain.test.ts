@@ -42,7 +42,7 @@ describe('ValidationChain', () => {
                 .equals('foo');
 
             const ctx: any = mockContext();
-            await validationChain.run()(ctx, next);
+            await validationChain.build()(ctx, next);
             const results = validationResults(ctx);
             expect(results.hasErrors()).toBe(true);
             expect(results.array().length).toBe(2);
@@ -57,8 +57,8 @@ describe('ValidationChain', () => {
                 .isInt();
 
             const ctx: any = mockContext();
-            await validationChain.run()(ctx, next);
-            await validationChain2.run()(ctx, next);
+            await validationChain.build()(ctx, next);
+            await validationChain2.build()(ctx, next);
             const results = validationResults(ctx);
             expect(results.hasErrors()).toBe(true);
             expect(Object.keys(results.mapped()).length).toBe(2);
@@ -66,6 +66,33 @@ describe('ValidationChain', () => {
         });
 
         test('Runs sanitizers only if validators have been passed', async () => {
+            const valid = '2019-01-01';
+            const invalid = '2019-20-20';
+
+            const validationChain = new ValidationChain(prop, ParamLocation.BODY)
+                .isISO8601()
+                .toDate();
+
+            const ctxInvalid = mockContext(ParamLocation.BODY, { [prop]: invalid });
+            const ctxValid = mockContext(ParamLocation.BODY, { [prop]: valid });
+
+            await validationChain.build()(ctxInvalid, next);
+
+            let results = validationResults(ctxInvalid);
+
+            expect(results.hasErrors()).toBe(true);
+            expect(Object.keys(results.passedData()).length).toBe(0);
+
+            await validationChain.build()(ctxValid, next);
+
+            results = validationResults(ctxValid);
+
+            expect(results.hasErrors()).toBe(false);
+            expect(Object.keys(results.passedData()).length).toBe(1);
+            expect(results.passedData()[prop]).toBeInstanceOf(Date);
+        });
+
+        test('Works with deprecated .run() as well', async () => {
             const valid = '2019-01-01';
             const invalid = '2019-20-20';
 
