@@ -12,7 +12,7 @@ export default class ValidationResult {
      */
     public static fromResults(results: ValidationResult[]): ValidationResult {
         const parameters: string[] = [];
-        const finalValues: Array<undefined | string | boolean | Date | number> = [];
+        const finalValues: (undefined | string | boolean | Date | number)[] = [];
         const errors: IValidationError[] = [];
 
         for (const result of results) {
@@ -25,14 +25,14 @@ export default class ValidationResult {
 
     public readonly parameters: string[];
 
-    public readonly finalValues: Array<undefined | string | boolean | Date | number>;
+    public readonly finalValues: (undefined | string | boolean | Date | number)[];
 
     private results: IValidationError[];
 
     constructor(
         parameter: string | string[] = [],
         // tslint:disable-next-line: max-line-length
-        finalValue?: undefined | string | boolean | Date | number | Array<undefined | string | boolean | Date | number>,
+        finalValue?: undefined | string | boolean | Date | number | (undefined | string | boolean | Date | number)[],
         results?: IValidationError[],
     ) {
         this.parameters = Array.isArray(parameter) ? parameter : [parameter];

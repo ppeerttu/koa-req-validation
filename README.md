@@ -29,7 +29,7 @@ The **koa-req-validation** requires [validator][validator-site], [koa-router][ko
 
 Install peer dependencies
 ```
-npm install validator koa-bodyparser koa-router
+npm install validator@12 koa-bodyparser@4 @koa/router@8
 ```
 
 Install **koa-req-validation**
@@ -91,11 +91,11 @@ See the [generated TypeDoc][typedocs] and [ValidationChain][validation-chain] fo
 
 # Motivation
 
-Motivation behind this module is the awesome experience of using the [express-validator][express-validator-site]. However, due to various reasons the `express-validator` doesn't suit it and it seems that there is quite a lot of request validation packages out there mainly for `koa` v1 without warranty for active maintenance. This package tries to mimic the `express-validator` pacakge and eventually provide most of the features.
+Motivation behind this module is the awesome experience of using the [express-validator][express-validator-site]. However, due to various reasons the `express-validator` doesn't suit `koa` and it seems that there are quite a lot of request validation packages out there mainly for `koa` v1 without warranty for active maintenance. This package tries to mimic the `express-validator` pacakge and eventually provide most of the features.
 
 ## Peer dependencies
 
-The usage of the few peer dependencies is a known decision. As it appears to be slowly growing concern that developers hog thousands of npm pacakges without knowing them, we'd like to make sure the developer knows what's included in this package and actively consider whether to include this pacakge along with it's peer dependencies to the project.
+As it appears to be slowly growing concern that developers hog thousands of npm pacakges without knowing them, we'd like to make sure the developer knows what's included in this package and actively consider whether to include this pacakge along with it's peer dependencies to their projects.
 
 # Issues
 
