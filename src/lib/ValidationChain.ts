@@ -1108,17 +1108,8 @@ export default class ValidationChain {
                     : message;
 
                 if (validation === 'custom') {
-                    // Has to be thrown before the try-catch
-                    // in order to notify the developer during development
-                    if (!func) {
-                        throw new Error(
-                            `No custom validation function defined for `
-                            + `parameter ${this.parameter} at request `
-                            + `location ${this.location}`,
-                        );
-                    }
                     try {
-                        await func(input, ctx);
+                        await func!(input, ctx);
                     } catch (e) {
                         arr.push({
                             msg: finalMessage || e.message || this.defaultErrorMessage,
@@ -1161,9 +1152,6 @@ export default class ValidationChain {
     ): any {
         const { sanitation, options } = sanitationDefinition;
         const fn = validator[sanitation] as (input: string, options?: any) => any;
-        if (typeof fn === 'undefined') {
-            throw new Error(`Given sanitation ${sanitation} is not implemented`);
-        }
         return fn(input, options);
     }
 }
