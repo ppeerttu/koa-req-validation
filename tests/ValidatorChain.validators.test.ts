@@ -84,11 +84,11 @@ describe('ValidatorChain validators', () => {
         });
 
         test('Throws if no validation function has been defined', async () => {
-            // @ts-ignore
-            const validationChain = new ValidationChain('int', ParamLocation.BODY)
-                .custom();
-            const ctx: any = mockContext(ParamLocation.BODY, { int: '12' });
-            await expect(validationChain.build()(ctx, next)).rejects.toThrow();
+            expect(() => {
+                // @ts-ignore
+                new ValidationChain('int', ParamLocation.BODY)
+                    .custom();
+            }).toThrow(TypeError);
         });
 
         test(
@@ -1496,6 +1496,39 @@ describe('ValidatorChain validators', () => {
                 const value = 'fi';
                 const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
                     .isISO31661Alpha2();
+                const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
+                await validationChain.build()(ctx, next);
+
+                const results = validationResults(ctx);
+                expect(results.mapped()).not.toHaveProperty(prop);
+            },
+        );
+
+    });
+
+    describe('isISO31661Alpha3()', () => {
+
+        test(
+            'Returns an error if the value is not valid ISO 3166-1 alpha 3 country code',
+            async () => {
+                const value = 'fi';
+                const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
+                    .isISO31661Alpha3();
+                const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
+                await validationChain.build()(ctx, next);
+
+                const results = validationResults(ctx);
+                expect(results.mapped()).toHaveProperty(prop);
+            },
+        );
+
+        test(
+            'Doesn\'t return an error if the value is valid '
+            + 'ISO 3166-1 alpha 3 country code',
+            async () => {
+                const value = 'fin';
+                const validationChain = new ValidationChain(prop, ParamLocation.QUERY)
+                    .isISO31661Alpha3();
                 const ctx = mockContext(ParamLocation.QUERY, { [prop]: value });
                 await validationChain.build()(ctx, next);
 

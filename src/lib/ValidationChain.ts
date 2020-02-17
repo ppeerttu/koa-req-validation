@@ -5,10 +5,8 @@ import { IValidationState } from '..';
 import {
     CustomErrorMessageFunction,
     CustomValidatorFunction,
-    INormalizeEmailOptions,
     IOptionalOptions,
     ISanitationDefinition,
-    IsInValuesOptions,
     IValidationDefinition,
     IValidationError,
     ParamLocation,
@@ -147,6 +145,11 @@ export default class ValidationChain {
      * @param func The validation function
      */
     public custom(func: CustomValidatorFunction) {
+        if (typeof func === 'undefined') {
+            throw new TypeError(
+                `Expected to receive a custom validation function but received: ${func}`,
+            );
+        }
         this.operations.push({
             type: 'validation',
             validation: 'custom',
@@ -402,7 +405,7 @@ export default class ValidationChain {
      * @param values Options containing at least `values`
      * property with allowed values
      */
-    public isIn(values: IsInValuesOptions) {
+    public isIn(values: any[]) {
         this.operations.push({
             type: 'validation',
             validation: 'isIn',
@@ -729,6 +732,18 @@ export default class ValidationChain {
         this.operations.push({
             type: 'validation',
             validation: 'isISO31661Alpha2',
+        });
+        return this;
+    }
+
+    /**
+     * Check if the string is a valid ISO 3166-1 alpha-3
+     * officially assigned country code.
+     */
+    public isISO31661Alpha3() {
+        this.operations.push({
+            type: 'validation',
+            validation: 'isISO31661Alpha3',
         });
         return this;
     }
