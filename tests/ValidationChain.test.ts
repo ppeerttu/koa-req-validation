@@ -92,6 +92,33 @@ describe('ValidationChain', () => {
             expect(results.passedData()[prop]).toBeInstanceOf(Date);
         });
 
+        test('Works with deprecated .run() as well', async () => {
+            const valid = '2019-01-01';
+            const invalid = '2019-20-20';
+
+            const validationChain = new ValidationChain(prop, ParamLocation.BODY)
+                .isISO8601()
+                .toDate();
+
+            const ctxInvalid = mockContext(ParamLocation.BODY, { [prop]: invalid });
+            const ctxValid = mockContext(ParamLocation.BODY, { [prop]: valid });
+
+            await validationChain.run()(ctxInvalid, next);
+
+            let results = validationResults(ctxInvalid);
+
+            expect(results.hasErrors()).toBe(true);
+            expect(Object.keys(results.passedData()).length).toBe(0);
+
+            await validationChain.run()(ctxValid, next);
+
+            results = validationResults(ctxValid);
+
+            expect(results.hasErrors()).toBe(false);
+            expect(Object.keys(results.passedData()).length).toBe(1);
+            expect(results.passedData()[prop]).toBeInstanceOf(Date);
+        });
+
     });
 
 });
