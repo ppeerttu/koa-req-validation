@@ -1,8 +1,8 @@
 /// <reference types="koa__router" />
 /// <reference types="koa" />
 /// <reference types="koa-bodyparser" />
-import ValidationChain from './lib/ValidationChain';
-import ValidationResult from './lib/ValidationResult';
+import ValidationChain from "./lib/ValidationChain";
+import ValidationResult from "./lib/ValidationResult";
 /**
  * Koa context for validation operations.
  */
@@ -68,4 +68,4 @@ export declare const query: (queryString: string) => ValidationChain;
  * ```
  */
 export declare const param: (routeParam: string) => ValidationChain;
-export * from './lib/types';
+export * from "./lib/types";

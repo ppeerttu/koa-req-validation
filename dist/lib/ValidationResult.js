@@ -4,6 +4,30 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * Validation result set.
  */
 class ValidationResult {
+    constructor(parameter = [], 
+    // tslint:disable-next-line: max-line-length
+    finalValue, results) {
+        this.parameters = Array.isArray(parameter) ? parameter : [parameter];
+        this.finalValues = Array.isArray(finalValue)
+            ? finalValue
+            : this.parameters.length
+                ? [finalValue]
+                : [];
+        if (this.parameters.length !== this.finalValues.length) {
+            throw new Error(`Invalid ValidationResult state: parameters (${this.parameters.length})` +
+                ` and finalValues (${this.finalValues.length}) do not match`);
+        }
+        if (results) {
+            if (!Array.isArray(results)) {
+                throw new TypeError(`Parameter for ValidationResult constructor must be an` +
+                    ` array but received ${results}`);
+            }
+            this.results = results;
+        }
+        else {
+            this.results = [];
+        }
+    }
     /**
      * Merge multiple validation error results into a single one.
      *
@@ -19,28 +43,6 @@ class ValidationResult {
             errors.push(...result.array());
         }
         return new ValidationResult(parameters, finalValues, errors);
-    }
-    constructor(parameter = [], 
-    // tslint:disable-next-line: max-line-length
-    finalValue, results) {
-        this.parameters = Array.isArray(parameter) ? parameter : [parameter];
-        this.finalValues = Array.isArray(finalValue)
-            ? finalValue
-            : (this.parameters.length ? [finalValue] : []);
-        if (this.parameters.length !== this.finalValues.length) {
-            throw new Error(`Invalid ValidationResult state: parameters (${this.parameters.length})`
-                + ` and finalValues (${this.finalValues.length}) do not match`);
-        }
-        if (results) {
-            if (!Array.isArray(results)) {
-                throw new TypeError(`Parameter for ValidationResult constructor must be an`
-                    + ` array but received ${results}`);
-            }
-            this.results = results;
-        }
-        else {
-            this.results = [];
-        }
     }
     /**
      * See if validation result has any validation errors.
@@ -71,7 +73,7 @@ class ValidationResult {
     passedData() {
         const results = {};
         for (let i = 0; i < this.parameters.length; i++) {
-            if (typeof this.finalValues[i] !== 'undefined') {
+            if (typeof this.finalValues[i] !== "undefined") {
                 results[this.parameters[i]] = this.finalValues[i];
             }
         }
