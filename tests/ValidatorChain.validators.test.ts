@@ -39,7 +39,7 @@ describe("ValidatorChain validators", () => {
             expect(results.array().length).toBe(0);
         });
 
-        test("Doesn\t ignore null value", async () => {
+        test("Doesn't ignore null value", async () => {
             const validationChain = new ValidationChain("param", ParamLocation.BODY)
                 .equals("foo")
                 .optional();
