@@ -3,3 +3,10 @@
 
 # Test coverage results
 /coverage
+
+# OS X
+.DS_Store
+
+# Editor
+.vscode/*
+!.vscode/settings.json

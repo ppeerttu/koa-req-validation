@@ -1,7 +1,7 @@
-import { RouterContext } from '@koa/router';
-import validator from 'validator';
+import { RouterContext } from "@koa/router";
+import validator from "validator";
 
-import { IValidationState } from '..';
+import { IValidationState } from "..";
 import {
     CustomErrorMessageFunction,
     CustomValidatorFunction,
@@ -10,18 +10,17 @@ import {
     IValidationDefinition,
     IValidationError,
     ParamLocation,
-} from './types';
-import ValidationResult from './ValidationResult';
+} from "./types";
+import ValidationResult from "./ValidationResult";
 
 /**
  * The validation chain object.
  */
 export default class ValidationChain {
-
     /**
      * Default error message when validation fails.
      */
-    public readonly defaultErrorMessage = 'Invalid value';
+    public readonly defaultErrorMessage = "Invalid value";
 
     /**
      * Parameter to be validated.
@@ -42,8 +41,8 @@ export default class ValidationChain {
      * Is this parameter optional?
      */
     private isOptional: {
-        value: boolean,
-        options?: IOptionalOptions,
+        value: boolean;
+        options?: IOptionalOptions;
     } = { value: false };
 
     /**
@@ -52,16 +51,13 @@ export default class ValidationChain {
      * @param parameter Name of the parameter to validate
      * @param location Location of the parameter in request
      */
-    constructor(
-        parameter: string,
-        location: ParamLocation,
-    ) {
+    constructor(parameter: string, location: ParamLocation) {
         this.parameter = parameter;
         if (!Object.values(ParamLocation).includes(location)) {
             throw new TypeError(
-                `Param location has to be one of `
-                + Object.values(ParamLocation).join(', ')
-                + ` but received ${location}`,
+                `Param location has to be one of ` +
+                    Object.values(ParamLocation).join(", ") +
+                    ` but received ${location}`
             );
         }
         this.location = location;
@@ -82,7 +78,7 @@ export default class ValidationChain {
      */
     public build = () => async (
         ctx: RouterContext<IValidationState>,
-        next: () => Promise<void>,
+        next: () => Promise<void>
     ) => {
         const results = await this.checkResults(ctx);
         if (results) {
@@ -93,15 +89,15 @@ export default class ValidationChain {
             }
         }
         await next();
-    }
+    };
 
     /**
      * @deprecated Use `build()` instead
      */
     public run = () => {
-        console.warn('ValidationChain.run() is deprecated. Please use .build() instead.');
+        console.warn("ValidationChain.run() is deprecated. Please use .build() instead.");
         return this.build();
-    }
+    };
 
     /**
      * Pass a custom message to the validation.
@@ -113,15 +109,17 @@ export default class ValidationChain {
     public withMessage(message: string | CustomErrorMessageFunction) {
         if (this.operations.length < 1) {
             throw new Error(
-                `Can't set a validation error message using withMessage() when `
-                + `no validations have been defined`,
+                `Can't set a validation error message using withMessage() when ` +
+                    `no validations have been defined`
             );
         }
         const validationDefinition = this.operations[this.operations.length - 1];
-        if (validationDefinition.type === 'sanitation') {
-            throw new Error(`Can't set a validation error message using withMessage() `
-            + `to a sanitizer definition! Please call withMessage() immediately after `
-            + `the validation definition.`);
+        if (validationDefinition.type === "sanitation") {
+            throw new Error(
+                `Can't set a validation error message using withMessage() ` +
+                    `to a sanitizer definition! Please call withMessage() immediately after ` +
+                    `the validation definition.`
+            );
         }
         validationDefinition.message = message;
         return this;
@@ -145,14 +143,14 @@ export default class ValidationChain {
      * @param func The validation function
      */
     public custom(func: CustomValidatorFunction) {
-        if (typeof func === 'undefined') {
+        if (typeof func === "undefined") {
             throw new TypeError(
-                `Expected to receive a custom validation function but received: ${func}`,
+                `Expected to receive a custom validation function but received: ${func}`
             );
         }
         this.operations.push({
-            type: 'validation',
-            validation: 'custom',
+            type: "validation",
+            validation: "custom",
             func,
         });
         return this;
@@ -163,8 +161,8 @@ export default class ValidationChain {
      */
     public contains(seed: string) {
         this.operations.push({
-            type: 'validation',
-            validation: 'contains',
+            type: "validation",
+            validation: "contains",
             options: seed,
         });
         return this;
@@ -175,8 +173,8 @@ export default class ValidationChain {
      */
     public equals(comparison: string) {
         this.operations.push({
-            type: 'validation',
-            validation: 'equals',
+            type: "validation",
+            validation: "equals",
             options: comparison,
         });
         return this;
@@ -187,8 +185,8 @@ export default class ValidationChain {
      */
     public isInt(options?: validator.IsIntOptions) {
         this.operations.push({
-            type: 'validation',
-            validation: 'isInt',
+            type: "validation",
+            validation: "isInt",
             options,
         });
         return this;
@@ -201,8 +199,8 @@ export default class ValidationChain {
      */
     public isLength(options: validator.IsLengthOptions) {
         this.operations.push({
-            type: 'validation',
-            validation: 'isLength',
+            type: "validation",
+            validation: "isLength",
             options,
         });
         return this;
@@ -213,8 +211,8 @@ export default class ValidationChain {
      */
     public isEmail(options?: validator.IsEmailOptions) {
         this.operations.push({
-            type: 'validation',
-            validation: 'isEmail',
+            type: "validation",
+            validation: "isEmail",
             options,
         });
         return this;
@@ -225,8 +223,8 @@ export default class ValidationChain {
      */
     public isBoolean() {
         this.operations.push({
-            type: 'validation',
-            validation: 'isBoolean',
+            type: "validation",
+            validation: "isBoolean",
         });
         return this;
     }
@@ -236,8 +234,8 @@ export default class ValidationChain {
      */
     public isEmpty(options?: validator.IsEmptyOptions) {
         this.operations.push({
-            type: 'validation',
-            validation: 'isEmpty',
+            type: "validation",
+            validation: "isEmpty",
             options,
         });
         return this;
@@ -248,8 +246,8 @@ export default class ValidationChain {
      */
     public isFloat(options?: validator.IsFloatOptions) {
         this.operations.push({
-            type: 'validation',
-            validation: 'isFloat',
+            type: "validation",
+            validation: "isFloat",
             options,
         });
         return this;
@@ -262,8 +260,8 @@ export default class ValidationChain {
      */
     public isHash(algorithm: validator.HashAlgorithm) {
         this.operations.push({
-            type: 'validation',
-            validation: 'isHash',
+            type: "validation",
+            validation: "isHash",
             options: algorithm,
         });
         return this;
@@ -274,8 +272,8 @@ export default class ValidationChain {
      */
     public isJWT() {
         this.operations.push({
-            type: 'validation',
-            validation: 'isJWT',
+            type: "validation",
+            validation: "isJWT",
         });
         return this;
     }
@@ -286,8 +284,8 @@ export default class ValidationChain {
      */
     public isJSON() {
         this.operations.push({
-            type: 'validation',
-            validation: 'isJSON',
+            type: "validation",
+            validation: "isJSON",
         });
         return this;
     }
@@ -298,8 +296,8 @@ export default class ValidationChain {
      */
     public isLatLong() {
         this.operations.push({
-            type: 'validation',
-            validation: 'isLatLong',
+            type: "validation",
+            validation: "isLatLong",
         });
         return this;
     }
@@ -309,8 +307,8 @@ export default class ValidationChain {
      */
     public isLowercase() {
         this.operations.push({
-            type: 'validation',
-            validation: 'isLowercase',
+            type: "validation",
+            validation: "isLowercase",
         });
         return this;
     }
@@ -320,8 +318,8 @@ export default class ValidationChain {
      */
     public isMACAddress(options?: validator.IsMACAddressOptions) {
         this.operations.push({
-            type: 'validation',
-            validation: 'isMACAddress',
+            type: "validation",
+            validation: "isMACAddress",
             options,
         });
         return this;
@@ -332,8 +330,8 @@ export default class ValidationChain {
      */
     public isMongoId() {
         this.operations.push({
-            type: 'validation',
-            validation: 'isMongoId',
+            type: "validation",
+            validation: "isMongoId",
         });
         return this;
     }
@@ -343,8 +341,8 @@ export default class ValidationChain {
      */
     public isNumeric(options?: validator.IsNumericOptions) {
         this.operations.push({
-            type: 'validation',
-            validation: 'isNumeric',
+            type: "validation",
+            validation: "isNumeric",
             options,
         });
         return this;
@@ -355,8 +353,8 @@ export default class ValidationChain {
      */
     public isPort() {
         this.operations.push({
-            type: 'validation',
-            validation: 'isPort',
+            type: "validation",
+            validation: "isPort",
         });
         return this;
     }
@@ -364,10 +362,10 @@ export default class ValidationChain {
     /**
      * Check if the parameter is valid UUID (v3, v4 or v5).
      */
-    public isUUID(version?: 3 | 4 | 5 | '3' | '4' | '5' | 'all') {
+    public isUUID(version?: 3 | 4 | 5 | "3" | "4" | "5" | "all") {
         this.operations.push({
-            type: 'validation',
-            validation: 'isUUID',
+            type: "validation",
+            validation: "isUUID",
             options: version,
         });
         return this;
@@ -378,8 +376,8 @@ export default class ValidationChain {
      */
     public isUppercase() {
         this.operations.push({
-            type: 'validation',
-            validation: 'isUppercase',
+            type: "validation",
+            validation: "isUppercase",
         });
         return this;
     }
@@ -391,8 +389,8 @@ export default class ValidationChain {
      */
     public matches(regExp: RegExp) {
         this.operations.push({
-            type: 'validation',
-            validation: 'matches',
+            type: "validation",
+            validation: "matches",
             options: regExp,
         });
         return this;
@@ -407,8 +405,8 @@ export default class ValidationChain {
      */
     public isIn(values: any[]) {
         this.operations.push({
-            type: 'validation',
-            validation: 'isIn',
+            type: "validation",
+            validation: "isIn",
             options: values,
         });
         return this;
@@ -422,8 +420,8 @@ export default class ValidationChain {
      */
     public isAfter(date?: string) {
         this.operations.push({
-            type: 'validation',
-            validation: 'isAfter',
+            type: "validation",
+            validation: "isAfter",
             options: date,
         });
         return this;
@@ -437,8 +435,8 @@ export default class ValidationChain {
      */
     public isAlpha(locale?: validator.AlphaLocale) {
         this.operations.push({
-            type: 'validation',
-            validation: 'isAlpha',
+            type: "validation",
+            validation: "isAlpha",
             options: locale,
         });
         return this;
@@ -452,8 +450,8 @@ export default class ValidationChain {
      */
     public isAlphanumeric(locale?: validator.AlphanumericLocale) {
         this.operations.push({
-            type: 'validation',
-            validation: 'isAlphanumeric',
+            type: "validation",
+            validation: "isAlphanumeric",
             options: locale,
         });
         return this;
@@ -464,8 +462,8 @@ export default class ValidationChain {
      */
     public isAscii() {
         this.operations.push({
-            type: 'validation',
-            validation: 'isAscii',
+            type: "validation",
+            validation: "isAscii",
         });
         return this;
     }
@@ -475,8 +473,8 @@ export default class ValidationChain {
      */
     public isBase64() {
         this.operations.push({
-            type: 'validation',
-            validation: 'isBase64',
+            type: "validation",
+            validation: "isBase64",
         });
         return this;
     }
@@ -489,8 +487,8 @@ export default class ValidationChain {
      */
     public isBefore(date?: string) {
         this.operations.push({
-            type: 'validation',
-            validation: 'isBefore',
+            type: "validation",
+            validation: "isBefore",
             options: date,
         });
         return this;
@@ -504,8 +502,8 @@ export default class ValidationChain {
      */
     public isByteLength(options: validator.IsByteLengthOptions = { min: 0 }) {
         this.operations.push({
-            type: 'validation',
-            validation: 'isByteLength',
+            type: "validation",
+            validation: "isByteLength",
             options,
         });
         return this;
@@ -516,8 +514,8 @@ export default class ValidationChain {
      */
     public isCreditCard() {
         this.operations.push({
-            type: 'validation',
-            validation: 'isCreditCard',
+            type: "validation",
+            validation: "isCreditCard",
         });
         return this;
     }
@@ -529,8 +527,8 @@ export default class ValidationChain {
      */
     public isCurrency(options?: validator.IsCurrencyOptions) {
         this.operations.push({
-            type: 'validation',
-            validation: 'isCurrency',
+            type: "validation",
+            validation: "isCurrency",
             options,
         });
         return this;
@@ -541,8 +539,8 @@ export default class ValidationChain {
      */
     public isDataURI() {
         this.operations.push({
-            type: 'validation',
-            validation: 'isDataURI',
+            type: "validation",
+            validation: "isDataURI",
         });
         return this;
     }
@@ -554,8 +552,8 @@ export default class ValidationChain {
      */
     public isDecimal(options?: validator.IsDecimalOptions) {
         this.operations.push({
-            type: 'validation',
-            validation: 'isDecimal',
+            type: "validation",
+            validation: "isDecimal",
             options,
         });
         return this;
@@ -569,8 +567,8 @@ export default class ValidationChain {
      */
     public isDivisibleBy(division: number) {
         this.operations.push({
-            type: 'validation',
-            validation: 'isDivisibleBy',
+            type: "validation",
+            validation: "isDivisibleBy",
             options: division,
         });
         return this;
@@ -584,8 +582,8 @@ export default class ValidationChain {
      */
     public isFQDN(options?: validator.IsFQDNOptions) {
         this.operations.push({
-            type: 'validation',
-            validation: 'isFQDN',
+            type: "validation",
+            validation: "isFQDN",
             options,
         });
         return this;
@@ -597,8 +595,8 @@ export default class ValidationChain {
      */
     public isFullWidth() {
         this.operations.push({
-            type: 'validation',
-            validation: 'isFullWidth',
+            type: "validation",
+            validation: "isFullWidth",
         });
         return this;
     }
@@ -609,8 +607,8 @@ export default class ValidationChain {
      */
     public isHalfWidth() {
         this.operations.push({
-            type: 'validation',
-            validation: 'isHalfWidth',
+            type: "validation",
+            validation: "isHalfWidth",
         });
         return this;
     }
@@ -621,8 +619,8 @@ export default class ValidationChain {
      */
     public isHexColor() {
         this.operations.push({
-            type: 'validation',
-            validation: 'isHexColor',
+            type: "validation",
+            validation: "isHexColor",
         });
         return this;
     }
@@ -633,8 +631,8 @@ export default class ValidationChain {
      */
     public isHexadecimal() {
         this.operations.push({
-            type: 'validation',
-            validation: 'isHexadecimal',
+            type: "validation",
+            validation: "isHexadecimal",
         });
         return this;
     }
@@ -642,10 +640,10 @@ export default class ValidationChain {
     /**
      * Check if the string is an IP (ver 4 or 6).
      */
-    public isIP(version?: 4 | 6 | '4' | '6') {
+    public isIP(version?: 4 | 6 | "4" | "6") {
         this.operations.push({
-            type: 'validation',
-            validation: 'isIP',
+            type: "validation",
+            validation: "isIP",
             options: version,
         });
         return this;
@@ -656,8 +654,8 @@ export default class ValidationChain {
      */
     public isIPRange() {
         this.operations.push({
-            type: 'validation',
-            validation: 'isIPRange',
+            type: "validation",
+            validation: "isIPRange",
         });
         return this;
     }
@@ -667,10 +665,10 @@ export default class ValidationChain {
      *
      * @param version The version
      */
-    public isISBN(version: 10 | 13 | '10' | '13') {
+    public isISBN(version: 10 | 13 | "10" | "13") {
         this.operations.push({
-            type: 'validation',
-            validation: 'isISBN',
+            type: "validation",
+            validation: "isISBN",
             options: version,
         });
         return this;
@@ -683,8 +681,8 @@ export default class ValidationChain {
      */
     public isISSN(options?: validator.IsISSNOptions) {
         this.operations.push({
-            type: 'validation',
-            validation: 'isISSN',
+            type: "validation",
+            validation: "isISSN",
             options,
         });
         return this;
@@ -695,8 +693,8 @@ export default class ValidationChain {
      */
     public isISIN() {
         this.operations.push({
-            type: 'validation',
-            validation: 'isISIN',
+            type: "validation",
+            validation: "isISIN",
         });
         return this;
     }
@@ -706,8 +704,8 @@ export default class ValidationChain {
      */
     public isISO8601(options?: validator.IsISO8601Options) {
         this.operations.push({
-            type: 'validation',
-            validation: 'isISO8601',
+            type: "validation",
+            validation: "isISO8601",
             options,
         });
         return this;
@@ -718,8 +716,8 @@ export default class ValidationChain {
      */
     public isRFC3339() {
         this.operations.push({
-            type: 'validation',
-            validation: 'isRFC3339',
+            type: "validation",
+            validation: "isRFC3339",
         });
         return this;
     }
@@ -730,8 +728,8 @@ export default class ValidationChain {
      */
     public isISO31661Alpha2() {
         this.operations.push({
-            type: 'validation',
-            validation: 'isISO31661Alpha2',
+            type: "validation",
+            validation: "isISO31661Alpha2",
         });
         return this;
     }
@@ -742,8 +740,8 @@ export default class ValidationChain {
      */
     public isISO31661Alpha3() {
         this.operations.push({
-            type: 'validation',
-            validation: 'isISO31661Alpha3',
+            type: "validation",
+            validation: "isISO31661Alpha3",
         });
         return this;
     }
@@ -753,8 +751,8 @@ export default class ValidationChain {
      */
     public isISRC() {
         this.operations.push({
-            type: 'validation',
-            validation: 'isISRC',
+            type: "validation",
+            validation: "isISRC",
         });
         return this;
     }
@@ -764,8 +762,8 @@ export default class ValidationChain {
      */
     public isMD5() {
         this.operations.push({
-            type: 'validation',
-            validation: 'isMD5',
+            type: "validation",
+            validation: "isMD5",
         });
         return this;
     }
@@ -775,8 +773,8 @@ export default class ValidationChain {
      */
     public isMimeType() {
         this.operations.push({
-            type: 'validation',
-            validation: 'isMimeType',
+            type: "validation",
+            validation: "isMimeType",
         });
         return this;
     }
@@ -787,11 +785,14 @@ export default class ValidationChain {
      * @param locale The locale, defaults to any
      */
     public isMobilePhone(
-        locale: validator.MobilePhoneLocale | validator.MobilePhoneLocale[] | 'any' = 'any',
+        locale:
+            | validator.MobilePhoneLocale
+            | validator.MobilePhoneLocale[]
+            | "any" = "any"
     ) {
         this.operations.push({
-            type: 'validation',
-            validation: 'isMobilePhone',
+            type: "validation",
+            validation: "isMobilePhone",
             options: locale,
         });
         return this;
@@ -802,8 +803,8 @@ export default class ValidationChain {
      */
     public isMultibyte() {
         this.operations.push({
-            type: 'validation',
-            validation: 'isMultibyte',
+            type: "validation",
+            validation: "isMultibyte",
         });
         return this;
     }
@@ -813,10 +814,10 @@ export default class ValidationChain {
      *
      * @param locale The locale to use
      */
-    public isPostalCode(locale: validator.PostalCodeLocale | 'any' = 'any') {
+    public isPostalCode(locale: validator.PostalCodeLocale | "any" = "any") {
         this.operations.push({
-            type: 'validation',
-            validation: 'isPostalCode',
+            type: "validation",
+            validation: "isPostalCode",
             options: locale,
         });
         return this;
@@ -827,8 +828,8 @@ export default class ValidationChain {
      */
     public isSurrogatePair() {
         this.operations.push({
-            type: 'validation',
-            validation: 'isSurrogatePair',
+            type: "validation",
+            validation: "isSurrogatePair",
         });
         return this;
     }
@@ -840,8 +841,8 @@ export default class ValidationChain {
      */
     public isURL(options?: validator.IsURLOptions) {
         this.operations.push({
-            type: 'validation',
-            validation: 'isURL',
+            type: "validation",
+            validation: "isURL",
             options,
         });
         return this;
@@ -852,8 +853,8 @@ export default class ValidationChain {
      */
     public isVariableWidth() {
         this.operations.push({
-            type: 'validation',
-            validation: 'isVariableWidth',
+            type: "validation",
+            validation: "isVariableWidth",
         });
         return this;
     }
@@ -865,8 +866,8 @@ export default class ValidationChain {
      */
     public isWhitelisted(chars: string | string[]) {
         this.operations.push({
-            type: 'validation',
-            validation: 'isWhitelisted',
+            type: "validation",
+            validation: "isWhitelisted",
             options: chars,
         });
         return this;
@@ -880,8 +881,8 @@ export default class ValidationChain {
      */
     public blacklist(chars: string) {
         this.operations.push({
-            type: 'sanitation',
-            sanitation: 'blacklist',
+            type: "sanitation",
+            sanitation: "blacklist",
             options: chars,
         });
         return this;
@@ -892,8 +893,8 @@ export default class ValidationChain {
      */
     public escape() {
         this.operations.push({
-            type: 'sanitation',
-            sanitation: 'escape',
+            type: "sanitation",
+            sanitation: "escape",
         });
         return this;
     }
@@ -903,8 +904,8 @@ export default class ValidationChain {
      */
     public unescape() {
         this.operations.push({
-            type: 'sanitation',
-            sanitation: 'unescape',
+            type: "sanitation",
+            sanitation: "unescape",
         });
         return this;
     }
@@ -916,8 +917,8 @@ export default class ValidationChain {
      */
     public ltrim(chars?: string) {
         this.operations.push({
-            type: 'sanitation',
-            sanitation: 'ltrim',
+            type: "sanitation",
+            sanitation: "ltrim",
             options: chars,
         });
         return this;
@@ -930,8 +931,8 @@ export default class ValidationChain {
      */
     public rtrim(chars?: string) {
         this.operations.push({
-            type: 'sanitation',
-            sanitation: 'rtrim',
+            type: "sanitation",
+            sanitation: "rtrim",
             options: chars,
         });
         return this;
@@ -946,8 +947,8 @@ export default class ValidationChain {
      */
     public normalizeEmail(options?: validator.NormalizeEmailOptions) {
         this.operations.push({
-            type: 'sanitation',
-            sanitation: 'normalizeEmail',
+            type: "sanitation",
+            sanitation: "normalizeEmail",
             options,
         });
         return this;
@@ -962,8 +963,8 @@ export default class ValidationChain {
      */
     public stripLow(keepNewLines: boolean = false) {
         this.operations.push({
-            type: 'sanitation',
-            sanitation: 'stripLow',
+            type: "sanitation",
+            sanitation: "stripLow",
             options: keepNewLines,
         });
         return this;
@@ -975,8 +976,8 @@ export default class ValidationChain {
      */
     public toBoolean(strict = false) {
         this.operations.push({
-            type: 'sanitation',
-            sanitation: 'toBoolean',
+            type: "sanitation",
+            sanitation: "toBoolean",
             options: strict,
         });
         return this;
@@ -987,8 +988,8 @@ export default class ValidationChain {
      */
     public toDate() {
         this.operations.push({
-            type: 'sanitation',
-            sanitation: 'toDate',
+            type: "sanitation",
+            sanitation: "toDate",
         });
         return this;
     }
@@ -998,8 +999,8 @@ export default class ValidationChain {
      */
     public toFloat() {
         this.operations.push({
-            type: 'sanitation',
-            sanitation: 'toFloat',
+            type: "sanitation",
+            sanitation: "toFloat",
         });
         return this;
     }
@@ -1009,8 +1010,8 @@ export default class ValidationChain {
      */
     public toInt(radix: number = 10) {
         this.operations.push({
-            type: 'sanitation',
-            sanitation: 'toInt',
+            type: "sanitation",
+            sanitation: "toInt",
             options: radix,
         });
         return this;
@@ -1023,8 +1024,8 @@ export default class ValidationChain {
      */
     public trim(chars?: string) {
         this.operations.push({
-            type: 'sanitation',
-            sanitation: 'trim',
+            type: "sanitation",
+            sanitation: "trim",
             options: chars,
         });
         return this;
@@ -1038,8 +1039,8 @@ export default class ValidationChain {
      */
     public whitelist(chars: string) {
         this.operations.push({
-            type: 'sanitation',
-            sanitation: 'whitelist',
+            type: "sanitation",
+            sanitation: "whitelist",
             options: chars,
         });
         return this;
@@ -1050,7 +1051,7 @@ export default class ValidationChain {
      * @param ctx The context
      */
     private async checkResults(
-        ctx: RouterContext<IValidationState>,
+        ctx: RouterContext<IValidationState>
     ): Promise<ValidationResult | null> {
         let input: any;
         let originalInput: any;
@@ -1069,7 +1070,7 @@ export default class ValidationChain {
 
         originalInput = input;
 
-        if (typeof input === 'undefined') {
+        if (typeof input === "undefined") {
             if (this.isOptional.value) {
                 return null;
             }
@@ -1087,7 +1088,7 @@ export default class ValidationChain {
                 const arr = await arrP;
                 const { type } = current;
 
-                if (type === 'sanitation' && input !== null) {
+                if (type === "sanitation" && input !== null) {
                     // If some of the validations has failed, we can't do any sanitations
                     if (arr.length) {
                         return arr;
@@ -1103,11 +1104,12 @@ export default class ValidationChain {
                     func,
                 } = current as IValidationDefinition;
 
-                const finalMessage: string | undefined = typeof message === 'function'
-                    ? message(ctx, input === null ? '' : input + '')
-                    : message;
+                const finalMessage: string | undefined =
+                    typeof message === "function"
+                        ? message(ctx, input === null ? "" : input + "")
+                        : message;
 
-                if (validation === 'custom') {
+                if (validation === "custom") {
                     try {
                         await func!(input, ctx);
                     } catch (e) {
@@ -1115,7 +1117,7 @@ export default class ValidationChain {
                             msg: finalMessage || e.message || this.defaultErrorMessage,
                             location: this.location,
                             param: this.parameter,
-                            value: originalInput + '',
+                            value: originalInput + "",
                         });
                     }
 
@@ -1125,19 +1127,19 @@ export default class ValidationChain {
                         msg: finalMessage || this.defaultErrorMessage,
                         location: this.location,
                         param: this.parameter,
-                        value: originalInput + '',
+                        value: originalInput + "",
                     });
                 }
 
                 return arr;
             },
-            Promise.resolve([]),
+            Promise.resolve([])
         );
 
         return new ValidationResult(
             this.parameter,
             errors.length ? undefined : input,
-            errors,
+            errors
         );
     }
 
@@ -1146,10 +1148,7 @@ export default class ValidationChain {
      *
      * @param input The input as string
      */
-    private sanitize(
-        input: string,
-        sanitationDefinition: ISanitationDefinition,
-    ): any {
+    private sanitize(input: string, sanitationDefinition: ISanitationDefinition): any {
         const { sanitation, options } = sanitationDefinition;
         const fn = validator[sanitation] as (input: string, options?: any) => any;
         return fn(input, options);

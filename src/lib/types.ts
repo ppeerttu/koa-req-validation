@@ -1,4 +1,4 @@
-import { RouterContext } from '@koa/router';
+import { RouterContext } from "@koa/router";
 
 /**
  * Interface describing validation errors.
@@ -22,7 +22,7 @@ export interface IOptionalOptions {
  */
 type CustomValidatorFunctionWithContext = (
     input: any,
-    ctx: RouterContext,
+    ctx: RouterContext
 ) => Promise<void>;
 
 /**
@@ -30,30 +30,24 @@ type CustomValidatorFunctionWithContext = (
  * validation function should throw an error
  * when ever validation fails.
  */
-export type CustomValidatorFunction = (
-    input: any,
-) => Promise<void>;
+export type CustomValidatorFunction = (input: any) => Promise<void>;
 
 /**
  * Custom validation error message function. This function will receive the request
  * context and the user's input for the parameter, and it has to return the error
  * message as a result.f
  */
-export type CustomErrorMessageFunction = (
-    ctx: RouterContext,
-    input: string,
-) => string;
+export type CustomErrorMessageFunction = (ctx: RouterContext, input: string) => string;
 
 /**
  * Validation definition for internal module usage.
  */
 export interface IValidationDefinition {
-
     /**
      * Just a helper type for separating validation definitions from
      * sanitation definitions.
      */
-    type: 'validation';
+    type: "validation";
 
     /**
      * Validation function
@@ -80,77 +74,77 @@ export interface IValidationDefinition {
  * Allowed validation function name. This is the available list
  * of validators in the validator.js -module.
  */
-export type ValidatorFunctionName = 'custom'
-    | 'contains'
-    | 'equals'
-    | 'isAfter'
-    | 'isAlpha'
-    | 'isAlphanumeric'
-    | 'isAscii'
-    | 'isBase64'
-    | 'isBefore'
-    | 'isBoolean'
-    | 'isByteLength'
-    | 'isCreditCard'
-    | 'isCurrency'
-    | 'isDataURI'
-    | 'isMagnetURI' // Not found from validatorjs static type interface
-    | 'isDecimal'
-    | 'isDivisibleBy'
-    | 'isEmail'
-    | 'isEmpty'
-    | 'isFQDN'
-    | 'isFloat'
-    | 'isFullWidth'
-    | 'isHalfWidth'
-    | 'isHash'
-    | 'isHexColor'
-    | 'isHexadecimal'
-    | 'isIdentityCard' // Not found from validatorjs static type interface
-    | 'isIP'
-    | 'isIPRange'
-    | 'isISBN'
-    | 'isISSN'
-    | 'isISIN'
-    | 'isISO8601'
-    | 'isRFC3339'
-    | 'isISO31661Alpha2'
-    | 'isISO31661Alpha3'
-    | 'isISRC'
-    | 'isIn'
-    | 'isInt'
-    | 'isJSON'
-    | 'isJWT'
-    | 'isLatLong'
-    | 'isLength'
-    | 'isLowercase'
-    | 'isMACAddress'
-    | 'isMD5'
-    | 'isMimeType'
-    | 'isMobilePhone'
-    | 'isMongoId'
-    | 'isMultibyte'
-    | 'isNumeric'
-    | 'isPort'
-    | 'isPostalCode'
-    | 'isSurrogatePair'
-    | 'isURL'
-    | 'isUUID'
-    | 'isUppercase'
-    | 'isVariableWidth'
-    | 'isWhitelisted'
-    | 'matches';
+export type ValidatorFunctionName =
+    | "custom"
+    | "contains"
+    | "equals"
+    | "isAfter"
+    | "isAlpha"
+    | "isAlphanumeric"
+    | "isAscii"
+    | "isBase64"
+    | "isBefore"
+    | "isBoolean"
+    | "isByteLength"
+    | "isCreditCard"
+    | "isCurrency"
+    | "isDataURI"
+    | "isMagnetURI" // Not found from validatorjs static type interface
+    | "isDecimal"
+    | "isDivisibleBy"
+    | "isEmail"
+    | "isEmpty"
+    | "isFQDN"
+    | "isFloat"
+    | "isFullWidth"
+    | "isHalfWidth"
+    | "isHash"
+    | "isHexColor"
+    | "isHexadecimal"
+    | "isIdentityCard" // Not found from validatorjs static type interface
+    | "isIP"
+    | "isIPRange"
+    | "isISBN"
+    | "isISSN"
+    | "isISIN"
+    | "isISO8601"
+    | "isRFC3339"
+    | "isISO31661Alpha2"
+    | "isISO31661Alpha3"
+    | "isISRC"
+    | "isIn"
+    | "isInt"
+    | "isJSON"
+    | "isJWT"
+    | "isLatLong"
+    | "isLength"
+    | "isLowercase"
+    | "isMACAddress"
+    | "isMD5"
+    | "isMimeType"
+    | "isMobilePhone"
+    | "isMongoId"
+    | "isMultibyte"
+    | "isNumeric"
+    | "isPort"
+    | "isPostalCode"
+    | "isSurrogatePair"
+    | "isURL"
+    | "isUUID"
+    | "isUppercase"
+    | "isVariableWidth"
+    | "isWhitelisted"
+    | "matches";
 
 /**
  * Sanitation definition.
  */
 export interface ISanitationDefinition {
-
     /**
      * Just a type helper for separating sanitation definitions from
      * validation definitions
      */
-    type: 'sanitation';
+    type: "sanitation";
 
     /**
      * The sanitation function name
@@ -166,27 +160,28 @@ export interface ISanitationDefinition {
 /**
  * Allowed sanitation functions by validator.
  */
-export type SanitationFunctionName = 'blacklist'
-    | 'escape'
-    | 'unescape'
-    | 'ltrim'
-    | 'normalizeEmail'
-    | 'rtrim'
-    | 'stripLow'
-    | 'toBoolean'
-    | 'toDate'
-    | 'toFloat'
-    | 'toInt'
-    | 'trim'
-    | 'whitelist';
+export type SanitationFunctionName =
+    | "blacklist"
+    | "escape"
+    | "unescape"
+    | "ltrim"
+    | "normalizeEmail"
+    | "rtrim"
+    | "stripLow"
+    | "toBoolean"
+    | "toDate"
+    | "toFloat"
+    | "toInt"
+    | "trim"
+    | "whitelist";
 
 /**
  * Location of the parameter to be validated.
  */
 export enum ParamLocation {
-    BODY = 'body',
-    PARAM = 'param',
-    QUERY = 'query',
+    BODY = "body",
+    PARAM = "param",
+    QUERY = "query",
 }
 
 /**
