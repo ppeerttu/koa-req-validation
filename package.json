@@ -1,6 +1,6 @@
 {
     "name": "koa-req-validation",
-    "version": "0.9.2",
+    "version": "0.10.0",
     "description": "A request validation middleware for Koa.",
     "keywords": [
         "nodejs",
