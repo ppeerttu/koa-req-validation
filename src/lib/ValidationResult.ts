@@ -1,10 +1,9 @@
-import { IMappedValidationResults, IValidationError } from './types';
+import { IMappedValidationResults, IValidationError } from "./types";
 
 /**
  * Validation result set.
  */
 export default class ValidationResult {
-
     /**
      * Merge multiple validation error results into a single one.
      *
@@ -32,25 +31,33 @@ export default class ValidationResult {
     constructor(
         parameter: string | string[] = [],
         // tslint:disable-next-line: max-line-length
-        finalValue?: undefined | string | boolean | Date | number | (undefined | string | boolean | Date | number)[],
-        results?: IValidationError[],
+        finalValue?:
+            | undefined
+            | string
+            | boolean
+            | Date
+            | number
+            | (undefined | string | boolean | Date | number)[],
+        results?: IValidationError[]
     ) {
         this.parameters = Array.isArray(parameter) ? parameter : [parameter];
         this.finalValues = Array.isArray(finalValue)
             ? finalValue
-            : (this.parameters.length ? [finalValue] : []);
+            : this.parameters.length
+            ? [finalValue]
+            : [];
 
         if (this.parameters.length !== this.finalValues.length) {
             throw new Error(
-                `Invalid ValidationResult state: parameters (${this.parameters.length})`
-                + ` and finalValues (${this.finalValues.length}) do not match`,
+                `Invalid ValidationResult state: parameters (${this.parameters.length})` +
+                    ` and finalValues (${this.finalValues.length}) do not match`
             );
         }
         if (results) {
             if (!Array.isArray(results)) {
                 throw new TypeError(
-                    `Parameter for ValidationResult constructor must be an`
-                    + ` array but received ${results}`,
+                    `Parameter for ValidationResult constructor must be an` +
+                        ` array but received ${results}`
                 );
             }
             this.results = results;
@@ -70,7 +77,7 @@ export default class ValidationResult {
      * Reuturn the validation results as an array.
      */
     public array(): IValidationError[] {
-        return [ ...this.results ];
+        return [...this.results];
     }
 
     /**
@@ -88,10 +95,10 @@ export default class ValidationResult {
      * Return final values that have been stored within this validation result. This can
      * be used for retrieving all values that have passed validations and been sanitized.
      */
-    public passedData(): { [key: string]: any; } {
+    public passedData(): { [key: string]: any } {
         const results: any = {};
         for (let i = 0; i < this.parameters.length; i++) {
-            if (typeof this.finalValues[i] !== 'undefined') {
+            if (typeof this.finalValues[i] !== "undefined") {
                 results[this.parameters[i]] = this.finalValues[i];
             }
         }

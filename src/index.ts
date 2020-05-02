@@ -1,14 +1,13 @@
-import { RouterContext } from '@koa/router';
+import { RouterContext } from "@koa/router";
 
-import { ParamLocation } from './lib/types';
-import ValidationChain from './lib/ValidationChain';
-import ValidationResult from './lib/ValidationResult';
+import { ParamLocation } from "./lib/types";
+import ValidationChain from "./lib/ValidationChain";
+import ValidationResult from "./lib/ValidationResult";
 
 /**
  * Koa context for validation operations.
  */
 export interface IValidationState {
-
     /**
      * Validation results
      */
@@ -28,7 +27,7 @@ export interface IValidationState {
  * }
  */
 export const validationResults = (
-    ctx: RouterContext<IValidationState>,
+    ctx: RouterContext<IValidationState>
 ): ValidationResult => {
     if (Array.isArray(ctx.state.validationResults)) {
         return ValidationResult.fromResults(ctx.state.validationResults);
@@ -50,10 +49,8 @@ export const validationResults = (
  * );
  * ```
  */
-export const body = (bodyParam: string) => new ValidationChain(
-    bodyParam,
-    ParamLocation.BODY,
-);
+export const body = (bodyParam: string): ValidationChain =>
+    new ValidationChain(bodyParam, ParamLocation.BODY);
 
 /**
  * Validate request query.
@@ -68,10 +65,8 @@ export const body = (bodyParam: string) => new ValidationChain(
  * );
  * ```
  */
-export const query = (queryString: string) => new ValidationChain(
-    queryString,
-    ParamLocation.QUERY,
-);
+export const query = (queryString: string): ValidationChain =>
+    new ValidationChain(queryString, ParamLocation.QUERY);
 
 /**
  * Validate request param.
@@ -86,9 +81,7 @@ export const query = (queryString: string) => new ValidationChain(
  * );
  * ```
  */
-export const param = (routeParam: string) => new ValidationChain(
-    routeParam,
-    ParamLocation.PARAM,
-);
+export const param = (routeParam: string): ValidationChain =>
+    new ValidationChain(routeParam, ParamLocation.PARAM);
 
-export * from './lib/types';
+export * from "./lib/types";
