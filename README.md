@@ -10,51 +10,50 @@
 
 A [validator][validator-site] middleware for [koa][koa-site]. Inspired by [express-validator][express-validator-site].
 
-- [koa-req-validation](#koa-req-validation)
-- [Installation](#installation)
-- [Getting started](#getting-started)
-- [Documentation](#documentation)
-- [Motivation](#motivation)
-  - [Peer dependencies](#peer-dependencies)
-- [Issues](#issues)
-- [Changelog](#changelog)
-- [Contribution](#contribution)
-- [Licence](#licence)
-
+-   [koa-req-validation](#koa-req-validation)
+-   [Installation](#installation)
+-   [Getting started](#getting-started)
+-   [Documentation](#documentation)
+-   [Motivation](#motivation)
+    -   [Peer dependencies](#peer-dependencies)
+-   [Issues](#issues)
+-   [Changelog](#changelog)
+-   [Contribution](#contribution)
+-   [Licence](#licence)
 
 # Installation
 
 The **koa-req-validation** requires [validator][validator-site], [koa-router][koa-router-site] and [koa-bodyparser][koa-bodyparser-site] as peer dependencies.
 
-
 Install peer dependencies
+
 ```
-npm install validator@12 koa-bodyparser@4 @koa/router@8
+npm install validator@13 koa-bodyparser@4 @koa/router@8
 ```
 
 Install **koa-req-validation**
+
 ```
 npm install koa-req-validation
 ```
-
 
 # Getting started
 
 A basic usage example
 
 ```typescript
-import Router, { RouterContext } from '@koa/router';
-import { query, validationResults, IValidationState } from 'koa-req-validation';
+import Router, { RouterContext } from "@koa/router";
+import { query, validationResults, IValidationState } from "koa-req-validation";
 
 // ...
 
 const router = new Router();
 
 router.get(
-    '/api/hello',
-    query('name')
+    "/api/hello",
+    query("name")
         .isLength({ min: 3, max: 20 })
-        .withMessage('The name has to be between 3 and 20 characters')
+        .withMessage("The name has to be between 3 and 20 characters")
         .build(), // <-- This is required at the end of each validation
     async (ctx: RouterContext<IValidationState>) => {
         const result = validationResults(ctx);
@@ -72,11 +71,12 @@ See the [demo][demo-link] for other examples.
 # Documentation
 
 This module offers various validation and sanitation functions. Please note the following things:
-* The **order matters**
-  * The validations and sanitations are being run in order they've been called in the validation chain
-* No sanitations are run for a chain after some of the validations has failed
-  * This is due to the fact that some of the sanitizers rely on "valid" value (for example valid email address)
-* The sanitized values can be accessed only through `ValidationResult.passedData()`
+
+-   The **order matters**
+    -   The validations and sanitations are being run in order they've been called in the validation chain
+-   No sanitations are run for a chain after some of the validations has failed
+    -   This is due to the fact that some of the sanitizers rely on "valid" value (for example valid email address)
+-   The sanitized values can be accessed only through `ValidationResult.passedData()`
 
 ```typescript
 const result = validationResults(ctx);
@@ -85,7 +85,6 @@ if (result.hasErrors()) {
 }
 const passed = result.passedData();
 ```
-
 
 See the [generated TypeDoc][typedocs] and [ValidationChain][validation-chain] for API documentation.
 
@@ -113,18 +112,15 @@ All contributions to the project are welcome.
 
 [ISC Licence][licence-link]
 
-
-[demo-link]:https://github.com/ppeerttu/koa-req-validation/blob/master/demo/index.ts
-[licence-link]:https://github.com/ppeerttu/koa-req-validation/blob/master/LICENCE
-[typedocs]:https://ppeerttu.github.io/koa-req-validation/
-[validation-chain]:https://ppeerttu.github.io/koa-req-validation/classes/_lib_validationchain_.validationchain.html
-
-[issue-site]:https://github.com/ppeerttu/koa-req-validation/issues
-[issue-all-filter-site]:https://github.com/ppeerttu/koa-req-validation/issues?utf8=%E2%9C%93&q=is%3Aissue
-[releases-site]:https://github.com/ppeerttu/koa-req-validation/releases
-
-[koa-site]:https://koajs.com/
-[koa-router-site]:https://github.com/ZijianHe/koa-router
-[koa-bodyparser-site]:https://github.com/koajs/bodyparser
-[validator-site]:https://github.com/chriso/validator.js
-[express-validator-site]:https://github.com/express-validator/express-validator
+[demo-link]: https://github.com/ppeerttu/koa-req-validation/blob/master/demo/index.ts
+[licence-link]: https://github.com/ppeerttu/koa-req-validation/blob/master/LICENCE
+[typedocs]: https://ppeerttu.github.io/koa-req-validation/
+[validation-chain]: https://ppeerttu.github.io/koa-req-validation/classes/_lib_validationchain_.validationchain.html
+[issue-site]: https://github.com/ppeerttu/koa-req-validation/issues
+[issue-all-filter-site]: https://github.com/ppeerttu/koa-req-validation/issues?utf8=%E2%9C%93&q=is%3Aissue
+[releases-site]: https://github.com/ppeerttu/koa-req-validation/releases
+[koa-site]: https://koajs.com/
+[koa-router-site]: https://github.com/ZijianHe/koa-router
+[koa-bodyparser-site]: https://github.com/koajs/bodyparser
+[validator-site]: https://github.com/chriso/validator.js
+[express-validator-site]: https://github.com/express-validator/express-validator

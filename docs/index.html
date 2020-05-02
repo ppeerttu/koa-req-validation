@@ -94,24 +94,24 @@
 				</a>
 				<p>The <strong>koa-req-validation</strong> requires <a href="https://github.com/chriso/validator.js">validator</a>, <a href="https://github.com/ZijianHe/koa-router">koa-router</a> and <a href="https://github.com/koajs/bodyparser">koa-bodyparser</a> as peer dependencies.</p>
 				<p>Install peer dependencies</p>
-				<pre><code>npm install <span class="hljs-symbol">validator@</span><span class="hljs-number">12</span> koa-<span class="hljs-symbol">bodyparser@</span><span class="hljs-number">4</span> @koa/<span class="hljs-symbol">router@</span><span class="hljs-number">8</span></code></pre><p>Install <strong>koa-req-validation</strong></p>
+				<pre><code>npm install <span class="hljs-symbol">validator@</span><span class="hljs-number">13</span> koa-<span class="hljs-symbol">bodyparser@</span><span class="hljs-number">4</span> @koa/<span class="hljs-symbol">router@</span><span class="hljs-number">8</span></code></pre><p>Install <strong>koa-req-validation</strong></p>
 				<pre><code>npm <span class="hljs-keyword">install</span> koa-req-<span class="hljs-keyword">validation</span></code></pre>
 				<a href="#getting-started" id="getting-started" style="color: inherit; text-decoration: none;">
 					<h1>Getting started</h1>
 				</a>
 				<p>A basic usage example</p>
-				<pre><code class="language-typescript"><span class="hljs-keyword">import</span> Router, { RouterContext } <span class="hljs-keyword">from</span> <span class="hljs-string">'@koa/router'</span>;
-<span class="hljs-keyword">import</span> { query, validationResults, IValidationState } <span class="hljs-keyword">from</span> <span class="hljs-string">'koa-req-validation'</span>;
+				<pre><code class="language-typescript"><span class="hljs-keyword">import</span> Router, { RouterContext } <span class="hljs-keyword">from</span> <span class="hljs-string">"@koa/router"</span>;
+<span class="hljs-keyword">import</span> { query, validationResults, IValidationState } <span class="hljs-keyword">from</span> <span class="hljs-string">"koa-req-validation"</span>;
 
 <span class="hljs-comment">// ...</span>
 
 <span class="hljs-keyword">const</span> router = <span class="hljs-keyword">new</span> Router();
 
 router.get(
-    <span class="hljs-string">'/api/hello'</span>,
-    query(<span class="hljs-string">'name'</span>)
+    <span class="hljs-string">"/api/hello"</span>,
+    query(<span class="hljs-string">"name"</span>)
         .isLength({ min: <span class="hljs-number">3</span>, max: <span class="hljs-number">20</span> })
-        .withMessage(<span class="hljs-string">'The name has to be between 3 and 20 characters'</span>)
+        .withMessage(<span class="hljs-string">"The name has to be between 3 and 20 characters"</span>)
         .build(), <span class="hljs-comment">// &lt;-- This is required at the end of each validation</span>
     <span class="hljs-keyword">async</span> (ctx: RouterContext&lt;IValidationState&gt;) =&gt; {
         <span class="hljs-keyword">const</span> result = validationResults(ctx);
