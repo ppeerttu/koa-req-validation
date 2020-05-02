@@ -1,9 +1,9 @@
 /// <reference types="koa__router" />
 /// <reference types="koa" />
 /// <reference types="koa-bodyparser" />
-import validator from 'validator';
-import { IValidationState } from '..';
-import { CustomErrorMessageFunction, CustomValidatorFunction, IOptionalOptions, ParamLocation } from './types';
+import validator from "validator";
+import { IValidationState } from "..";
+import { CustomErrorMessageFunction, CustomValidatorFunction, IOptionalOptions, ParamLocation } from "./types";
 /**
  * The validation chain object.
  */
@@ -149,7 +149,7 @@ export default class ValidationChain {
     /**
      * Check if the parameter is valid UUID (v3, v4 or v5).
      */
-    isUUID(version?: 3 | 4 | 5 | '3' | '4' | '5' | 'all'): this;
+    isUUID(version?: 3 | 4 | 5 | "3" | "4" | "5" | "all"): this;
     /**
      * Check if the parameter contains only uppercase characters.
      */
@@ -268,7 +268,7 @@ export default class ValidationChain {
     /**
      * Check if the string is an IP (ver 4 or 6).
      */
-    isIP(version?: 4 | 6 | '4' | '6'): this;
+    isIP(version?: 4 | 6 | "4" | "6"): this;
     /**
      * Check if the string is an IP range (ver 4 only).
      */
@@ -278,7 +278,7 @@ export default class ValidationChain {
      *
      * @param version The version
      */
-    isISBN(version: 10 | 13 | '10' | '13'): this;
+    isISBN(version: 10 | 13 | "10" | "13"): this;
     /**
      * Check if the string is an ISSN.
      *
@@ -324,7 +324,7 @@ export default class ValidationChain {
      *
      * @param locale The locale, defaults to any
      */
-    isMobilePhone(locale?: validator.MobilePhoneLocale | validator.MobilePhoneLocale[] | 'any'): this;
+    isMobilePhone(locale?: validator.MobilePhoneLocale | validator.MobilePhoneLocale[] | "any"): this;
     /**
      * Check if the string contains one or more multibyte chars.
      */
@@ -334,7 +334,7 @@ export default class ValidationChain {
      *
      * @param locale The locale to use
      */
-    isPostalCode(locale?: validator.PostalCodeLocale | 'any'): this;
+    isPostalCode(locale?: validator.PostalCodeLocale | "any"): this;
     /**
      * Check if the string contains any surrogate pairs chars.
      */

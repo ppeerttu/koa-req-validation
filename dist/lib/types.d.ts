@@ -1,5 +1,5 @@
 /// <reference types="koa__router" />
-import { RouterContext } from '@koa/router';
+import { RouterContext } from "@koa/router";
 /**
  * Interface describing validation errors.
  */
@@ -39,7 +39,7 @@ export interface IValidationDefinition {
      * Just a helper type for separating validation definitions from
      * sanitation definitions.
      */
-    type: 'validation';
+    type: "validation";
     /**
      * Validation function
      */
@@ -61,7 +61,7 @@ export interface IValidationDefinition {
  * Allowed validation function name. This is the available list
  * of validators in the validator.js -module.
  */
-export declare type ValidatorFunctionName = 'custom' | 'contains' | 'equals' | 'isAfter' | 'isAlpha' | 'isAlphanumeric' | 'isAscii' | 'isBase64' | 'isBefore' | 'isBoolean' | 'isByteLength' | 'isCreditCard' | 'isCurrency' | 'isDataURI' | 'isMagnetURI' | 'isDecimal' | 'isDivisibleBy' | 'isEmail' | 'isEmpty' | 'isFQDN' | 'isFloat' | 'isFullWidth' | 'isHalfWidth' | 'isHash' | 'isHexColor' | 'isHexadecimal' | 'isIdentityCard' | 'isIP' | 'isIPRange' | 'isISBN' | 'isISSN' | 'isISIN' | 'isISO8601' | 'isRFC3339' | 'isISO31661Alpha2' | 'isISO31661Alpha3' | 'isISRC' | 'isIn' | 'isInt' | 'isJSON' | 'isJWT' | 'isLatLong' | 'isLength' | 'isLowercase' | 'isMACAddress' | 'isMD5' | 'isMimeType' | 'isMobilePhone' | 'isMongoId' | 'isMultibyte' | 'isNumeric' | 'isPort' | 'isPostalCode' | 'isSurrogatePair' | 'isURL' | 'isUUID' | 'isUppercase' | 'isVariableWidth' | 'isWhitelisted' | 'matches';
+export declare type ValidatorFunctionName = "custom" | "contains" | "equals" | "isAfter" | "isAlpha" | "isAlphanumeric" | "isAscii" | "isBase64" | "isBefore" | "isBoolean" | "isByteLength" | "isCreditCard" | "isCurrency" | "isDataURI" | "isMagnetURI" | "isDecimal" | "isDivisibleBy" | "isEmail" | "isEmpty" | "isFQDN" | "isFloat" | "isFullWidth" | "isHalfWidth" | "isHash" | "isHexColor" | "isHexadecimal" | "isIdentityCard" | "isIP" | "isIPRange" | "isISBN" | "isISSN" | "isISIN" | "isISO8601" | "isRFC3339" | "isISO31661Alpha2" | "isISO31661Alpha3" | "isISRC" | "isIn" | "isInt" | "isJSON" | "isJWT" | "isLatLong" | "isLength" | "isLowercase" | "isMACAddress" | "isMD5" | "isMimeType" | "isMobilePhone" | "isMongoId" | "isMultibyte" | "isNumeric" | "isPort" | "isPostalCode" | "isSurrogatePair" | "isURL" | "isUUID" | "isUppercase" | "isVariableWidth" | "isWhitelisted" | "matches";
 /**
  * Sanitation definition.
  */
@@ -70,7 +70,7 @@ export interface ISanitationDefinition {
      * Just a type helper for separating sanitation definitions from
      * validation definitions
      */
-    type: 'sanitation';
+    type: "sanitation";
     /**
      * The sanitation function name
      */
@@ -83,7 +83,7 @@ export interface ISanitationDefinition {
 /**
  * Allowed sanitation functions by validator.
  */
-export declare type SanitationFunctionName = 'blacklist' | 'escape' | 'unescape' | 'ltrim' | 'normalizeEmail' | 'rtrim' | 'stripLow' | 'toBoolean' | 'toDate' | 'toFloat' | 'toInt' | 'trim' | 'whitelist';
+export declare type SanitationFunctionName = "blacklist" | "escape" | "unescape" | "ltrim" | "normalizeEmail" | "rtrim" | "stripLow" | "toBoolean" | "toDate" | "toFloat" | "toInt" | "trim" | "whitelist";
 /**
  * Location of the parameter to be validated.
  */
