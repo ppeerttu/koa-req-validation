@@ -9,6 +9,7 @@ import {
     param,
     query,
     validationResults,
+    body,
 } from "../src";
 
 /**
@@ -105,6 +106,25 @@ router.get(
             response += `Hello ${name}\n`;
         }
         ctx.body = response;
+    }
+);
+
+router.post(
+    "/api/person",
+    body("name").isLength({ min: 3, max: 55 }).build(),
+    body("address.street").isLength({ min: 2, max: 55 }).build(),
+    body("address.zip").isPostalCode().build(),
+    body("address.city").isLength({ min: 3, max: 55 }).build(),
+    async (ctx: RouterContext<IValidationState>) => {
+        const results = validationResults(ctx);
+        if (results.hasErrors()) {
+            throw new RequestError(422, results.mapped());
+        }
+        console.log(results.passedData());
+        const { name, address } = results.passedData();
+        ctx.body = {
+            message: `${name} lives at ${address.street} ${address.zip} ${address.city}`,
+        };
     }
 );
 

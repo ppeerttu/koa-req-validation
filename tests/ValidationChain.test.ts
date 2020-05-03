@@ -130,6 +130,12 @@ describe("ValidationChain", () => {
             const results = validationResults(ctx);
             expect(results.hasErrors()).toBe(false);
             expect(results.array().length).toBe(0);
+
+            const failCtx: any = mockContext(ParamLocation.BODY, {});
+            await validationChain.build()(failCtx, next);
+            const failResults = validationResults(failCtx);
+            expect(failResults.hasErrors()).toBe(true);
+            expect(failResults.array().length).toBe(1);
         });
     });
 });

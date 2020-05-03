@@ -82,7 +82,7 @@ describe("ValidatorChain validators", () => {
             expect(() => {
                 // @ts-ignore
                 new ValidationChain("int", ParamLocation.BODY).custom();
-            }).toThrow(TypeError);
+            }).toThrowError(TypeError);
         });
 
         test("Returns the default error message if no message has been passed", async () => {
