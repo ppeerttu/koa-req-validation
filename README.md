@@ -72,11 +72,14 @@ See the [demo][demo-link] for other examples.
 
 This module offers various validation and sanitation functions. Please note the following things:
 
+-   Nested objects can now be validated
+    -   Support has been added to the `ValidationResult.passedData()` output as well
 -   The **order matters**
     -   The validations and sanitations are being run in order they've been called in the validation chain
 -   No sanitations are run for a chain after some of the validations has failed
     -   This is due to the fact that some of the sanitizers rely on "valid" value (for example valid email address)
 -   The sanitized values can be accessed only through `ValidationResult.passedData()`
+    -   The request body is treated as immutable in the validation middleware
 
 ```typescript
 const result = validationResults(ctx);
@@ -90,7 +93,7 @@ See the [generated TypeDoc][typedocs] and [ValidationChain][validation-chain] fo
 
 # Motivation
 
-Motivation behind this module is the awesome experience of using the [express-validator][express-validator-site]. However, due to various reasons the `express-validator` doesn't suit `koa` and it seems that there are quite a lot of request validation packages out there mainly for `koa` v1 without warranty for active maintenance. This package tries to mimic the `express-validator` pacakge and eventually provide most of the features.
+Motivation behind this module is the awesome experience of using the [express-validator][express-validator-site]. However, due to various reasons the `express-validator` doesn't suit `koa` and it seems that there are quite a lot of request validation packages out there mainly for `koa` v1 without warranty for active maintenance. This package tries to mimic the `express-validator` package and eventually provide most of the features.
 
 ## Peer dependencies
 
