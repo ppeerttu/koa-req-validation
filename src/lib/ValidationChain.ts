@@ -1129,7 +1129,7 @@ export default class ValidationChain {
         );
 
         return new ValidationResult(
-            this.parameter,
+            this.parameter.join("."),
             errors.length ? undefined : input,
             errors
         );
