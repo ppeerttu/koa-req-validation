@@ -26,5 +26,5 @@ jobs:
         env:
           CI: true
       - name: Publish Codecov report
-        if: ${{ github.ref == 'ref/heads/master' && matrix.node-version == '12.x' }}
+        if: ${{ matrix.node-version == '12.x' }}
         run: echo 'Would publish to Codecov...'
