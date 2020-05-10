@@ -1102,10 +1102,7 @@ export default class ValidationChain {
 
                 if (validation === "custom") {
                     try {
-                        if (!func) {
-                            throw new Error("Custom validation function not defined");
-                        }
-                        await func(input, ctx);
+                        await func!(input, ctx);
                     } catch (e) {
                         arr.push({
                             msg: finalMessage || e.message || this.defaultErrorMessage,
@@ -1129,7 +1126,7 @@ export default class ValidationChain {
         );
 
         return new ValidationResult(
-            this.parameter,
+            this.parameter.join("."),
             errors.length ? undefined : input,
             errors
         );

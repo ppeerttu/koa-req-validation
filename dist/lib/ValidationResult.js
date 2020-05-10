@@ -77,7 +77,32 @@ class ValidationResult {
                 results[this.parameters[i]] = this.finalValues[i];
             }
         }
-        return results;
+        return this.deepen(results);
+    }
+    /**
+     * Deepen a dot-notated nested object into a real nested object.
+     *
+     * @param obj Object with dot-notated nested properties
+     *
+     * ```typescript
+     * const dotNotated = { "nested.prop": "value" };
+     * const deepened = this.deepen(dotNotated);
+     * console.log(deepened); // { 'nested': { 'prop': 'value' }}
+     * ```
+     */
+    deepen(obj) {
+        const output = {};
+        for (const key in obj) {
+            let t = output;
+            const parts = key.split(".");
+            const k = parts.pop();
+            while (parts.length) {
+                const part = parts.shift();
+                t = t[part] = t[part] || {};
+            }
+            t[k] = obj[key];
+        }
+        return output;
     }
 }
 exports.default = ValidationResult;

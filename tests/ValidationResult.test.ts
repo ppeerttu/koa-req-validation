@@ -140,5 +140,34 @@ describe("ValidationResult", () => {
             expect(passed.baz).toBe(2);
             expect(Object.keys(passed).length).toBe(2);
         });
+
+        test("Should return passed values in an object (nested object)", () => {
+            const err1: IValidationError = {
+                msg: "Invalid value",
+                value: "null",
+                param: "name",
+                location: "body",
+            };
+            const err2: IValidationError = {
+                msg: "Invalid value",
+                value: "31-31-2019",
+                param: "startDate",
+                location: "body",
+            };
+            const result1 = new ValidationResult("foo", undefined, [err1]);
+            const result2 = new ValidationResult([], [], [err2]);
+            const result3 = new ValidationResult(
+                ["address.zip", "address.city"],
+                ["90000", "Toronto"],
+                []
+            );
+
+            const merged = ValidationResult.fromResults([result1, result2, result3]);
+            const passed = merged.passedData();
+
+            expect(passed.address.zip).toBe("90000");
+            expect(passed.address.city).toBe("Toronto");
+            expect(Object.keys(passed).length).toBe(1);
+        });
     });
 });

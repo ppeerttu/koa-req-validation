@@ -29,7 +29,17 @@ export default class ValidationResult {
      * Return final values that have been stored within this validation result. This can
      * be used for retrieving all values that have passed validations and been sanitized.
      */
-    passedData(): {
-        [key: string]: any;
-    };
+    passedData(): Record<string, any>;
+    /**
+     * Deepen a dot-notated nested object into a real nested object.
+     *
+     * @param obj Object with dot-notated nested properties
+     *
+     * ```typescript
+     * const dotNotated = { "nested.prop": "value" };
+     * const deepened = this.deepen(dotNotated);
+     * console.log(deepened); // { 'nested': { 'prop': 'value' }}
+     * ```
+     */
+    private deepen;
 }

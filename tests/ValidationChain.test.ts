@@ -116,5 +116,26 @@ describe("ValidationChain", () => {
             expect(Object.keys(results.passedData()).length).toBe(1);
             expect(results.passedData()[prop]).toBeInstanceOf(Date);
         });
+
+        test("Handles nested properties as well", async () => {
+            const validationChain = new ValidationChain(
+                "nested.prop",
+                ParamLocation.BODY
+            ).contains("seed");
+
+            const ctx: any = mockContext(ParamLocation.BODY, {
+                nested: { prop: "sesame seed" },
+            });
+            await validationChain.build()(ctx, next);
+            const results = validationResults(ctx);
+            expect(results.hasErrors()).toBe(false);
+            expect(results.array().length).toBe(0);
+
+            const failCtx: any = mockContext(ParamLocation.BODY, {});
+            await validationChain.build()(failCtx, next);
+            const failResults = validationResults(failCtx);
+            expect(failResults.hasErrors()).toBe(true);
+            expect(failResults.array().length).toBe(1);
+        });
     });
 });
