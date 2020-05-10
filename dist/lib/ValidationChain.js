@@ -70,7 +70,7 @@ class ValidationChain {
             console.warn("ValidationChain.run() is deprecated. Please use .build() instead.");
             return this.build();
         };
-        this.parameter = parameter;
+        this.parameter = parameter.split(".");
         if (!Object.values(types_1.ParamLocation).includes(location)) {
             throw new TypeError(`Param location has to be one of ` +
                 Object.values(types_1.ParamLocation).join(", ") +
@@ -949,18 +949,7 @@ class ValidationChain {
         return __awaiter(this, void 0, void 0, function* () {
             let input;
             let originalInput;
-            switch (this.location) {
-                case types_1.ParamLocation.BODY:
-                    input = ctx.request.body[this.parameter];
-                    break;
-                case types_1.ParamLocation.PARAM:
-                    input = ctx.params[this.parameter];
-                    break;
-                case types_1.ParamLocation.QUERY:
-                    input = ctx.query[this.parameter];
-                    break;
-            }
-            originalInput = input;
+            input = originalInput = this.getOriginalInput(ctx);
             if (typeof input === "undefined") {
                 if (this.isOptional.value) {
                     return null;
@@ -998,24 +987,56 @@ class ValidationChain {
                         arr.push({
                             msg: finalMessage || e.message || this.defaultErrorMessage,
                             location: this.location,
-                            param: this.parameter,
+                            param: this.parameter.join("."),
                             value: originalInput + "",
                         });
                     }
-                    // @ts-ignore
                 }
                 else if (input === null || !validator_1.default[validation](input, options)) {
                     arr.push({
                         msg: finalMessage || this.defaultErrorMessage,
                         location: this.location,
-                        param: this.parameter,
+                        param: this.parameter.join("."),
                         value: originalInput + "",
                     });
                 }
                 return arr;
             }), Promise.resolve([]));
-            return new ValidationResult_1.default(this.parameter, errors.length ? undefined : input, errors);
+            return new ValidationResult_1.default(this.parameter.join("."), errors.length ? undefined : input, errors);
         });
+    }
+    /**
+     * Get original input as it is from the request body.
+     *
+     * @param ctx The context
+     */
+    getOriginalInput(ctx) {
+        let obj;
+        switch (this.location) {
+            case types_1.ParamLocation.BODY:
+                obj = ctx.request.body;
+                break;
+            case types_1.ParamLocation.PARAM:
+                obj = ctx.params;
+                break;
+            case types_1.ParamLocation.QUERY:
+                obj = ctx.query;
+                break;
+        }
+        return this.getParamFromObject(obj);
+    }
+    /**
+     * Get parameter from object.
+     *
+     * @param object Object to look the property from
+     */
+    getParamFromObject(object) {
+        return this.parameter.reduce((prev, current) => {
+            if (typeof prev === "object" && prev) {
+                return prev[current];
+            }
+            return undefined;
+        }, object);
     }
     /**
      * Sanitize the given input value with given sanitation definition.
