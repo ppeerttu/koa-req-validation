@@ -67,7 +67,7 @@
 				<a href="#koa-req-validation" id="koa-req-validation" style="color: inherit; text-decoration: none;">
 					<h1>koa-req-validation</h1>
 				</a>
-				<p><a href="https://travis-ci.org/ppeerttu/koa-req-validation"><img src="https://travis-ci.org/ppeerttu/koa-req-validation.svg?branch=master" alt="Build Status"></a>
+				<p><img src="https://github.com/ppeerttu/koa-req-validation/workflows/Node.js%20CI/badge.svg?branch=master" alt="Node.js CI">
 					<a href="https://david-dm.org/ppeerttu/koa-req-validation"><img src="https://david-dm.org/ppeerttu/koa-req-validation/status.svg" alt="dependencies Status"></a>
 					<a href="https://david-dm.org/ppeerttu/koa-req-validation?type=dev"><img src="https://david-dm.org/ppeerttu/koa-req-validation/dev-status.svg" alt="devDependencies Status"></a>
 					<a href="https://david-dm.org/ppeerttu/koa-req-validation?type=peer"><img src="https://david-dm.org/ppeerttu/koa-req-validation/peer-status.svg" alt="peerDependencies Status"></a>
@@ -128,6 +128,10 @@ router.get(
 				</a>
 				<p>This module offers various validation and sanitation functions. Please note the following things:</p>
 				<ul>
+					<li>Nested objects can now be validated<ul>
+							<li>Support has been added to the <code>ValidationResult.passedData()</code> output as well</li>
+						</ul>
+					</li>
 					<li>The <strong>order matters</strong><ul>
 							<li>The validations and sanitations are being run in order they&#39;ve been called in the validation chain</li>
 						</ul>
@@ -136,7 +140,10 @@ router.get(
 							<li>This is due to the fact that some of the sanitizers rely on &quot;valid&quot; value (for example valid email address)</li>
 						</ul>
 					</li>
-					<li>The sanitized values can be accessed only through <code>ValidationResult.passedData()</code></li>
+					<li>The sanitized values can be accessed only through <code>ValidationResult.passedData()</code><ul>
+							<li>The request body is treated as immutable in the validation middleware</li>
+						</ul>
+					</li>
 				</ul>
 				<pre><code class="language-typescript"><span class="hljs-keyword">const</span> result = validationResults(ctx);
 <span class="hljs-keyword">if</span> (result.hasErrors()) {
@@ -147,7 +154,7 @@ router.get(
 				<a href="#motivation" id="motivation" style="color: inherit; text-decoration: none;">
 					<h1>Motivation</h1>
 				</a>
-				<p>Motivation behind this module is the awesome experience of using the <a href="https://github.com/express-validator/express-validator">express-validator</a>. However, due to various reasons the <code>express-validator</code> doesn&#39;t suit <code>koa</code> and it seems that there are quite a lot of request validation packages out there mainly for <code>koa</code> v1 without warranty for active maintenance. This package tries to mimic the <code>express-validator</code> pacakge and eventually provide most of the features.</p>
+				<p>Motivation behind this module is the awesome experience of using the <a href="https://github.com/express-validator/express-validator">express-validator</a>. However, due to various reasons the <code>express-validator</code> doesn&#39;t suit <code>koa</code> and it seems that there are quite a lot of request validation packages out there mainly for <code>koa</code> v1 without warranty for active maintenance. This package tries to mimic the <code>express-validator</code> package and eventually provide most of the features.</p>
 				<a href="#peer-dependencies" id="peer-dependencies" style="color: inherit; text-decoration: none;">
 					<h2>Peer dependencies</h2>
 				</a>
