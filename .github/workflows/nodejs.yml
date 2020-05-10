@@ -25,6 +25,7 @@ jobs:
       - run: npm test -- --coverage
         env:
           CI: true
+
       - name: Publish Codecov report
         if: ${{ matrix.node-version == '12.x' }}
       - uses: codecov/codecov-action@v1
