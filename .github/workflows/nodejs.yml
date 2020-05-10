@@ -27,8 +27,8 @@ jobs:
           CI: true
       - name: Publish Codecov report
         if: ${{ matrix.node-version == '12.x' }}
-        env:
-          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
-        run: |
-          npm install codecov -g
-          codecov
+      - uses: codecov/codecov-action@v1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          name: codecov-umbrella
+          fail_ci_if_error: true
