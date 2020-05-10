@@ -1,6 +1,6 @@
 # koa-req-validation
 
-[![Build Status](https://travis-ci.org/ppeerttu/koa-req-validation.svg?branch=master)](https://travis-ci.org/ppeerttu/koa-req-validation)
+![Node.js CI](https://github.com/ppeerttu/koa-req-validation/workflows/Node.js%20CI/badge.svg?branch=master)
 [![dependencies Status](https://david-dm.org/ppeerttu/koa-req-validation/status.svg)](https://david-dm.org/ppeerttu/koa-req-validation)
 [![devDependencies Status](https://david-dm.org/ppeerttu/koa-req-validation/dev-status.svg)](https://david-dm.org/ppeerttu/koa-req-validation?type=dev)
 [![peerDependencies Status](https://david-dm.org/ppeerttu/koa-req-validation/peer-status.svg)](https://david-dm.org/ppeerttu/koa-req-validation?type=peer)
