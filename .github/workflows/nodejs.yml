@@ -28,7 +28,7 @@ jobs:
 
       - name: Publish Codecov report
         if: ${{ matrix.node-version == '12.x' }}
-      - uses: codecov/codecov-action@v1
+        uses: codecov/codecov-action@v1
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           name: codecov-umbrella
