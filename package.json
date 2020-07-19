@@ -1,6 +1,6 @@
 {
     "name": "koa-req-validation",
-    "version": "0.11.0",
+    "version": "0.12.0",
     "description": "A request validation middleware for Koa.",
     "keywords": [
         "nodejs",
@@ -27,10 +27,12 @@
     "homepage": "https://ppeerttu.github.io/koa-req-validation/",
     "license": "ISC",
     "devDependencies": {
-        "@koa/router": "^8.0.7",
+        "@koa/router": "^9.3.1",
         "@types/jest": "^25.1.2",
         "@types/koa": "^2.11.0",
         "@types/koa-bodyparser": "^4.2.2",
+        "@types/koa__router": "^8.0.2",
+        "@types/validator": "^13.1.0",
         "@typescript-eslint/eslint-plugin": "^2.30.0",
         "@typescript-eslint/parser": "^2.30.0",
         "eslint": "^6.8.0",
@@ -38,23 +40,20 @@
         "eslint-plugin-prettier": "^3.1.3",
         "jest": "^25.1.0",
         "koa": "^2.11.0",
-        "koa-bodyparser": "^4.2.1",
+        "koa-bodyparser": "^4.3.0",
         "prettier": "^2.0.5",
         "ts-jest": "^25.4.0",
         "ts-node": "^8.0.3",
         "typedoc": "^0.17.6",
         "typescript": "^3.8.3",
-        "validator": "^13.0.0"
+        "validator": "^13.1.1"
     },
     "peerDependencies": {
-        "@koa/router": "^8.0.x",
-        "koa-bodyparser": "^4.2.x",
-        "validator": "^13.0.x"
+        "@koa/router": "^9.3.x",
+        "koa-bodyparser": "^4.3.x",
+        "validator": "^13.1.x"
     },
-    "dependencies": {
-        "@types/koa__router": "^8.0.2",
-        "@types/validator": "^13.0.0"
-    },
+    "dependencies": {},
     "jest": {
         "preset": "ts-jest",
         "collectCoverageFrom": [

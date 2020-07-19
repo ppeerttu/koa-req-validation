@@ -1,4 +1,4 @@
-import { ParamLocation } from '../../src/lib/types';
+import { ParamLocation } from "../../src/lib/types";
 
 /**
  * Mocked Koa request context for testing.
@@ -16,7 +16,7 @@ import { ParamLocation } from '../../src/lib/types';
 export function mockContext(
     location?: ParamLocation,
     properties?: {},
-    state: any = {},
+    state: any = {}
 ): any {
     const ctx = {
         request: {
