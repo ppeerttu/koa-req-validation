@@ -143,7 +143,7 @@ export default class ValidationChain {
      * @param func The validation function
      */
     public custom(func: CustomValidatorFunction): ValidationChain {
-        if (typeof func === "undefined") {
+        if (typeof func !== "function") {
             throw new TypeError(
                 `Expected to receive a custom validation function but received: ${func}`
             );
