@@ -10,7 +10,6 @@
         "prettier/@typescript-eslint"
     ],
     "rules": {
-        "no-console": "warn",
-        "@typescript-eslint/interface-name-prefix": "warn"
+        "no-console": "warn"
     }
 }

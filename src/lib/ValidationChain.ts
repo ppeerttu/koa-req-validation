@@ -1,7 +1,6 @@
 import { RouterContext, Middleware } from "@koa/router";
 import validator from "validator";
 
-import { IValidationState } from "..";
 import {
     CustomErrorMessageFunction,
     CustomValidatorFunction,
@@ -12,6 +11,16 @@ import {
     ParamLocation,
 } from "./types";
 import ValidationResult from "./ValidationResult";
+
+/**
+ * Koa context for validation operations.
+ */
+interface IValidationState {
+    /**
+     * Validation results
+     */
+    validationResults: ValidationResult[];
+}
 
 /**
  * The validation chain object.

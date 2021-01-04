@@ -5,16 +5,6 @@ import ValidationChain from "./lib/ValidationChain";
 import ValidationResult from "./lib/ValidationResult";
 
 /**
- * Koa context for validation operations.
- */
-export interface IValidationState {
-    /**
-     * Validation results
-     */
-    validationResults: ValidationResult[];
-}
-
-/**
  * Get validation results out of the context.
  *
  * @param ctx The request context
@@ -26,9 +16,7 @@ export interface IValidationState {
  *     throw new RequestError(422, errors.mapped());
  * }
  */
-export const validationResults = (
-    ctx: RouterContext<IValidationState>
-): ValidationResult => {
+export const validationResults = (ctx: RouterContext): ValidationResult => {
     if (Array.isArray(ctx.state.validationResults)) {
         return ValidationResult.fromResults(ctx.state.validationResults);
     }

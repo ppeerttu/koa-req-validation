@@ -5,12 +5,30 @@ import bodyParser from "koa-bodyparser";
 
 import {
     CustomErrorMessageFunction,
-    IValidationState,
     param,
     query,
     validationResults,
     body,
 } from "../src";
+
+interface AuthData {
+    /**
+     * User ID
+     */
+    userId: string;
+    /**
+     * User role
+     */
+    role: "user" | "admin";
+    /**
+     * Username
+     */
+    username: string;
+}
+
+interface AuthState {
+    auth?: AuthData;
+}
 
 /**
  * Class returning errors as JSON response.
@@ -69,7 +87,7 @@ router.get(
         .isLength({ min: 3, max: 20 })
         .withMessage("The name has to be between 3 and 20 characters")
         .build(),
-    async (ctx: RouterContext<IValidationState>) => {
+    async (ctx: RouterContext) => {
         const results = validationResults(ctx);
         if (results.hasErrors()) {
             throw new RequestError(422, results.mapped());
@@ -82,7 +100,7 @@ router.get(
 router.get(
     "/api/hello/optional",
     query("name").isLength({ min: 3, max: 20 }).optional().build(),
-    async (ctx: RouterContext<IValidationState>) => {
+    async (ctx: RouterContext) => {
         const results = validationResults(ctx);
         if (results.hasErrors()) {
             throw new RequestError(422, results.mapped());
@@ -92,22 +110,18 @@ router.get(
     }
 );
 
-router.get(
-    "/api/hello/:count",
-    ...arrayExample,
-    async (ctx: RouterContext<IValidationState>) => {
-        const results = validationResults(ctx);
-        if (results.hasErrors()) {
-            throw new RequestError(422, results.mapped());
-        }
-        const { count, name } = results.passedData();
-        let response = "";
-        for (let i = 0; i < count; i++) {
-            response += `Hello ${name}\n`;
-        }
-        ctx.body = response;
+router.get("/api/hello/:count", ...arrayExample, async (ctx: RouterContext) => {
+    const results = validationResults(ctx);
+    if (results.hasErrors()) {
+        throw new RequestError(422, results.mapped());
     }
-);
+    const { count, name } = results.passedData();
+    let response = "";
+    for (let i = 0; i < count; i++) {
+        response += `Hello ${name}\n`;
+    }
+    ctx.body = response;
+});
 
 router.post(
     "/api/person",
@@ -115,7 +129,7 @@ router.post(
     body("address.street").isLength({ min: 2, max: 55 }).build(),
     body("address.zip").isPostalCode().build(),
     body("address.city").isLength({ min: 3, max: 55 }).build(),
-    async (ctx: RouterContext<IValidationState>) => {
+    async (ctx: RouterContext) => {
         const results = validationResults(ctx);
         if (results.hasErrors()) {
             throw new RequestError(422, results.mapped());
@@ -128,8 +142,24 @@ router.post(
     }
 );
 
+router.get(
+    "/api/auth",
+    query("username").optional().isLength({ min: 3, max: 55 }).build(),
+    async (ctx: RouterContext<AuthState>) => {
+        const results = validationResults(ctx);
+        if (results.hasErrors()) {
+            throw new RequestError(422, results.mapped());
+        }
+        if (ctx.state.auth) {
+            ctx.body = ctx.state.auth;
+        } else {
+            throw new RequestError(401, { message: "Unauthorized" });
+        }
+    }
+);
+
 app.use(bodyParser())
-    .use(async (ctx: RouterContext<IValidationState>, next) => {
+    .use(async (ctx: RouterContext, next) => {
         try {
             await next();
         } catch (e) {
