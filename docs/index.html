@@ -68,11 +68,14 @@
 					<h1>koa-req-validation</h1>
 				</a>
 				<p><img src="https://github.com/ppeerttu/koa-req-validation/workflows/Node.js%20CI/badge.svg?branch=master" alt="Node.js CI">
-					<a href="https://badge.fury.io/js/koa-req-validation"><img src="https://badge.fury.io/js/koa-req-validation.svg" alt="npm version"></a>
-					<a href="https://david-dm.org/ppeerttu/koa-req-validation"><img src="https://david-dm.org/ppeerttu/koa-req-validation/status.svg" alt="dependencies Status"></a>
-					<a href="https://david-dm.org/ppeerttu/koa-req-validation?type=dev"><img src="https://david-dm.org/ppeerttu/koa-req-validation/dev-status.svg" alt="devDependencies Status"></a>
-					<a href="https://david-dm.org/ppeerttu/koa-req-validation?type=peer"><img src="https://david-dm.org/ppeerttu/koa-req-validation/peer-status.svg" alt="peerDependencies Status"></a>
-					<a href="https://codecov.io/gh/ppeerttu/koa-req-validation"><img src="https://codecov.io/gh/ppeerttu/koa-req-validation/branch/master/graph/badge.svg?token=IuGu3GKizF" alt="codecov"></a>
+					<a href="https://badge.fury.io/js/koa-req-validation"><img src="https://badge.fury.io/js/koa-req-validation.svg" alt="dependencies"></a>
+				<img src="https://img.shields.io/librariesio/release/npm/koa-req-validation" alt="Libraries.io dependency status for latest release"></p>
+				<!--
+[![dependencies Status](https://david-dm.org/ppeerttu/koa-req-validation/status.svg)](https://david-dm.org/ppeerttu/koa-req-validation)
+[![devDependencies Status](https://david-dm.org/ppeerttu/koa-req-validation/dev-status.svg)](https://david-dm.org/ppeerttu/koa-req-validation?type=dev)
+[![peerDependencies Status](https://david-dm.org/ppeerttu/koa-req-validation/peer-status.svg)](https://david-dm.org/ppeerttu/koa-req-validation?type=peer)
+-->
+				<p><a href="https://codecov.io/gh/ppeerttu/koa-req-validation"><img src="https://codecov.io/gh/ppeerttu/koa-req-validation/branch/master/graph/badge.svg?token=IuGu3GKizF" alt="codecov"></a>
 				<a href="https://snyk.io/test/github/ppeerttu/koa-req-validation"><img src="https://snyk.io/test/github/ppeerttu/koa-req-validation/badge.svg" alt="Known Vulnerabilities"></a></p>
 				<p>A <a href="https://github.com/chriso/validator.js">validator</a> middleware for <a href="https://koajs.com/">koa</a>. Inspired by <a href="https://github.com/express-validator/express-validator">express-validator</a>.</p>
 				<ul>
@@ -94,24 +97,25 @@
 				</a>
 				<p>The <strong>koa-req-validation</strong> requires <a href="https://github.com/chriso/validator.js">validator</a>, <a href="https://github.com/koajs/router">@koa/router</a> and <a href="https://github.com/koajs/bodyparser">koa-bodyparser</a> as peer dependencies.</p>
 				<p>Install peer dependencies</p>
-				<pre><code>npm install <span class="hljs-symbol">validator@</span><span class="hljs-number">13</span> koa-<span class="hljs-symbol">bodyparser@</span><span class="hljs-number">4</span> @koa/<span class="hljs-symbol">router@</span><span class="hljs-number">9</span></code></pre><p>Install <strong>koa-req-validation</strong></p>
+				<pre><code>npm install validator<span class="hljs-symbol">@13</span> koa-bodyparser<span class="hljs-symbol">@4</span> <span class="hljs-symbol">@koa</span>/router<span class="hljs-symbol">@10</span></code></pre>
+				<p>Install <strong>koa-req-validation</strong></p>
 				<pre><code>npm <span class="hljs-keyword">install</span> koa-req-<span class="hljs-keyword">validation</span></code></pre>
 				<a href="#getting-started" id="getting-started" style="color: inherit; text-decoration: none;">
 					<h1>Getting started</h1>
 				</a>
 				<p>A basic usage example</p>
-				<pre><code class="language-typescript"><span class="hljs-keyword">import</span> Router, { RouterContext } <span class="hljs-keyword">from</span> <span class="hljs-string">"@koa/router"</span>;
-<span class="hljs-keyword">import</span> { query, validationResults, IValidationState } <span class="hljs-keyword">from</span> <span class="hljs-string">"koa-req-validation"</span>;
+				<pre><code class="language-typescript"><span class="hljs-keyword">import</span> Router, { RouterContext } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@koa/router&quot;</span>;
+<span class="hljs-keyword">import</span> { query, validationResults, IValidationState } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;koa-req-validation&quot;</span>;
 
 <span class="hljs-comment">// ...</span>
 
 <span class="hljs-keyword">const</span> router = <span class="hljs-keyword">new</span> Router();
 
 router.get(
-    <span class="hljs-string">"/api/hello"</span>,
-    query(<span class="hljs-string">"name"</span>)
-        .isLength({ min: <span class="hljs-number">3</span>, max: <span class="hljs-number">20</span> })
-        .withMessage(<span class="hljs-string">"The name has to be between 3 and 20 characters"</span>)
+    <span class="hljs-string">&quot;/api/hello&quot;</span>,
+    query(<span class="hljs-string">&quot;name&quot;</span>)
+        .isLength({ <span class="hljs-attr">min</span>: <span class="hljs-number">3</span>, <span class="hljs-attr">max</span>: <span class="hljs-number">20</span> })
+        .withMessage(<span class="hljs-string">&quot;The name has to be between 3 and 20 characters&quot;</span>)
         .build(), <span class="hljs-comment">// &lt;-- This is required at the end of each validation</span>
     <span class="hljs-keyword">async</span> (ctx: RouterContext&lt;IValidationState&gt;) =&gt; {
         <span class="hljs-keyword">const</span> result = validationResults(ctx);
@@ -129,19 +133,19 @@ router.get(
 				<p>This module offers various validation and sanitation functions. Please note the following things:</p>
 				<ul>
 					<li>Nested objects can now be validated<ul>
-							<li>Support has been added to the <code>ValidationResult.passedData()</code> output as well</li>
+							<li>  Support has been added to the <code>ValidationResult.passedData()</code> output as well</li>
 						</ul>
 					</li>
 					<li>The <strong>order matters</strong><ul>
-							<li>The validations and sanitations are being run in order they&#39;ve been called in the validation chain</li>
+							<li>  The validations and sanitations are being run in order they&#39;ve been called in the validation chain</li>
 						</ul>
 					</li>
 					<li>No sanitations are run for a chain after some of the validations has failed<ul>
-							<li>This is due to the fact that some of the sanitizers rely on &quot;valid&quot; value (for example valid email address)</li>
+							<li>  This is due to the fact that some of the sanitizers rely on &quot;valid&quot; value (for example valid email address)</li>
 						</ul>
 					</li>
 					<li>The sanitized values can be accessed only through <code>ValidationResult.passedData()</code><ul>
-							<li>The request body is treated as immutable in the validation middleware</li>
+							<li>  The request body is treated as immutable in the validation middleware</li>
 						</ul>
 					</li>
 				</ul>
@@ -229,6 +233,5 @@ router.get(
 </div>
 <div class="overlay"></div>
 <script src="assets/js/main.js"></script>
-<script>if (location.protocol == 'file:') document.write('<script src="assets/js/search.js"><' + '/script>');</script>
 </body>
 </html>

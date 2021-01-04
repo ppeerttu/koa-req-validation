@@ -1,11 +1,19 @@
 "use strict";
-function __export(m) {
-    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-}
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __exportStar = (this && this.__exportStar) || function(m, exports) {
+    for (var p in m) if (p !== "default" && !exports.hasOwnProperty(p)) __createBinding(exports, m, p);
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.param = exports.query = exports.body = exports.validationResults = void 0;
 const types_1 = require("./lib/types");
 const ValidationChain_1 = __importDefault(require("./lib/ValidationChain"));
 const ValidationResult_1 = __importDefault(require("./lib/ValidationResult"));
@@ -70,5 +78,5 @@ exports.query = (queryString) => new ValidationChain_1.default(queryString, type
  * ```
  */
 exports.param = (routeParam) => new ValidationChain_1.default(routeParam, types_1.ParamLocation.PARAM);
-__export(require("./lib/types"));
+__exportStar(require("./lib/types"), exports);
 //# sourceMappingURL=index.js.map

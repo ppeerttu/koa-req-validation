@@ -1,10 +1,13 @@
 # koa-req-validation
 
 ![Node.js CI](https://github.com/ppeerttu/koa-req-validation/workflows/Node.js%20CI/badge.svg?branch=master)
-[![npm version](https://badge.fury.io/js/koa-req-validation.svg)](https://badge.fury.io/js/koa-req-validation)
+[![dependencies](https://badge.fury.io/js/koa-req-validation.svg)](https://badge.fury.io/js/koa-req-validation)
+![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/npm/koa-req-validation)
+<!--
 [![dependencies Status](https://david-dm.org/ppeerttu/koa-req-validation/status.svg)](https://david-dm.org/ppeerttu/koa-req-validation)
 [![devDependencies Status](https://david-dm.org/ppeerttu/koa-req-validation/dev-status.svg)](https://david-dm.org/ppeerttu/koa-req-validation?type=dev)
 [![peerDependencies Status](https://david-dm.org/ppeerttu/koa-req-validation/peer-status.svg)](https://david-dm.org/ppeerttu/koa-req-validation?type=peer)
+-->
 [![codecov](https://codecov.io/gh/ppeerttu/koa-req-validation/branch/master/graph/badge.svg?token=IuGu3GKizF)](https://codecov.io/gh/ppeerttu/koa-req-validation)
 [![Known Vulnerabilities](https://snyk.io/test/github/ppeerttu/koa-req-validation/badge.svg)](https://snyk.io/test/github/ppeerttu/koa-req-validation)
 
@@ -28,7 +31,7 @@ The **koa-req-validation** requires [validator][validator-site], [@koa/router][k
 Install peer dependencies
 
 ```
-npm install validator@13 koa-bodyparser@4 @koa/router@9
+npm install validator@13 koa-bodyparser@4 @koa/router@10
 ```
 
 Install **koa-req-validation**
