@@ -1,7 +1,7 @@
 # koa-req-validation
 
 ![Node.js CI](https://github.com/ppeerttu/koa-req-validation/workflows/Node.js%20CI/badge.svg?branch=master)
-[![npm version](https://badge.fury.io/js/koa-req-validation.svg)](https://badge.fury.io/js/koa-req-validation)
+[![dependencies](https://badge.fury.io/js/koa-req-validation.svg)](https://badge.fury.io/js/koa-req-validation)
 ![Libraries.io dependency status for latest release](https://img.shields.io/librariesio/release/npm/koa-req-validation)
 <!--
 [![dependencies Status](https://david-dm.org/ppeerttu/koa-req-validation/status.svg)](https://david-dm.org/ppeerttu/koa-req-validation)
@@ -31,7 +31,7 @@ The **koa-req-validation** requires [validator][validator-site], [@koa/router][k
 Install peer dependencies
 
 ```
-npm install validator@13 koa-bodyparser@4 @koa/router@9
+npm install validator@13 koa-bodyparser@4 @koa/router@10
 ```
 
 Install **koa-req-validation**
