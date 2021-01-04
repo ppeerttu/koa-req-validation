@@ -116,7 +116,7 @@ class ValidationChain {
      * @param func The validation function
      */
     custom(func) {
-        if (typeof func === "undefined") {
+        if (typeof func !== "function") {
             throw new TypeError(`Expected to receive a custom validation function but received: ${func}`);
         }
         this.operations.push({

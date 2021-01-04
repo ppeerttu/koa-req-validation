@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.ParamLocation = void 0;
 /**
  * Location of the parameter to be validated.
  */

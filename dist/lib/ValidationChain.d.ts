@@ -1,7 +1,4 @@
-/// <reference types="koa__router" />
-/// <reference types="koa" />
-/// <reference types="koa-bodyparser" />
-/// <reference types="koa-compose" />
+import { Middleware } from "@koa/router";
 import validator from "validator";
 import { CustomErrorMessageFunction, CustomValidatorFunction, IOptionalOptions, ParamLocation } from "./types";
 /**
@@ -48,11 +45,11 @@ export default class ValidationChain {
      * );
      * ```
      */
-    build: () => import("koa-compose").Middleware<import("koa").ParameterizedContext<any, import("@koa/router").RouterParamContext<any, {}>>>;
+    build: () => Middleware;
     /**
      * @deprecated Use `build()` instead
      */
-    run: () => import("koa-compose").Middleware<import("koa").ParameterizedContext<any, import("@koa/router").RouterParamContext<any, {}>>>;
+    run: () => Middleware;
     /**
      * Pass a custom message to the validation.
      *
