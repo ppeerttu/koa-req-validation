@@ -467,7 +467,7 @@ export default class ValidationChain {
     }
 
     /**
-     * Check if the string contains ACII characters only.
+     * Check if the string contains ASCII characters only.
      */
     public isAscii(): ValidationChain {
         this.operations.push({
