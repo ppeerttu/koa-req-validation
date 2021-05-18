@@ -3,7 +3,11 @@ docs
 demo
 tests
 coverage
+.github
+.vscode
 
 .travis.yml
 tsconfig.json
 tslint.json
+.eslintignore
+.prettierrc

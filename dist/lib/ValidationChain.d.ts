@@ -187,7 +187,7 @@ export default class ValidationChain {
      */
     isAlphanumeric(locale?: validator.AlphanumericLocale): ValidationChain;
     /**
-     * Check if the string contains ACII characters only.
+     * Check if the string contains ASCII characters only.
      */
     isAscii(): ValidationChain;
     /**

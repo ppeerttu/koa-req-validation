@@ -404,7 +404,7 @@ class ValidationChain {
         return this;
     }
     /**
-     * Check if the string contains ACII characters only.
+     * Check if the string contains ASCII characters only.
      */
     isAscii() {
         this.operations.push({
