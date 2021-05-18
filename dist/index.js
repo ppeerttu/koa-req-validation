@@ -7,7 +7,7 @@ var __createBinding = (this && this.__createBinding) || (Object.create ? (functi
     o[k2] = m[k];
 }));
 var __exportStar = (this && this.__exportStar) || function(m, exports) {
-    for (var p in m) if (p !== "default" && !exports.hasOwnProperty(p)) __createBinding(exports, m, p);
+    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
 };
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
@@ -29,12 +29,13 @@ const ValidationResult_1 = __importDefault(require("./lib/ValidationResult"));
  *     throw new RequestError(422, errors.mapped());
  * }
  */
-exports.validationResults = (ctx) => {
+const validationResults = (ctx) => {
     if (Array.isArray(ctx.state.validationResults)) {
         return ValidationResult_1.default.fromResults(ctx.state.validationResults);
     }
     return new ValidationResult_1.default([], []);
 };
+exports.validationResults = validationResults;
 /**
  * Validate request body.
  *
@@ -49,7 +50,8 @@ exports.validationResults = (ctx) => {
  * );
  * ```
  */
-exports.body = (bodyParam) => new ValidationChain_1.default(bodyParam, types_1.ParamLocation.BODY);
+const body = (bodyParam) => new ValidationChain_1.default(bodyParam, types_1.ParamLocation.BODY);
+exports.body = body;
 /**
  * Validate request query.
  *
@@ -63,7 +65,8 @@ exports.body = (bodyParam) => new ValidationChain_1.default(bodyParam, types_1.P
  * );
  * ```
  */
-exports.query = (queryString) => new ValidationChain_1.default(queryString, types_1.ParamLocation.QUERY);
+const query = (queryString) => new ValidationChain_1.default(queryString, types_1.ParamLocation.QUERY);
+exports.query = query;
 /**
  * Validate request param.
  *
@@ -77,6 +80,7 @@ exports.query = (queryString) => new ValidationChain_1.default(queryString, type
  * );
  * ```
  */
-exports.param = (routeParam) => new ValidationChain_1.default(routeParam, types_1.ParamLocation.PARAM);
+const param = (routeParam) => new ValidationChain_1.default(routeParam, types_1.ParamLocation.PARAM);
+exports.param = param;
 __exportStar(require("./lib/types"), exports);
 //# sourceMappingURL=index.js.map

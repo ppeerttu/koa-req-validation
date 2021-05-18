@@ -7,6 +7,7 @@
 	<meta name="description" content="Documentation for koa-req-validation">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="assets/css/main.css">
+	<script async src="assets/js/search.js" id="search-script"></script>
 </head>
 <body>
 <header>
@@ -40,8 +41,6 @@
 							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
 							<input type="checkbox" id="tsd-filter-externals" checked />
 							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
-							<input type="checkbox" id="tsd-filter-only-exported" />
-							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
 						</div>
 					</div>
 					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
@@ -51,11 +50,6 @@
 	</div>
 	<div class="tsd-page-title">
 		<div class="container">
-			<ul class="tsd-breadcrumb">
-				<li>
-					<a href="globals.html">Globals</a>
-				</li>
-			</ul>
 			<h1>koa-req-validation</h1>
 		</div>
 	</div>
@@ -68,14 +62,9 @@
 					<h1>koa-req-validation</h1>
 				</a>
 				<p><img src="https://github.com/ppeerttu/koa-req-validation/workflows/Node.js%20CI/badge.svg?branch=master" alt="Node.js CI">
-					<a href="https://badge.fury.io/js/koa-req-validation"><img src="https://badge.fury.io/js/koa-req-validation.svg" alt="dependencies"></a>
-				<img src="https://img.shields.io/librariesio/release/npm/koa-req-validation" alt="Libraries.io dependency status for latest release"></p>
-				<!--
-[![dependencies Status](https://david-dm.org/ppeerttu/koa-req-validation/status.svg)](https://david-dm.org/ppeerttu/koa-req-validation)
-[![devDependencies Status](https://david-dm.org/ppeerttu/koa-req-validation/dev-status.svg)](https://david-dm.org/ppeerttu/koa-req-validation?type=dev)
-[![peerDependencies Status](https://david-dm.org/ppeerttu/koa-req-validation/peer-status.svg)](https://david-dm.org/ppeerttu/koa-req-validation?type=peer)
--->
-				<p><a href="https://codecov.io/gh/ppeerttu/koa-req-validation"><img src="https://codecov.io/gh/ppeerttu/koa-req-validation/branch/master/graph/badge.svg?token=IuGu3GKizF" alt="codecov"></a>
+					<a href="https://badge.fury.io/js/koa-req-validation"><img src="https://badge.fury.io/js/koa-req-validation.svg" alt="npm package"></a>
+					<img src="https://img.shields.io/librariesio/release/npm/koa-req-validation" alt="Libraries.io dependency status for latest release">
+					<a href="https://codecov.io/gh/ppeerttu/koa-req-validation"><img src="https://codecov.io/gh/ppeerttu/koa-req-validation/branch/master/graph/badge.svg?token=IuGu3GKizF" alt="codecov"></a>
 				<a href="https://snyk.io/test/github/ppeerttu/koa-req-validation"><img src="https://snyk.io/test/github/ppeerttu/koa-req-validation/badge.svg" alt="Known Vulnerabilities"></a></p>
 				<p>A <a href="https://github.com/chriso/validator.js">validator</a> middleware for <a href="https://koajs.com/">koa</a>. Inspired by <a href="https://github.com/express-validator/express-validator">express-validator</a>.</p>
 				<ul>
@@ -97,35 +86,38 @@
 				</a>
 				<p>The <strong>koa-req-validation</strong> requires <a href="https://github.com/chriso/validator.js">validator</a>, <a href="https://github.com/koajs/router">@koa/router</a> and <a href="https://github.com/koajs/bodyparser">koa-bodyparser</a> as peer dependencies.</p>
 				<p>Install peer dependencies</p>
-				<pre><code>npm install validator<span class="hljs-symbol">@13</span> koa-bodyparser<span class="hljs-symbol">@4</span> <span class="hljs-symbol">@koa</span>/router<span class="hljs-symbol">@10</span></code></pre>
+				<pre><code><span style="color: #001080">npm</span><span style="color: #000000"> </span><span style="color: #001080">install</span><span style="color: #000000"> </span><span style="color: #001080">validator</span><span style="color: #000000">@</span><span style="color: #098658">13</span><span style="color: #000000"> </span><span style="color: #001080">koa</span><span style="color: #000000">-</span><span style="color: #001080">bodyparser</span><span style="color: #000000">@</span><span style="color: #098658">4</span><span style="color: #000000"> @</span><span style="color: #001080">koa</span><span style="color: #000000">/</span><span style="color: #001080">router</span><span style="color: #000000">@</span><span style="color: #098658">10</span>
+</code></pre>
 				<p>Install <strong>koa-req-validation</strong></p>
-				<pre><code>npm <span class="hljs-keyword">install</span> koa-req-<span class="hljs-keyword">validation</span></code></pre>
+				<pre><code><span style="color: #001080">npm</span><span style="color: #000000"> </span><span style="color: #001080">install</span><span style="color: #000000"> </span><span style="color: #001080">koa</span><span style="color: #000000">-</span><span style="color: #001080">req</span><span style="color: #000000">-</span><span style="color: #001080">validation</span>
+</code></pre>
 				<a href="#getting-started" id="getting-started" style="color: inherit; text-decoration: none;">
 					<h1>Getting started</h1>
 				</a>
 				<p>A basic usage example</p>
-				<pre><code class="language-typescript"><span class="hljs-keyword">import</span> Router, { RouterContext } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@koa/router&quot;</span>;
-<span class="hljs-keyword">import</span> { query, validationResults, IValidationState } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;koa-req-validation&quot;</span>;
+				<pre><code class="language-typescript"><span style="color: #AF00DB">import</span><span style="color: #000000"> </span><span style="color: #001080">Router</span><span style="color: #000000">, { </span><span style="color: #001080">RouterContext</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;@koa/router&quot;</span><span style="color: #000000">;</span>
+<span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">query</span><span style="color: #000000">, </span><span style="color: #001080">validationResults</span><span style="color: #000000">, </span><span style="color: #001080">IValidationState</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;koa-req-validation&quot;</span><span style="color: #000000">;</span>
 
-<span class="hljs-comment">// ...</span>
+<span style="color: #008000">// ...</span>
 
-<span class="hljs-keyword">const</span> router = <span class="hljs-keyword">new</span> Router();
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">router</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Router</span><span style="color: #000000">();</span>
 
-router.get(
-    <span class="hljs-string">&quot;/api/hello&quot;</span>,
-    query(<span class="hljs-string">&quot;name&quot;</span>)
-        .isLength({ <span class="hljs-attr">min</span>: <span class="hljs-number">3</span>, <span class="hljs-attr">max</span>: <span class="hljs-number">20</span> })
-        .withMessage(<span class="hljs-string">&quot;The name has to be between 3 and 20 characters&quot;</span>)
-        .build(), <span class="hljs-comment">// &lt;-- This is required at the end of each validation</span>
-    <span class="hljs-keyword">async</span> (ctx: RouterContext&lt;IValidationState&gt;) =&gt; {
-        <span class="hljs-keyword">const</span> result = validationResults(ctx);
-        <span class="hljs-keyword">if</span> (result.hasErrors()) {
-            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> RequestError(<span class="hljs-number">422</span>, result.mapped());
-        }
-        <span class="hljs-keyword">const</span> { name } = ctx.query;
-        ctx.body = <span class="hljs-string">`Hello <span class="hljs-subst">${name}</span>`</span>;
-    }
-);</code></pre>
+<span style="color: #001080">router</span><span style="color: #000000">.</span><span style="color: #795E26">get</span><span style="color: #000000">(</span>
+<span style="color: #000000">    </span><span style="color: #A31515">&quot;/api/hello&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #795E26">query</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;name&quot;</span><span style="color: #000000">)</span>
+<span style="color: #000000">        .</span><span style="color: #795E26">isLength</span><span style="color: #000000">({ </span><span style="color: #001080">min:</span><span style="color: #000000"> </span><span style="color: #098658">3</span><span style="color: #000000">, </span><span style="color: #001080">max:</span><span style="color: #000000"> </span><span style="color: #098658">20</span><span style="color: #000000"> })</span>
+<span style="color: #000000">        .</span><span style="color: #795E26">withMessage</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;The name has to be between 3 and 20 characters&quot;</span><span style="color: #000000">)</span>
+<span style="color: #000000">        .</span><span style="color: #795E26">build</span><span style="color: #000000">(), </span><span style="color: #008000">// &lt;-- This is required at the end of each validation</span>
+<span style="color: #000000">    </span><span style="color: #0000FF">async</span><span style="color: #000000"> (</span><span style="color: #001080">ctx</span><span style="color: #000000">: </span><span style="color: #267F99">RouterContext</span><span style="color: #000000">&lt;</span><span style="color: #267F99">IValidationState</span><span style="color: #000000">&gt;) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
+<span style="color: #000000">        </span><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">result</span><span style="color: #000000"> = </span><span style="color: #795E26">validationResults</span><span style="color: #000000">(</span><span style="color: #001080">ctx</span><span style="color: #000000">);</span>
+<span style="color: #000000">        </span><span style="color: #AF00DB">if</span><span style="color: #000000"> (</span><span style="color: #001080">result</span><span style="color: #000000">.</span><span style="color: #795E26">hasErrors</span><span style="color: #000000">()) {</span>
+<span style="color: #000000">            </span><span style="color: #AF00DB">throw</span><span style="color: #000000"> </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">RequestError</span><span style="color: #000000">(</span><span style="color: #098658">422</span><span style="color: #000000">, </span><span style="color: #001080">result</span><span style="color: #000000">.</span><span style="color: #795E26">mapped</span><span style="color: #000000">());</span>
+<span style="color: #000000">        }</span>
+<span style="color: #000000">        </span><span style="color: #0000FF">const</span><span style="color: #000000"> { </span><span style="color: #0070C1">name</span><span style="color: #000000"> } = </span><span style="color: #001080">ctx</span><span style="color: #000000">.</span><span style="color: #001080">query</span><span style="color: #000000">;</span>
+<span style="color: #000000">        </span><span style="color: #001080">ctx</span><span style="color: #000000">.</span><span style="color: #001080">body</span><span style="color: #000000"> = </span><span style="color: #A31515">`Hello </span><span style="color: #0000FF">${</span><span style="color: #001080">name</span><span style="color: #0000FF">}</span><span style="color: #A31515">`</span><span style="color: #000000">;</span>
+<span style="color: #000000">    }</span>
+<span style="color: #000000">);</span>
+</code></pre>
 				<p>See the <a href="https://github.com/ppeerttu/koa-req-validation/blob/master/demo/index.ts">demo</a> for other examples.</p>
 				<a href="#documentation" id="documentation" style="color: inherit; text-decoration: none;">
 					<h1>Documentation</h1>
@@ -149,11 +141,12 @@ router.get(
 						</ul>
 					</li>
 				</ul>
-				<pre><code class="language-typescript"><span class="hljs-keyword">const</span> result = validationResults(ctx);
-<span class="hljs-keyword">if</span> (result.hasErrors()) {
-    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> RequestError(<span class="hljs-number">422</span>, result.mapped());
-}
-<span class="hljs-keyword">const</span> passed = result.passedData();</code></pre>
+				<pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">result</span><span style="color: #000000"> = </span><span style="color: #795E26">validationResults</span><span style="color: #000000">(</span><span style="color: #001080">ctx</span><span style="color: #000000">);</span>
+<span style="color: #AF00DB">if</span><span style="color: #000000"> (</span><span style="color: #001080">result</span><span style="color: #000000">.</span><span style="color: #795E26">hasErrors</span><span style="color: #000000">()) {</span>
+<span style="color: #000000">    </span><span style="color: #AF00DB">throw</span><span style="color: #000000"> </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">RequestError</span><span style="color: #000000">(</span><span style="color: #098658">422</span><span style="color: #000000">, </span><span style="color: #001080">result</span><span style="color: #000000">.</span><span style="color: #795E26">mapped</span><span style="color: #000000">());</span>
+<span style="color: #000000">}</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">passed</span><span style="color: #000000"> = </span><span style="color: #001080">result</span><span style="color: #000000">.</span><span style="color: #795E26">passedData</span><span style="color: #000000">();</span>
+</code></pre>
 				<p>See the <a href="https://ppeerttu.github.io/koa-req-validation/">generated TypeDoc</a> and <a href="https://ppeerttu.github.io/koa-req-validation/classes/_lib_validationchain_.validationchain.html">ValidationChain</a> for API documentation.</p>
 				<a href="#motivation" id="motivation" style="color: inherit; text-decoration: none;">
 					<h1>Motivation</h1>
@@ -184,20 +177,20 @@ router.get(
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
 			<nav class="tsd-navigation primary">
 				<ul>
-					<li class="globals  ">
-						<a href="globals.html"><em>Globals</em></a>
+					<li class=" ">
+						<a href="modules.html">Exports</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/_index_.html">&quot;index&quot;</a>
+						<a href="modules/index.html">index</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/_lib_validationchain_.html">&quot;lib/<wbr>Validation<wbr>Chain&quot;</a>
+						<a href="modules/lib_validationchain.html">lib/<wbr>Validation<wbr>Chain</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/_lib_validationresult_.html">&quot;lib/<wbr>Validation<wbr>Result&quot;</a>
+						<a href="modules/lib_validationresult.html">lib/<wbr>Validation<wbr>Result</a>
 					</li>
 					<li class=" tsd-kind-module">
-						<a href="modules/_lib_types_.html">&quot;lib/types&quot;</a>
+						<a href="modules/lib_types.html">lib/types</a>
 					</li>
 				</ul>
 			</nav>
