@@ -72,10 +72,6 @@
 					<li><a href="#installation">Installation</a></li>
 					<li><a href="#getting-started">Getting started</a></li>
 					<li><a href="#documentation">Documentation</a></li>
-					<li><a href="#motivation">Motivation</a><ul>
-							<li><a href="#peer-dependencies">Peer dependencies</a></li>
-						</ul>
-					</li>
 					<li><a href="#issues">Issues</a></li>
 					<li><a href="#changelog">Changelog</a></li>
 					<li><a href="#contribution">Contribution</a></li>
@@ -96,7 +92,7 @@
 				</a>
 				<p>A basic usage example</p>
 				<pre><code class="language-typescript"><span style="color: #AF00DB">import</span><span style="color: #000000"> </span><span style="color: #001080">Router</span><span style="color: #000000">, { </span><span style="color: #001080">RouterContext</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;@koa/router&quot;</span><span style="color: #000000">;</span>
-<span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">query</span><span style="color: #000000">, </span><span style="color: #001080">validationResults</span><span style="color: #000000">, </span><span style="color: #001080">IValidationState</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;koa-req-validation&quot;</span><span style="color: #000000">;</span>
+<span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">query</span><span style="color: #000000">, </span><span style="color: #001080">validationResults</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;koa-req-validation&quot;</span><span style="color: #000000">;</span>
 
 <span style="color: #008000">// ...</span>
 
@@ -108,7 +104,7 @@
 <span style="color: #000000">        .</span><span style="color: #795E26">isLength</span><span style="color: #000000">({ </span><span style="color: #001080">min:</span><span style="color: #000000"> </span><span style="color: #098658">3</span><span style="color: #000000">, </span><span style="color: #001080">max:</span><span style="color: #000000"> </span><span style="color: #098658">20</span><span style="color: #000000"> })</span>
 <span style="color: #000000">        .</span><span style="color: #795E26">withMessage</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;The name has to be between 3 and 20 characters&quot;</span><span style="color: #000000">)</span>
 <span style="color: #000000">        .</span><span style="color: #795E26">build</span><span style="color: #000000">(), </span><span style="color: #008000">// &lt;-- This is required at the end of each validation</span>
-<span style="color: #000000">    </span><span style="color: #0000FF">async</span><span style="color: #000000"> (</span><span style="color: #001080">ctx</span><span style="color: #000000">: </span><span style="color: #267F99">RouterContext</span><span style="color: #000000">&lt;</span><span style="color: #267F99">IValidationState</span><span style="color: #000000">&gt;) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
+<span style="color: #000000">    </span><span style="color: #0000FF">async</span><span style="color: #000000"> (</span><span style="color: #001080">ctx</span><span style="color: #000000">: </span><span style="color: #267F99">RouterContext</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
 <span style="color: #000000">        </span><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">result</span><span style="color: #000000"> = </span><span style="color: #795E26">validationResults</span><span style="color: #000000">(</span><span style="color: #001080">ctx</span><span style="color: #000000">);</span>
 <span style="color: #000000">        </span><span style="color: #AF00DB">if</span><span style="color: #000000"> (</span><span style="color: #001080">result</span><span style="color: #000000">.</span><span style="color: #795E26">hasErrors</span><span style="color: #000000">()) {</span>
 <span style="color: #000000">            </span><span style="color: #AF00DB">throw</span><span style="color: #000000"> </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">RequestError</span><span style="color: #000000">(</span><span style="color: #098658">422</span><span style="color: #000000">, </span><span style="color: #001080">result</span><span style="color: #000000">.</span><span style="color: #795E26">mapped</span><span style="color: #000000">());</span>
@@ -148,14 +144,6 @@
 <span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">passed</span><span style="color: #000000"> = </span><span style="color: #001080">result</span><span style="color: #000000">.</span><span style="color: #795E26">passedData</span><span style="color: #000000">();</span>
 </code></pre>
 				<p>See the <a href="https://ppeerttu.github.io/koa-req-validation/">generated TypeDoc</a> and <a href="https://ppeerttu.github.io/koa-req-validation/classes/_lib_validationchain_.validationchain.html">ValidationChain</a> for API documentation.</p>
-				<a href="#motivation" id="motivation" style="color: inherit; text-decoration: none;">
-					<h1>Motivation</h1>
-				</a>
-				<p>Motivation behind this module is the awesome experience of using the <a href="https://github.com/express-validator/express-validator">express-validator</a>. However, due to various reasons the <code>express-validator</code> doesn&#39;t suit <code>koa</code> and it seems that there are quite a lot of request validation packages out there mainly for <code>koa</code> v1 without warranty for active maintenance. This package tries to mimic the <code>express-validator</code> package and eventually provide most of the features.</p>
-				<a href="#peer-dependencies" id="peer-dependencies" style="color: inherit; text-decoration: none;">
-					<h2>Peer dependencies</h2>
-				</a>
-				<p>As it appears to be slowly growing concern that developers hog thousands of npm pacakges without knowing them, we&#39;d like to make sure the developer knows what&#39;s included in this package and actively consider whether to include this pacakge along with it&#39;s peer dependencies to their projects.</p>
 				<a href="#issues" id="issues" style="color: inherit; text-decoration: none;">
 					<h1>Issues</h1>
 				</a>
