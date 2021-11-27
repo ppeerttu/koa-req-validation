@@ -12,8 +12,6 @@ A [validator][validator-site] middleware for [koa][koa-site]. Inspired by [expre
 - [Installation](#installation)
 - [Getting started](#getting-started)
 - [Documentation](#documentation)
-- [Motivation](#motivation)
-  - [Peer dependencies](#peer-dependencies)
 - [Issues](#issues)
 - [Changelog](#changelog)
 - [Contribution](#contribution)
@@ -41,7 +39,7 @@ A basic usage example
 
 ```typescript
 import Router, { RouterContext } from "@koa/router";
-import { query, validationResults, IValidationState } from "koa-req-validation";
+import { query, validationResults } from "koa-req-validation";
 
 // ...
 
@@ -53,7 +51,7 @@ router.get(
         .isLength({ min: 3, max: 20 })
         .withMessage("The name has to be between 3 and 20 characters")
         .build(), // <-- This is required at the end of each validation
-    async (ctx: RouterContext<IValidationState>) => {
+    async (ctx: RouterContext) => {
         const result = validationResults(ctx);
         if (result.hasErrors()) {
             throw new RequestError(422, result.mapped());
@@ -88,14 +86,6 @@ const passed = result.passedData();
 ```
 
 See the [generated TypeDoc][typedocs] and [ValidationChain][validation-chain] for API documentation.
-
-# Motivation
-
-Motivation behind this module is the awesome experience of using the [express-validator][express-validator-site]. However, due to various reasons the `express-validator` doesn't suit `koa` and it seems that there are quite a lot of request validation packages out there mainly for `koa` v1 without warranty for active maintenance. This package tries to mimic the `express-validator` package and eventually provide most of the features.
-
-## Peer dependencies
-
-As it appears to be slowly growing concern that developers hog thousands of npm pacakges without knowing them, we'd like to make sure the developer knows what's included in this package and actively consider whether to include this pacakge along with it's peer dependencies to their projects.
 
 # Issues
 

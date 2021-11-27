@@ -9,7 +9,7 @@ import {
     query,
     validationResults,
     body,
-} from "../src";
+} from "..";
 
 interface AuthData {
     /**
@@ -63,7 +63,7 @@ const app = new Koa();
 const router = new Router();
 
 const customErrorMessage: CustomErrorMessageFunction = (
-    ctx: RouterContext,
+    _ctx: RouterContext,
     value: string
 ) => {
     return (

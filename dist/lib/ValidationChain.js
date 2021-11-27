@@ -985,7 +985,7 @@ class ValidationChain {
                     }
                     catch (e) {
                         arr.push({
-                            msg: finalMessage || e.message || this.defaultErrorMessage,
+                            msg: finalMessage !== null && finalMessage !== void 0 ? finalMessage : (e instanceof Error && e.message ? e.message : this.defaultErrorMessage),
                             location: this.location,
                             param: this.parameter.join("."),
                             value: originalInput + "",

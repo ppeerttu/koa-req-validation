@@ -13,16 +13,6 @@ import {
 import ValidationResult from "./ValidationResult";
 
 /**
- * Koa context for validation operations.
- */
-interface IValidationState {
-    /**
-     * Validation results
-     */
-    validationResults: ValidationResult[];
-}
-
-/**
  * The validation chain object.
  */
 export default class ValidationChain {
@@ -86,7 +76,7 @@ export default class ValidationChain {
      * ```
      */
     public build = (): Middleware => async (
-        ctx: RouterContext<IValidationState>,
+        ctx: RouterContext,
         next: () => Promise<void>
     ): Promise<void> => {
         const results = await this.checkResults(ctx);
@@ -1064,7 +1054,7 @@ export default class ValidationChain {
      * @param ctx The context
      */
     private async checkResults(
-        ctx: RouterContext<IValidationState>
+        ctx: RouterContext
     ): Promise<ValidationResult | null> {
         let input: any;
         let originalInput: any;
@@ -1114,7 +1104,7 @@ export default class ValidationChain {
                         await func!(input, ctx);
                     } catch (e) {
                         arr.push({
-                            msg: finalMessage || e.message || this.defaultErrorMessage,
+                            msg: finalMessage ?? (e instanceof Error && e.message ? e.message : this.defaultErrorMessage),
                             location: this.location,
                             param: this.parameter.join("."),
                             value: originalInput + "",
