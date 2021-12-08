@@ -106,7 +106,7 @@ All contributions to the project are welcome.
 [demo-link]: https://github.com/ppeerttu/koa-req-validation/blob/master/demo/index.ts
 [licence-link]: https://github.com/ppeerttu/koa-req-validation/blob/master/LICENCE
 [typedocs]: https://ppeerttu.github.io/koa-req-validation/
-[validation-chain]: https://ppeerttu.github.io/koa-req-validation/classes/_lib_validationchain_.validationchain.html
+[validation-chain]: https://ppeerttu.github.io/koa-req-validation/classes/lib_validationchain.default.html
 [issue-site]: https://github.com/ppeerttu/koa-req-validation/issues
 [issue-all-filter-site]: https://github.com/ppeerttu/koa-req-validation/issues?utf8=%E2%9C%93&q=is%3Aissue
 [releases-site]: https://github.com/ppeerttu/koa-req-validation/releases
