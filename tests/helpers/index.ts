@@ -1,3 +1,4 @@
+import { RouterContext } from "@koa/router";
 import { ParamLocation } from "../../src/lib/types";
 
 /**
@@ -15,9 +16,9 @@ import { ParamLocation } from "../../src/lib/types";
  */
 export function mockContext(
     location?: ParamLocation,
-    properties?: {},
-    state: any = {}
-): any {
+    properties?: Record<string, unknown>,
+    state: Record<string, unknown> = {},
+): RouterContext {
     const ctx = {
         request: {
             body: {},
@@ -39,5 +40,5 @@ export function mockContext(
                 break;
         }
     }
-    return ctx;
+    return ctx as RouterContext;
 }

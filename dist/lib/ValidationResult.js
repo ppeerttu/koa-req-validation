@@ -98,7 +98,7 @@ class ValidationResult {
             const k = parts.pop();
             while (parts.length) {
                 const part = parts.shift();
-                t = t[part] = t[part] || {};
+                t = (t[part] = t[part] || {});
             }
             t[k] = obj[key];
         }

@@ -1,4 +1,8 @@
-import { RouterContext } from "@koa/router";
+import { RouterContext, Middleware } from "@koa/router";
+import ValidationChain from "./ValidationChain";
+
+export interface Validator extends ValidationChain<Validator>, Middleware {
+}
 
 /**
  * Interface describing validation errors.
@@ -20,8 +24,8 @@ export interface IOptionalOptions {
 /**
  * Custom validation function with context object.
  */
-type CustomValidatorFunctionWithContext = (
-    input: any,
+export type CustomValidatorFunctionWithContext = (
+    input: unknown,
     ctx: RouterContext
 ) => Promise<void>;
 
@@ -30,7 +34,7 @@ type CustomValidatorFunctionWithContext = (
  * validation function should throw an error
  * when ever validation fails.
  */
-export type CustomValidatorFunction = (input: any) => Promise<void>;
+export type CustomValidatorFunction = (input: unknown) => Promise<void>;
 
 /**
  * Custom validation error message function. This function will receive the request
@@ -38,142 +42,6 @@ export type CustomValidatorFunction = (input: any) => Promise<void>;
  * message as a result.f
  */
 export type CustomErrorMessageFunction = (ctx: RouterContext, input: string) => string;
-
-/**
- * Validation definition for internal module usage.
- */
-export interface IValidationDefinition {
-    /**
-     * Just a helper type for separating validation definitions from
-     * sanitation definitions.
-     */
-    type: "validation";
-
-    /**
-     * Validation function
-     */
-    validation: ValidatorFunctionName;
-
-    /**
-     * Message for invalid value
-     */
-    message?: string | CustomErrorMessageFunction;
-
-    /**
-     * Options for validation function
-     */
-    options?: any;
-
-    /**
-     * Custom validation function
-     */
-    func?: CustomValidatorFunction | CustomValidatorFunctionWithContext;
-}
-
-/**
- * Allowed validation function name. This is the available list
- * of validators in the validator.js -module.
- */
-export type ValidatorFunctionName =
-    | "custom"
-    | "contains"
-    | "equals"
-    | "isAfter"
-    | "isAlpha"
-    | "isAlphanumeric"
-    | "isAscii"
-    | "isBase64"
-    | "isBefore"
-    | "isBoolean"
-    | "isByteLength"
-    | "isCreditCard"
-    | "isCurrency"
-    | "isDataURI"
-    | "isMagnetURI" // Not found from validatorjs static type interface
-    | "isDecimal"
-    | "isDivisibleBy"
-    | "isEmail"
-    | "isEmpty"
-    | "isFQDN"
-    | "isFloat"
-    | "isFullWidth"
-    | "isHalfWidth"
-    | "isHash"
-    | "isHexColor"
-    | "isHexadecimal"
-    | "isIdentityCard" // Not found from validatorjs static type interface
-    | "isIP"
-    | "isIPRange"
-    | "isISBN"
-    | "isISSN"
-    | "isISIN"
-    | "isISO8601"
-    | "isRFC3339"
-    | "isISO31661Alpha2"
-    | "isISO31661Alpha3"
-    | "isISRC"
-    | "isIn"
-    | "isInt"
-    | "isJSON"
-    | "isJWT"
-    | "isLatLong"
-    | "isLength"
-    | "isLowercase"
-    | "isMACAddress"
-    | "isMD5"
-    | "isMimeType"
-    | "isMobilePhone"
-    | "isMongoId"
-    | "isMultibyte"
-    | "isNumeric"
-    | "isPort"
-    | "isPostalCode"
-    | "isSurrogatePair"
-    | "isURL"
-    | "isUUID"
-    | "isUppercase"
-    | "isVariableWidth"
-    | "isWhitelisted"
-    | "matches";
-
-/**
- * Sanitation definition.
- */
-export interface ISanitationDefinition {
-    /**
-     * Just a type helper for separating sanitation definitions from
-     * validation definitions
-     */
-    type: "sanitation";
-
-    /**
-     * The sanitation function name
-     */
-    sanitation: SanitationFunctionName;
-
-    /**
-     * Options for the sanitation
-     */
-    options?: any;
-}
-
-/**
- * Allowed sanitation functions by validator.
- */
-export type SanitationFunctionName =
-    | "blacklist"
-    | "escape"
-    | "unescape"
-    | "ltrim"
-    | "normalizeEmail"
-    | "rtrim"
-    | "stripLow"
-    | "toBoolean"
-    | "toDate"
-    | "toFloat"
-    | "toInt"
-    | "trim"
-    | "whitelist";
 
 /**
  * Location of the parameter to be validated.

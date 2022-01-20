@@ -80,9 +80,8 @@
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/lib_types.imappedvalidationresults.html" class="tsd-kind-icon">IMapped<wbr>Validation<wbr>Results</a></li>
 								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/lib_types.ioptionaloptions.html" class="tsd-kind-icon">IOptional<wbr>Options</a></li>
-								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/lib_types.isanitationdefinition.html" class="tsd-kind-icon">ISanitation<wbr>Definition</a></li>
-								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/lib_types.ivalidationdefinition.html" class="tsd-kind-icon">IValidation<wbr>Definition</a></li>
 								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/lib_types.ivalidationerror.html" class="tsd-kind-icon">IValidation<wbr>Error</a></li>
+								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/lib_types.validator.html" class="tsd-kind-icon">Validator</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
@@ -90,8 +89,7 @@
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-type-alias tsd-parent-kind-module"><a href="lib_types.html#customerrormessagefunction" class="tsd-kind-icon">Custom<wbr>Error<wbr>Message<wbr>Function</a></li>
 								<li class="tsd-kind-type-alias tsd-parent-kind-module"><a href="lib_types.html#customvalidatorfunction" class="tsd-kind-icon">Custom<wbr>Validator<wbr>Function</a></li>
-								<li class="tsd-kind-type-alias tsd-parent-kind-module"><a href="lib_types.html#sanitationfunctionname" class="tsd-kind-icon">Sanitation<wbr>Function<wbr>Name</a></li>
-								<li class="tsd-kind-type-alias tsd-parent-kind-module"><a href="lib_types.html#validatorfunctionname" class="tsd-kind-icon">Validator<wbr>Function<wbr>Name</a></li>
+								<li class="tsd-kind-type-alias tsd-parent-kind-module"><a href="lib_types.html#customvalidatorfunctionwithcontext" class="tsd-kind-icon">Custom<wbr>Validator<wbr>Function<wbr>With<wbr>Context</a></li>
 							</ul>
 						</section>
 					</div>
@@ -105,7 +103,7 @@
 					<div class="tsd-signature tsd-kind-icon">Custom<wbr>Error<wbr>Message<wbr>Function<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>ctx<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">RouterContext</span>, input<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/e09983a/src/lib/types.ts#L40">lib/types.ts:40</a></li>
+							<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/2186209/src/lib/types.ts#L44">src/lib/types.ts:44</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -143,10 +141,10 @@
 				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module">
 					<a name="customvalidatorfunction" class="tsd-anchor"></a>
 					<h3>Custom<wbr>Validator<wbr>Function</h3>
-					<div class="tsd-signature tsd-kind-icon">Custom<wbr>Validator<wbr>Function<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>input<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<div class="tsd-signature tsd-kind-icon">Custom<wbr>Validator<wbr>Function<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>input<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/e09983a/src/lib/types.ts#L33">lib/types.ts:33</a></li>
+							<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/2186209/src/lib/types.ts#L37">src/lib/types.ts:37</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -161,14 +159,14 @@
 						<ul class="tsd-parameters">
 							<li class="tsd-parameter-signature">
 								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-type-alias">
-									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>input<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>input<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
 								</ul>
 								<ul class="tsd-descriptions">
 									<li class="tsd-description">
 										<h4 class="tsd-parameters-title">Parameters</h4>
 										<ul class="tsd-parameters">
 											<li>
-												<h5>input: <span class="tsd-signature-type">any</span></h5>
+												<h5>input: <span class="tsd-signature-type">unknown</span></h5>
 											</li>
 										</ul>
 										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -179,34 +177,42 @@
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module">
-					<a name="sanitationfunctionname" class="tsd-anchor"></a>
-					<h3>Sanitation<wbr>Function<wbr>Name</h3>
-					<div class="tsd-signature tsd-kind-icon">Sanitation<wbr>Function<wbr>Name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;blacklist&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;escape&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;unescape&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;ltrim&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;normalizeEmail&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;rtrim&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;stripLow&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;toBoolean&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;toDate&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;toFloat&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;toInt&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;trim&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;whitelist&quot;</span></div>
+					<a name="customvalidatorfunctionwithcontext" class="tsd-anchor"></a>
+					<h3>Custom<wbr>Validator<wbr>Function<wbr>With<wbr>Context</h3>
+					<div class="tsd-signature tsd-kind-icon">Custom<wbr>Validator<wbr>Function<wbr>With<wbr>Context<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>input<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">unknown</span>, ctx<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">RouterContext</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/e09983a/src/lib/types.ts#L163">lib/types.ts:163</a></li>
+							<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/2186209/src/lib/types.ts#L27">src/lib/types.ts:27</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>Allowed sanitation functions by validator.</p>
+							<p>Custom validation function with context object.</p>
 						</div>
 					</div>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module">
-					<a name="validatorfunctionname" class="tsd-anchor"></a>
-					<h3>Validator<wbr>Function<wbr>Name</h3>
-					<div class="tsd-signature tsd-kind-icon">Validator<wbr>Function<wbr>Name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;custom&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;contains&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;equals&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;isAfter&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;isAlpha&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;isAlphanumeric&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;isAscii&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;isBase64&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;isBefore&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;isBoolean&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;isByteLength&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;isCreditCard&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;isCurrency&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;isDataURI&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;isMagnetURI&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;isDecimal&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;isDivisibleBy&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;isEmail&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;isEmpty&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;isFQDN&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;isFloat&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;isFullWidth&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;isHalfWidth&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;isHash&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;isHexColor&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;isHexadecimal&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;isIdentityCard&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;isIP&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;isIPRange&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;isISBN&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;isISSN&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;isISIN&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;isISO8601&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;isRFC3339&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;isISO31661Alpha2&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;isISO31661Alpha3&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;isISRC&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;isIn&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;isInt&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;isJSON&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;isJWT&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;isLatLong&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;isLength&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;isLowercase&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;isMACAddress&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;isMD5&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;isMimeType&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;isMobilePhone&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;isMongoId&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;isMultibyte&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;isNumeric&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;isPort&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;isPostalCode&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;isSurrogatePair&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;isURL&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;isUUID&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;isUppercase&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;isVariableWidth&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;isWhitelisted&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;matches&quot;</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/ppeerttu/koa-request-validation/blob/e09983a/src/lib/types.ts#L77">lib/types.ts:77</a></li>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-signature">
+								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-type-alias">
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>input<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">unknown</span>, ctx<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">RouterContext</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+								</ul>
+								<ul class="tsd-descriptions">
+									<li class="tsd-description">
+										<h4 class="tsd-parameters-title">Parameters</h4>
+										<ul class="tsd-parameters">
+											<li>
+												<h5>input: <span class="tsd-signature-type">unknown</span></h5>
+											</li>
+											<li>
+												<h5>ctx: <span class="tsd-signature-type">RouterContext</span></h5>
+											</li>
+										</ul>
+										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
+									</li>
+								</ul>
+							</li>
 						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>Allowed validation function name. This is the available list
-							of validators in the validator.js -module.</p>
-						</div>
 					</div>
 				</section>
 			</section>
@@ -229,6 +235,9 @@
 					<li class="current tsd-kind-module">
 						<a href="lib_types.html">lib/types</a>
 					</li>
+					<li class=" tsd-kind-module">
+						<a href="lib_utils.html">lib/utils</a>
+					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
@@ -243,13 +252,10 @@
 						<a href="../interfaces/lib_types.ioptionaloptions.html" class="tsd-kind-icon">IOptional<wbr>Options</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-module">
-						<a href="../interfaces/lib_types.isanitationdefinition.html" class="tsd-kind-icon">ISanitation<wbr>Definition</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-module">
-						<a href="../interfaces/lib_types.ivalidationdefinition.html" class="tsd-kind-icon">IValidation<wbr>Definition</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-module">
 						<a href="../interfaces/lib_types.ivalidationerror.html" class="tsd-kind-icon">IValidation<wbr>Error</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-module">
+						<a href="../interfaces/lib_types.validator.html" class="tsd-kind-icon">Validator</a>
 					</li>
 					<li class=" tsd-kind-type-alias tsd-parent-kind-module">
 						<a href="lib_types.html#customerrormessagefunction" class="tsd-kind-icon">Custom<wbr>Error<wbr>Message<wbr>Function</a>
@@ -258,10 +264,7 @@
 						<a href="lib_types.html#customvalidatorfunction" class="tsd-kind-icon">Custom<wbr>Validator<wbr>Function</a>
 					</li>
 					<li class=" tsd-kind-type-alias tsd-parent-kind-module">
-						<a href="lib_types.html#sanitationfunctionname" class="tsd-kind-icon">Sanitation<wbr>Function<wbr>Name</a>
-					</li>
-					<li class=" tsd-kind-type-alias tsd-parent-kind-module">
-						<a href="lib_types.html#validatorfunctionname" class="tsd-kind-icon">Validator<wbr>Function<wbr>Name</a>
+						<a href="lib_types.html#customvalidatorfunctionwithcontext" class="tsd-kind-icon">Custom<wbr>Validator<wbr>Function<wbr>With<wbr>Context</a>
 					</li>
 				</ul>
 			</nav>
@@ -274,16 +277,18 @@
 		<div class="tsd-legend-group">
 			<ul class="tsd-legend">
 				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
 				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
 			</ul>
 		</div>
 	</div>

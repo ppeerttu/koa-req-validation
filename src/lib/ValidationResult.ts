@@ -95,14 +95,14 @@ export default class ValidationResult {
      * Return final values that have been stored within this validation result. This can
      * be used for retrieving all values that have passed validations and been sanitized.
      */
-    public passedData(): Record<string, any> {
-        const results: any = {};
+    public passedData<T = Record<string, unknown>>(): T {
+        const results: Record<string, unknown> = {};
         for (let i = 0; i < this.parameters.length; i++) {
             if (typeof this.finalValues[i] !== "undefined") {
                 results[this.parameters[i]] = this.finalValues[i];
             }
         }
-        return this.deepen(results);
+        return this.deepen(results) as T;
     }
 
     /**
@@ -116,15 +116,15 @@ export default class ValidationResult {
      * console.log(deepened); // { 'nested': { 'prop': 'value' }}
      * ```
      */
-    private deepen(obj: Record<string, any>): Record<string, any> {
-        const output: Record<string, any> = {};
+    private deepen(obj: Record<string, unknown>): Record<string, unknown> {
+        const output: Record<string, unknown> = {};
         for (const key in obj) {
             let t = output;
             const parts = key.split(".");
             const k = parts.pop() as string;
             while (parts.length) {
                 const part = parts.shift() as string;
-                t = t[part] = t[part] || {};
+                t = (t[part] = t[part] || {}) as Record<string, unknown>
             }
             t[k] = obj[key];
         }

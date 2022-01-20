@@ -1,5 +1,5 @@
 import { RouterContext } from "@koa/router";
-import ValidationChain from "./lib/ValidationChain";
+import { Validator } from "./lib/types";
 import ValidationResult from "./lib/ValidationResult";
 /**
  * Get validation results out of the context.
@@ -17,32 +17,32 @@ export declare const validationResults: (ctx: RouterContext) => ValidationResult
 /**
  * Validate request body.
  *
- * @param bodyParam The parameter to be validated from request.
+ * @param field The parameter to be validated from request.
  *
  * ```typescript
  * router.post(
  *     '/auth/login',
- *     body('username').equals('user').build(),
- *     body('password').equals('pass').build(),
+ *     body('username').equals('user'),
+ *     body('password').equals('pass'),
  *     handler
  * );
  * ```
  */
-export declare const body: (bodyParam: string) => ValidationChain;
+export declare const body: (field: string) => Validator;
 /**
  * Validate request query.
  *
- * @param queryString The parameter to be validated from request.
+ * @param field The parameter to be validated from request.
  *
  * ```typescript
  * router.get(
  *     '/api/tags',
- *     query('search').contains('_').build(),
+ *     query('search').contains('_'),
  *     handler
  * );
  * ```
  */
-export declare const query: (queryString: string) => ValidationChain;
+export declare const query: (field: string) => Validator;
 /**
  * Validate request param.
  *
@@ -51,10 +51,10 @@ export declare const query: (queryString: string) => ValidationChain;
  * ```typescript
  * router.get(
  *     '/api/users/:id',
- *     param('id').isInt().build(),
+ *     param('id').isInt(),
  *     handler
  * );
  * ```
  */
-export declare const param: (routeParam: string) => ValidationChain;
+export declare const param: (routeParam: string) => Validator;
 export * from "./lib/types";

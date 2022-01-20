@@ -1,10 +1,11 @@
-import { Middleware } from "@koa/router";
+/// <reference types="koa__router" />
+import { Middleware as RequestMiddleware } from "@koa/router";
 import validator from "validator";
 import { CustomErrorMessageFunction, CustomValidatorFunction, IOptionalOptions, ParamLocation } from "./types";
 /**
  * The validation chain object.
  */
-export default class ValidationChain {
+export default class ValidationChain<Middleware> {
     /**
      * Default error message when validation fails.
      */
@@ -25,6 +26,7 @@ export default class ValidationChain {
      * Is this parameter optional?
      */
     private isOptional;
+    middleware: Middleware;
     /**
      * Create a new ValidationChain.
      *
@@ -32,24 +34,7 @@ export default class ValidationChain {
      * @param location Location of the parameter in request
      */
     constructor(parameter: string, location: ParamLocation);
-    /**
-     * Build the validation chain. This method has to be called at the end of each
-     * validation.
-     *
-     * ```typescript
-     * router.post(
-     *     '/auth/login',
-     *     body('username').equals('user').build(),
-     *     body('password').equals('pass').build(),
-     *     handler
-     * );
-     * ```
-     */
-    build: () => Middleware;
-    /**
-     * @deprecated Use `build()` instead
-     */
-    run: () => Middleware;
+    handleRequest: RequestMiddleware;
     /**
      * Pass a custom message to the validation.
      *
@@ -57,106 +42,106 @@ export default class ValidationChain {
      *
      * @throws {Error} No validation has been set before `withMessage()` has been called
      */
-    withMessage(message: string | CustomErrorMessageFunction): ValidationChain;
+    withMessage(message: string | CustomErrorMessageFunction): Middleware;
     /**
      * Set this property as optional.
      */
-    optional(options?: IOptionalOptions): ValidationChain;
+    optional(options?: IOptionalOptions): Middleware;
     /**
      * Custom async validation function to execute. The function
      * must throw when the validation fails.
      *
      * @param func The validation function
      */
-    custom(func: CustomValidatorFunction): ValidationChain;
+    custom(func: CustomValidatorFunction): Middleware;
     /**
      * Check if the request property contains the given seed.
      */
-    contains(seed: string): ValidationChain;
+    contains(seed: string): Middleware;
     /**
      * Check if the request property equals the given comparison.
      */
-    equals(comparison: string): ValidationChain;
+    equals(comparison: string): Middleware;
     /**
      * Check if the parameter is an integer.
      */
-    isInt(options?: validator.IsIntOptions): ValidationChain;
+    isInt(options?: validator.IsIntOptions): Middleware;
     /**
      * Check if the string is in given length.
      *
      * @param options Min and max length
      */
-    isLength(options: validator.IsLengthOptions): ValidationChain;
+    isLength(options: validator.IsLengthOptions): Middleware;
     /**
      * Check if the parameter is an email.
      */
-    isEmail(options?: validator.IsEmailOptions): ValidationChain;
+    isEmail(options?: validator.IsEmailOptions): Middleware;
     /**
      * Check if the parameter is a boolean value.
      */
-    isBoolean(): ValidationChain;
+    isBoolean(): Middleware;
     /**
      * Check if the parameter is a zero length string.
      */
-    isEmpty(options?: validator.IsEmptyOptions): ValidationChain;
+    isEmpty(options?: validator.IsEmptyOptions): Middleware;
     /**
      * Check if the parameter is a float.
      */
-    isFloat(options?: validator.IsFloatOptions): ValidationChain;
+    isFloat(options?: validator.IsFloatOptions): Middleware;
     /**
      * Check if the parameter is an algorithm.
      *
      * @param algorithm The algorithm
      */
-    isHash(algorithm: validator.HashAlgorithm): ValidationChain;
+    isHash(algorithm: validator.HashAlgorithm): Middleware;
     /**
      * Check if the parameter is a valid JWT token.
      */
-    isJWT(): ValidationChain;
+    isJWT(): Middleware;
     /**
      * Check if the parameter is a valid JSON. Uses
      * `JSON.parse`.
      */
-    isJSON(): ValidationChain;
+    isJSON(): Middleware;
     /**
      * Check if the parameter is a latitude-lognitude coordinate
      * in the format `lat,long` or `lat, long`.
      */
-    isLatLong(): ValidationChain;
+    isLatLong(): Middleware;
     /**
      * Check if the paramter contains only lowercase characters.
      */
-    isLowercase(): ValidationChain;
+    isLowercase(): Middleware;
     /**
      * Check if the parameter is a MAC address.
      */
-    isMACAddress(options?: validator.IsMACAddressOptions): ValidationChain;
+    isMACAddress(options?: validator.IsMACAddressOptions): Middleware;
     /**
      * Check if the parameter is a valid MongoDB ObjectId.
      */
-    isMongoId(): ValidationChain;
+    isMongoId(): Middleware;
     /**
      * Check if the parameter contains only numbers.
      */
-    isNumeric(options?: validator.IsNumericOptions): ValidationChain;
+    isNumeric(options?: validator.IsNumericOptions): Middleware;
     /**
      * Check if the parameter is a valid port number.
      */
-    isPort(): ValidationChain;
+    isPort(): Middleware;
     /**
      * Check if the parameter is valid UUID (v3, v4 or v5).
      */
-    isUUID(version?: 3 | 4 | 5 | "3" | "4" | "5" | "all"): ValidationChain;
+    isUUID(version?: 3 | 4 | 5 | "3" | "4" | "5" | "all"): Middleware;
     /**
      * Check if the parameter contains only uppercase characters.
      */
-    isUppercase(): ValidationChain;
+    isUppercase(): Middleware;
     /**
      * Check if the parameter matches given regular expression.
      *
      * @param regExp The regular expression
      */
-    matches(regExp: RegExp): ValidationChain;
+    matches(regExp: RegExp): Middleware;
     /**
      * Check if the parameter is some of the allowed
      * values.
@@ -164,221 +149,221 @@ export default class ValidationChain {
      * @param values Options containing at least `values`
      * property with allowed values
      */
-    isIn(values: any[]): ValidationChain;
+    isIn(values: string[]): Middleware;
     /**
      * Check if the string is a date that's after the specified
      * date (defaults to now).
      *
      * @param date The date (defaults to now)
      */
-    isAfter(date?: string): ValidationChain;
+    isAfter(date?: string): Middleware;
     /**
      * Check if the string contains only letters. Locale
      * defaults to en-US.
      *
      * @param locale The locale
      */
-    isAlpha(locale?: validator.AlphaLocale): ValidationChain;
+    isAlpha(locale?: validator.AlphaLocale): Middleware;
     /**
      * Check if the string contains only letters and numbers.
      * Locale defaults to en-US.
      *
      * @param locale The locale
      */
-    isAlphanumeric(locale?: validator.AlphanumericLocale): ValidationChain;
+    isAlphanumeric(locale?: validator.AlphanumericLocale): Middleware;
     /**
      * Check if the string contains ASCII characters only.
      */
-    isAscii(): ValidationChain;
+    isAscii(): Middleware;
     /**
      * Check if the string is base64 encoded.
      */
-    isBase64(): ValidationChain;
+    isBase64(): Middleware;
     /**
      * Check if the string is a date that's before
      * the given date, which defaults to now.
      *
      * @param date The date (defaults to now)
      */
-    isBefore(date?: string): ValidationChain;
+    isBefore(date?: string): Middleware;
     /**
      * Check if the strin's length (in UTF-8 bytes)
      * falls in range.
      *
      * @param options The range
      */
-    isByteLength(options?: validator.IsByteLengthOptions): ValidationChain;
+    isByteLength(options?: validator.IsByteLengthOptions): Middleware;
     /**
      * Check if the string is a credit card.
      */
-    isCreditCard(): ValidationChain;
+    isCreditCard(): Middleware;
     /**
      * Check if the string is a valid currency amount.
      *
      * @param options The options
      */
-    isCurrency(options?: validator.IsCurrencyOptions): ValidationChain;
+    isCurrency(options?: validator.IsCurrencyOptions): Middleware;
     /**
      * Check if the string is a data uri format.
      */
-    isDataURI(): ValidationChain;
+    isDataURI(): Middleware;
     /**
      * Check if the string represents a decimal number.
      *
      * @param options The options
      */
-    isDecimal(options?: validator.IsDecimalOptions): ValidationChain;
+    isDecimal(options?: validator.IsDecimalOptions): Middleware;
     /**
      * Check if the string is a number divisible by
      * given number.
      *
      * @param division The division number
      */
-    isDivisibleBy(division: number): ValidationChain;
+    isDivisibleBy(division: number): Middleware;
     /**
      * Check if the string is fully qualified
      * domain name.
      *
      * @param options The options
      */
-    isFQDN(options?: validator.IsFQDNOptions): ValidationChain;
+    isFQDN(options?: validator.IsFQDNOptions): Middleware;
     /**
      * Check if the string contains any full-width
      * chars.
      */
-    isFullWidth(): ValidationChain;
+    isFullWidth(): Middleware;
     /**
      * Check if the string contains any half-width
      * chars.
      */
-    isHalfWidth(): ValidationChain;
+    isHalfWidth(): Middleware;
     /**
      * Check if the string is a hexadecimal
      * color.
      */
-    isHexColor(): ValidationChain;
+    isHexColor(): Middleware;
     /**
      * Check if the string is a hexadecimal
      * number.
      */
-    isHexadecimal(): ValidationChain;
+    isHexadecimal(): Middleware;
     /**
      * Check if the string is an IP (ver 4 or 6).
      */
-    isIP(version?: 4 | 6 | "4" | "6"): ValidationChain;
+    isIP(version?: 4 | 6 | "4" | "6"): Middleware;
     /**
      * Check if the string is an IP range (ver 4 only).
      */
-    isIPRange(): ValidationChain;
+    isIPRange(): Middleware;
     /**
      * Check if the string is an ISBN.
      *
      * @param version The version
      */
-    isISBN(version: 10 | 13 | "10" | "13"): ValidationChain;
+    isISBN(version: 10 | 13 | "10" | "13"): Middleware;
     /**
      * Check if the string is an ISSN.
      *
      * @param options The options
      */
-    isISSN(options?: validator.IsISSNOptions): ValidationChain;
+    isISSN(options?: validator.IsISSNOptions): Middleware;
     /**
      * Check if the string is an ISIN.
      */
-    isISIN(): ValidationChain;
+    isISIN(): Middleware;
     /**
      * Check if the string is valid ISO8601 date.
      */
-    isISO8601(options?: validator.IsISO8601Options): ValidationChain;
+    isISO8601(options?: validator.IsISO8601Options): Middleware;
     /**
      * Check if the string is valid RFC3339 date.
      */
-    isRFC3339(): ValidationChain;
+    isRFC3339(): Middleware;
     /**
      * Check if the string is a valid ISO 3166-1 alpha-2
      * officially assigned country code.
      */
-    isISO31661Alpha2(): ValidationChain;
+    isISO31661Alpha2(): Middleware;
     /**
      * Check if the string is a valid ISO 3166-1 alpha-3
      * officially assigned country code.
      */
-    isISO31661Alpha3(): ValidationChain;
+    isISO31661Alpha3(): Middleware;
     /**
      * Check if the string is a ISRC.
      */
-    isISRC(): ValidationChain;
+    isISRC(): Middleware;
     /**
      * Check if the string is a MD5 hash.
      */
-    isMD5(): ValidationChain;
+    isMD5(): Middleware;
     /**
      * Check if the string is a valid MIME type format.
      */
-    isMimeType(): ValidationChain;
+    isMimeType(): Middleware;
     /**
      * Check if the string is a mobile phone number.
      *
      * @param locale The locale, defaults to any
      */
-    isMobilePhone(locale?: validator.MobilePhoneLocale | validator.MobilePhoneLocale[] | "any"): ValidationChain;
+    isMobilePhone(locale?: validator.MobilePhoneLocale | validator.MobilePhoneLocale[] | "any"): Middleware;
     /**
      * Check if the string contains one or more multibyte chars.
      */
-    isMultibyte(): ValidationChain;
+    isMultibyte(): Middleware;
     /**
      * Check if the string is a postal code.
      *
      * @param locale The locale to use
      */
-    isPostalCode(locale?: validator.PostalCodeLocale | "any"): ValidationChain;
+    isPostalCode(locale?: validator.PostalCodeLocale | "any"): Middleware;
     /**
      * Check if the string contains any surrogate pairs chars.
      */
-    isSurrogatePair(): ValidationChain;
+    isSurrogatePair(): Middleware;
     /**
      * Check if the string is an URL.
      *
      * @param options Possible options
      */
-    isURL(options?: validator.IsURLOptions): ValidationChain;
+    isURL(options?: validator.IsURLOptions): Middleware;
     /**
      * Check if the string contains a mixture of full and half-width chars.
      */
-    isVariableWidth(): ValidationChain;
+    isVariableWidth(): Middleware;
     /**
      * Checks characters if they appear in the whitelist.
      *
      * @param chars The characters
      */
-    isWhitelisted(chars: string | string[]): ValidationChain;
+    isWhitelisted(chars: string | string[]): Middleware;
     /**
      * Remove characters that appear in the blacklist. The characters are used in a RegExp
      *  and so you will need to escape some chars, e.g. blacklist(input, '\\[\\]').
      *
      * @param chars Characters to blacklist
      */
-    blacklist(chars: string): ValidationChain;
+    blacklist(chars: string): Middleware;
     /**
      * Replace <, >, &, ', ' and / with HTML entities.
      */
-    escape(): ValidationChain;
+    escape(): Middleware;
     /**
      * Replaces HTML encoded entities with <, >, &, ", ' and /.
      */
-    unescape(): ValidationChain;
+    unescape(): Middleware;
     /**
      * Trim characters from the left-side of the input.
      *
      * @param chars The characters to trim
      */
-    ltrim(chars?: string): ValidationChain;
+    ltrim(chars?: string): Middleware;
     /**
      * Trim characters from the right-side of the input.
      *
      * @param chars The characters to trim
      */
-    rtrim(chars?: string): ValidationChain;
+    rtrim(chars?: string): Middleware;
     /**
      * Normalize email address.
      *
@@ -386,7 +371,7 @@ export default class ValidationChain {
      *
      * @see https://github.com/chriso/validator.js For details
      */
-    normalizeEmail(options?: validator.NormalizeEmailOptions): ValidationChain;
+    normalizeEmail(options?: validator.NormalizeEmailOptions): Middleware;
     /**
      * Remove characters with a numerical value < 32 and 127, mostly control characters.
      * If keep_new_lines is true, newline characters are preserved (\n and \r, hex 0xA
@@ -394,37 +379,38 @@ export default class ValidationChain {
      *
      * @param keepNewLines
      */
-    stripLow(keepNewLines?: boolean): ValidationChain;
+    stripLow(keepNewLines?: boolean): Middleware;
     /**
      * convert the input string to a boolean. Everything except for '0', 'false' and ''
      * returns true. In strict mode only '1' and 'true' return true.
      */
-    toBoolean(strict?: boolean): ValidationChain;
+    toBoolean(strict?: boolean): Middleware;
     /**
      * Convert the input string to a date.
      */
-    toDate(): ValidationChain;
+    toDate(): Middleware;
     /**
      * Convert the input string to a float.
      */
-    toFloat(): ValidationChain;
+    toFloat(): Middleware;
     /**
      * Convert the input string to an integer, or NaN if the input is not an integer.
      */
-    toInt(radix?: number): ValidationChain;
+    toInt(radix?: number): Middleware;
     /**
      * Trim characters (whitespace by default) from both sides of the input.
      *
      * @param chars The characters to trim
      */
-    trim(chars?: string): ValidationChain;
+    trim(chars?: string): Middleware;
     /**
      * Remove characters that do not appear in the whitelist. The characters are used in a
      * RegExp and so you will need to escape some chars, e.g. whitelist(input, '\\[\\]').
      *
      * @param chars Characters to whitelist
      */
-    whitelist(chars: string): ValidationChain;
+    whitelist(chars: string): Middleware;
+    private getNormalizedInput;
     /**
      * Run the validations and return the results.
      * @param ctx The context
@@ -448,4 +434,5 @@ export default class ValidationChain {
      * @param input The input as string
      */
     private sanitize;
+    private addSanitation;
 }
