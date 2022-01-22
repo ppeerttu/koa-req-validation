@@ -1,6 +1,6 @@
-import { RouterContext } from "@koa/router";
-
-import { ParamLocation } from "./lib/types";
+import { Middleware, RouterContext } from "@koa/router";
+import { ParamLocation, Validator } from "./lib/types";
+import { bindAll } from "./lib/utils";
 import ValidationChain from "./lib/ValidationChain";
 import ValidationResult from "./lib/ValidationResult";
 
@@ -23,38 +23,46 @@ export const validationResults = (ctx: RouterContext): ValidationResult => {
     return new ValidationResult([], []);
 };
 
+const check = (location: ParamLocation, field: string): Validator => {
+    const chain = new ValidationChain<Validator>(field, location);
+    const middleware: Middleware = (ctx, next) => chain.handleRequest(ctx, next);
+    chain.middleware = middleware as Validator;
+    return Object.assign<Middleware, ValidationChain<Validator>>(
+        middleware,
+        bindAll(chain) as ValidationChain<Validator>
+    );
+};
+
 /**
  * Validate request body.
  *
- * @param bodyParam The parameter to be validated from request.
+ * @param field The parameter to be validated from request.
  *
  * ```typescript
  * router.post(
  *     '/auth/login',
- *     body('username').equals('user').build(),
- *     body('password').equals('pass').build(),
+ *     body('username').equals('user'),
+ *     body('password').equals('pass'),
  *     handler
  * );
  * ```
  */
-export const body = (bodyParam: string): ValidationChain =>
-    new ValidationChain(bodyParam, ParamLocation.BODY);
+export const body = (field: string): Validator => check(ParamLocation.BODY, field);
 
 /**
  * Validate request query.
  *
- * @param queryString The parameter to be validated from request.
+ * @param field The parameter to be validated from request.
  *
  * ```typescript
  * router.get(
  *     '/api/tags',
- *     query('search').contains('_').build(),
+ *     query('search').contains('_'),
  *     handler
  * );
  * ```
  */
-export const query = (queryString: string): ValidationChain =>
-    new ValidationChain(queryString, ParamLocation.QUERY);
+export const query = (field: string): Validator => check(ParamLocation.QUERY, field);
 
 /**
  * Validate request param.
@@ -64,12 +72,12 @@ export const query = (queryString: string): ValidationChain =>
  * ```typescript
  * router.get(
  *     '/api/users/:id',
- *     param('id').isInt().build(),
+ *     param('id').isInt(),
  *     handler
  * );
  * ```
  */
-export const param = (routeParam: string): ValidationChain =>
-    new ValidationChain(routeParam, ParamLocation.PARAM);
+export const param = (routeParam: string): Validator =>
+    check(ParamLocation.PARAM, routeParam);
 
 export * from "./lib/types";

@@ -10,3 +10,5 @@
 # Editor
 .vscode/*
 !.vscode/settings.json
+
+.eslintcache

@@ -1,15 +1,9 @@
+/* eslint-disable no-console */
 import Router, { RouterContext } from "@koa/router";
 import http from "http";
 import Koa from "koa";
 import bodyParser from "koa-bodyparser";
-
-import {
-    CustomErrorMessageFunction,
-    param,
-    query,
-    validationResults,
-    body,
-} from "..";
+import { body, CustomErrorMessageFunction, param, query, validationResults } from "..";
 
 interface AuthData {
     /**
@@ -30,6 +24,12 @@ interface AuthState {
     auth?: AuthData;
 }
 
+interface Address {
+    street: string;
+    zip: string;
+    city: string;
+}
+
 /**
  * Class returning errors as JSON response.
  */
@@ -38,9 +38,9 @@ class RequestError extends Error {
 
     public readonly status: number;
 
-    public readonly response: any;
+    public readonly response: unknown;
 
-    constructor(status: number, errors: any) {
+    constructor(status: number, errors?: unknown) {
         super();
         this.status = status;
         this.response = errors;
@@ -73,20 +73,15 @@ const customErrorMessage: CustomErrorMessageFunction = (
 };
 
 const arrayExample = [
-    param("count").isInt({ min: 1, max: 100 }).toInt().build(),
-    query("name")
-        .trim()
-        .isLength({ min: 3, max: 20 })
-        .withMessage(customErrorMessage)
-        .build(),
+    param("count").isInt({ min: 1, max: 100 }).toInt(),
+    query("name").trim().isLength({ min: 3, max: 20 }).withMessage(customErrorMessage),
 ];
 
 router.get(
     "/api/hello",
     query("name")
         .isLength({ min: 3, max: 20 })
-        .withMessage("The name has to be between 3 and 20 characters")
-        .build(),
+        .withMessage("The name has to be between 3 and 20 characters"),
     async (ctx: RouterContext) => {
         const results = validationResults(ctx);
         if (results.hasErrors()) {
@@ -99,7 +94,7 @@ router.get(
 
 router.get(
     "/api/hello/optional",
-    query("name").isLength({ min: 3, max: 20 }).optional().build(),
+    query("name").isLength({ min: 3, max: 20 }).optional(),
     async (ctx: RouterContext) => {
         const results = validationResults(ctx);
         if (results.hasErrors()) {
@@ -125,17 +120,18 @@ router.get("/api/hello/:count", ...arrayExample, async (ctx: RouterContext) => {
 
 router.post(
     "/api/person",
-    body("name").isLength({ min: 3, max: 55 }).build(),
-    body("address.street").isLength({ min: 2, max: 55 }).build(),
-    body("address.zip").isPostalCode().build(),
-    body("address.city").isLength({ min: 3, max: 55 }).build(),
+    body("name").isLength({ min: 3, max: 55 }),
+    body("address.street").isLength({ min: 2, max: 55 }),
+    body("address.zip").isPostalCode(),
+    body("address.city").isLength({ min: 3, max: 55 }),
     async (ctx: RouterContext) => {
         const results = validationResults(ctx);
         if (results.hasErrors()) {
             throw new RequestError(422, results.mapped());
         }
         console.log(results.passedData());
-        const { name, address } = results.passedData();
+        const { name, address } =
+            results.passedData<{ name: string; address: Address }>();
         ctx.body = {
             message: `${name} lives at ${address.street} ${address.zip} ${address.city}`,
         };
@@ -144,7 +140,7 @@ router.post(
 
 router.get(
     "/api/auth",
-    query("username").optional().isLength({ min: 3, max: 55 }).build(),
+    query("username").optional().isLength({ min: 3, max: 55 }),
     async (ctx: RouterContext<AuthState>) => {
         const results = validationResults(ctx);
         if (results.hasErrors()) {
@@ -183,7 +179,6 @@ server.on("error", (error) => {
 });
 
 server.on("listening", () => {
-    // tslint:disable-next-line: no-console
     console.log(`Demo app listening on port ${httpPort}`);
 });
 

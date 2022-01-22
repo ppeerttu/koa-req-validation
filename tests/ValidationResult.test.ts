@@ -5,21 +5,22 @@ describe("ValidationResult", () => {
     describe("constructor()", () => {
         test("Constructs without exceptions", () => {
             expect(() => {
-                const results1 = new ValidationResult();
-                const results2 = new ValidationResult([]);
-                const results3 = new ValidationResult([], []);
-                const results4 = new ValidationResult([], [], []);
+                new ValidationResult();
+                new ValidationResult([]);
+                new ValidationResult([], []);
+                new ValidationResult([], [], []);
             }).not.toThrow();
         });
 
         test("Throws a TypeError when initializing with invalid value", () => {
             expect(() => {
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 const param: any = {};
-                const restults = new ValidationResult([], [], param);
+                new ValidationResult([], [], param);
             }).toThrow(TypeError);
 
             expect(() => {
-                const results = new ValidationResult("foo", []);
+                new ValidationResult("foo", []);
             }).toThrow(Error);
         });
     });
@@ -134,7 +135,7 @@ describe("ValidationResult", () => {
 
             const merged = ValidationResult.fromResults([result1, result2, result3]);
 
-            const passed = merged.passedData();
+            const passed = merged.passedData<{ biz: Date; baz: number }>();
 
             expect(passed.biz).toBeInstanceOf(Date);
             expect(passed.baz).toBe(2);
@@ -163,7 +164,8 @@ describe("ValidationResult", () => {
             );
 
             const merged = ValidationResult.fromResults([result1, result2, result3]);
-            const passed = merged.passedData();
+            const passed =
+                merged.passedData<{ address: { zip: string; city: string } }>();
 
             expect(passed.address.zip).toBe("90000");
             expect(passed.address.city).toBe("Toronto");

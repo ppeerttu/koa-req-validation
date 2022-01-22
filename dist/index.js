@@ -15,6 +15,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.param = exports.query = exports.body = exports.validationResults = void 0;
 const types_1 = require("./lib/types");
+const utils_1 = require("./lib/utils");
 const ValidationChain_1 = __importDefault(require("./lib/ValidationChain"));
 const ValidationResult_1 = __importDefault(require("./lib/ValidationResult"));
 /**
@@ -36,36 +37,42 @@ const validationResults = (ctx) => {
     return new ValidationResult_1.default([], []);
 };
 exports.validationResults = validationResults;
+const check = (location, field) => {
+    const chain = new ValidationChain_1.default(field, location);
+    const middleware = (ctx, next) => chain.handleRequest(ctx, next);
+    chain.middleware = middleware;
+    return Object.assign(middleware, utils_1.bindAll(chain));
+};
 /**
  * Validate request body.
  *
- * @param bodyParam The parameter to be validated from request.
+ * @param field The parameter to be validated from request.
  *
  * ```typescript
  * router.post(
  *     '/auth/login',
- *     body('username').equals('user').build(),
- *     body('password').equals('pass').build(),
+ *     body('username').equals('user'),
+ *     body('password').equals('pass'),
  *     handler
  * );
  * ```
  */
-const body = (bodyParam) => new ValidationChain_1.default(bodyParam, types_1.ParamLocation.BODY);
+const body = (field) => check(types_1.ParamLocation.BODY, field);
 exports.body = body;
 /**
  * Validate request query.
  *
- * @param queryString The parameter to be validated from request.
+ * @param field The parameter to be validated from request.
  *
  * ```typescript
  * router.get(
  *     '/api/tags',
- *     query('search').contains('_').build(),
+ *     query('search').contains('_'),
  *     handler
  * );
  * ```
  */
-const query = (queryString) => new ValidationChain_1.default(queryString, types_1.ParamLocation.QUERY);
+const query = (field) => check(types_1.ParamLocation.QUERY, field);
 exports.query = query;
 /**
  * Validate request param.
@@ -75,12 +82,12 @@ exports.query = query;
  * ```typescript
  * router.get(
  *     '/api/users/:id',
- *     param('id').isInt().build(),
+ *     param('id').isInt(),
  *     handler
  * );
  * ```
  */
-const param = (routeParam) => new ValidationChain_1.default(routeParam, types_1.ParamLocation.PARAM);
+const param = (routeParam) => check(types_1.ParamLocation.PARAM, routeParam);
 exports.param = param;
 __exportStar(require("./lib/types"), exports);
 //# sourceMappingURL=index.js.map
