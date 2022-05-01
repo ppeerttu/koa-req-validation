@@ -52,6 +52,14 @@ describe("ValidationChain", () => {
             });
         });
 
+        test("Throws if validations are added after type-changing sanitation", async () => {
+            expect(() =>
+                new ValidationChain("param", ParamLocation.BODY)
+                    .toBoolean()
+                    .contains("seed")
+            ).toThrow(Error);
+        });
+
         test("Stores validations", async () => {
             const validationChain = new ValidationChain(
                 "param",
