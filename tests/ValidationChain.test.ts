@@ -1,5 +1,5 @@
 import { validationResults } from "../src";
-import { ParamLocation } from "../src/lib/types";
+import { IMappedValidationResults, ParamLocation } from "../src/lib/types";
 import ValidationChain from "../src/lib/ValidationChain";
 import { mockContext } from "./helpers";
 
@@ -19,48 +19,78 @@ describe("ValidationChain", () => {
     describe("constructor()", () => {
         test("Constructs without exceptions", () => {
             expect(() => {
-                const chain = new ValidationChain("param", ParamLocation.BODY);
+                new ValidationChain("param", ParamLocation.BODY);
             }).not.toThrow();
         });
 
         test("Throws a TypeError with invalid parameters", () => {
             expect(() => {
-                const location: any = "invalid";
-                const chain = new ValidationChain("param", location);
+                const location = "invalid" as ParamLocation;
+                new ValidationChain("param", location);
             }).toThrow(TypeError);
         });
     });
 
     describe("Chaining", () => {
-        test("Stores validations", async () => {
-            const validationChain = new ValidationChain("param", ParamLocation.BODY)
-                .contains("seed")
-                .equals("foo");
+        test("Returns error if expected value is null or missing", async () => {
+            const validationChain = new ValidationChain(
+                "param",
+                ParamLocation.BODY
+            ).contains("seed");
 
-            const ctx: any = mockContext();
+            const ctx = mockContext();
             await validationChain.build()(ctx, next);
             const results = validationResults(ctx);
             expect(results.hasErrors()).toBe(true);
-            expect(results.array().length).toBe(2);
+            expect(results.mapped()).toStrictEqual<IMappedValidationResults>({
+                param: {
+                    param: "param",
+                    location: "body",
+                    value: "",
+                    msg: "Missing value",
+                },
+            });
+        });
+
+        test("Throws if validations are added after type-changing sanitation", async () => {
+            expect(() =>
+                new ValidationChain("param", ParamLocation.BODY)
+                    .toBoolean()
+                    .contains("seed")
+            ).toThrow(Error);
+        });
+
+        test("Stores validations", async () => {
+            const validationChain = new ValidationChain(
+                "param",
+                ParamLocation.BODY
+            ).contains("seed");
+
+            const ctx = mockContext();
+            await validationChain.build()(ctx, next);
+            const results = validationResults(ctx);
+            expect(results.hasErrors()).toBe(true);
+            expect(results.array().length).toBe(1);
             expect(Object.keys(results.mapped()).length).toBe(1);
         });
 
         test("Combines previous chain results", async () => {
-            const validationChain = new ValidationChain("param", ParamLocation.BODY)
-                .contains("seed")
-                .equals("foo");
+            const validationChain = new ValidationChain(
+                "param",
+                ParamLocation.BODY
+            ).contains("seed");
             const validationChain2 = new ValidationChain(
                 "param2",
                 ParamLocation.PARAM
             ).isInt();
 
-            const ctx: any = mockContext();
+            const ctx = mockContext();
             await validationChain.build()(ctx, next);
             await validationChain2.build()(ctx, next);
             const results = validationResults(ctx);
             expect(results.hasErrors()).toBe(true);
             expect(Object.keys(results.mapped()).length).toBe(2);
-            expect(results.array().length).toBe(3);
+            expect(results.array().length).toBe(2);
         });
 
         test("Runs sanitizers only if validators have been passed", async () => {
@@ -123,7 +153,7 @@ describe("ValidationChain", () => {
                 ParamLocation.BODY
             ).contains("seed");
 
-            const ctx: any = mockContext(ParamLocation.BODY, {
+            const ctx = mockContext(ParamLocation.BODY, {
                 nested: { prop: "sesame seed" },
             });
             await validationChain.build()(ctx, next);
@@ -131,7 +161,7 @@ describe("ValidationChain", () => {
             expect(results.hasErrors()).toBe(false);
             expect(results.array().length).toBe(0);
 
-            const failCtx: any = mockContext(ParamLocation.BODY, {});
+            const failCtx = mockContext(ParamLocation.BODY, {});
             await validationChain.build()(failCtx, next);
             const failResults = validationResults(failCtx);
             expect(failResults.hasErrors()).toBe(true);

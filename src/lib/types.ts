@@ -7,7 +7,7 @@ export interface IValidationError {
     param: string;
     location: string;
     msg: string;
-    value: string;
+    value: string | null;
 }
 
 /**
@@ -21,7 +21,7 @@ export interface IOptionalOptions {
  * Custom validation function with context object.
  */
 type CustomValidatorFunctionWithContext = (
-    input: any,
+    input: unknown,
     ctx: RouterContext
 ) => Promise<void>;
 
@@ -30,7 +30,7 @@ type CustomValidatorFunctionWithContext = (
  * validation function should throw an error
  * when ever validation fails.
  */
-export type CustomValidatorFunction = (input: any) => Promise<void>;
+export type CustomValidatorFunction = (input: unknown) => Promise<void>;
 
 /**
  * Custom validation error message function. This function will receive the request
@@ -39,20 +39,19 @@ export type CustomValidatorFunction = (input: any) => Promise<void>;
  */
 export type CustomErrorMessageFunction = (ctx: RouterContext, input: string) => string;
 
-/**
- * Validation definition for internal module usage.
- */
-export interface IValidationDefinition {
+export const isSanitation = (
+    definition:
+        | IValidationDefinition
+        | ICustomValidationDefinition
+        | ISanitationDefinition
+): definition is ISanitationDefinition => definition.type === "sanitation";
+
+interface IValidationDefinitionBase {
     /**
      * Just a helper type for separating validation definitions from
      * sanitation definitions.
      */
     type: "validation";
-
-    /**
-     * Validation function
-     */
-    validation: ValidatorFunctionName;
 
     /**
      * Message for invalid value
@@ -62,12 +61,27 @@ export interface IValidationDefinition {
     /**
      * Options for validation function
      */
-    options?: any;
+    options?: unknown;
+}
 
+type Subset<T, U extends T> = U;
+
+export interface ICustomValidationDefinition extends IValidationDefinitionBase {
+    validation: Subset<ValidatorFunctionName, "custom">;
     /**
      * Custom validation function
      */
-    func?: CustomValidatorFunction | CustomValidatorFunctionWithContext;
+    func: CustomValidatorFunction | CustomValidatorFunctionWithContext;
+}
+
+/**
+ * Validation definition for internal module usage.
+ */
+export interface IValidationDefinition extends IValidationDefinitionBase {
+    /**
+     * Validation function
+     */
+    validation: Exclude<ValidatorFunctionName, "custom">;
 }
 
 /**
@@ -154,7 +168,7 @@ export interface ISanitationDefinition {
     /**
      * Options for the sanitation
      */
-    options?: any;
+    options?: unknown;
 }
 
 /**

@@ -32,7 +32,7 @@ describe("ValidatorChain validators", () => {
                 .equals("foo")
                 .optional();
 
-            const ctx: any = mockContext();
+            const ctx = mockContext();
             await validationChain.build()(ctx, next);
             const results = validationResults(ctx);
             expect(results.hasErrors()).toBe(false);
@@ -44,7 +44,7 @@ describe("ValidatorChain validators", () => {
                 .equals("foo")
                 .optional();
 
-            const ctx: any = mockContext(ParamLocation.BODY, { param: null });
+            const ctx = mockContext(ParamLocation.BODY, { param: null });
             await validationChain.build()(ctx, next);
             const results = validationResults(ctx);
             expect(results.hasErrors()).toBe(true);
@@ -56,7 +56,7 @@ describe("ValidatorChain validators", () => {
                 .equals("foo")
                 .optional({ allowNull: true });
 
-            const ctx: any = mockContext(ParamLocation.BODY, { param: null });
+            const ctx = mockContext(ParamLocation.BODY, { param: null });
             await validationChain.build()(ctx, next);
             const results = validationResults(ctx);
             expect(results.hasErrors()).toBe(false);
@@ -67,19 +67,20 @@ describe("ValidatorChain validators", () => {
     describe("custom()", () => {
         test("Returns errors if function throws", async () => {
             const validationChain = new ValidationChain("int", ParamLocation.BODY).custom(
-                async (input: any) => {
+                async (input) => {
                     if (typeof input !== "number") {
                         throw new TypeError("Invalid number: " + input);
                     }
                 }
             );
-            const ctx: any = mockContext(ParamLocation.BODY, { int: "12" });
+            const ctx = mockContext(ParamLocation.BODY, { int: "12" });
             await validationChain.build()(ctx, next);
             expect(validationResults(ctx).array().length).toBe(1);
         });
 
         test("Throws if no validation function has been defined", async () => {
             expect(() => {
+                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                 // @ts-ignore
                 new ValidationChain("int", ParamLocation.BODY).custom();
             }).toThrowError(TypeError);
@@ -87,13 +88,13 @@ describe("ValidatorChain validators", () => {
 
         test("Returns the default error message if no message has been passed", async () => {
             const validationChain = new ValidationChain("int", ParamLocation.BODY).custom(
-                async (input: any) => {
+                async (input) => {
                     if (typeof input !== "number") {
                         throw new TypeError();
                     }
                 }
             );
-            const ctx: any = mockContext(ParamLocation.BODY, { int: "12" });
+            const ctx = mockContext(ParamLocation.BODY, { int: "12" });
             await validationChain.build()(ctx, next);
             const results = validationResults(ctx).mapped();
             expect(results).toHaveProperty("int");
@@ -105,13 +106,13 @@ describe("ValidatorChain validators", () => {
 
         test("Doesn't return errors if function doesn't throw", async () => {
             const validationChain = new ValidationChain("int", ParamLocation.BODY).custom(
-                async (input: any) => {
-                    if (isNaN(parseInt(input, 10))) {
+                async (input) => {
+                    if (typeof input !== "string" || isNaN(parseInt(input, 10))) {
                         throw new TypeError("Invalid number: " + input);
                     }
                 }
             );
-            const ctx: any = mockContext(ParamLocation.BODY, { int: 12 });
+            const ctx = mockContext(ParamLocation.BODY, { int: 12 });
             await validationChain.build()(ctx, next);
             expect(validationResults(ctx).array().length).toBe(0);
         });
@@ -123,7 +124,7 @@ describe("ValidatorChain validators", () => {
                 "int",
                 ParamLocation.BODY
             ).isInt();
-            const ctx: any = mockContext(ParamLocation.BODY, { int: "12" });
+            const ctx = mockContext(ParamLocation.BODY, { int: "12" });
             await validationChain.build()(ctx, next);
             expect(validationResults(ctx).array().length).toBe(0);
         });
@@ -133,7 +134,7 @@ describe("ValidatorChain validators", () => {
                 "int",
                 ParamLocation.BODY
             ).isInt();
-            const ctx: any = mockContext(ParamLocation.BODY, { int: "abc" });
+            const ctx = mockContext(ParamLocation.BODY, { int: "abc" });
             await validationChain.build()(ctx, next);
             expect(validationResults(ctx).mapped()).toHaveProperty("int");
         });
@@ -142,7 +143,7 @@ describe("ValidatorChain validators", () => {
             const validationChain = new ValidationChain("int", ParamLocation.BODY).isInt({
                 min: 5,
             });
-            const ctx: any = mockContext(ParamLocation.BODY, { int: "-9" });
+            const ctx = mockContext(ParamLocation.BODY, { int: "-9" });
             await validationChain.build()(ctx, next);
             expect(validationResults(ctx).mapped()).toHaveProperty("int");
         });
@@ -151,7 +152,7 @@ describe("ValidatorChain validators", () => {
             const validationChain = new ValidationChain("int", ParamLocation.BODY).isInt({
                 max: 5,
             });
-            const ctx: any = mockContext(ParamLocation.BODY, { int: "9" });
+            const ctx = mockContext(ParamLocation.BODY, { int: "9" });
             await validationChain.build()(ctx, next);
             expect(validationResults(ctx).mapped()).toHaveProperty("int");
         });
@@ -163,7 +164,7 @@ describe("ValidatorChain validators", () => {
                 "string",
                 ParamLocation.PARAM
             ).isLength({ min: 5, max: 7 });
-            const ctx: any = mockContext(ParamLocation.PARAM, { string: "abcabc" });
+            const ctx = mockContext(ParamLocation.PARAM, { string: "abcabc" });
             await validationChain.build()(ctx, next);
             expect(validationResults(ctx).array().length).toBe(0);
         });
@@ -173,7 +174,7 @@ describe("ValidatorChain validators", () => {
                 "string",
                 ParamLocation.PARAM
             ).isLength({ min: 5 });
-            const ctx: any = mockContext(ParamLocation.PARAM, { string: "ab" });
+            const ctx = mockContext(ParamLocation.PARAM, { string: "ab" });
             await validationChain.build()(ctx, next);
             expect(validationResults(ctx).mapped()).toHaveProperty("string");
         });
@@ -183,7 +184,7 @@ describe("ValidatorChain validators", () => {
                 "string",
                 ParamLocation.PARAM
             ).isLength({ max: 5 });
-            const ctx: any = mockContext(ParamLocation.PARAM, { string: "abcabc" });
+            const ctx = mockContext(ParamLocation.PARAM, { string: "abcabc" });
             await validationChain.build()(ctx, next);
             expect(validationResults(ctx).mapped()).toHaveProperty("string");
         });
@@ -253,20 +254,20 @@ describe("ValidatorChain validators", () => {
 
         test("Throws when trying to set a message with no validations", () => {
             expect(() => {
-                const validationChain = new ValidationChain(
-                    "param",
-                    ParamLocation.BODY
-                ).withMessage("Invalid value");
+                new ValidationChain("param", ParamLocation.BODY).withMessage(
+                    "Invalid value"
+                );
             }).toThrowError();
 
             expect(() => {
-                const validationChain = new ValidationChain("param", ParamLocation.BODY)
+                new ValidationChain("param", ParamLocation.BODY)
                     .toInt()
                     .withMessage("Invalid value");
             }).toThrowError();
         });
 
         test("Handles missing values in CustomErrorMessageFunction", async () => {
+            const email = "used@email";
             const localizedMessage = "This email address has already been taken:";
             const messageFn: CustomErrorMessageFunction = (context, value) =>
                 `${context.state.localizedMessage} ${value}`;
@@ -276,14 +277,17 @@ describe("ValidatorChain validators", () => {
 
             const ctx = mockContext(
                 ParamLocation.BODY,
-                { email: null },
+                { email },
                 { localizedMessage } // This object goes to ctx.state
             );
             await validationChain.build()(ctx, next);
             const results = validationResults(ctx);
             const mappedResults = results.mapped();
             expect(mappedResults).toHaveProperty("email");
-            expect(mappedResults.email).toHaveProperty("msg", `${localizedMessage} `);
+            expect(mappedResults.email).toHaveProperty(
+                "msg",
+                `${localizedMessage} ${email}`
+            );
         });
     });
 
