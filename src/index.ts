@@ -73,3 +73,5 @@ export const param = (routeParam: string): ValidationChain =>
     new ValidationChain(routeParam, ParamLocation.PARAM);
 
 export * from "./lib/types";
+export * as ValidationChain from "./lib/ValidationChain";
+export * as ValidationResult from "./lib/ValidationResult";

@@ -58,3 +58,5 @@ export declare const query: (queryString: string) => ValidationChain;
  */
 export declare const param: (routeParam: string) => ValidationChain;
 export * from "./lib/types";
+export * as ValidationChain from "./lib/ValidationChain";
+export * as ValidationResult from "./lib/ValidationResult";

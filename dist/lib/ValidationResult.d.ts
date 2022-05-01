@@ -29,7 +29,7 @@ export default class ValidationResult {
      * Return final values that have been stored within this validation result. This can
      * be used for retrieving all values that have passed validations and been sanitized.
      */
-    passedData(): Record<string, any>;
+    passedData<T = Record<string, unknown>>(): T;
     /**
      * Deepen a dot-notated nested object into a real nested object.
      *

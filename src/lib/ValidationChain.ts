@@ -7,7 +7,6 @@ import {
     ICustomValidationDefinition,
     IOptionalOptions,
     ISanitationDefinition,
-    isSanitation,
     IValidationDefinition,
     IValidationError,
     ParamLocation,
@@ -1150,3 +1149,10 @@ export default class ValidationChain {
         return this;
     }
 }
+
+const isSanitation = (
+    definition:
+        | IValidationDefinition
+        | ICustomValidationDefinition
+        | ISanitationDefinition
+): definition is ISanitationDefinition => definition.type === "sanitation";
