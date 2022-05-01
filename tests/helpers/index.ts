@@ -1,3 +1,4 @@
+import { RouterContext } from "@koa/router";
 import { ParamLocation } from "../../src/lib/types";
 
 /**
@@ -13,31 +14,30 @@ import { ParamLocation } from "../../src/lib/types";
  * // Later in code extracting the body parameters from the request
  * const { foo, bar } = ctx.request.body;
  */
-export function mockContext(
-    location?: ParamLocation,
-    properties?: {},
-    state: any = {}
-): any {
+export function mockContext<
+    T = unknown,
+    S extends Record<string, unknown> = Record<string, unknown>
+>(location?: ParamLocation, payload?: T, state?: S) {
     const ctx = {
         request: {
             body: {},
         },
         query: {},
         params: {},
-        state,
+        state: state ?? {},
     };
-    if (properties) {
+    if (payload) {
         switch (location) {
             case ParamLocation.BODY:
-                ctx.request.body = properties;
+                ctx.request.body = payload;
                 break;
             case ParamLocation.PARAM:
-                ctx.params = properties;
+                ctx.params = payload;
                 break;
             case ParamLocation.QUERY:
-                ctx.query = properties;
+                ctx.query = payload;
                 break;
         }
     }
-    return ctx;
+    return ctx as RouterContext;
 }
