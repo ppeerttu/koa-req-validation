@@ -91,6 +91,7 @@ class ValidationResult {
      * ```
      */
     deepen(obj) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const output = {};
         for (const key in obj) {
             let t = output;

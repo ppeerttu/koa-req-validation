@@ -25,6 +25,7 @@ export default class ValidationChain {
      * Is this parameter optional?
      */
     private isOptional;
+    private hasNonStringSanitizer;
     /**
      * Create a new ValidationChain.
      *
@@ -164,7 +165,7 @@ export default class ValidationChain {
      * @param values Options containing at least `values`
      * property with allowed values
      */
-    isIn(values: any[]): ValidationChain;
+    isIn(values: string[]): ValidationChain;
     /**
      * Check if the string is a date that's after the specified
      * date (defaults to now).
@@ -354,7 +355,7 @@ export default class ValidationChain {
     isWhitelisted(chars: string | string[]): ValidationChain;
     /**
      * Remove characters that appear in the blacklist. The characters are used in a RegExp
-     *  and so you will need to escape some chars, e.g. blacklist(input, '\\[\\]').
+     * and so you will need to escape some chars, e.g. blacklist(input, '\\[\\]').
      *
      * @param chars Characters to blacklist
      */
@@ -448,4 +449,6 @@ export default class ValidationChain {
      * @param input The input as string
      */
     private sanitize;
+    private addValidation;
+    private addSanitation;
 }

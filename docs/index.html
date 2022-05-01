@@ -1,218 +1,86 @@
-<!doctype html>
-<html class="default no-js">
-<head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>koa-req-validation</title>
-	<meta name="description" content="Documentation for koa-req-validation">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="assets/css/main.css">
-	<script async src="assets/js/search.js" id="search-script"></script>
-</head>
-<body>
-<header>
-	<div class="tsd-page-toolbar">
-		<div class="container">
-			<div class="table-wrap">
-				<div class="table-cell" id="tsd-search" data-index="assets/js/search.json" data-base=".">
-					<div class="field">
-						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
-						<input id="tsd-search-field" type="text" />
-					</div>
-					<ul class="results">
-						<li class="state loading">Preparing search index...</li>
-						<li class="state failure">The search index is not available</li>
-					</ul>
-					<a href="index.html" class="title">koa-req-validation</a>
-				</div>
-				<div class="table-cell" id="tsd-widgets">
-					<div id="tsd-filter">
-						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
-						<div class="tsd-filter-group">
-							<div class="tsd-select" id="tsd-filter-visibility">
-								<span class="tsd-select-label">All</span>
-								<ul class="tsd-select-list">
-									<li data-value="public">Public</li>
-									<li data-value="protected">Public/Protected</li>
-									<li data-value="private" class="selected">All</li>
-								</ul>
-							</div>
-							<input type="checkbox" id="tsd-filter-inherited" checked />
-							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
-							<input type="checkbox" id="tsd-filter-externals" checked />
-							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
-						</div>
-					</div>
-					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="tsd-page-title">
-		<div class="container">
-			<h1>koa-req-validation</h1>
-		</div>
-	</div>
-</header>
-<div class="container container-main">
-	<div class="row">
-		<div class="col-8 col-content">
-			<div class="tsd-panel tsd-typography">
-				<a href="#koa-req-validation" id="koa-req-validation" style="color: inherit; text-decoration: none;">
-					<h1>koa-req-validation</h1>
-				</a>
-				<p><img src="https://github.com/ppeerttu/koa-req-validation/workflows/Node.js%20CI/badge.svg?branch=master" alt="Node.js CI">
-					<a href="https://badge.fury.io/js/koa-req-validation"><img src="https://badge.fury.io/js/koa-req-validation.svg" alt="npm package"></a>
-					<img src="https://img.shields.io/librariesio/release/npm/koa-req-validation" alt="Libraries.io dependency status for latest release">
-					<a href="https://codecov.io/gh/ppeerttu/koa-req-validation"><img src="https://codecov.io/gh/ppeerttu/koa-req-validation/branch/master/graph/badge.svg?token=IuGu3GKizF" alt="codecov"></a>
-				<a href="https://snyk.io/test/github/ppeerttu/koa-req-validation"><img src="https://snyk.io/test/github/ppeerttu/koa-req-validation/badge.svg" alt="Known Vulnerabilities"></a></p>
-				<p>A <a href="https://github.com/chriso/validator.js">validator</a> middleware for <a href="https://koajs.com/">koa</a>. Inspired by <a href="https://github.com/express-validator/express-validator">express-validator</a>.</p>
-				<ul>
-					<li><a href="#koa-req-validation">koa-req-validation</a></li>
-					<li><a href="#installation">Installation</a></li>
-					<li><a href="#getting-started">Getting started</a></li>
-					<li><a href="#documentation">Documentation</a></li>
-					<li><a href="#issues">Issues</a></li>
-					<li><a href="#changelog">Changelog</a></li>
-					<li><a href="#contribution">Contribution</a></li>
-					<li><a href="#licence">Licence</a></li>
-				</ul>
-				<a href="#installation" id="installation" style="color: inherit; text-decoration: none;">
-					<h1>Installation</h1>
-				</a>
-				<p>The <strong>koa-req-validation</strong> requires <a href="https://github.com/chriso/validator.js">validator</a>, <a href="https://github.com/koajs/router">@koa/router</a> and <a href="https://github.com/koajs/bodyparser">koa-bodyparser</a> as peer dependencies.</p>
-				<p>Install peer dependencies</p>
-				<pre><code><span style="color: #001080">npm</span><span style="color: #000000"> </span><span style="color: #001080">install</span><span style="color: #000000"> </span><span style="color: #001080">validator</span><span style="color: #000000">@</span><span style="color: #098658">13</span><span style="color: #000000"> </span><span style="color: #001080">koa</span><span style="color: #000000">-</span><span style="color: #001080">bodyparser</span><span style="color: #000000">@</span><span style="color: #098658">4</span><span style="color: #000000"> @</span><span style="color: #001080">koa</span><span style="color: #000000">/</span><span style="color: #001080">router</span><span style="color: #000000">@</span><span style="color: #098658">10</span>
-</code></pre>
-				<p>Install <strong>koa-req-validation</strong></p>
-				<pre><code><span style="color: #001080">npm</span><span style="color: #000000"> </span><span style="color: #001080">install</span><span style="color: #000000"> </span><span style="color: #001080">koa</span><span style="color: #000000">-</span><span style="color: #001080">req</span><span style="color: #000000">-</span><span style="color: #001080">validation</span>
-</code></pre>
-				<a href="#getting-started" id="getting-started" style="color: inherit; text-decoration: none;">
-					<h1>Getting started</h1>
-				</a>
-				<p>A basic usage example</p>
-				<pre><code class="language-typescript"><span style="color: #AF00DB">import</span><span style="color: #000000"> </span><span style="color: #001080">Router</span><span style="color: #000000">, { </span><span style="color: #001080">RouterContext</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;@koa/router&quot;</span><span style="color: #000000">;</span>
-<span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">query</span><span style="color: #000000">, </span><span style="color: #001080">validationResults</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;koa-req-validation&quot;</span><span style="color: #000000">;</span>
+<!DOCTYPE html><html class="default"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>koa-req-validation</title><meta name="description" content="Documentation for koa-req-validation"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="assets/style.css"/><link rel="stylesheet" href="assets/highlight.css"/><script async src="assets/search.js" id="search-script"></script></head><body><script>document.body.classList.add(localStorage.getItem("tsd-theme") || "os")</script><header><div class="tsd-page-toolbar"><div class="container"><div class="table-wrap"><div class="table-cell" id="tsd-search" data-base="."><div class="field"><label for="tsd-search-field" class="tsd-widget search no-caption">Search</label><input type="text" id="tsd-search-field"/></div><ul class="results"><li class="state loading">Preparing search index...</li><li class="state failure">The search index is not available</li></ul><a href="index.html" class="title">koa-req-validation</a></div><div class="table-cell" id="tsd-widgets"><div id="tsd-filter"><a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a><div class="tsd-filter-group"><div class="tsd-select" id="tsd-filter-visibility"><span class="tsd-select-label">All</span><ul class="tsd-select-list"><li data-value="public">Public</li><li data-value="protected">Public/Protected</li><li data-value="private" class="selected">All</li></ul></div> <input type="checkbox" id="tsd-filter-inherited" checked/><label class="tsd-widget" for="tsd-filter-inherited">Inherited</label><input type="checkbox" id="tsd-filter-externals" checked/><label class="tsd-widget" for="tsd-filter-externals">Externals</label></div></div><a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a></div></div></div></div><div class="tsd-page-title"><div class="container"><h1>koa-req-validation </h1></div></div></header><div class="container container-main"><div class="row"><div class="col-8 col-content"><div class="tsd-panel tsd-typography">
+<a href="#koa-req-validation" id="koa-req-validation" style="color: inherit; text-decoration: none;">
+  <h1>koa-req-validation</h1>
+</a>
+<p><img src="https://github.com/ppeerttu/koa-req-validation/workflows/Node.js%20CI/badge.svg?branch=master" alt="Node.js CI">
+<a href="https://badge.fury.io/js/koa-req-validation"><img src="https://badge.fury.io/js/koa-req-validation.svg" alt="npm package"></a>
+<img src="https://img.shields.io/librariesio/release/npm/koa-req-validation" alt="Libraries.io dependency status for latest release">
+<a href="https://codecov.io/gh/ppeerttu/koa-req-validation"><img src="https://codecov.io/gh/ppeerttu/koa-req-validation/branch/master/graph/badge.svg?token=IuGu3GKizF" alt="codecov"></a>
+<a href="https://snyk.io/test/github/ppeerttu/koa-req-validation"><img src="https://snyk.io/test/github/ppeerttu/koa-req-validation/badge.svg" alt="Known Vulnerabilities"></a></p>
+<p>A <a href="https://github.com/chriso/validator.js">validator</a> middleware for <a href="https://koajs.com/">koa</a>. Inspired by <a href="https://github.com/express-validator/express-validator">express-validator</a>.</p>
+<ul>
+<li><a href="#koa-req-validation">koa-req-validation</a></li>
+<li><a href="#installation">Installation</a></li>
+<li><a href="#getting-started">Getting started</a></li>
+<li><a href="#documentation">Documentation</a></li>
+<li><a href="#issues">Issues</a></li>
+<li><a href="#changelog">Changelog</a></li>
+<li><a href="#contribution">Contribution</a></li>
+<li><a href="#licence">Licence</a></li>
+</ul>
 
-<span style="color: #008000">// ...</span>
-
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">router</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Router</span><span style="color: #000000">();</span>
-
-<span style="color: #001080">router</span><span style="color: #000000">.</span><span style="color: #795E26">get</span><span style="color: #000000">(</span>
-<span style="color: #000000">    </span><span style="color: #A31515">&quot;/api/hello&quot;</span><span style="color: #000000">,</span>
-<span style="color: #000000">    </span><span style="color: #795E26">query</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;name&quot;</span><span style="color: #000000">)</span>
-<span style="color: #000000">        .</span><span style="color: #795E26">isLength</span><span style="color: #000000">({ </span><span style="color: #001080">min:</span><span style="color: #000000"> </span><span style="color: #098658">3</span><span style="color: #000000">, </span><span style="color: #001080">max:</span><span style="color: #000000"> </span><span style="color: #098658">20</span><span style="color: #000000"> })</span>
-<span style="color: #000000">        .</span><span style="color: #795E26">withMessage</span><span style="color: #000000">(</span><span style="color: #A31515">&quot;The name has to be between 3 and 20 characters&quot;</span><span style="color: #000000">)</span>
-<span style="color: #000000">        .</span><span style="color: #795E26">build</span><span style="color: #000000">(), </span><span style="color: #008000">// &lt;-- This is required at the end of each validation</span>
-<span style="color: #000000">    </span><span style="color: #0000FF">async</span><span style="color: #000000"> (</span><span style="color: #001080">ctx</span><span style="color: #000000">: </span><span style="color: #267F99">RouterContext</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
-<span style="color: #000000">        </span><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">result</span><span style="color: #000000"> = </span><span style="color: #795E26">validationResults</span><span style="color: #000000">(</span><span style="color: #001080">ctx</span><span style="color: #000000">);</span>
-<span style="color: #000000">        </span><span style="color: #AF00DB">if</span><span style="color: #000000"> (</span><span style="color: #001080">result</span><span style="color: #000000">.</span><span style="color: #795E26">hasErrors</span><span style="color: #000000">()) {</span>
-<span style="color: #000000">            </span><span style="color: #AF00DB">throw</span><span style="color: #000000"> </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">RequestError</span><span style="color: #000000">(</span><span style="color: #098658">422</span><span style="color: #000000">, </span><span style="color: #001080">result</span><span style="color: #000000">.</span><span style="color: #795E26">mapped</span><span style="color: #000000">());</span>
-<span style="color: #000000">        }</span>
-<span style="color: #000000">        </span><span style="color: #0000FF">const</span><span style="color: #000000"> { </span><span style="color: #0070C1">name</span><span style="color: #000000"> } = </span><span style="color: #001080">ctx</span><span style="color: #000000">.</span><span style="color: #001080">query</span><span style="color: #000000">;</span>
-<span style="color: #000000">        </span><span style="color: #001080">ctx</span><span style="color: #000000">.</span><span style="color: #001080">body</span><span style="color: #000000"> = </span><span style="color: #A31515">`Hello </span><span style="color: #0000FF">${</span><span style="color: #001080">name</span><span style="color: #0000FF">}</span><span style="color: #A31515">`</span><span style="color: #000000">;</span>
-<span style="color: #000000">    }</span>
-<span style="color: #000000">);</span>
+<a href="#installation" id="installation" style="color: inherit; text-decoration: none;">
+  <h1>Installation</h1>
+</a>
+<p>The <strong>koa-req-validation</strong> requires <a href="https://github.com/chriso/validator.js">validator</a>, <a href="https://github.com/koajs/router">@koa/router</a> and <a href="https://github.com/koajs/bodyparser">koa-bodyparser</a> as peer dependencies.</p>
+<p>Install peer dependencies</p>
+<pre><code><span class="hl-0">npm</span><span class="hl-1"> </span><span class="hl-0">install</span><span class="hl-1"> </span><span class="hl-0">validator</span><span class="hl-1">@</span><span class="hl-4">13</span><span class="hl-1"> </span><span class="hl-0">koa</span><span class="hl-1">-</span><span class="hl-0">bodyparser</span><span class="hl-1">@</span><span class="hl-4">4</span><span class="hl-1"> @</span><span class="hl-0">koa</span><span class="hl-1">/</span><span class="hl-0">router</span><span class="hl-1">@</span><span class="hl-4">10</span>
 </code></pre>
-				<p>See the <a href="https://github.com/ppeerttu/koa-req-validation/blob/master/demo/index.ts">demo</a> for other examples.</p>
-				<a href="#documentation" id="documentation" style="color: inherit; text-decoration: none;">
-					<h1>Documentation</h1>
-				</a>
-				<p>This module offers various validation and sanitation functions. Please note the following things:</p>
-				<ul>
-					<li>Nested objects can now be validated<ul>
-							<li>  Support has been added to the <code>ValidationResult.passedData()</code> output as well</li>
-						</ul>
-					</li>
-					<li>The <strong>order matters</strong><ul>
-							<li>  The validations and sanitations are being run in order they&#39;ve been called in the validation chain</li>
-						</ul>
-					</li>
-					<li>No sanitations are run for a chain after some of the validations has failed<ul>
-							<li>  This is due to the fact that some of the sanitizers rely on &quot;valid&quot; value (for example valid email address)</li>
-						</ul>
-					</li>
-					<li>The sanitized values can be accessed only through <code>ValidationResult.passedData()</code><ul>
-							<li>  The request body is treated as immutable in the validation middleware</li>
-						</ul>
-					</li>
-				</ul>
-				<pre><code class="language-typescript"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">result</span><span style="color: #000000"> = </span><span style="color: #795E26">validationResults</span><span style="color: #000000">(</span><span style="color: #001080">ctx</span><span style="color: #000000">);</span>
-<span style="color: #AF00DB">if</span><span style="color: #000000"> (</span><span style="color: #001080">result</span><span style="color: #000000">.</span><span style="color: #795E26">hasErrors</span><span style="color: #000000">()) {</span>
-<span style="color: #000000">    </span><span style="color: #AF00DB">throw</span><span style="color: #000000"> </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">RequestError</span><span style="color: #000000">(</span><span style="color: #098658">422</span><span style="color: #000000">, </span><span style="color: #001080">result</span><span style="color: #000000">.</span><span style="color: #795E26">mapped</span><span style="color: #000000">());</span>
-<span style="color: #000000">}</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">passed</span><span style="color: #000000"> = </span><span style="color: #001080">result</span><span style="color: #000000">.</span><span style="color: #795E26">passedData</span><span style="color: #000000">();</span>
+<p>Install <strong>koa-req-validation</strong></p>
+<pre><code><span class="hl-0">npm</span><span class="hl-1"> </span><span class="hl-0">install</span><span class="hl-1"> </span><span class="hl-0">koa</span><span class="hl-1">-</span><span class="hl-0">req</span><span class="hl-1">-</span><span class="hl-0">validation</span>
 </code></pre>
-				<p>See the <a href="https://ppeerttu.github.io/koa-req-validation/">generated TypeDoc</a> and <a href="https://ppeerttu.github.io/koa-req-validation/classes/_lib_validationchain_.validationchain.html">ValidationChain</a> for API documentation.</p>
-				<a href="#issues" id="issues" style="color: inherit; text-decoration: none;">
-					<h1>Issues</h1>
-				</a>
-				<p>We use <a href="https://github.com/ppeerttu/koa-req-validation/issues">GitHub</a> for issue tracking. Please look from <a href="https://github.com/ppeerttu/koa-req-validation/issues?utf8=%E2%9C%93&amp;q=is%3Aissue">previously submitted issues</a> if someone else has already submitted the same issue.</p>
-				<a href="#changelog" id="changelog" style="color: inherit; text-decoration: none;">
-					<h1>Changelog</h1>
-				</a>
-				<p>Please see <a href="https://github.com/ppeerttu/koa-req-validation/releases">releases</a>.</p>
-				<a href="#contribution" id="contribution" style="color: inherit; text-decoration: none;">
-					<h1>Contribution</h1>
-				</a>
-				<p>All contributions to the project are welcome.</p>
-				<a href="#licence" id="licence" style="color: inherit; text-decoration: none;">
-					<h1>Licence</h1>
-				</a>
-				<p><a href="https://github.com/ppeerttu/koa-req-validation/blob/master/LICENCE">ISC Licence</a></p>
-			</div>
-		</div>
-		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
-			<nav class="tsd-navigation primary">
-				<ul>
-					<li class=" ">
-						<a href="modules.html">Exports</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/index.html">index</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/lib_validationchain.html">lib/<wbr>Validation<wbr>Chain</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/lib_validationresult.html">lib/<wbr>Validation<wbr>Result</a>
-					</li>
-					<li class=" tsd-kind-module">
-						<a href="modules/lib_types.html">lib/types</a>
-					</li>
-				</ul>
-			</nav>
-			<nav class="tsd-navigation secondary menu-sticky">
-				<ul class="before-current">
-				</ul>
-			</nav>
-		</div>
-	</div>
-</div>
-<footer class="with-border-bottom">
-	<div class="container">
-		<h2>Legend</h2>
-		<div class="tsd-legend-group">
-			<ul class="tsd-legend">
-				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
-				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
-			</ul>
-		</div>
-	</div>
-</footer>
-<div class="container tsd-generator">
-	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
-</div>
-<div class="overlay"></div>
-<script src="assets/js/main.js"></script>
-</body>
-</html>
+
+<a href="#getting-started" id="getting-started" style="color: inherit; text-decoration: none;">
+  <h1>Getting started</h1>
+</a>
+<p>A basic usage example</p>
+<pre><code class="language-typescript"><span class="hl-5">import</span><span class="hl-1"> </span><span class="hl-0">Router</span><span class="hl-1">, { </span><span class="hl-0">RouterContext</span><span class="hl-1"> } </span><span class="hl-5">from</span><span class="hl-1"> </span><span class="hl-3">&quot;@koa/router&quot;</span><span class="hl-1">;</span><br/><span class="hl-5">import</span><span class="hl-1"> { </span><span class="hl-0">query</span><span class="hl-1">, </span><span class="hl-0">validationResults</span><span class="hl-1"> } </span><span class="hl-5">from</span><span class="hl-1"> </span><span class="hl-3">&quot;koa-req-validation&quot;</span><span class="hl-1">;</span><br/><br/><span class="hl-6">// ...</span><br/><br/><span class="hl-7">const</span><span class="hl-1"> </span><span class="hl-8">router</span><span class="hl-1"> = </span><span class="hl-7">new</span><span class="hl-1"> </span><span class="hl-2">Router</span><span class="hl-1">();</span><br/><br/><span class="hl-0">router</span><span class="hl-1">.</span><span class="hl-2">get</span><span class="hl-1">(</span><br/><span class="hl-1">    </span><span class="hl-3">&quot;/api/hello&quot;</span><span class="hl-1">,</span><br/><span class="hl-1">    </span><span class="hl-2">query</span><span class="hl-1">(</span><span class="hl-3">&quot;name&quot;</span><span class="hl-1">)</span><br/><span class="hl-1">        .</span><span class="hl-2">isLength</span><span class="hl-1">({ </span><span class="hl-0">min:</span><span class="hl-1"> </span><span class="hl-4">3</span><span class="hl-1">, </span><span class="hl-0">max:</span><span class="hl-1"> </span><span class="hl-4">20</span><span class="hl-1"> })</span><br/><span class="hl-1">        .</span><span class="hl-2">withMessage</span><span class="hl-1">(</span><span class="hl-3">&quot;The name has to be between 3 and 20 characters&quot;</span><span class="hl-1">)</span><br/><span class="hl-1">        .</span><span class="hl-2">build</span><span class="hl-1">(), </span><span class="hl-6">// &lt;-- This is required at the end of each validation</span><br/><span class="hl-1">    </span><span class="hl-7">async</span><span class="hl-1"> (</span><span class="hl-0">ctx</span><span class="hl-1">: </span><span class="hl-9">RouterContext</span><span class="hl-1">) </span><span class="hl-7">=&gt;</span><span class="hl-1"> {</span><br/><span class="hl-1">        </span><span class="hl-7">const</span><span class="hl-1"> </span><span class="hl-8">result</span><span class="hl-1"> = </span><span class="hl-2">validationResults</span><span class="hl-1">(</span><span class="hl-0">ctx</span><span class="hl-1">);</span><br/><span class="hl-1">        </span><span class="hl-5">if</span><span class="hl-1"> (</span><span class="hl-0">result</span><span class="hl-1">.</span><span class="hl-2">hasErrors</span><span class="hl-1">()) {</span><br/><span class="hl-1">            </span><span class="hl-5">throw</span><span class="hl-1"> </span><span class="hl-7">new</span><span class="hl-1"> </span><span class="hl-2">RequestError</span><span class="hl-1">(</span><span class="hl-4">422</span><span class="hl-1">, </span><span class="hl-0">result</span><span class="hl-1">.</span><span class="hl-2">mapped</span><span class="hl-1">());</span><br/><span class="hl-1">        }</span><br/><span class="hl-1">        </span><span class="hl-7">const</span><span class="hl-1"> { </span><span class="hl-8">name</span><span class="hl-1"> } = </span><span class="hl-0">ctx</span><span class="hl-1">.</span><span class="hl-0">query</span><span class="hl-1">;</span><br/><span class="hl-1">        </span><span class="hl-0">ctx</span><span class="hl-1">.</span><span class="hl-0">body</span><span class="hl-1"> = </span><span class="hl-3">`Hello </span><span class="hl-7">${</span><span class="hl-0">name</span><span class="hl-7">}</span><span class="hl-3">`</span><span class="hl-1">;</span><br/><span class="hl-1">    }</span><br/><span class="hl-1">);</span>
+</code></pre>
+<p>See the <a href="https://github.com/ppeerttu/koa-req-validation/blob/master/demo/index.ts">demo</a> for other examples.</p>
+
+<a href="#documentation" id="documentation" style="color: inherit; text-decoration: none;">
+  <h1>Documentation</h1>
+</a>
+<p>This module offers various validation and sanitation functions. Please note the following things:</p>
+<ul>
+<li>Nested objects can now be validated<ul>
+<li>Support has been added to the <code>ValidationResult.passedData()</code> output as well</li>
+</ul>
+</li>
+<li>The <strong>order matters</strong><ul>
+<li>The validations and sanitations are being run in order they&#39;ve been called in the validation chain</li>
+</ul>
+</li>
+<li>No sanitations are run for a chain after some of the validations has failed<ul>
+<li>This is due to the fact that some of the sanitizers rely on &quot;valid&quot; value (for example valid email address)</li>
+</ul>
+</li>
+<li>The sanitized values can be accessed only through <code>ValidationResult.passedData()</code><ul>
+<li>The request body is treated as immutable in the validation middleware</li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-typescript"><span class="hl-7">const</span><span class="hl-1"> </span><span class="hl-8">result</span><span class="hl-1"> = </span><span class="hl-2">validationResults</span><span class="hl-1">(</span><span class="hl-0">ctx</span><span class="hl-1">);</span><br/><span class="hl-5">if</span><span class="hl-1"> (</span><span class="hl-0">result</span><span class="hl-1">.</span><span class="hl-2">hasErrors</span><span class="hl-1">()) {</span><br/><span class="hl-1">    </span><span class="hl-5">throw</span><span class="hl-1"> </span><span class="hl-7">new</span><span class="hl-1"> </span><span class="hl-2">RequestError</span><span class="hl-1">(</span><span class="hl-4">422</span><span class="hl-1">, </span><span class="hl-0">result</span><span class="hl-1">.</span><span class="hl-2">mapped</span><span class="hl-1">());</span><br/><span class="hl-1">}</span><br/><span class="hl-7">const</span><span class="hl-1"> </span><span class="hl-8">passed</span><span class="hl-1"> = </span><span class="hl-0">result</span><span class="hl-1">.</span><span class="hl-2">passedData</span><span class="hl-1">();</span>
+</code></pre>
+<p>See the <a href="https://ppeerttu.github.io/koa-req-validation/">generated TypeDoc</a> and <a href="https://ppeerttu.github.io/koa-req-validation/classes/lib_validationchain.default.html">ValidationChain</a> for API documentation.</p>
+
+<a href="#issues" id="issues" style="color: inherit; text-decoration: none;">
+  <h1>Issues</h1>
+</a>
+<p>We use <a href="https://github.com/ppeerttu/koa-req-validation/issues">GitHub</a> for issue tracking. Please look from <a href="https://github.com/ppeerttu/koa-req-validation/issues?utf8=%E2%9C%93&amp;q=is%3Aissue">previously submitted issues</a> if someone else has already submitted the same issue.</p>
+
+<a href="#changelog" id="changelog" style="color: inherit; text-decoration: none;">
+  <h1>Changelog</h1>
+</a>
+<p>Please see <a href="https://github.com/ppeerttu/koa-req-validation/releases">releases</a>.</p>
+
+<a href="#contribution" id="contribution" style="color: inherit; text-decoration: none;">
+  <h1>Contribution</h1>
+</a>
+<p>All contributions to the project are welcome.</p>
+
+<a href="#licence" id="licence" style="color: inherit; text-decoration: none;">
+  <h1>Licence</h1>
+</a>
+<p><a href="https://github.com/ppeerttu/koa-req-validation/blob/master/LICENCE">ISC Licence</a></p>
+</div></div><div class="col-4 col-menu menu-sticky-wrap menu-highlight"><nav class="tsd-navigation primary"><ul><li class="current"><a href="modules.html">Exports</a></li><li class=" tsd-kind-namespace"><a href="modules/ValidationChain.html">Validation<wbr/>Chain</a></li><li class=" tsd-kind-namespace"><a href="modules/ValidationResult.html">Validation<wbr/>Result</a></li></ul></nav><nav class="tsd-navigation secondary menu-sticky"><ul><li class="tsd-kind-enum"><a href="enums/ParamLocation.html" class="tsd-kind-icon">Param<wbr/>Location</a></li><li class="tsd-kind-interface"><a href="interfaces/ICustomValidationDefinition.html" class="tsd-kind-icon">ICustom<wbr/>Validation<wbr/>Definition</a></li><li class="tsd-kind-interface"><a href="interfaces/IMappedValidationResults.html" class="tsd-kind-icon">IMapped<wbr/>Validation<wbr/>Results</a></li><li class="tsd-kind-interface"><a href="interfaces/IOptionalOptions.html" class="tsd-kind-icon">IOptional<wbr/>Options</a></li><li class="tsd-kind-interface"><a href="interfaces/ISanitationDefinition.html" class="tsd-kind-icon">ISanitation<wbr/>Definition</a></li><li class="tsd-kind-interface"><a href="interfaces/IValidationDefinition.html" class="tsd-kind-icon">IValidation<wbr/>Definition</a></li><li class="tsd-kind-interface"><a href="interfaces/IValidationError.html" class="tsd-kind-icon">IValidation<wbr/>Error</a></li><li class="tsd-kind-type-alias"><a href="modules.html#CustomErrorMessageFunction" class="tsd-kind-icon">Custom<wbr/>Error<wbr/>Message<wbr/>Function</a></li><li class="tsd-kind-type-alias"><a href="modules.html#CustomValidatorFunction" class="tsd-kind-icon">Custom<wbr/>Validator<wbr/>Function</a></li><li class="tsd-kind-type-alias"><a href="modules.html#CustomValidatorFunctionWithContext" class="tsd-kind-icon">Custom<wbr/>Validator<wbr/>Function<wbr/>With<wbr/>Context</a></li><li class="tsd-kind-type-alias"><a href="modules.html#SanitationFunctionName" class="tsd-kind-icon">Sanitation<wbr/>Function<wbr/>Name</a></li><li class="tsd-kind-type-alias"><a href="modules.html#ValidatorFunctionName" class="tsd-kind-icon">Validator<wbr/>Function<wbr/>Name</a></li><li class="tsd-kind-function"><a href="modules.html#body" class="tsd-kind-icon">body</a></li><li class="tsd-kind-function"><a href="modules.html#param" class="tsd-kind-icon">param</a></li><li class="tsd-kind-function"><a href="modules.html#query" class="tsd-kind-icon">query</a></li><li class="tsd-kind-function"><a href="modules.html#validationResults" class="tsd-kind-icon">validation<wbr/>Results</a></li></ul></nav></div></div></div><footer class="with-border-bottom"><div class="container"><h2>Legend</h2><div class="tsd-legend-group"><ul class="tsd-legend"><li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li></ul></div><h2>Settings</h2><p>Theme <select id="theme"><option value="os">OS</option><option value="light">Light</option><option value="dark">Dark</option></select></p></div></footer><div class="container tsd-generator"><p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p></div><div class="overlay"></div><script src="assets/main.js"></script></body></html>

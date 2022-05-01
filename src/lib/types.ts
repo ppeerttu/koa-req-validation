@@ -20,7 +20,7 @@ export interface IOptionalOptions {
 /**
  * Custom validation function with context object.
  */
-type CustomValidatorFunctionWithContext = (
+export type CustomValidatorFunctionWithContext = (
     input: unknown,
     ctx: RouterContext
 ) => Promise<void>;
@@ -38,13 +38,6 @@ export type CustomValidatorFunction = (input: unknown) => Promise<void>;
  * message as a result.f
  */
 export type CustomErrorMessageFunction = (ctx: RouterContext, input: string) => string;
-
-export const isSanitation = (
-    definition:
-        | IValidationDefinition
-        | ICustomValidationDefinition
-        | ISanitationDefinition
-): definition is ISanitationDefinition => definition.type === "sanitation";
 
 interface IValidationDefinitionBase {
     /**
